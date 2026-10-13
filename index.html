@@ -592,6 +592,38 @@
   .focus-toggle:hover{background:var(--gc-tint);}
   .focus-toggle input{accent-color:var(--gc);width:15px;height:15px;cursor:pointer;margin:0;}
   @media (max-width:560px){.profile-row{flex-direction:column;gap:6px;}}
+
+  /* ===== Widok mobilny ===== */
+  @media (max-width:640px){
+    body{padding:20px 14px 56px;}
+    h1{font-size:34px;line-height:1.1;}
+    .note{padding:14px 14px;font-size:14.5px;}
+    details.howto{padding:0 14px;}
+    details.howto[open]{padding-bottom:12px;}
+    details.howto summary{font-size:12.5px;}
+    .card{padding-left:14px;padding-right:14px;}
+    .info-icon{width:22px;height:22px;font-size:13px;}
+    .info-icon .tooltip, .radar-dot .tooltip{
+      position:fixed;left:12px;right:12px;bottom:12px;top:auto;
+      width:auto;transform:none;font-size:14px;line-height:1.5;
+      padding:12px 14px;z-index:200;
+    }
+    .info-icon .tooltip::after{display:none;}
+    .radar-dot{transform:none;margin-left:-7px;margin-top:-7px;}
+    .radar-dot::before{content:'';position:absolute;inset:-10px;}
+    .summary{padding-left:16px;padding-right:16px;}
+    .radars{gap:8px;}
+    input[type=text], input[type=date], textarea, select{font-size:16px;}
+    .btn-primary{width:100%;}
+  }
+
+  /* Urządzenia dotykowe: dymki sterowane klasą .open (bez "lepkiego" hover/focus) */
+  @media (hover:none){
+    .radar-dot:hover .tooltip, .radar-dot:focus .tooltip{display:none;}
+    .radar-dot.open .tooltip{display:block;}
+    .info-icon:hover .tooltip, .info-icon:focus .tooltip, .info-icon:focus-within .tooltip{opacity:0;visibility:hidden;}
+    .info-icon.open .tooltip{opacity:1;visibility:visible;pointer-events:auto;}
+  }
 </style>
 </head>
 <body>
@@ -636,7 +668,7 @@
 
   <section class="group" id="orgSection">
     <div class="group-head"><span class="dot org"></span><span class="eyebrow">Organizacja i planowanie</span></div>
-    <p class="group-desc">Jak zespół dzieli pracę, ustala priorytety, współpracuje i bierze odpowiedzialność za wynik — niezależnie od frameworka. W większych, rozproszonych organizacjach część z tych rzeczy wygląda inaczej, bo zależy od więcej osób naraz.</p>
+    <p class="group-desc">Jak zespół dzieli pracę, ustala priorytety, współpracuje i bierze odpowiedzialność za wynik — niezależnie od frameworka. Jeśli coś jest poza Waszą kontrolą (priorytety, zależności, budżet), opisujcie, jak jest, nie jak powinno być.</p>
     <div id="orgCards"></div>
   </section>
 
@@ -648,7 +680,7 @@
 
   <div class="summary">
     <h2>Podsumowanie</h2>
-    <p class="lede">Kształt pokazuje, które opisy wybraliście w każdym obszarze. To obraz tego, gdzie jesteście na spektrum całego badania — nie ocena i nie porównanie. Najedźcie na punkt, żeby zobaczyć wybrany opis.</p>
+    <p class="lede">Kształt pokazuje, które opisy wybraliście w każdym obszarze. To obraz tego, gdzie jesteście na spektrum całego badania — nie ocena i nie porównanie. Najedźcie na punkt (na telefonie: dotknijcie go), żeby zobaczyć wybrany opis.</p>
 
     <div class="radars" style="margin-top:8px;">
       <div class="radar-block">
@@ -694,7 +726,7 @@
            i historia są tymczasowo wyłączone — przycisk PDF pełni teraz rolę "zapisz i eksportuj" naraz.
       <button class="btn-primary" id="saveBtn">Zapisz ocenę zespołu</button>
       -->
-      <button class="btn-primary" id="printBtn">Zapisz i pobierz opis (PDF)</button>
+      <button class="btn-primary" id="printBtn">Pobierz opis (plik HTML)</button>
     </div>
     <div id="saveStatus" class="muted" style="margin-top:8px;"></div>
 
@@ -1229,10 +1261,10 @@ const comments = {};
 
 const REAL_DATA_DIMS = new Set(['deploy_freq', 'lead_time', 'change_failure', 'mttr']);
 const REAL_DATA_PLACEHOLDERS = {
-  deploy_freq: 'Opcjonalnie: realna wartość z dashboardu wraz z okresem, np. „14 wdrożeń w ostatnim kwartale”',
-  lead_time: 'Opcjonalnie: realna wartość z dashboardu wraz z okresem, np. „mediana 3 dni, z ostatnich 3 miesięcy”',
-  change_failure: 'Opcjonalnie: realna wartość z dashboardu wraz z okresem, np. „3 z 25 wdrożeń w ostatnich 3 miesiącach”',
-  mttr: 'Opcjonalnie: realna wartość z dashboardu wraz z okresem, np. „średnio 4 godziny, z incydentów z ostatnich 6 miesięcy”'
+  deploy_freq: 'Realna wartość z dashboardu wraz z okresem, np. „średnio 2 wdrożenia dziennie w ostatnim miesiącu”',
+  lead_time: 'Realna wartość z dashboardu wraz z okresem, np. „mediana 6 godzin od commita do produkcji, z ostatnich 4 tygodni”',
+  change_failure: 'Realna wartość z dashboardu wraz z okresem, np. „3 z 60 wdrożeń w ostatnim miesiącu”',
+  mttr: 'Realna wartość z dashboardu wraz z okresem, np. „średnio 45 minut, z incydentów z ostatniego kwartału”'
 };
 const realData = {};
 const naReasons = {};
@@ -1742,6 +1774,173 @@ document.getElementById('teamName').addEventListener('input', () => {
 
 loadHistory();
 */
+
+/* ===== Autozapis w przeglądarce (localStorage) + ostrzeżenie przed zamknięciem karty ===== */
+(function(){
+  const KEY = 'poziomy-zespolu-v3-neutralny-autosave';
+  let restoring = false;
+  let resetting = false;
+  let dirty = false;      // są zmiany, których nie pobrano do pliku
+  let timer = null;
+
+  function snapshot(){
+    return {
+      v: 1,
+      ts: Date.now(),
+      team: document.getElementById('teamName').value,
+      closing: document.getElementById('closingQuestion').value,
+      notes: document.getElementById('notes').value,
+      state: Object.assign({}, state),
+      na: Array.from(naSet),
+      comments: Object.assign({}, comments),
+      realData: Object.assign({}, realData),
+      naReasons: Object.assign({}, naReasons),
+      actions: actionItems.map(a => Object.assign({}, a)),
+      focus: Array.from(focusSet)
+    };
+  }
+  function hasContent(snap){
+    return Object.values(snap.state).some(v => v !== null) || snap.na.length > 0 ||
+      snap.team.trim() || snap.closing.trim() || snap.notes.trim() || snap.actions.length > 0;
+  }
+  function save(){
+    if(restoring || resetting) return;
+    try{
+      const snap = snapshot();
+      if(hasContent(snap)) localStorage.setItem(KEY, JSON.stringify(snap));
+      else localStorage.removeItem(KEY);
+    }catch(e){}
+  }
+  function schedule(){
+    if(restoring) return;
+    dirty = true;
+    clearTimeout(timer);
+    timer = setTimeout(save, 300);
+  }
+
+  function fire(el, type){ el.dispatchEvent(new Event(type, {bubbles:true})); }
+
+  function restore(snap){
+    restoring = true;
+    try{
+      document.getElementById('teamName').value = snap.team || '';
+      document.getElementById('closingQuestion').value = snap.closing || '';
+      document.getElementById('notes').value = snap.notes || '';
+      Object.keys(snap.state || {}).forEach(id => {
+        const v = snap.state[id];
+        if(v === null || v === undefined) return;
+        const r = document.getElementById(`score-${id}-${v}`);
+        if(r){ r.checked = true; fire(r, 'change'); }
+      });
+      (snap.na || []).forEach(id => {
+        const c = document.getElementById(`na-${id}`);
+        if(c){ c.checked = true; fire(c, 'change'); }
+      });
+      Object.keys(snap.naReasons || {}).forEach(id => {
+        const el = document.getElementById(`na-reason-${id}`);
+        if(el){ el.value = snap.naReasons[id]; fire(el, 'input'); }
+      });
+      Object.keys(snap.comments || {}).forEach(id => {
+        const box = document.getElementById(`comment-${id}`);
+        if(box && snap.comments[id]){
+          box.value = snap.comments[id]; fire(box, 'input');
+          box.style.display = 'block';
+          const t = document.getElementById(`comment-toggle-${id}`);
+          if(t) t.textContent = '− Ukryj komentarz';
+        }
+      });
+      Object.keys(snap.realData || {}).forEach(id => {
+        const el = document.getElementById(`realdata-${id}`);
+        if(el){ el.value = snap.realData[id]; fire(el, 'input'); }
+      });
+      (snap.actions || []).forEach(a => actionItems.push(a));
+      (snap.focus || []).forEach(id => focusSet.add(id));
+      renderActionItems();
+      update();
+    } finally {
+      restoring = false;
+    }
+  }
+
+  function showBanner(ts){
+    const when = new Date(ts).toLocaleString('pl-PL', {day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'});
+    const b = document.createElement('div');
+    b.id = 'restoreBanner';
+    b.style.cssText = 'position:sticky;top:0;z-index:50;margin:0 0 16px;padding:10px 14px;background:#E9EEF5;border:1px solid #3F6190;border-radius:6px;font-size:14px;color:#17222E;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;';
+    b.innerHTML = `<span>Przywrócono Wasze odpowiedzi zapisane automatycznie w tej przeglądarce (${when}).</span><button type="button" style="font:inherit;padding:6px 12px;border:1px solid #3F6190;background:#fff;border-radius:5px;cursor:pointer;">Zacznij od nowa</button>`;
+    const btn = b.querySelector('button');
+    const label = btn.textContent;
+    let armed = false, armTimer = null;
+    btn.addEventListener('click', () => {
+      if(!armed){
+        armed = true;
+        btn.textContent = 'Na pewno? Kliknij ponownie, aby usunąć wszystko';
+        btn.style.background = '#fff3f0';
+        btn.style.borderColor = '#B23B2E';
+        armTimer = setTimeout(() => {
+          armed = false;
+          btn.textContent = label;
+          btn.style.background = '#fff';
+          btn.style.borderColor = '#3F6190';
+        }, 5000);
+        return;
+      }
+      clearTimeout(armTimer);
+      resetting = true;
+      try{ localStorage.removeItem(KEY); }catch(e){}
+      dirty = false;
+      location.reload();
+    });
+    const wrap = document.querySelector('.wrap') || document.body;
+    wrap.insertBefore(b, wrap.firstChild);
+  }
+
+  // przywrócenie po otwarciu strony
+  try{
+    const raw = localStorage.getItem(KEY);
+    if(raw){
+      const snap = JSON.parse(raw);
+      if(snap && snap.v === 1 && hasContent(snap)){
+        restore(snap);
+        showBanner(snap.ts);
+      }
+    }
+  }catch(e){}
+
+  // zapis przy każdej zmianie
+  document.addEventListener('input', schedule, true);
+  document.addEventListener('change', schedule, true);
+  document.addEventListener('click', (e) => {
+    if(e.target.closest && e.target.closest('#addActionBtn, .rm-action')) schedule();
+  }, true);
+  window.addEventListener('pagehide', save);
+
+  // po pobraniu pliku nie ostrzegamy już przy zamknięciu
+  document.getElementById('printBtn').addEventListener('click', () => {
+    setTimeout(() => {
+      const st = document.getElementById('saveStatus');
+      if(st && st.textContent.indexOf('Pobrano') === 0) dirty = false;
+    }, 50);
+  });
+
+  window.addEventListener('beforeunload', (e) => {
+    if(dirty){
+      e.preventDefault();
+      e.returnValue = '';
+    }
+  });
+})();
+
+/* ===== Dymki na ekranach dotykowych: dotknięcie otwiera, ponowne dotknięcie lub dotknięcie poza dymkiem zamyka ===== */
+(function(){
+  if(!window.matchMedia || !window.matchMedia('(hover:none)').matches) return;
+  document.addEventListener('click', function(e){
+    const t = e.target.closest ? e.target.closest('.radar-dot, .info-icon') : null;
+    const wasOpen = t && t.classList.contains('open');
+    document.querySelectorAll('.radar-dot.open, .info-icon.open').forEach(el => el.classList.remove('open'));
+    if(t && !wasOpen) t.classList.add('open');
+  }, true);
+})();
 </script>
 </body>
 </html>
