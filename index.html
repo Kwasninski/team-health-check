@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Poziomy zespołu</title>
+<title>Health Chceck Zespołu</title>
 <style>
   :root{
     --ink:#17222E;
@@ -630,7 +630,7 @@
 <div class="wrap">
 
   <div class="eyebrow">Narzędzie samoobsługowe</div>
-  <h1>Poziomy zespołu</h1>
+  <h1>Health Check Zespołu</h1>
   <p class="lede">Wspólny opis tego, jak zespół planuje i organizuje pracę oraz jak wygląda jego droga od kodu do produkcji. Nie ma tu dobrych ani złych odpowiedzi ani wyniku zbiorczego — każda opcja opisuje inny sposób pracy, który w jakimś kontekście ma sens.</p>
 
   <div class="team-field">
@@ -1588,7 +1588,7 @@ document.getElementById('printBtn').addEventListener('click', () => {
     .map(d => `<li><strong>${d.title}</strong>${naReasons[d.id] && naReasons[d.id].trim() ? ': ' + naReasons[d.id].trim() : ' (bez podanego powodu)'}</li>`);
   const naHTML = naEntries.length ? naEntries.join('') : '';
 
-  const html = `<!DOCTYPE html><html lang="pl"><head><meta charset="UTF-8"><title>Poziomy zespołu — opis</title>
+  const html = `<!DOCTYPE html><html lang="pl"><head><meta charset="UTF-8"><title>Health Check Zespołu — opis</title>
   <style>
     body{font-family: Georgia, "Iowan Old Style", serif; color:#17222E; padding:40px; max-width:800px; margin:0 auto;}
     h1{font-size:28px;margin-bottom:4px;} h2{font-size:16px;margin-top:30px;font-family:-apple-system,Segoe UI,sans-serif;text-transform:uppercase;letter-spacing:.04em;color:#3C4A59;}
@@ -1621,7 +1621,7 @@ document.getElementById('printBtn').addEventListener('click', () => {
     .reco-described{font-size:13px;color:#555;font-style:italic;margin:2px 0 6px;font-family:-apple-system,Segoe UI,sans-serif;}
     @media print{.hint{display:none;}}
   </style></head><body>
-  <h1>Poziomy zespołu</h1>
+  <h1>Health Check Zespołu</h1>
   <div class="meta">${team ? 'Zespół: ' + team + ' · ' : ''}Zapisano: ${new Date().toLocaleDateString('pl-PL', {year:'numeric', month:'long', day:'numeric'})} · Wersja narzędzia: v3</div>
   <div class="hint">Wskazówka: Ctrl+P (lub Cmd+P), żeby zapisać tę stronę jako PDF.</div>
   <div class="row">
