@@ -1,0 +1,1747 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Poziomy zespołu</title>
+<style>
+  :root{
+    --ink:#17222E;
+    --ink-soft:#3C4A59;
+    --paper:#E4E7DE;
+    --paper-card:#F2F3ED;
+    --line: rgba(23,34,46,0.14);
+    --org:#B9812E;
+    --org-soft:#E9D3AD;
+    --tech:#276765;
+    --tech-soft:#BFDAD8;
+    --low:#B5533C;
+    --high:#4F7F55;
+  }
+  :root{--info:#3F6190;--info-soft:#E9EEF5;}
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height:1.5;
+    padding: 32px 18px 80px;
+  }
+  .wrap{max-width:960px;margin:0 auto;}
+
+  .eyebrow{
+    font-size:11px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    font-weight:600;
+  }
+  h1{
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+    font-weight:400;
+    font-size:clamp(30px,5vw,46px);
+    letter-spacing:-0.01em;
+    margin:6px 0 10px;
+  }
+  h2{
+    font-family: Georgia, "Iowan Old Style", serif;
+    font-weight:400;
+    font-size:22px;
+    margin: 0 0 4px;
+  }
+  .lede{
+    font-size:16px;
+    color:var(--ink-soft);
+    max-width:640px;
+  }
+
+  .team-field{
+    margin-top:22px;
+    max-width:360px;
+  }
+  .team-field label{
+    display:block;
+    font-size:11px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    font-weight:700;
+    color:var(--ink-soft);
+    margin-bottom:6px;
+  }
+  .team-field input{
+    width:100%;
+    padding:10px 12px;
+    border:1px solid var(--line);
+    border-radius:5px;
+    font-family:inherit;
+    font-size:14.5px;
+    background:var(--paper-card);
+    color:var(--ink);
+  }
+  .team-field input:focus-visible{outline:2px solid var(--org);outline-offset:1px;}
+  .team-hint{
+    font-size:12.5px;
+    color:var(--ink-soft);
+    margin:6px 0 0;
+  }
+
+  .note{
+    margin-top:22px;
+    padding:18px 20px;
+    background:var(--info-soft);
+    border-left:3px solid var(--info);
+    border-radius:2px;
+    font-size:15px;
+    color:var(--ink-soft);
+  }
+  .note strong{color:var(--ink);}
+
+  details.howto{
+    margin-top:12px;
+    background:var(--info-soft);
+    border:1px solid rgba(63,97,144,0.18);
+    border-left:3px solid var(--info);
+    border-radius:6px;
+    padding:0 18px;
+    transition:box-shadow .15s, border-color .15s;
+  }
+  details.howto:hover{box-shadow:0 2px 8px rgba(23,34,46,0.10);}
+  details.howto[open]{padding-bottom:14px;box-shadow:0 2px 8px rgba(23,34,46,0.08);}
+  details.howto summary{
+    cursor:pointer;
+    font-size:13px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    font-weight:600;
+    color:var(--ink);
+    padding:14px 0;
+    list-style:none;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+  }
+  details.howto summary::-webkit-details-marker{display:none;}
+  details.howto summary::after{
+    content:'';
+    flex:none;
+    width:8px;height:8px;
+    border-right:2px solid var(--info);
+    border-bottom:2px solid var(--info);
+    transform:rotate(45deg);
+    margin-top:-4px;
+    transition:transform .15s;
+  }
+  details.howto[open] summary::after{transform:rotate(-135deg);margin-top:4px;}
+  details.howto ol, details.howto ul{
+    margin:8px 0 0;
+    padding-left:20px;
+    font-size:14.5px;
+    color:var(--ink-soft);
+  }
+  details.howto li{margin-bottom:6px;}
+  .howto-note{
+    margin:12px 0 4px;
+    font-size:13.5px;
+    color:var(--ink-soft);
+    background:rgba(23,34,46,0.05);
+    border-radius:5px;
+    padding:10px 12px;
+  }
+  .howto-note strong{color:var(--ink);}
+
+  .na-toggle{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    margin-top:10px;
+    cursor:pointer;
+    user-select:none;
+  }
+  .na-toggle input{cursor:pointer;}
+  .real-data-input{
+    display:block;
+    width:100%;
+    margin-top:8px;
+    padding:7px 9px;
+    border:1px solid var(--line);
+    border-radius:5px;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:inherit;
+    font-size:12.5px;
+  }
+  .na-reason-input{
+    display:block;
+    width:100%;
+    margin-top:6px;
+    padding:7px 9px;
+    border:1px solid var(--line);
+    border-radius:5px;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:inherit;
+    font-size:12.5px;
+  }
+  .comment-toggle{
+    display:block;
+    margin-top:10px;
+    background:none;
+    border:none;
+    padding:0;
+    font-size:12.5px;
+    font-weight:600;
+    color:var(--cc);
+    cursor:pointer;
+  }
+  .comment-box{
+    display:block;
+    width:100%;
+    min-height:60px;
+    margin-top:8px;
+    padding:8px 10px;
+    border:1px solid var(--line);
+    border-radius:5px;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:inherit;
+    font-size:13px;
+    resize:vertical;
+  }
+  .card.is-na{opacity:0.55;}
+  .card.is-na .radio-option{cursor:not-allowed;}
+  .na-badge{
+    display:inline-block;
+    font-size:10.5px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    font-weight:700;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+    border-radius:3px;
+    padding:1px 6px;
+    margin-left:8px;
+    vertical-align:middle;
+  }
+
+  .radars{
+    display:flex;
+    gap:24px;
+    margin: 34px 0 10px;
+    flex-wrap:wrap;
+  }
+  .radar-block{
+    flex:1 1 300px;
+    background:var(--paper-card);
+    border-radius:6px;
+    padding:16px 16px 8px;
+  }
+  .radar-block .rlabel{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-bottom:4px;
+  }
+  .radar-block .rlabel .name{
+    font-size:12px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    font-weight:700;
+  }
+  .radar-block .rlabel .avg-unused{
+    font-family: Georgia, serif;
+    font-size:20px;
+    color:var(--ink);
+  }
+  .radar-block .rlabel .avg-range{
+    font-size:11px;
+    color:var(--ink-soft);
+    margin-left:4px;
+  }
+  .org-label{color:var(--org);}
+  .tech-label{color:var(--tech);}
+
+  .radar-inner{position:relative;}
+  .radar-dot{
+    position:absolute;
+    width:14px;
+    height:14px;
+    border-radius:50%;
+    background:var(--dot-color, var(--ink));
+    border:2px solid var(--paper-card);
+    transform:translate(-50%,-50%);
+    padding:0;
+    cursor:pointer;
+    z-index:5;
+  }
+  .radar-dot:focus-visible{outline:2px solid var(--ink);outline-offset:2px;}
+  .radar-dot:hover,
+  .radar-dot:focus{
+    z-index:50;
+  }
+  .radar-dot .tooltip{
+    display:none;
+    position:absolute;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    width:240px;
+    background:var(--ink);
+    color:var(--paper);
+    font-size:12px;
+    line-height:1.45;
+    padding:9px 11px;
+    border-radius:6px;
+    z-index:30;
+    box-shadow:0 4px 14px rgba(0,0,0,0.25);
+    text-align:left;
+  }
+  .radar-dot .tooltip .tt-score{
+    font-weight:700;
+    color:var(--org);
+  }
+  .radar-dot:hover .tooltip,
+  .radar-dot:focus .tooltip{
+    display:block;
+  }
+
+  section.group{
+    margin-top:48px;
+  }
+  .group-head{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:10px;
+    margin-bottom:6px;
+  }
+  .dot{width:9px;height:9px;border-radius:50%;flex:none;}
+  .dot.org{background:var(--org);}
+  .dot.tech{background:var(--tech);}
+  .group-head .eyebrow{margin:0;}
+  .group-desc{font-size:14px;color:var(--ink-soft);margin:6px 0 20px;max-width:620px;}
+
+  .card{
+    background:var(--paper-card);
+    border-radius:6px;
+    padding:18px 20px;
+    margin-bottom:14px;
+    --cc:var(--org);
+    --cc-tint:rgba(185,129,46,0.10);
+    border-left:4px solid var(--cc);
+  }
+  .card.tech{--cc:var(--tech);--cc-tint:rgba(39,103,101,0.10);}
+  .card:not(.unanswered):not(.is-na){background:linear-gradient(var(--cc-tint),var(--cc-tint)),var(--paper-card);}
+  .card button:focus-visible, .card input:focus-visible, .card textarea:focus-visible{outline:2px solid var(--cc);outline-offset:2px;}
+  .na-toggle input{accent-color:var(--cc);}
+  .real-data-input:focus, .na-reason-input:focus, .comment-box:focus{border-color:var(--cc);}
+  .card .title{
+    font-weight:600;
+    font-size:15.5px;
+    margin-bottom:10px;
+  }
+  .title-row{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    margin-bottom:10px;
+  }
+  .title-row .title{margin-bottom:0;}
+  .info-icon{
+    position:relative;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:16px;height:16px;
+    border-radius:50%;
+    background:var(--ink-soft);
+    color:var(--paper-card);
+    font-size:11px;
+    font-style:italic;
+    font-family:Georgia,"Iowan Old Style",serif;
+    flex:none;
+    cursor:default;
+  }
+  .info-icon:hover .tooltip,
+  .info-icon:focus .tooltip,
+  .info-icon:focus-within .tooltip{
+    opacity:1;
+    visibility:visible;
+  }
+  .info-icon .tooltip{
+    position:absolute;
+    bottom:135%;
+    left:0;
+    width:230px;
+    background:var(--ink);
+    color:var(--paper);
+    padding:9px 11px;
+    border-radius:6px;
+    font-size:12.5px;
+    font-weight:400;
+    font-style:normal;
+    line-height:1.45;
+    opacity:0;
+    visibility:hidden;
+    transition:opacity .12s ease;
+    z-index:6;
+    box-shadow:0 6px 14px rgba(0,0,0,0.18);
+    pointer-events:none;
+  }
+  .info-icon .tooltip::after{
+    content:'';
+    position:absolute;
+    top:100%;
+    left:6px;
+    border:5px solid transparent;
+    border-top-color:var(--ink);
+  }
+  .scale-radio-list{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    margin-top:4px;
+  }
+  .radio-option{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    padding:10px 12px;
+    border:1px solid var(--line);
+    border-radius:6px;
+    cursor:pointer;
+    background:var(--paper-card);
+    text-align:left;
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .radio-option:hover{border-color:var(--cc);}
+  .radio-option input{
+    position:absolute;
+    opacity:0;
+    width:1px;
+    height:1px;
+    pointer-events:none;
+  }
+  .radio-option .opt-num{
+    flex-shrink:0;
+    width:14px;
+    height:14px;
+    margin-top:3px;
+    border-radius:50%;
+    border:2px solid var(--ink-soft);
+    background:transparent;
+  }
+  .radio-option .opt-text{
+    font-size:14px;
+    line-height:1.45;
+    color:var(--ink-soft);
+    text-align:left;
+  }
+  .radio-option.is-checked{
+    background:var(--paper);
+    border-color:var(--cc);
+    box-shadow:0 0 0 1px var(--cc);
+  }
+  .radio-option.is-checked .opt-text{color:var(--ink);}
+  .radio-option.is-checked .opt-num{background:var(--cc);border-color:var(--cc);box-shadow:inset 0 0 0 2px var(--paper);}
+  .radio-option:has(input:focus-visible){
+    outline:2px solid var(--ink);
+    outline-offset:2px;
+  }
+
+  .summary{
+    margin-top:56px;
+    background:var(--ink);
+    color:var(--paper);
+    border-radius:8px;
+    padding:26px 26px 22px;
+  }
+  .summary h2{color:var(--paper);}
+  .summary .lede{color:#C7CDD3;}
+  .sum-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:16px;
+    margin-top:18px;
+  }
+  @media(max-width:600px){.sum-grid{grid-template-columns:1fr;}}
+  .sum-card{
+    background: rgba(255,255,255,0.06);
+    border-radius:6px;
+    padding:14px 16px;
+  }
+  .sum-card .k{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#9FAAB5;margin-bottom:4px;}
+  .sum-card .v{font-family:Georgia,serif;font-size:18px;}
+
+  textarea{
+    width:100%;
+    min-height:90px;
+    margin-top:16px;
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.18);
+    border-radius:6px;
+    color:var(--paper);
+    font-family:inherit;
+    font-size:14px;
+    padding:10px 12px;
+    resize:vertical;
+  }
+  textarea::placeholder{color:#8B96A2;}
+
+  .actions{
+    display:flex;
+    gap:10px;
+    margin-top:16px;
+    flex-wrap:wrap;
+  }
+  button{
+    font-family:inherit;
+    font-size:13.5px;
+    font-weight:600;
+    letter-spacing:.02em;
+    padding:10px 16px;
+    border-radius:5px;
+    border:1px solid transparent;
+    cursor:pointer;
+  }
+  .btn-primary{background:var(--org);color:#241705;}
+  .btn-ghost{background:transparent;color:var(--paper);border-color:rgba(255,255,255,0.35);}
+  button:focus-visible, input:focus-visible{outline:2px solid var(--org);outline-offset:2px;}
+
+  .history{margin-top:20px;}
+  .history .k{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#9FAAB5;margin-bottom:8px;}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;}
+  th,td{text-align:left;padding:6px 8px;border-bottom:1px solid rgba(255,255,255,0.12);}
+  th{color:#9FAAB5;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;}
+  .muted{color:#8B96A2;font-size:13px;}
+  .status-warning{color:var(--low);font-size:13px;font-weight:600;}
+  @keyframes flash-warning{0%,100%{box-shadow:none;}50%{box-shadow:0 0 0 2px var(--low);}}
+  .card.flash-warning{animation:flash-warning 0.5s ease-in-out 2;}
+
+  footer{
+    text-align:center;
+    margin-top:50px;
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+
+  @media print{
+    body{background:#fff;padding:0;}
+    .actions, details.howto, .history{display:none;}
+    .summary{background:#fff;color:#000;border:1px solid #ccc;}
+    .summary h2, .summary .lede{color:#000;}
+    .sum-card{background:#f4f4f4;}
+  }
+
+  .actions-list{margin-top:16px;}
+  .action-row{
+    display:grid;grid-template-columns: 1fr 140px 130px auto;gap:8px;margin-bottom:8px;align-items:stretch;
+  }
+  @media(max-width:640px){.action-row{grid-template-columns:1fr;}}
+  .action-row input{
+    background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.18);border-radius:5px;
+    color:var(--paper);font-family:inherit;font-size:13.5px;padding:8px 10px;
+  }
+  .action-row input::placeholder{color:#8B96A2;}
+  .action-row .rm{
+    background:transparent;border:1px solid rgba(255,255,255,0.25);color:var(--paper);border-radius:5px;cursor:pointer;
+    padding:8px 14px;font-size:13px;font-weight:600;white-space:nowrap;
+  }
+  .action-list-out{margin-top:6px;font-size:13.5px;}
+  .action-list-out li{margin-bottom:4px;color:#D8DCE1;}
+
+  .reco{margin-top:32px;}
+  .reco-disclaimer{
+    font-size:12.5px;
+    color:#9FAAB5;
+    font-style:italic;
+    margin:0 0 12px;
+  }
+  .reco-card{--gc:var(--org);--gc-soft:var(--org-soft);--gc-tint:rgba(185,129,46,0.20);background:rgba(255,255,255,0.05);border:1px solid var(--gc);border-left-width:5px;border-radius:8px;padding:0;margin-bottom:18px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,0.28);}
+  .reco-card.tech{--gc:#3E9C98;--gc-soft:var(--tech-soft);--gc-tint:rgba(62,156,152,0.22);}
+  .reco-card .head{display:flex;align-items:center;gap:10px;padding:13px 16px;background:var(--gc-tint);}
+  .reco-card .head .dot{background:var(--gc);width:11px;height:11px;}
+  .reco-card .dname{font-weight:700;font-size:15.5px;color:var(--gc-soft);}
+  .reco-card .reco-described{padding:10px 16px;font-size:13px;color:#C9D1D9;font-style:italic;border-bottom:1px solid rgba(255,255,255,0.12);}
+  .reco-section{padding:13px 16px;border-bottom:1px solid rgba(255,255,255,0.12);}
+  .reco-section:last-child{border-bottom:none;}
+  .reco-label{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--gc-soft);margin-bottom:7px;}
+  .reco-card ul{margin:0;padding-left:18px;font-size:13.5px;color:#E1E5E9;}
+  .reco-card ul li{margin-bottom:6px;}
+  .reco-card ul li:last-child{margin-bottom:0;}
+  .reco-whytext{font-size:13px;color:#B7C0C9;line-height:1.55;}
+  .reco-section.reco-blocked{background:rgba(255,255,255,0.045);font-size:13px;color:#B9D4D2;line-height:1.55;}
+  .reco-section.reco-blocked .reco-label{color:var(--tech-soft);text-transform:none;letter-spacing:0;font-size:12.5px;}
+  .reco-empty{font-size:13.5px;color:#9FAAB5;}
+  .sum-sub{font-family:Georgia,serif;font-size:20px;font-weight:400;margin:36px 0 8px;color:var(--paper);}
+  .profile-group{margin-top:20px;border-radius:8px;overflow:hidden;border:1px solid var(--gc);--gc:var(--org);--gc-soft:var(--org-soft);--gc-tint:rgba(185,129,46,0.18);}
+  .profile-group.tech{--gc:#3E9C98;--gc-soft:var(--tech-soft);--gc-tint:rgba(62,156,152,0.20);}
+  .profile-group-title{display:flex;align-items:center;gap:10px;padding:11px 16px;background:var(--gc-tint);border-bottom:1px solid var(--gc);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--gc-soft);}
+  .profile-group-title .dot{width:11px;height:11px;background:var(--gc);}
+  .profile-row{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:12px 16px;border-left:4px solid var(--gc);background:rgba(255,255,255,0.04);margin-top:1px;transition:background .15s ease;}
+  .profile-row:has(.focus-check:checked){background:var(--gc-tint);}
+  .profile-main{flex:1;min-width:0;}
+  .profile-title{font-weight:600;font-size:14.5px;margin-bottom:3px;}
+  .profile-text{font-size:13.5px;line-height:1.45;color:#D5DBE1;}
+  .profile-text.profile-muted{color:#8B96A2;font-style:italic;}
+  .focus-toggle{display:flex;align-items:center;gap:7px;font-size:12.5px;color:#E4E7DE;cursor:pointer;white-space:nowrap;padding:5px 10px;border:1px solid var(--gc);border-radius:999px;background:rgba(255,255,255,0.04);}
+  .focus-toggle:hover{background:var(--gc-tint);}
+  .focus-toggle input{accent-color:var(--gc);width:15px;height:15px;cursor:pointer;margin:0;}
+  @media (max-width:560px){.profile-row{flex-direction:column;gap:6px;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="eyebrow">Narzędzie samoobsługowe · bez moderatora</div>
+  <h1>Poziomy zespołu</h1>
+  <p class="lede">Wspólny opis tego, jak zespół planuje i organizuje pracę oraz jak wygląda jego droga od kodu do produkcji. Nie ma tu dobrych ani złych odpowiedzi ani wyniku zbiorczego — każda opcja opisuje inny sposób pracy, który w jakimś kontekście ma sens.</p>
+
+  <div class="team-field">
+    <label for="teamName">Nazwa zespołu</label>
+    <input type="text" id="teamName" placeholder="np. Payments Squad">
+  </div>
+
+  <div class="note">
+    <strong>Zanim zaczniecie:</strong> to narzędzie zostaje z Wami na dłużej. Nie potrzebujecie nikogo poza swoim składem, żeby z niego korzystać — usiądźcie razem, przejdźcie przez pytania, podyskutujcie tam, gdzie opisy wybieracie różnie, i wybierzcie 1–2 tematy, którymi chcecie się zająć w najbliższym kwartale. Wracajcie do niego regularnie i sprawdzajcie, co się zmieniło.
+  </div>
+
+  <details class="howto">
+    <summary>Jak korzystać z tego narzędzia (3 kroki)</summary>
+    <ol>
+      <li>Usiądźcie razem jako zespół — najlepiej w pełnym składzie, razem z PO/TPO.</li>
+      <li>Dla każdego wymiaru przeczytajcie wszystkie opisy i wspólnie wybierzcie ten, który najlepiej oddaje to, jak pracujecie na co dzień. Dyskusja i różnice zdań są tu ważniejsze niż sam wybór. Jeśli pytanie po prostu nie pasuje do Waszego kontekstu (np. specyfika technologii czy regulacji), zaznaczcie „nie dotyczy” zamiast zgadywać.</li>
+      <li>Na dole zobaczycie swój opis w jednym miejscu. Sami zaznaczacie tematy, o których chcecie porozmawiać — dla nich pojawią się propozycje. Jest też miejsce na własne działania. Zapiszcie opis, żeby wrócić do niego za kwartał i zobaczyć, co się zmieniło.</li>
+    </ol>
+    <p class="howto-note"><strong>Jeśli się nie zgadzacie:</strong> nie wybierajcie w milczeniu „środka”, tylko po to, żeby ruszyć dalej. Przedyskutujcie, skąd bierze się różnica zdań — często to najbardziej wartościowa część ćwiczenia. Jeśli mimo dyskusji nadal się nie zgadzacie, wybierzcie opis, który pasuje do typowego dnia pracy, i zanotujcie rozbieżność w komentarzu — to samo w sobie jest przydatną informacją.</p>
+  </details>
+
+  <details class="howto">
+    <summary>Ograniczenia tego narzędzia — wprost, żeby nie było wątpliwości</summary>
+    <ul>
+      <li>To jest samoopis zespołu, nie pomiar automatyczny. Dla części wymiarów (autonomia, bezpieczeństwo psychologiczne, pętla zwrotna z biznesem) nie istnieje żaden inny sposób pomiaru — pytanie zespołu to jedyne źródło tej informacji.</li>
+      <li>Pięć opisów przy każdym pytaniu to uproszczenie ciągłej rzeczywistości — żaden nie pasuje idealnie. Wybierzcie najbliższy i dopiszcie komentarz, jeśli coś nie gra. Narzędzie nie liczy wyniku zbiorczego, nie rysuje wykresów i nie porównuje zespołów — to opis do rozmowy, nie ocena.</li>
+      <li>Narzędzie polega na uczciwości zespołu. Nic nie chroni przed masowym zaznaczaniem „nie dotyczy” tam, gdzie opis byłby niewygodny — dlatego przy każdym takim zaznaczeniu warto zostawić krótkie uzasadnienie (pole niżej przy checkboxie).</li>
+    </ul>
+  </details>
+
+  <details class="howto">
+    <summary>O metodologii — dlaczego samoopis, a nie twarde dane</summary>
+    <p class="howto-note">Tam, gdzie realny pomiar istnieje (cztery metryki DORA: częstotliwość wdrożeń, lead time, wskaźnik nieudanych zmian, MTTR), każdy z tych wymiarów ma dodatkowe, opcjonalne pole na wpisanie faktycznej wartości z Waszego dashboardu, jeśli ją znacie — wybrany opis i twarda liczba mogą się różnić, i to też jest informacja. Warto wiedzieć, że sam doroczny <em>State of DevOps Report</em>, z którego pochodzą te cztery metryki, również opiera się na ankietach samoopisowych tysięcy inżynierów — samoopis jako metoda w tej dokładnie dziedzinie ma ugruntowaną pozycję. Tam, gdzie wymiar dotyczy kultury czy sposobu pracy (nie technologii), żaden inny pomiar nie istnieje — pytamy zespół, bo to jedyne źródło tej informacji.</p>
+  </details>
+
+  <section class="group" id="orgSection">
+    <div class="group-head"><span class="dot org"></span><span class="eyebrow">Organizacja i planowanie</span></div>
+    <p class="group-desc">Jak zespół dzieli pracę, ustala priorytety, współpracuje i bierze odpowiedzialność za wynik — niezależnie od frameworka. W większych, rozproszonych organizacjach część z tych rzeczy wygląda inaczej, bo zależy od więcej osób naraz.</p>
+    <div id="orgCards"></div>
+  </section>
+
+  <section class="group" id="techSection">
+    <div class="group-head"><span class="dot tech"></span><span class="eyebrow">Technologia — DORA / DevOps</span></div>
+    <p class="group-desc">Jak wygląda droga zmiany od commita do produkcji, jak szybko zespół wykrywa i naprawia problemy. Żaden z opisów nie jest uniwersalnym celem — w środowiskach regulowanych, embedded czy tam, gdzie koszt błędu jest bardzo wysoki, różne podejścia bywają świadomym, racjonalnym wyborem. Potraktujcie te wymiary jako opis stanu, nie listę zadań do odhaczenia.</p>
+    <div id="techCards"></div>
+  </section>
+
+  <div class="summary">
+    <h2>Podsumowanie</h2>
+    <p class="lede">Kształt pokazuje, które opisy wybraliście w każdym obszarze. To obraz tego, gdzie jesteście na spektrum całego badania — nie ocena i nie porównanie. Najedźcie na punkt, żeby zobaczyć wybrany opis.</p>
+
+    <div class="radars" style="margin-top:8px;">
+      <div class="radar-block">
+        <div class="rlabel"><span class="name org-label">Organizacja i planowanie</span></div>
+        <div id="orgRadarBottom"></div>
+      </div>
+      <div class="radar-block">
+        <div class="rlabel"><span class="name tech-label">Technologia (DORA)</span></div>
+        <div id="techRadarBottom"></div>
+      </div>
+    </div>
+
+    <h3 class="sum-sub">Tematy do rozmowy</h3>
+    <p class="lede">Poniżej tematy, w których wybraliście jeden z trzech pierwszych opisów — w każdej sekcji od pierwszego do trzeciego. Zaznaczcie te, o których chcecie porozmawiać albo coś w nich zmienić; propozycje pojawią się tylko dla nich. Pozostałe tematy pominęliśmy, ale nic nie stoi na przeszkodzie, żeby wrócić do nich w notatkach.</p>
+
+    <div id="profileOut"></div>
+
+    <div class="reco">
+      <h3 class="sum-sub" style="margin-top:44px;">Propozycje do rozmowy</h3>
+      <p class="reco-disclaimer">Poniżej propozycje dla tematów, które zaznaczyliście. To są punkty wyjścia do rozmowy, nie gotowa recepta — Wasz kontekst może wymagać zupełnie innego podejścia niż to, co tu zaproponowano. Traktujcie to jako inspirację, nie ograniczenie.</p>
+      <div id="recoOut"></div>
+    </div>
+
+    <div class="k" style="margin-top:16px;margin-bottom:8px;">Pytanie otwarte do zespołu</div>
+    <textarea id="closingQuestion" placeholder="Czego jako zespół potrzebujemy, aby mieć większe zdolności wytwarzania?"></textarea>
+
+    <textarea id="notes" placeholder="Notatki zespołu: co Was zaskoczyło w opisie, na co warto zwrócić uwagę..."></textarea>
+
+    <div class="actions-list">
+      <div class="k" style="margin-top:10px;">Działania (co / kto bierze udział lub się zgłosił / do kiedy)</div>
+      <div class="action-row">
+        <input type="text" id="actionText" placeholder="Konkretne działanie">
+        <input type="text" id="actionOwner" placeholder="Kto bierze udział / zgłosił się">
+        <input type="date" id="actionDeadline">
+        <button type="button" class="rm" id="addActionBtn" aria-label="Dodaj działanie">Dodaj działanie</button>
+      </div>
+      <ul class="action-list-out" id="actionListOut"></ul>
+    </div>
+
+    <div class="actions">
+      <!-- Zapisywanie wyników wymaga trwałego magazynu (np. działania jako artefakt Claude).
+           Ten plik jest obecnie samodzielnym HTML-em odpalanym w przeglądarce, więc zapis
+           i historia są tymczasowo wyłączone — przycisk PDF pełni teraz rolę "zapisz i eksportuj" naraz.
+      <button class="btn-primary" id="saveBtn">Zapisz ocenę zespołu</button>
+      -->
+      <button class="btn-primary" id="printBtn">Zapisz i pobierz opis (PDF)</button>
+    </div>
+    <div id="saveStatus" class="muted" style="margin-top:8px;"></div>
+
+    <!-- Historia ocen wymaga trwałego magazynu (window.storage) — niedostępnego w samodzielnym pliku HTML.
+         Odkomentować razem z przyciskiem "Zapisz ocenę zespołu" powyżej, jeśli narzędzie znów będzie
+         działać jako artefakt z dostępem do zapisu.
+    <div class="history">
+      <div class="k">Historia ocen zespołu</div>
+      <div id="historyBody" class="muted">Ładowanie historii…</div>
+    </div>
+    -->
+  </div>
+
+  <footer>Wypełniajcie razem. Wracajcie za kwartał i sprawdźcie, co się zmieniło.<br><span style="font-size:11px;">Wersja narzędzia: v3 (bez wyników liczbowych) — październik 2026</span></footer>
+</div>
+
+<script>
+const ORG_DIMS = [
+  {id:'planowanie', title:'Podział i planowanie pracy', help:"Chodzi o to, czy praca jest dzielona na małe, zarządzalne kawałki i planowana w krótkich, przewidywalnych cyklach — niezależnie, czy nazywacie to sprintem, iteracją czy po prostu tygodniowym planem. W środowisku, gdzie zespół zależy od roadmapy kilku innych zespołów naraz, krótki cykl bywa trudniejszy do utrzymania niż w izolowanym zespole — to też warto uwzględnić w opisie.", levels:[
+    'Zadania trafiają do nas bez podziału na mniejsze części ani planu na iterację.',
+    'Dzielimy pracę doraźnie, plany często rozjeżdżają się z rzeczywistością.',
+    'Planujemy pracę w krótkich cyklach, ale trafność planu bywa różna.',
+    'Dzielimy pracę na małe przyrosty i zwykle dowozimy to, co zaplanowaliśmy.',
+    'Samodzielnie planujemy krótkoterminowo z wysoką trafnością i elastycznie reagujemy na zmiany.'
+  ]},
+  {id:'priorytety', title:'Zarządzanie priorytetami i backlogiem', help:"Backlog to lista rzeczy do zrobienia. Pytanie dotyczy tego, czy ma jasną, uzgodnioną kolejność ważności, rozumianą przez cały zespół, a nie tylko przez jedną osobę. W organizacjach z wieloma interesariuszami o sprzecznych priorytetach to bywa trudniejsze niż w małym, izolowanym zespole.", levels:[
+    'Wszystko jest u nas „pilne”, priorytety zmieniają się z dnia na dzień bez uzasadnienia.',
+    'Mamy priorytety, ale nie rozumiemy ich spójnie jako zespół.',
+    'Mamy uporządkowany backlog i znamy priorytety, choć rzadko je rewidujemy.',
+    'Opieramy priorytety o jasne kryteria (wartość, ryzyko), backlog mamy aktualny i czytelny.',
+    'Współtworzymy priorytety, rozumiemy kontekst biznesowy i potrafimy je uzasadnić.'
+  ]},
+  {id:'gotowosc', title:'Definicja gotowości i ukończenia', help:"DoR („Definition of Ready”) to uzgodnione minimum, kiedy zadanie nadaje się do rozpoczęcia. DoD („Definition of Done”) to kryteria, kiedy jest naprawdę skończone. To nie oznacza czekania, aż wszystko będzie jasne — w zwinnym, zmiennym środowisku często trzeba zacząć, zanim wszystko jest domknięte. Chodzi o świadome nazwanie, co jeszcze jest niewiadomą, a nie o wyeliminowanie każdej niepewności przed startem.", levels:[
+    'Nie mamy wspólnego rozumienia, kiedy zadanie jest „gotowe do startu” lub „zrobione”.',
+    'Mamy definicje, ale ignorujemy je pod presją czasu.',
+    'Znamy definicje i zwykle ich przestrzegamy.',
+    'Mamy jasne minimum do rozpoczęcia pracy i świadomie nazywamy niewiadome, które zostają do wyjaśnienia w trakcie.',
+    'Minimum gotowości dopasowujemy do kontekstu — celowo decydujemy, kiedy zacząć mimo niepewności, i świadomie zarządzamy wynikającym z tego ryzykiem.'
+  ]},
+  {id:'wspolpraca', title:'Współpraca i rozproszenie wiedzy', help:"Bus factor to liczba osób, których nagła nieobecność (np. odejście z firmy) zatrzymałaby pracę zespołu. Im mniej takich osób, tym bardziej praca zależy od ich obecności. W większych, rozproszonych systemach ryzyko rzadko jest tak proste jak „jedna osoba zna cały moduł” — częściej chodzi o to, że nikt nie rozumie całości interakcji między usługami, za które odpowiada kilka zespołów naraz.", levels:[
+    'Mamy silosy kompetencyjne — pojedyncze osoby są „jedynym punktem awarii” (bus factor 1).',
+    'Wymieniamy się wiedzą sporadycznie, głównie przy okazji problemów.',
+    'Świadomie staramy się dzielić wiedzą, ale nie robimy tego systemowo.',
+    'Regularnie parujemy i robimy przeglądy, wiedza jest rozproszona na kilka osób.',
+    'Każdy element systemu może u nas przejąć więcej niż jedna osoba, wiedza swobodnie krąży.'
+  ]},
+  {id:'retro', title:'Regularna refleksja i wdrażanie usprawnień', help:"Nie chodzi o konkretną nazwę spotkania (np. retrospektywę) — liczy się regularny, świadomy moment przyjrzenia się temu, JAK zespół pracuje, niezależnie od formy, i to, czy coś z tego faktycznie się zmienia.", levels:[
+    'Nie mamy żadnego regularnego momentu na refleksję nad sposobem pracy — i nic z tego nie wynika.',
+    'Taka refleksja się u nas zdarza, ale wnioski rzadko wdrażamy.',
+    'Część wniosków z takich rozmów wdrażamy, efekty bywają widoczne.',
+    'Regularne rozmowy o sposobie pracy kończymy konkretnymi działaniami, które dowozimy.',
+    'Ciągłe doskonalenie jest naszym nawykiem niezależnie od formy — mierzymy efekty usprawnień.'
+  ]},
+  {id:'autonomia', title:'Autonomia i odpowiedzialność', help:"Chodzi o to, ile decyzji — technicznych i procesowych — zespół może podjąć samodzielnie, bez czekania na akceptację z zewnątrz, i czy bierze odpowiedzialność za efekt tych decyzji.", levels:[
+    'Czekamy na polecenia, nie czujemy się właścicielami wyniku.',
+    'Wykonujemy decyzje podjęte gdzie indziej, rzadko je kwestionujemy.',
+    'Część decyzji technicznych podejmujemy samodzielnie.',
+    'Samodzielnie podejmujemy większość decyzji procesowych i technicznych.',
+    'W pełni bierzemy odpowiedzialność za rezultat i aktywnie kształtujemy sposób pracy.'
+  ]},
+  {id:'zaleznosci', title:'Zarządzanie zależnościami i ryzykiem', help:"Zależność to sytuacja, w której wykonanie Waszej pracy wymaga czegoś od innego zespołu, systemu lub osoby. W organizacji z wieloma zespołami na współdzielonej platformie zależności bywają wielopoziomowe i trudne do przewidzenia — to normalne, pytanie dotyczy tego, jak szybko je zauważacie, nie czy w ogóle występują.", levels:[
+    'Zależności ujawniają się nam w ostatniej chwili i powodują poślizgi.',
+    'Znamy zależności, ale zarządzamy nimi reaktywnie.',
+    'Identyfikujemy zależności z wyprzedzeniem, ale komunikacja bywa niespójna.',
+    'Aktywnie śledzimy zależności i ryzyka oraz komunikujemy je innym zespołom.',
+    'Proaktywnie zarządzamy zależnościami, adresujemy ryzyka, zanim staną się problemem.'
+  ]},
+  {id:'bezp_psych', title:'Bezpieczeństwo psychologiczne', help:"Bezpieczeństwo psychologiczne to poczucie, że można przyznać się do błędu, zadać „głupie” pytanie albo skrytykować pomysł bez obawy o negatywne konsekwencje społeczne czy zawodowe.", levels:[
+    'Ukrywamy błędy i problemy, bo boimy się konsekwencji.',
+    'Ujawniamy błędy niechętnie, zwykle dopiero gdy nie da się ich ukryć.',
+    'Zwykle mówimy otwarcie o problemach, choć nie zawsze od razu.',
+    'Swobodnie przyznajemy się do błędów i prosimy o pomoc, bez obawy o ocenę.',
+    'Kwestionowanie decyzji i przyznawanie się do niewiedzy jest u nas normą — traktujemy to jako wartość, nie ryzyko.'
+  ]},
+  {id:'tempo', title:'Zrównoważone tempo', help:"Zrównoważone tempo to zasada z Extreme Programming (XP) mówiąca, że zespół powinien pracować w tempie, które da się utrzymać w długim okresie — bez chronicznych nadgodzin i wypalenia.", levels:[
+    'Praca w nadgodzinach i pod presją jest u nas normą, jesteśmy chronicznie przeciążeni.',
+    'Przeciążamy się często, zwykle przy większych deadline’ach.',
+    'Nasze tempo bywa nierówne, ale zwykle wracamy do normy po intensywnych okresach.',
+    'Nasze tempo jest w większości stabilne i możliwe do utrzymania w długim okresie.',
+    'Pracujemy w stałym, zrównoważonym tempie — przeciążenie to u nas wyjątek i szybko adresowany sygnał.'
+  ]},
+  {id:'jakosc_kodu', title:'Jakość inżynierska kodu i wspólna własność', help:"Chodzi o codzienne praktyki inżynierskie z Extreme Programming: refaktoryzację (poprawianie struktury kodu bez zmiany jego zachowania), collective code ownership (każdy może zmieniać każdy fragment kodu, nie tylko jego autor) i dbanie o prostotę rozwiązań, a nie tylko o to, żeby „działało”.", levels:[
+    'Piszemy kod w pojedynkę, bez przeglądów — nikt nie odważa się go refaktoryzować z obawy przed zepsuciem.',
+    'Sporadycznie przeglądamy kod, refaktoryzację odkładamy „na później”, która nigdy nie nadchodzi.',
+    'Code review jest u nas normą, refaktoryzację robimy przy okazji, ale niesystematycznie.',
+    'Regularnie refaktoryzujemy i dbamy o prostotę rozwiązań — kod jest „wspólny”, każdy może go zmieniać.',
+    'Prostota i czytelność kodu to nasz nawyk, nie wysiłek. Parowanie lub mob programming i wspólna własność kodu są normą, jakość rośnie z czasem zamiast spadać.'
+  ]},
+  {id:'feedback_biznes', title:'Pętla zwrotna z użytkownikiem i biznesem', help:"Chodzi o to, czy zespół wie, że to, co dostarcza, faktycznie działa dla użytkownika i tworzy wartość biznesową, a nie tylko czy zadanie formalnie zostało zamknięte. Sprawne procesy i technika nie gwarantują, że budujecie właściwe rzeczy — to osobny wymiar.", levels:[
+    'Dowiadujemy się, czy coś działa, głównie z reklamacji lub przypadkowych sygnałów — nikt u nas systematycznie tego nie sprawdza.',
+    'Czasem ktoś u nas sprawdza wyniki po wdrożeniu, ale zależy to od inicjatywy pojedynczej osoby, nie od ustalonej praktyki.',
+    'Mamy dostęp do podstawowych danych o użyciu funkcji, ale rzadko wracamy do nich po zakończeniu pracy.',
+    'Regularnie sprawdzamy, czy dostarczone rozwiązania osiągają zakładany efekt, i wykorzystujemy to przy planowaniu kolejnych prac.',
+    'Weryfikacja wpływu jest wbudowana w nasz sposób pracy — definiujemy miarę sukcesu przed startem zadania i świadomie z niej korzystamy do podejmowania decyzji.'
+  ]}
+];
+
+const TECH_DIMS = [
+  {id:'deploy_freq', title:'Częstotliwość wdrożeń', help:"Deployment Frequency (częstotliwość wdrożeń) — jak często zmiany trafiają na produkcję. Jedna z czterech kluczowych metryk DORA. Częstotliwość zależy od kontekstu — w środowiskach z twardymi oknami wdrożeniowymi (regulacje, certyfikacja sprzętu, integracje z systemami o ograniczonej dostępności) rzadsze, większe wdrożenia bywają świadomym wyborem. Jeśli odpowiadacie za kilka usług, opiszcie tę najbardziej krytyczną biznesowo albo powtórzcie opis osobno dla 2–3 kluczowych serwisów zamiast uśredniać w głowie.", levels:[
+    'Wdrażamy rzadziej niż raz w miesiącu, nasze wdrożenia są duże i ryzykowne.',
+    'Wdrażamy raz na miesiąc do kilku tygodni.',
+    'Wdrażamy co tydzień lub kilka razy w tygodniu.',
+    'Wdrażamy codziennie, nasze zmiany są małe i przewidywalne.',
+    'Wdrażamy wielokrotnie dziennie, na żądanie — tam, gdzie nasz kontekst na to pozwala.'
+  ]},
+  {id:'lead_time', title:'Czas realizacji zmiany (lead time)', help:"Lead Time for Changes — czas od momentu, gdy zmiana w kodzie jest gotowa, do chwili, gdy działa na produkcji. Druga z metryk DORA. W systemach złożonych z wielu usług lead time bywa sumą czasów oczekiwania na kilka zespołów naraz — mierzenie tylko swojego fragmentu może dawać złudny obraz całości. Jeśli odpowiadacie za kilka usług, opiszcie tę najbardziej krytyczną biznesowo albo powtórzcie opis osobno dla 2–3 kluczowych serwisów zamiast uśredniać w głowie.", levels:[
+    'U nas od commita do produkcji mijają tygodnie lub miesiące.',
+    'U nas to kilka dni do tygodnia.',
+    'U nas to poniżej doby.',
+    'U nas to kilka godzin.',
+    'U nas to poniżej godziny — zmiana trafia na produkcję niemal natychmiast po zatwierdzeniu.'
+  ]},
+  {id:'change_failure', title:'Wskaźnik nieudanych zmian', help:"Change Failure Rate — jaki procent wdrożeń powoduje awarię, degradację usługi lub wymaga poprawki. Trzecia metryka DORA. Uwaga: akceptowalny poziom zależy od kosztu błędu w Waszym kontekście — różne podejścia bywają świadomym kompromisem między tempem a ostrożnością. Jeśli odpowiadacie za kilka usług, opiszcie tę najbardziej krytyczną biznesowo albo powtórzcie opis osobno dla 2–3 kluczowych serwisów zamiast uśredniać w głowie.", levels:[
+    'Duża część naszych wdrożeń wymaga hotfixa lub rollbacku.',
+    'Problemy po naszych wdrożeniach zdarzają się często i są kosztowne.',
+    'Część naszych wdrożeń wymaga poprawek, ale szybko je wykrywamy.',
+    'Rzadko mamy problemy po wdrożeniu, a jeśli już, wykrywamy je niemal natychmiast.',
+    'Nieudane wdrożenia to u nas rzadkość — wykrywamy je automatycznie, zanim wpłyną na użytkowników.'
+  ]},
+  {id:'mttr', title:'Czas przywrócenia usługi (MTTR)', help:"MTTR (Mean Time To Restore/Recovery) — jak szybko zespół przywraca działanie usługi po awarii. Czwarta metryka DORA. W systemach rozproszonych czas przywrócenia bywa trudny do zmierzenia jednoznacznie, bo różne komponenty mogą się psuć i wracać niezależnie — traktujcie to jako przybliżenie, nie precyzyjny wskaźnik. Jeśli odpowiadacie za kilka usług, opiszcie tę najbardziej krytyczną biznesowo albo powtórzcie opis osobno dla 2–3 kluczowych serwisów zamiast uśredniać w głowie.", levels:[
+    'Przywrócenie usługi po awarii zajmuje nam dni.',
+    'Przywrócenie zajmuje nam od kilkunastu godzin do doby.',
+    'Przywrócenie zajmuje nam kilka godzin.',
+    'Przywrócenie zajmuje nam poniżej godziny.',
+    'Przywrócenie zajmuje nam minuty, dzięki gotowym procedurom i automatyzacji.'
+  ]},
+  {id:'testy_ci', title:'Automatyzacja testów i CI', help:"CI (Continuous Integration) to praktyka częstego łączenia zmian w kodzie z automatycznym uruchamianiem testów. Ten wymiar pyta, jak bardzo zespół polega na automatycznych testach zamiast ręcznego sprawdzania. W kodzie odziedziczonym bez testów od lat punkt wyjścia bywa po prostu inny niż w nowym projekcie.", levels:[
+    'Testujemy głównie manualnie, nie mamy CI albo nasz pipeline jest niestabilny.',
+    'Mamy podstawowe testy automatyczne, nasz pipeline działa, ale bywa zawodny.',
+    'Mamy solidny zestaw testów automatycznych uruchamiany na commit, ufamy naszemu pipeline’owi.',
+    'Mamy wysokie pokrycie testami różnych poziomów, nasz pipeline jest szybki i stabilny.',
+    'Testy automatyczne są dla nas pełnym źródłem zaufania do jakości — wdrażamy bez obaw.'
+  ]},
+  {id:'cicd_trunk', title:'Integracja i dostarczanie kodu (CI/CD, krótkie gałęzie)', help:"CD to automatyzacja drogi od zatwierdzonej zmiany do produkcji. Trunk-based development to praca na krótko żyjących gałęziach, często integrowanych. W środowisku z wieloma zespołami na współdzielonym repozytorium albo z zależnościami między wieloma usługami częsta integracja bywa trudniejsza do skoordynowania niż w pojedynczym repozytorium i wymaga innej infrastruktury (feature flagi, testy kontraktowe).", levels:[
+    'Mamy długo żyjące gałęzie, nasze scalenia są rzadkie i bolesne.',
+    'Nasze gałęzie żyją kilka dni do tygodnia, scalenia bywają problematyczne.',
+    'Mamy krótkie gałęzie, często integrujemy z główną linią kodu.',
+    'Pracujemy niemal w trunk-based development, mamy automatyczną ścieżkę do wdrożenia po zatwierdzeniu.',
+    'Pracujemy w pełnym trunk-based development — każda nasza zmiana automatycznie przechodzi przez pipeline do produkcji.'
+  ]},
+  {id:'observability', title:'Observability i monitoring', help:"Observability to zdolność systemu do pokazywania, co się w nim dzieje — przez logi, metryki i tracing. W systemie złożonym z wielu usług sam wgląd w pojedynczy serwis nie wystarczy — trzeba widzieć, jak żądanie przechodzi przez cały łańcuch (distributed tracing), inaczej alerty pokazują objawy, nie przyczyny.", levels:[
+    'O problemach dowiadujemy się od użytkowników.',
+    'Mamy podstawowe logi i metryki, ale nikt regularnie ich nie sprawdza.',
+    'Mamy dashboardy i alerty na kluczowe metryki.',
+    'Mamy pełny wgląd w system (logi, metryki, tracing), nasze alerty są wiarygodne.',
+    'Wykrywamy i często naprawiamy problemy, zanim zauważy je użytkownik.'
+  ]},
+  {id:'iac_dlug', title:'Infrastruktura jako kod i dług techniczny', help:"IaC (Infrastructure as Code) to zarządzanie infrastrukturą przez kod, a nie ręczną konfigurację. Dług techniczny to świadomie lub nieświadomie odłożone decyzje — sam dług nie jest problemem, problemem jest dług niewidoczny i niekontrolowany. Zespół, który świadomie zaciąga dług, żeby dowieźć coś na czas, i wie dokładnie co i dlaczego odłożył, jest w zupełnie innej sytuacji niż zespół, który nie wie, ile długu ma.", levels:[
+    'Konfigurujemy środowiska ręcznie, nasz dług techniczny narasta bez śledzenia — nikt nie wie, ile go faktycznie mamy.',
+    'Częściowo automatyzujemy infrastrukturę, o długu technicznym wspominamy ustnie, ale nigdzie go nie zapisujemy.',
+    'Mamy infrastrukturę w dużej części jako kod, nasz dług techniczny jest widoczny w backlogu, ale rzadko świadomie go priorytetyzujemy.',
+    'Nasza infrastruktura jest w pełni wersjonowana i powtarzalna. Dług techniczny zaciągamy świadomie, z jasnym uzasadnieniem, i regularnie go spłacamy.',
+    'Nasze środowiska są odtwarzalne jednym kliknięciem. Traktujemy dług techniczny jako narzędzie strategiczne — świadomie decydujemy, kiedy go zaciągnąć, a kiedy spłacić, na podstawie realnego kosztu.'
+  ]},
+  {id:'security', title:'Bezpieczeństwo (DevSecOps)', help:"Bezpieczeństwo jako część codziennego procesu wytwarzania, nie jednorazowy audyt raz w roku. Obejmuje m.in. zarządzanie sekretami (hasła, klucze API), skanowanie zależności pod kątem znanych podatności i traktowanie znalezionych luk jak zwykłych błędów do naprawy, a nie osobnej kategorii pracy.", levels:[
+    'Trzymamy sekrety wprost w kodzie lub plikach konfiguracyjnych, nikt u nas nie skanuje zależności pod kątem podatności.',
+    'Znamy podstawowe zasady bezpieczeństwa, ale stosujemy je niekonsekwentnie i zależnie od osoby.',
+    'Skanujemy zależności, sekrety trzymamy w dedykowanym miejscu, ale reagujemy na znalezione problemy z opóźnieniem.',
+    'Skanowanie bezpieczeństwa jest częścią naszego pipeline’u, a znalezione podatności trafiają do backlogu z jasnym priorytetem.',
+    'Bezpieczeństwo jest wbudowane w nasz codzienny proces na równi z jakością kodu — samodzielnie identyfikujemy i naprawiamy większość problemów, zanim staną się incydentem.'
+  ]}
+];
+
+const RECOMMENDATIONS = {
+  planowanie: {
+    low: {
+      steps: [
+        'Zacznijcie od zapisania w jednym miejscu, co dokładnie robicie w najbliższym tygodniu — nawet na kartce czy w prostej liście. Chodzi o to, żeby każdy w zespole widział to samo, zamiast trzymać plan tylko w głowie.',
+        'Ustalcie jeden stały moment w tygodniu na wspólne spojrzenie na to, co przed Wami. Wystarczy 15–20 minut — najważniejsze, żeby to był nawyk, a nie coś ad hoc.'
+      ],
+      why: 'Bez żadnego punktu odniesienia zespół nie może odróżnić przypadkowego opóźnienia od systemowego problemu — a bez tego rozróżnienia każda rozmowa o terminach staje się sporem o odczucia, nie o fakty.'
+    },
+    mid: {
+      steps: [
+        'Jeśli długość cyklu jest ustalona i nie do zmiany (np. wspólny sprint dla kilku zespołów), skupcie się na tym, co go rozjeżdża — sprawdźcie z ostatnich 3–4 cykli, ile procent zaplanowanej pracy faktycznie dowieźliście, i poszukajcie wzorca w tym, co się regularnie nie udaje.',
+        'Dzielcie duże zadania na fragmenty możliwe do ukończenia w 1–3 dni. Jeśli trudno rozbić zadanie, to sam w sobie sygnał, że wymaga doprecyzowania, zanim je podejmiecie.'
+      ],
+      why: 'Zespoły, które nie dzielą pracy na małe kawałki, uczą się wolniej — duże zadania dają rzadszy feedback o tym, czy obrane podejście w ogóle działa. To samo tłumaczy utratę przewidywalności; dodatkowo nieprzewidywalne planowanie bywa wygodnym pretekstem do mikrozarządzania zespołem z zewnątrz.'
+    },
+    blockedLabel: "Gdy wiecie, jak planować, ale ktoś inny co chwilę psuje plan:",
+    blocked: 'Jeśli umiecie dzielić pracę i planować krótko, ale i tak nic się nie zgadza — sprawdźcie, czy problem nie leży poza Wami: zależności od zespołów, które same nie planują w cyklach, albo ciągłe zmiany priorytetów odgórnie w trakcie iteracji. Tego nie rozwiąże sama dyscyplina planowania — wymaga rozmowy z osobami ustalającymi priorytety na wyższym poziomie.'
+  },
+  priorytety: {
+    low: {
+      steps: [
+        'Policzcie, ile zadań w ostatnim tygodniu miało etykietę „najpilniejsze” jednocześnie — sama ta liczba zwykle pokazuje skalę problemu.',
+        'Ustalcie, kto ma ostateczny głos w sprawie kolejności prac, jeśli zespół się nie zgadza. Nie musi to być jedna stała osoba na zawsze — ważne, żeby w danym momencie było jasne, kto decyduje.'
+      ],
+      why: 'Brak jednego miejsca i jednej osoby odpowiedzialnej za priorytety oznacza, że każdy pracuje nad czymś innym z przekonaniem, że to najważniejsze — a to rozprasza zespół bardziej niż niedoskonała kolejność.'
+    },
+    mid: {
+      steps: [
+        'Ustalcie jawne kryteria priorytetyzacji (np. wartość biznesowa vs wysiłek) i spiszcie je. Nie muszą być skomplikowane — wystarczą 2–3 pytania, które zadajecie przy każdej nowej rzeczy w backlogu.',
+        'Przeglądajcie i porządkujcie backlog regularnie, nie tylko tuż przed planowaniem. Krótki, cykliczny przegląd (np. raz w tygodniu) zapobiega temu, żeby backlog stał się nieaktualnym śmietnikiem pomysłów.'
+      ],
+      why: 'Niejasne priorytety kosztują więcej niż samo marnowanie czasu na mniej wartościowe zadania — uczą zespół, że priorytety i tak się zmienią, więc po co się do nich przywiązywać. To osłabia zaangażowanie w każdą kolejną decyzję o kolejności prac, nawet gdy ktoś w końcu porządnie ją ustali.'
+    },
+    blockedLabel: "Gdy priorytety są jasne na papierze, ale nie w praktyce:",
+    blocked: 'Jeśli macie jasne kryteria priorytetyzacji, ale priorytety i tak zmieniają się co tydzień odgórnie — problem nie jest w Waszym procesie, tylko w braku jednego właściciela priorytetów po stronie biznesu. Eskalujcie to wprost jako pytanie: kto ostatecznie decyduje, i czy ta osoba jest gotowa bronić swoich decyzji przed presją z boku.'
+  },
+  gotowosc: {
+    low: {
+      steps: [
+        'Przejrzyjcie ostatnie 5 zadań i sprawdźcie, w ilu z nich brakowało kluczowej informacji już na starcie — to pokaże, czy problem jest częsty, czy incydentalny.',
+        'Spiszcie 2–3 najczęstsze powody, przez które zadania „wracają” w trakcie pracy, i zacznijcie je sprawdzać na starcie. Z czasem ta krótka lista sama przerodzi się w Wasze minimum gotowości.'
+      ],
+      why: 'Bez żadnego wspólnego punktu odniesienia zespół nie ma jak ocenić, czy zadanie faktycznie nadaje się do podjęcia — efekt to najczęściej odkrywanie brakujących informacji w najgorszym możliwym momencie, czyli w połowie pracy.'
+    },
+    mid: {
+      steps: [
+        'Zamiast pełnej checklisty, ustalcie „bezpieczne minimum” do startu — np. znany cel i osobę, która decyduje, gdy coś się zmieni w trakcie. To minimum powinno dać się sprawdzić w mniej niż minutę, inaczej nikt nie będzie z niego korzystał.',
+        'Gdy zaczynacie coś niedoprecyzowanego, nazwijcie to wprost jako założenie robocze i ustalcie, kiedy je zweryfikujecie. Samo nazwanie niepewności na głos często wystarczy, żeby zespół zaczął nią świadomie zarządzać.'
+      ],
+      why: 'Sztywne trzymanie się pełnej DoR bywa nierealne w bardzo zmiennym, zwinnym środowisku — i to nie musi być problemem, jeśli niepewność jest świadomie nazwana i zarządzana, a nie ignorowana w milczeniu. Chodzi o to, żeby ryzyko związane z brakiem jasności było widoczne, a nie o wyeliminowanie każdej niewiadomej przed startem.'
+    },
+    blockedLabel: "Gdy proces zwykle działa, ale coś i tak regularnie wybucha:",
+    blocked: 'Jeśli świadomie zaczynacie z niepewnością i to zwykle działa, ale mimo to regularnie coś wybucha — sprawdźcie, czy naprawdę nazywacie założenia na głos, czy tylko po cichu zakładacie, że ktoś inny to ogarnie. Czasem to nie proces zawodzi, tylko brakuje jednej osoby z mandatem, żeby powiedzieć „stop, to jeszcze nie jest gotowe”.'
+  },
+  wspolpraca: {
+    low: {
+      steps: [
+        'Zróbcie prostą mapę: kto jest jedyną osobą znającą dany obszar systemu — to najczęściej zaskakuje sam zespół. Wystarczy kartka z listą obszarów i imionami, żeby zobaczyć, gdzie są luki.',
+        'Umówcie się na jedno wspólne zadanie w parze w najbliższym tygodniu, żeby zacząć rozprowadzać wiedzę. Wybierzcie coś małego i konkretnego, żeby łatwiej było wejść w ten nawyk.'
+      ],
+      why: 'Zespół, który nawet nie wie, gdzie ma pojedyncze punkty awarii, nie może nimi świadomie zarządzać — pierwszym krokiem jest po prostu zobaczyć, gdzie one są.'
+    },
+    mid: {
+      steps: [
+        'Wprowadźcie regularne parowanie lub przeglądy kodu na krytycznych obszarach. Nie musi to być każda zmiana — zacznijcie od tych fragmentów, których dotyka najmniej osób.',
+        'Zmapujcie, kto jest jedynym ekspertem w danym obszarze, i zaplanujcie przekazanie wiedzy. Nawet jedna wspólna sesja czy krótka notatka „na start” znacząco zmniejsza ryzyko.'
+      ],
+      why: 'Kiedy tylko jedna osoba rozumie dany obszar, zespół zaczyna unikać zmian w nim — nie dlatego, że są niepotrzebne, tylko dlatego, że ocenić ich konsekwencje potrafi wyłącznie ta jedna osoba. Ryzyko nieobecności jest tu drugorzędne wobec tego, ile dobrych decyzji architektonicznych po prostu nigdy nie zostaje podjętych.'
+    },
+    blockedLabel: "Gdy dzielicie się wiedzą, a ryzyko i tak zostaje:",
+    blocked: 'Jeśli parujecie i dzielicie się wiedzą, ale bus factor i tak jest niski, bo system jest rozłożony na wiele usług, których nikt w całości nie rozumie — problem nie jest w Waszych nawykach, tylko w architekturze albo braku dokumentacji granic odpowiedzialności między zespołami. To wymaga inwestycji w mapę systemu, nie więcej parowania.'
+  },
+  retro: {
+    low: {
+      steps: [
+        'Zanim wprowadzicie regularne spotkania, sprawdźcie nieformalnie: ile razy w ostatnim miesiącu ten sam problem wracał w rozmowach kuluarowych, a nigdy nie trafił na żadne forum. To pokazuje realną skalę tego, co dziś ginie.',
+        'Na pierwsze takie spotkanie przynieście po jednej rzeczy, która was ostatnio zirytowała w sposobie pracy — to naturalny start rozmowy. Nie szukajcie od razu rozwiązań, samo nazwanie problemów już coś zmienia.'
+      ],
+      why: 'Zespół, który nigdy się nie zatrzymuje, nie odróżnia problemu jednorazowego od wzorca powtarzającego się co iterację — a to rozróżnienie jest tym, co w ogóle pozwala cokolwiek poprawić systemowo, zamiast gasić te same pożary w kółko.'
+    },
+    mid: {
+      steps: [
+        'Kończcie każdą taką rozmowę maksymalnie 1–2 konkretnymi akcjami z właścicielem i terminem. Więcej akcji niż to zwykle oznacza, że żadna z nich nie zostanie zrealizowana.',
+        'Zaczynajcie kolejną rozmowę od przeglądu, co się stało z akcjami z poprzedniego razu. To jedno pytanie na starcie buduje wiarygodność całego procesu.'
+      ],
+      why: 'Rozmowa bez wdrożonych wniosków uczy zespół czegoś gorszego niż stagnacja — uczy, że mówienie o problemach nic nie zmienia. Kiedy to się utrwali, kolejne rozmowy stają się rytuałem bez treści, a prawdziwe problemy przestają być w ogóle zgłaszane.'
+    },
+    blockedLabel: "Gdy wnioski są wdrażane, a nic realnie się nie zmienia:",
+    blocked: 'Jeśli regularnie wyciągacie wnioski i wdrażacie akcje, ale nic realnie się nie zmienia — sprawdźcie, czy problemy, które nazywacie, w ogóle są w zasięgu Waszej decyzyjności. Część rzeczy (struktura organizacyjna, budżet na narzędzia) wymaga eskalacji poza zespół, a traktowanie ich jak wewnętrznego zadania z retro tylko frustruje ludzi bez realnego wpływu.'
+  },
+  autonomia: {
+    low: {
+      steps: [
+        'Policzcie, ile decyzji w ostatnim miesiącu zespół próbował podjąć samodzielnie, a ile z nich zostało cofniętych lub zmienionych z zewnątrz. Sama proporcja pokazuje punkt startowy.',
+        'Wybierzcie jedną, najmniej ryzykowną kategorię decyzji (np. jak podzielić pracę wewnątrz zespołu) i jawnie ogłoście, że to zespół o niej decyduje. Mały, bezpieczny obszar łatwiej obronić i rozszerzyć niż od razu walczyć o dużą autonomię.'
+      ],
+      why: 'Zespoły bez żadnej autonomii często nawet nie próbują jej przetestować, zakładając z góry, że i tak nie dostaną zgody — a to błędne koło nie przerwie się samo bez pierwszego, małego kroku.'
+    },
+    mid: {
+      steps: [
+        'Zacznijcie od jednej kategorii decyzji (np. techniczne „jak”), którą zespół podejmuje bez akceptacji z zewnątrz. Jasno zakomunikujcie to na zewnątrz, żeby nie było niedomówień.',
+        'Ustalcie jasno, gdzie kończy się mandat zespołu, a zaczyna eskalacja. Spisana granica eliminuje niepotrzebne pytania o pozwolenie w codziennej pracy.'
+      ],
+      why: 'Zespół bez realnej autonomii z czasem przestaje w ogóle próbować rozwiązywać problemy samodzielnie — nauczył się, że i tak ktoś to podważy. Ta wyuczona bezradność jest droższa niż samo opóźnienie decyzji, bo trudno ją odwrócić, nawet gdy autonomię formalnie przywrócicie.'
+    },
+    blockedLabel: "Gdy próbujecie decydować, a decyzje i tak wracają z góry:",
+    blocked: 'Jeśli zespół próbuje przejąć więcej decyzji, ale ciągle jest to cofane z góry — to nie jest problem dojrzałości zespołu, tylko sygnał, że ktoś nad Wami nie ufa procesowi albo ma inne, niewypowiedziane kryteria sukcesu. Warto to nazwać wprost w rozmowie z przełożonym, zamiast zgadywać.'
+  },
+  zaleznosci: {
+    low: {
+      steps: [
+        'Zacznijcie zapisywać zależności tam, gdzie je zauważycie — choćby w jednym wspólnym dokumencie, bez formalnego procesu. Ważniejsze jest to, żeby zacząć, niż żeby proces był od razu dopracowany.',
+        'Na najbliższym planowaniu zapytajcie wprost: „czego potrzebujemy od kogoś spoza zespołu, żeby to zrobić?” To jedno pytanie, zadawane regularnie, wyłapuje większość zależności, zanim staną się problemem.'
+      ],
+      why: 'Jeśli zależności nigdy nie są nazywane na głos, zespół dowiaduje się o nich dopiero wtedy, gdy już powodują poślizg — samo zapisywanie ich, nawet nieformalnie, to już duży krok naprzód.'
+    },
+    mid: {
+      steps: [
+        'Wprowadźcie prosty rejestr zależności międzyzespołowych, przeglądany na bieżąco. Nie musi być rozbudowany — wystarczy lista z osobą kontaktową i statusem.',
+        'Zgłaszajcie zależność w momencie jej odkrycia, nie czekając na planowanie. Im wcześniej inny zespół się o niej dowie, tym więcej ma czasu na reakcję.'
+      ],
+      why: 'Zależności odkryte późno kosztują nieproporcjonalnie więcej niż te odkryte wcześnie — nie dlatego, że sama praca jest trudniejsza, tylko dlatego, że im później to nastąpi, tym mniej czasu ma drugi zespół na reakcję, co Wasz problem zamienia w ich pilny kryzys i nadwyręża relację na dłużej niż jeden projekt.'
+    },
+    blockedLabel: "Gdy zgłaszacie zależności, a inne zespoły ich nie honorują:",
+    blocked: 'Jeśli zgłaszacie zależności wcześnie, a mimo to inne zespoły nie realizują ich na czas — to nie jest coś, co poprawi lepszy rejestr zależności. To wymaga eskalacji na poziom, gdzie ktoś ma władzę ustalić priorytety między zespołami, bo samo zgłoszenie zależności nie daje Wam mocy sprawczej nad cudzym backlogiem.'
+  },
+  bezp_psych: {
+    low: {
+      steps: [
+        'Zróbcie krótką, anonimową ankietę (3 pytania) o tym, czy ludzie czują się bezpiecznie, zgłaszając błędy. Samo zadanie tego pytania jest już sygnałem zmiany.',
+        'Jako lider lub senior znajdźcie okazję, żeby publicznie przyznać się do własnej pomyłki — to szybciej zmienia normy niż jakakolwiek deklaracja. Ludzie patrzą na to, co robicie, nie na to, co mówicie.'
+      ],
+      why: 'Tam, gdzie ludzie ukrywają błędy, nie da się zbudować żadnego z pozostałych wymiarów. Zanim zajmiecie się czymkolwiek innym, warto zainwestować właśnie tutaj, bo to fundament pod całą resztę.'
+    },
+    mid: {
+      steps: [
+        'Wprowadźcie zasadę „błąd omawiamy bez szukania winnego” i konsekwentnie ją stosujcie. Szczególnie ważne jest trzymanie się jej wtedy, gdy błąd jest kosztowny — to wtedy jest naprawdę testowana.',
+        'Niech lider/senior jako pierwszy przyzna się do błędu na forum — to modeluje zachowanie. Jedno szczere „popełniłem błąd” waży więcej niż dziesięć deklaracji o otwartości.'
+      ],
+      why: 'Tam, gdzie ludzie boją się przyznać do błędu, błędy nie znikają — przechodzą do ukrycia i wychodzą na jaw później, zwykle w gorszym momencie i przy wyższych stawkach. To bezpośrednio wpływa na to, jak szybko system faktycznie się psuje, zanim ktokolwiek to zauważy.'
+    },
+    blockedLabel: "Gdy sami modelujecie otwartość, a ludzie i tak milczą:",
+    blocked: 'Jeśli jako lider modelujecie otwartość, a mimo to ludzie się nie otwierają — sprawdźcie, czy gdzieś wyżej w organizacji nie ma kultury szukania winnych przy błędach. Bezpieczeństwo psychologiczne w jednym zespole nie przetrwa długo, jeśli cała organizacja karze przyznawanie się do pomyłek.'
+  },
+  tempo: {
+    low: {
+      steps: [
+        'Zróbcie jeden tydzień przeglądu: zapiszcie, ile razy ktoś pracował po godzinach albo przenosił zadanie z powodu przeciążenia. Same liczby, bez oceniania, wystarczą, żeby zobaczyć skalę problemu.',
+        'Otwarcie zgłoście przełożonym, że obecne tempo nie jest do utrzymania — zanim zamieni się to w wypalenie lub odejścia z zespołu. Łatwiej to usłyszeć jako sygnał wczesnego ostrzegania niż jako skargę po fakcie.'
+      ],
+      why: 'Chroniczne przeciążenie, które nie jest nazwane na głos, jest traktowane jak „normalność”. Nazwanie problemu to pierwszy krok do tego, żeby ktokolwiek zaczął go traktować poważnie.'
+    },
+    mid: {
+      steps: [
+        'Śledźcie sygnały przeciążenia (nadgodziny, przenoszone zadania) i reagujcie na nie w regularnej rozmowie o sposobie pracy. Nie czekajcie, aż ktoś powie to wprost — same dane często mówią wcześniej.',
+        'Ustalcie limit pracy w toku (WIP), żeby ograniczyć rozpraszanie i presję. Nawet prosty limit liczby równoległych zadań na osobę potrafi zrobić różnicę.'
+      ],
+      why: 'Chroniczne przeciążenie mierzalnie obniża jakość podejmowanych decyzji technicznych, bo zmęczony mózg wybiera rozwiązania doraźne zamiast przemyślanych. Krótkoterminowy zysk z przyspieszenia regularnie okazuje się iluzoryczny, gdy policzy się koszt poprawek i rotacji, które za nim idą.'
+    },
+    blockedLabel: "Gdy zgłaszacie przeciążenie, a presja i tak nie maleje:",
+    blocked: 'Jeśli zgłaszacie przeciążenie, a presja mimo to nie maleje — to nie jest coś, co rozwiąże limit WIP. To znaczy, że ktoś powyżej zespołu podejmuje decyzje ilościowe (zakres, terminy) bez uwzględniania Waszej realnej przepustowości. Dane o przeciążeniu są argumentem do tej rozmowy — ale rozmowę trzeba faktycznie odbyć na poziomie, gdzie te decyzje zapadają.'
+  },
+  jakosc_kodu: {
+    low: {
+      steps: [
+        'Sprawdźcie, jaki procent ostatnio scalonych zmian przeszedł jakikolwiek przegląd przez drugą osobę — to Wasz punkt odniesienia, nawet jeśli liczba jest niska.',
+        'Wybierzcie jeden, najbardziej „toksyczny” fragment kodu, którego nikt nie chce dotykać, i zróbcie na nim pierwszą wspólną refaktoryzację. Sukces na jednym fragmencie buduje odwagę do kolejnych.'
+      ],
+      why: 'Kod, którego boi się dotykać cały zespół, z czasem paraliżuje tempo pracy niezależnie od tego, jak dobrze zespół planuje — to jeden z tych wymiarów, gdzie brak działania systematycznie się mści.'
+    },
+    mid: {
+      steps: [
+        'Wprowadźcie code review jako standardowy krok przed scaleniem zmiany, nie tylko dla większych funkcji. Konsekwencja jest tu ważniejsza niż dokładność pojedynczego przeglądu.',
+        'Zarezerwujcie stały czas w sprincie na refaktoryzację najbardziej uciążliwych fragmentów kodu, zamiast czekać na „wielki remont”. Małe, regularne porcje są łatwiejsze do obronienia niż jedno duże przedsięwzięcie.'
+      ],
+      why: 'Spowolnienie zmian to najbardziej oczywisty skutek kodu, którego boi się dotykać cały zespół. Poważniejszy jest efekt cichszy: systematyczne zniechęcanie do dobrych decyzji architektonicznych, bo każda propozycja większej zmiany zderza się z ryzykiem, którego nikt nie chce wziąć na siebie. Im gorszy kod, tym mniej ktokolwiek chce go poprawiać — i koło się zamyka.'
+    },
+    blockedLabel: "Gdy chcecie dbać o kod, a terminy nigdy na to nie pozwalają:",
+    blocked: 'Jeśli chcecie refaktoryzować i robić code review, ale presja terminów nigdy na to nie pozwala — to nie problem dyscypliny zespołu, tylko decyzja biznesowa o priorytetach, podejmowana świadomie lub nie. Nazwijcie wprost koszt tego wyboru (spowolnienie kolejnych zmian) osobie, która ustala terminy, zamiast po cichu radzić sobie z coraz gorszym kodem.'
+  },
+  feedback_biznes: {
+    low: {
+      steps: [
+        'Wybierzcie jedną niedawno dostarczoną funkcję i sprawdźcie, czy w ogóle da się zmierzyć, czy była używana. Sam brak takiej możliwości już jest ważną informacją.',
+        'Zapytajcie Product Ownera lub biznes, skąd wiedzą, że ostatnie wdrożenie się opłaciło. Odpowiedź „chyba tak” jest sygnałem, że nikt tego naprawdę nie sprawdza.'
+      ],
+      why: 'Zespół może dowozić zadania terminowo i z dobrą jakością techniczną, a mimo to budować rzeczy, których nikt nie potrzebuje. Bez podstawowego mechanizmu sprawdzania efektu ta pomyłka wychodzi na jaw dopiero wtedy, gdy jest już bardzo kosztowna do naprawienia.'
+    },
+    mid: {
+      steps: [
+        'Ustalcie prostą miarę sukcesu (np. jedną metrykę użycia) dla każdej większej funkcji, zanim zaczniecie ją budować. Wystarczy jedno zdanie typu „uznamy to za sukces, jeśli…”.',
+        'Zarezerwujcie stały punkt w planowaniu kolejnego okresu na przegląd, co się stało z rzeczami dostarczonymi poprzednio. Krótki przegląd wystarczy, ważna jest regularność.'
+      ],
+      why: 'Zdefiniowanie miary sukcesu przed startem pracy zmienia charakter dyskusji — zamiast sporu o subiektywne odczucia, macie punkt odniesienia, do którego można wrócić. To też chroni zespół przed budowaniem kolejnych wersji czegoś, co od początku nie działało.'
+    },
+    blockedLabel: 'Gdy chcecie mierzyć efekt, ale nikt nie daje Wam dostępu do danych:',
+    blocked: 'Jeśli chcecie sprawdzać wpływ swojej pracy, ale dane o użyciu są zamknięte w innym dziale albo nikt nie chce ich udostępnić — to decyzja organizacyjna, nie brak inicjatywy zespołu. Poproście wprost o dostęp do konkretnych danych, wskazując, do jakiej decyzji są Wam potrzebne.'
+  },
+  deploy_freq: {
+    low: {
+      steps: [
+        'Znajdźcie jeden, najczęściej robiony typ zmiany i spróbujcie wdrożyć go w mniejszym rozmiarze niż zwykle, żeby zobaczyć różnicę. Nawet jedno udane, mniejsze wdrożenie zmienia sposób myślenia zespołu o ryzyku.',
+        'Spiszcie, co dziś blokuje częstsze wdrożenia (proces, ludzie, narzędzia) — zanim zaczniecie automatyzować, warto wiedzieć, co realnie stoi na drodze. Często okazuje się, że przeszkoda jest bardziej organizacyjna niż techniczna.'
+      ],
+      why: 'Bardzo rzadkie wdrożenia to zwykle objaw głębszego problemu — strachu przed zmianą, braku automatyzacji, ręcznych kroków. Zanim zajmiecie się częstotliwością wprost, warto zrozumieć, co ją dziś ogranicza.'
+    },
+    mid: {
+      steps: [
+        'Zmniejszcie wielkość pojedynczego wdrożenia — mniejsze, częstsze zmiany. Mniejszy rozmiar zmiany to prostszy rollback i łatwiejsze znalezienie przyczyny, gdy coś pójdzie nie tak.',
+        'Zautomatyzujcie choć jeden krok procesu wdrożenia, który dziś jest ręczny. Wybierzcie ten, który najczęściej bywa pomijany lub robiony niedbale pod presją czasu.'
+      ],
+      why: 'Częste, małe wdrożenia nie są celem samym w sobie — to sposób na to, żeby ryzyko każdej zmiany było małe i łatwe do wycofania. Zespół, który wdraża rzadko i dużo, płaci za to trudniejszym debugowaniem, a każde wdrożenie staje się wydarzeniem budzącym stres, co paradoksalnie zniechęca do wdrażania jeszcze bardziej.'
+    },
+    blockedLabel: "Gdy chcecie wdrażać częściej, a proces na to nie pozwala:",
+    blocked: 'Jeśli umiecie i chcecie wdrażać częściej, ale proces zatwierdzania (compliance, change advisory board, zewnętrzne zależności) na to nie pozwala — to nie jest coś, co rozwiążecie sami. Policzcie realny koszt tego procesu (czas, opóźnienia, ryzyko dużych wdrożeń) i przedstawcie go jako argument do zmiany procesu, zamiast próbować obejść go po cichu.'
+  },
+  lead_time: {
+    low: {
+      steps: [
+        'Zmierzcie czas dla jednej, ostatniej zmiany — od pierwszego commita do działania na produkcji — żeby mieć punkt odniesienia. Jedna taka miara mówi więcej niż ogólne wrażenie „chyba nieźle nam idzie”.',
+        'Zapytajcie zespół, który krok w tej drodze najbardziej ich frustruje — to zwykle najszybszy trop do poprawy. Frustracja zespołu jest zaskakująco dobrym wskaźnikiem, gdzie faktycznie jest wąskie gardło.'
+      ],
+      why: 'Bez żadnego pomiaru lead time zwykle wydaje się „jakoś taki, jaki jest”. Dopiero konkretna liczba pokazuje, czy problem tkwi w code review, testach czy samym wdrożeniu.'
+    },
+    mid: {
+      steps: [
+        'Zmapujcie drogę zmiany od commita do produkcji i znajdźcie największe wąskie gardło. Skupcie się na jednym, największym opóźnieniu, zamiast próbować naprawiać wszystko naraz.',
+        'Skróćcie czas oczekiwania na code review (np. limit 24h na pierwszą odpowiedź). To jedna z najczęstszych, a zarazem najłatwiejszych do naprawienia przyczyn długiego lead time.'
+      ],
+      why: 'Długi lead time wydłuża pętlę uczenia się zespołu — błędne założenia wychodzą na jaw później, gdy poprawka jest już droższa, a uwaga zespołu dawno przesunęła się gdzie indziej. To koszt, który rzadko trafia do bezpośrednich rozliczeń, ale kumuluje się w czasie.'
+    },
+    blockedLabel: "Gdy znacie wąskie gardło, ale nie macie nad nim władzy:",
+    blocked: 'Jeśli wiecie, gdzie jest wąskie gardło (np. zewnętrzny zespół musi zatwierdzić każdą zmianę), ale nie macie władzy, żeby to zmienić — udokumentujcie rzeczywisty czas oczekiwania i przedstawcie to jako dane, nie skargę. Liczby są trudniejsze do zignorowania niż odczucia.'
+  },
+  change_failure: {
+    low: {
+      steps: [
+        'Zacznijcie zapisywać każdy przypadek, gdy wdrożenie wymagało poprawki lub wycofania — nawet w prostym arkuszu. Bez tego zespół polega na wrażeniu, które bywa złudne.',
+        'Po każdym takim przypadku zadajcie jedno pytanie: co konkretnie wykryłoby to wcześniej? Odpowiedzi na to pytanie z czasem same ułożą się w listę priorytetów do poprawy.'
+      ],
+      why: 'Bez śledzenia awarii wdrożeniowych zespół polega na wrażeniu („chyba nieźle nam idzie”), a nie na faktach — a to wrażenie bywa złudne, zwłaszcza gdy problemy są szybko gaszone i szybko zapominane.'
+    },
+    mid: {
+      steps: [
+        'Wprowadźcie checklistę przed wdrożeniem dla najbardziej ryzykownych zmian. Nie musi być długa — kilka najważniejszych punktów wyłapuje większość powtarzalnych błędów.',
+        'Dodajcie testy regresyjne dla obszarów, które najczęściej się psują. Inwestycja w te konkretne miejsca zwraca się szybciej niż równomierne pokrycie całego systemu.'
+      ],
+      why: 'Wysoki odsetek nieudanych wdrożeń buduje kulturę strachu przed wdrażaniem, w której zespół kompensuje ryzyko wolniejszym tempem i większą liczbą ręcznych kontroli. Paradoksalnie, to dokładnie odwrotność tego, czego potrzeba do faktycznej poprawy.'
+    },
+    blockedLabel: "Gdy macie dobre praktyki, a wskaźnik i tak jest wysoki:",
+    blocked: 'Jeśli macie dobre praktyki, a mimo to CFR jest wysoki — sprawdźcie, czy problem nie leży w systemach, na które nie macie wpływu (zależności zewnętrzne, dane produkcyjne, których nie da się w pełni odtworzyć testowo). Czasem realny sufit jakości jest niżej, niż sugerowałaby dobra praktyka inżynierska, i trzeba to nazwać wprost zamiast winić proces.'
+  },
+  mttr: {
+    low: {
+      steps: [
+        'Spiszcie, co się dzieje dziś, krok po kroku, gdy coś się psuje — nawet jeśli to chaotyczne, samo spisanie tego już coś pokazuje. Zobaczycie luki, o których istnieniu nikt wcześniej głośno nie mówił.',
+        'Ustalcie, kto i jak jest informowany o awarii jako pierwszy — zaskakująco często to ogniwo brakuje. Jasna ścieżka eskalacji potrafi skrócić czas reakcji bardziej niż jakiekolwiek narzędzie.'
+      ],
+      why: 'Zanim zajmiecie się skracaniem czasu naprawy, potrzebujecie wiedzieć, jak dziś naprawdę wygląda reakcja na awarię — często okazuje się, że największym problemem nie jest sama naprawa, tylko czas, zanim ktokolwiek się zorientuje.'
+    },
+    mid: {
+      steps: [
+        'Spiszcie prostą procedurę reagowania na incydent (kto, co, w jakiej kolejności). Nie musi być idealna od razu — ważne, żeby istniała i była gdzieś dostępna w chwili kryzysu.',
+        'Poćwiczcie scenariusz awarii (game day) choć raz, żeby sprawdzić, gdzie są luki. Ćwiczenie w spokojnych warunkach jest dużo tańsze niż nauka podczas prawdziwej awarii.'
+      ],
+      why: 'Krótki czas przywracania usługi znaczy więcej niż niska częstotliwość awarii — awarii nigdy nie da się całkowicie wyeliminować, a to, jak szybko organizacja reaguje, decyduje o realnym zaufaniu klientów i poczuciu kontroli zespołu nad systemem, którym się opiekuje.'
+    },
+    blockedLabel: "Gdy macie procedury, a czas przywrócenia i tak jest długi:",
+    blocked: 'Jeśli macie procedurę i przećwiczone scenariusze, a mimo to MTTR jest wysoki — sprawdźcie, czy problem nie leży w dostępie (kto ma uprawnienia do naprawy w środku nocy) albo w zależności od zewnętrznego dostawcy, którego SLA jest gorsze niż Wasze własne. To coś do wynegocjowania wyżej, nie do naprawienia procedurą wewnętrzną.'
+  },
+  testy_ci: {
+    low: {
+      steps: [
+        'Sprawdźcie, jaki procent kodu jest dziś pokryty testami automatycznymi — nawet zgrubne, przybliżone narzędzie da Wam punkt zero do porównań w przyszłości.',
+        'Wybierzcie jedną, najbardziej krytyczną ścieżkę systemu i napiszcie dla niej pierwsze automatyczne testy — nie starajcie się objąć wszystkiego naraz. Ta jedna ścieżka da Wam szybko odczuwalną wartość i wzorzec do dalszej pracy.'
+      ],
+      why: 'Zaczynanie automatyzacji testów od zera przytłacza, jeśli próbuje się objąć wszystko naraz — jedna dobrze wybrana, krytyczna ścieżka daje szybciej odczuwalną wartość niż rozproszony wysiłek.'
+    },
+    mid: {
+      steps: [
+        'Zacznijcie od automatyzacji testów dla najbardziej krytycznej ścieżki systemu. Priorytetyzujcie miejsca, gdzie błąd byłby najbardziej kosztowny, nie te najłatwiejsze do przetestowania.',
+        'Ustabilizujcie istniejący pipeline CI, zanim dodacie kolejne testy — flaky testy podważają zaufanie. Jeden niestabilny test potrafi zepsuć zaufanie do całego zestawu.'
+      ],
+      why: 'Bez zaufanych testów zespół zaczyna unikać refaktoryzacji i większych usprawnień, bo koszt sprawdzenia, czy coś się nie zepsuło, jest zbyt wysoki. To nie awarie są tu najgorsze — to cicha stagnacja architektury, którą trudno później odwrócić.'
+    },
+    blockedLabel: "Gdy chcecie testować, a kod na to strukturalnie nie pozwala:",
+    blocked: 'Jeśli chcecie pisać testy, ale kod jest zbyt mocno spleciony, żeby dało się go łatwo testować (brak separacji, ukryte zależności, stan globalny) — to nie problem braku chęci, tylko problem architektoniczny, którego same testy nie rozwiążą. Czasem trzeba najpierw zainwestować w minimalny refaktor pod testowalność — i to jest osobna decyzja do uzasadnienia biznesowo.'
+  },
+  cicd_trunk: {
+    low: {
+      steps: [
+        'Zmierzcie, jak długo dziś średnio żyje gałąź kodu, zanim zostanie scalona — to da Wam punkt odniesienia. Bez tej liczby trudno ocenić, czy problem faktycznie jest poważny.',
+        'Spróbujcie skrócić czas życia jednej, najbliższej gałęzi funkcyjnej o połowę, jako eksperyment. Potraktujcie to jako test, nie stałą zasadę — łatwiej się na to zgodzić.'
+      ],
+      why: 'Bez punktu odniesienia trudno ocenić, czy problem jest poważny — a długo żyjące gałęzie zwykle narastają stopniowo, więc zespół przyzwyczaja się do bólu, zamiast go zauważyć.'
+    },
+    mid: {
+      steps: [
+        'Skróćcie czas życia gałęzi funkcyjnych — cel: poniżej 1–2 dni. Krótszy czas życia gałęzi to mniej okazji do konfliktów przy scalaniu.',
+        'Wprowadźcie feature flagi, żeby móc integrować niedokończoną pracę bez ryzyka. To pozwala scalać częściej, nawet gdy funkcja nie jest jeszcze gotowa do pokazania użytkownikom.'
+      ],
+      why: 'Długo żyjące gałęzie kodu to odroczony koszt, który rośnie nieliniowo — konflikt przy scaleniu gałęzi żyjącej tydzień bywa wielokrotnie trudniejszy niż przy scaleniu codziennym, bo rozjazd kodu narasta wykładniczo, nie liniowo.'
+    },
+    blockedLabel: "Gdy chcecie integrować częściej, a infrastruktura nie nadąża:",
+    blocked: 'Jeśli chcecie integrować częściej, ale wymaga to zmian w infrastrukturze (feature flagi, lepsze testy kontraktowe między serwisami), na które nie macie budżetu — to jest inwestycja do uzasadnienia jako projekt, nie coś do wymuszenia samą dyscypliną zespołu.'
+  },
+  observability: {
+    low: {
+      steps: [
+        'Sprawdźcie, czy macie w ogóle jakikolwiek dashboard czy logi dla najważniejszej części systemu — jeśli nie, zacznijcie od tego minimum. Nawet podstawowy wgląd jest ogromnym skokiem względem zera.',
+        'Zapytajcie: skąd ostatnio dowiedzieliście się o awarii? Jeśli odpowiedź to „od użytkownika”, to Wasz priorytet numer jeden. To pytanie samo w sobie zwykle pokazuje, od czego zacząć.'
+      ],
+      why: 'Zespół latający w ciemno nie ma jak reagować szybciej niż użytkownicy. Zanim zajmiecie się zaawansowanymi alertami, potrzebujecie w ogóle podstawowego wglądu w to, co się dzieje.'
+    },
+    mid: {
+      steps: [
+        'Dodajcie alerty na 2–3 najważniejsze metryki (dostępność, błędy, czas odpowiedzi). Mniej, ale dobrze dobranych alertów działa lepiej niż wiele ignorowanych powiadomień.',
+        'Ustalcie jeden dashboard, który zespół sprawdza codziennie, nie tylko w czasie awarii. Codzienny nawyk sprawia, że odchylenia od normy widać, zanim staną się problemem.'
+      ],
+      why: 'Skąd zespół ma wiedzieć, czy jego usprawnienia faktycznie coś zmieniają, jeśli nie ma danych, na których mógłby to sprawdzić? Brak wglądu w system oznacza podejmowanie decyzji technicznych na podstawie przekonania „chyba działa dobrze”, zamiast na podstawie faktów.'
+    },
+    blockedLabel: "Gdy chcecie lepszego wglądu, a infrastruktura jest poza Wami:",
+    blocked: 'Jeśli chcecie mieć lepszy wgląd, ale infrastruktura obserwowalności jest scentralizowana i kontrolowana przez inny zespół (platformowy, SRE) — eskalujcie konkretną potrzebę (jakie metryki, jaki dashboard), zamiast czekać, aż ktoś sam się domyśli, czego brakuje.'
+  },
+  iac_dlug: {
+    low: {
+      steps: [
+        'Wybierzcie jedno, najczęściej ręcznie zmieniane środowisko i spiszcie krok po kroku, jak się je dziś konfiguruje — to pierwszy krok do zapisania tego w kodzie. Samo spisanie procesu często ujawnia niepotrzebne komplikacje.',
+        'Zróbcie jedną, widoczną listę rzeczy, które nazywacie „długiem technicznym” — nawet jeśli nigdy wcześniej nie było takiej listy. Widoczność tej listy jest ważniejsza na start niż jej kompletność.'
+      ],
+      why: 'Kiedy środowiska są konfigurowane ręcznie, a dług techniczny nigdzie nie jest zapisany, zespół traci coś więcej niż powtarzalność — traci jakąkolwiek podstawę do świadomej decyzji, ile technicznego ryzyka faktycznie niesie w danym momencie.'
+    },
+    mid: {
+      steps: [
+        'Zacznijcie od zapisania w kodzie konfiguracji jednego, najczęściej zmienianego środowiska. Wybierzcie środowisko, które najbardziej boli, gdy trzeba je odtworzyć ręcznie.',
+        'Załóżcie widoczny rejestr długu technicznego i przeglądajcie go co sprint lub miesiąc. Regularny przegląd zapobiega temu, żeby lista stała się cmentarzyskiem zapomnianych pomysłów.'
+      ],
+      why: 'Dług techniczny sam w sobie nie jest problemem — bywa racjonalnym wyborem, żeby dowieźć coś na czas. Problemem jest dług niewidoczny, bo nikt nie może świadomie zdecydować, czy warto go spłacić, jeśli nie wie, że w ogóle istnieje.'
+    },
+    blockedLabel: "Gdy dług jest widoczny, ale nikt nie daje czasu na spłatę:",
+    blocked: 'Jeśli macie widoczny rejestr długu, ale nikt nigdy nie daje czasu na jego spłatę — to nie jest problem dyscypliny zespołu, tylko decyzja priorytetowa podejmowana wyżej. Przedstawcie dług w kategoriach ryzyka biznesowego (co się stanie, jeśli tego nie spłacimy), nie w kategoriach czystości kodu — to częściej trafia do decydentów.'
+  },
+  security: {
+    low: {
+      steps: [
+        'Sprawdźcie, czy jakiekolwiek hasła, klucze API lub tokeny są dziś wprost w repozytorium kodu. Jeśli tak, to pierwsza rzecz do naprawienia, niezależnie od reszty.',
+        'Włączcie darmowe, automatyczne skanowanie zależności (wiele platform ma to wbudowane bezpłatnie) i zobaczcie, ile realnie macie znanych podatności. Sama liczba często bywa zaskoczeniem.'
+      ],
+      why: 'Luka bezpieczeństwa różni się od zwykłego błędu tym, że ktoś aktywnie szuka okazji, żeby ją wykorzystać. Czas między pojawieniem się podatności a jej naprawą ma tu bezpośrednie znaczenie, inaczej niż przy długu technicznym, który może poczekać.'
+    },
+    mid: {
+      steps: [
+        'Ustalcie jasną zasadę, w jakim czasie naprawiacie podatności o różnej wadze (np. krytyczne w dni, nie w miesiące). Bez tego zgłoszenia od skanera trafiają na dno backlogu.',
+        'Włączcie skanowanie bezpieczeństwa jako krok w pipeline CI, a nie osobną, ręczną czynność. To, co nie jest zautomatyzowane, prędzej czy później przestaje się dziać.'
+      ],
+      why: 'Skanowanie, które istnieje, ale którego wyniki nikt nie przegląda, daje złudne poczucie bezpieczeństwa — gorsze niż jego brak, bo tworzy wrażenie, że temat jest już zaadresowany.'
+    },
+    blockedLabel: 'Gdy widzicie podatności, ale nikt nie daje czasu na ich naprawę:',
+    blocked: 'Jeśli zgłaszacie luki bezpieczeństwa, a priorytet zawsze wygrywają nowe funkcje — przedstawcie to w kategoriach ryzyka biznesowego (potencjalny wyciek danych, przestój, konsekwencje prawne), nie w kategoriach czystości kodu. To zwykle szybciej trafia do decydentów niż argument czysto techniczny.'
+  }
+};
+
+const state = {};
+const naSet = new Set();
+[...ORG_DIMS, ...TECH_DIMS].forEach(d => state[d.id] = null);
+
+const comments = {};
+
+const REAL_DATA_DIMS = new Set(['deploy_freq', 'lead_time', 'change_failure', 'mttr']);
+const REAL_DATA_PLACEHOLDERS = {
+  deploy_freq: 'Opcjonalnie: realna wartość z dashboardu wraz z okresem, np. „14 wdrożeń w ostatnim kwartale”',
+  lead_time: 'Opcjonalnie: realna wartość z dashboardu wraz z okresem, np. „mediana 3 dni, z ostatnich 3 miesięcy”',
+  change_failure: 'Opcjonalnie: realna wartość z dashboardu wraz z okresem, np. „3 z 25 wdrożeń w ostatnich 3 miesiącach”',
+  mttr: 'Opcjonalnie: realna wartość z dashboardu wraz z okresem, np. „średnio 4 godziny, z incydentów z ostatnich 6 miesięcy”'
+};
+const realData = {};
+const naReasons = {};
+
+function renderCards(dims, containerId, colorClass){
+  const el = document.getElementById(containerId);
+  const cat = containerId === 'techCards' ? 'tech' : 'org';
+  el.innerHTML = dims.map(d => `
+    <div class="card unanswered ${cat}" id="card-${d.id}">
+      <div class="title-row">
+        <div class="title">${d.title}</div>
+        ${d.help ? `<span class="info-icon" tabindex="0">i<span class="tooltip">${d.help}</span></span>` : ''}
+      </div>
+      <div class="scale-radio-list" id="scalelist-${d.id}" role="radiogroup" aria-label="Wybierzcie opis, który najlepiej pasuje">
+        ${[1,2,3,4,5].map(n => `<label class="radio-option" for="score-${d.id}-${n}"><input type="radio" name="score-${d.id}" id="score-${d.id}-${n}" value="${n}" data-id="${d.id}"><span class="opt-num"></span><span class="opt-text">${d.levels[n-1]}</span></label>`).join('')}
+      </div>
+      ${REAL_DATA_DIMS.has(d.id) ? `<input type="text" class="real-data-input" id="realdata-${d.id}" placeholder="${REAL_DATA_PLACEHOLDERS[d.id]}">` : ''}
+      <label class="na-toggle">
+        <input type="checkbox" id="na-${d.id}">
+        Nie dotyczy naszego zespołu — pomiń ten obszar
+      </label>
+      <input type="text" class="na-reason-input" id="na-reason-${d.id}" style="display:none;" placeholder="Dlaczego nie dotyczy? (opcjonalnie, ale zalecane)">
+      <button type="button" class="comment-toggle" id="comment-toggle-${d.id}">+ Dodaj komentarz</button>
+      <textarea class="comment-box" id="comment-${d.id}" style="display:none;" placeholder="Komentarz do tej odpowiedzi — dlaczego ten opis, co warto dopisać..."></textarea>
+    </div>
+  `).join('');
+
+  dims.forEach(d => {
+    const scaleList = document.getElementById(`scalelist-${d.id}`);
+    const radios = Array.from(document.querySelectorAll(`input[name="score-${d.id}"]`));
+    radios.forEach(r => {
+      r.addEventListener('change', (e) => {
+        const v = parseInt(e.target.value, 10);
+        state[d.id] = v;
+        scaleList.querySelectorAll('.radio-option').forEach(opt => opt.classList.remove('is-checked'));
+        e.target.closest('.radio-option').classList.add('is-checked');
+        document.getElementById(`card-${d.id}`).classList.remove('unanswered');
+        clearExportWarning();
+        update();
+      });
+    });
+
+    if(REAL_DATA_DIMS.has(d.id)){
+      const realInput = document.getElementById(`realdata-${d.id}`);
+      realInput.addEventListener('input', (e) => {
+        realData[d.id] = e.target.value;
+      });
+    }
+
+    const naCheckbox = document.getElementById(`na-${d.id}`);
+    const naReasonInput = document.getElementById(`na-reason-${d.id}`);
+    naCheckbox.addEventListener('change', (e) => {
+      const card = document.getElementById(`card-${d.id}`);
+      if(e.target.checked){
+        naSet.add(d.id);
+        radios.forEach(r => r.disabled = true);
+        card.classList.add('is-na');
+        card.classList.remove('unanswered');
+        naReasonInput.style.display = 'block';
+        naReasonInput.focus();
+        clearExportWarning();
+      } else {
+        naSet.delete(d.id);
+        radios.forEach(r => r.disabled = false);
+        card.classList.remove('is-na');
+        naReasonInput.style.display = 'none';
+        if(state[d.id] === null) card.classList.add('unanswered');
+      }
+      update();
+    });
+    naReasonInput.addEventListener('input', (e) => {
+      naReasons[d.id] = e.target.value;
+    });
+
+    const commentToggle = document.getElementById(`comment-toggle-${d.id}`);
+    const commentBox = document.getElementById(`comment-${d.id}`);
+    commentToggle.addEventListener('click', () => {
+      const isHidden = commentBox.style.display === 'none';
+      commentBox.style.display = isHidden ? 'block' : 'none';
+      commentToggle.textContent = isHidden ? '− Ukryj komentarz' : '+ Dodaj komentarz';
+      if(isHidden) commentBox.focus();
+    });
+    commentBox.addEventListener('input', (e) => {
+      comments[d.id] = e.target.value;
+    });
+  });
+}
+
+function vertexPoints(dims, size, values){
+  const cx = size/2, cy = size/2, r = size/2 - 26;
+  const n = dims.length;
+  return dims.map((d,i) => {
+    const angle = (Math.PI*2 * i / n) - Math.PI/2;
+    const raw = values[d.id];
+    const val = (naSet.has(d.id) || raw === null || raw === undefined) ? 0 : raw;
+    const rad = r * (val/5);
+    const x = cx + rad * Math.cos(angle);
+    const y = cy + rad * Math.sin(angle);
+    const levelText = (raw && raw >= 1 && raw <= 5) ? d.levels[raw-1] : null;
+    return {id: d.id, title: d.title, x, y, raw, levelText};
+  });
+}
+
+function polygonPoints(dims, size, values){
+  return vertexPoints(dims, size, values).map(p => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ');
+}
+
+function renderRadar(dims, values, color, size=280){
+  const cx = size/2, cy = size/2, r = size/2 - 26;
+  const n = dims.length;
+  let rings = '';
+  for(let lvl=1; lvl<=5; lvl++){
+    const pts = dims.map((d,i) => {
+      const angle = (Math.PI*2*i/n) - Math.PI/2;
+      const rad = r * (lvl/5);
+      return `${(cx+rad*Math.cos(angle)).toFixed(1)},${(cy+rad*Math.sin(angle)).toFixed(1)}`;
+    }).join(' ');
+    rings += `<polygon points="${pts}" fill="none" stroke="rgba(23,34,46,0.10)" stroke-width="1"/>`;
+  }
+  let axes = '';
+  let labels = '';
+  dims.forEach((d,i) => {
+    const angle = (Math.PI*2*i/n) - Math.PI/2;
+    const x2 = cx + r*Math.cos(angle), y2 = cy + r*Math.sin(angle);
+    axes += `<line x1="${cx}" y1="${cy}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="rgba(23,34,46,0.10)" stroke-width="1"/>`;
+    const lx = cx + (r+14)*Math.cos(angle), ly = cy + (r+14)*Math.sin(angle);
+    const anchor = Math.cos(angle) > 0.3 ? 'start' : (Math.cos(angle) < -0.3 ? 'end' : 'middle');
+    labels += `<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" font-size="8.5" fill="#3C4A59" text-anchor="${anchor}" dominant-baseline="middle">${i+1}</text>`;
+  });
+  const verts = vertexPoints(dims, size, values);
+  const poly = verts.map(p => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ');
+  const svg = `<svg width="100%" viewBox="0 0 ${size} ${size}" style="max-width:${size}px;display:block;margin:0 auto;">
+    ${rings}${axes}
+    <polygon points="${poly}" fill="${color}" fill-opacity="0.28" stroke="${color}" stroke-width="2"/>
+    ${labels}
+  </svg>`;
+  const overlay = verts.map(p => {
+    let bodyHtml;
+    if(naSet.has(p.id)){
+      bodyHtml = 'Nie dotyczy';
+    } else if(p.raw === null || p.raw === undefined){
+      bodyHtml = 'Brak odpowiedzi';
+    } else {
+      bodyHtml = p.levelText;
+    }
+    const leftPct = (p.x/size*100).toFixed(2);
+    const topPct = (p.y/size*100).toFixed(2);
+    return `<button type="button" class="radar-dot" style="left:${leftPct}%; top:${topPct}%; --dot-color:${color};" tabindex="0">
+      <span class="tooltip"><strong>${p.title}</strong><br>${bodyHtml}</span>
+    </button>`;
+  }).join('');
+  return `<div class="radar-inner" style="max-width:${size}px;margin:0 auto;">${svg}${overlay}</div>`;
+}
+
+const focusSet = new Set();
+
+function renderProfile(){
+  const el = document.getElementById('profileOut');
+  const groups = [
+    {label:'Organizacja i planowanie', dims:ORG_DIMS, cls:'org'},
+    {label:'Technologia (DORA / DevOps)', dims:TECH_DIMS, cls:'tech'}
+  ];
+  const visibleIds = new Set();
+  el.innerHTML = groups.map(g => {
+    const rows = g.dims
+      .filter(d => !naSet.has(d.id) && state[d.id] !== null && state[d.id] <= 3)
+      .sort((a, b) => state[a.id] - state[b.id]);
+    rows.forEach(d => visibleIds.add(d.id));
+    return `
+    <div class="profile-group ${g.cls}">
+      <div class="profile-group-title"><span class="dot ${g.cls}"></span>${g.label}</div>
+      ${rows.length ? rows.map(d => `<div class="profile-row"><div class="profile-main"><div class="profile-title">${d.title}</div><div class="profile-text">${d.levels[state[d.id]-1]}</div></div><label class="focus-toggle"><input type="checkbox" class="focus-check" data-id="${d.id}" ${focusSet.has(d.id) ? 'checked' : ''}> Chcemy o tym porozmawiać</label></div>`).join('')
+        : '<div class="profile-row"><div class="profile-text profile-muted">Brak tematów do zaznaczenia w tej sekcji.</div></div>'}
+    </div>`;
+  }).join('');
+  [...focusSet].forEach(id => { if(!visibleIds.has(id)) focusSet.delete(id); });
+  el.querySelectorAll('.focus-check').forEach(cb => {
+    cb.addEventListener('change', () => {
+      const id = cb.getAttribute('data-id');
+      if(cb.checked) focusSet.add(id); else focusSet.delete(id);
+      renderRecommendations();
+    });
+  });
+}
+
+function update(){
+  document.getElementById('orgRadarBottom').innerHTML = renderRadar(ORG_DIMS, state, '#B9812E');
+  document.getElementById('techRadarBottom').innerHTML = renderRadar(TECH_DIMS, state, '#3E9C98');
+  renderProfile();
+  renderRecommendations();
+}
+
+function renderRecommendations(){
+  const el = document.getElementById('recoOut');
+  const chosen = [...ORG_DIMS, ...TECH_DIMS].filter(d => focusSet.has(d.id) && !naSet.has(d.id) && state[d.id] !== null && state[d.id] <= 3);
+  const wrap = el.closest('.reco');
+  if(wrap) wrap.style.display = chosen.length ? '' : 'none';
+  if(chosen.length === 0){
+    el.innerHTML = '';
+    return;
+  }
+  el.innerHTML = chosen.map(d => {
+    const v = state[d.id];
+    const dimReco = RECOMMENDATIONS[d.id] || {};
+    const r = dimReco[v <= 2 ? 'low' : 'mid'] || {steps:[], why:''};
+    const steps = r.steps, why = r.why;
+    const blocked = dimReco.blocked || '';
+    const blockedLabel = dimReco.blockedLabel || 'Jeśli to nie kwestia niewiedzy, tylko blokady:';
+    const cat = ORG_DIMS.some(x => x.id === d.id) ? 'org' : 'tech';
+    return `
+    <div class="reco-card ${cat}">
+      <div class="head"><span class="dot ${cat}"></span><span class="dname">${d.title}</span></div>
+      <div class="reco-described">Opisaliście: ${d.levels[v-1]}</div>
+      <div class="reco-section"><div class="reco-label">Na start</div><ul>${steps.map(s => `<li>${s}</li>`).join('')}</ul></div>
+      ${why ? `<div class="reco-section"><div class="reco-label">Dlaczego to ma znaczenie</div><div class="reco-whytext">${why}</div></div>` : ''}
+      ${blocked ? `<div class="reco-section reco-blocked"><div class="reco-label">${blockedLabel}</div><div>${blocked}</div></div>` : ''}
+    </div>`;
+  }).join('');
+}
+
+renderCards(ORG_DIMS, 'orgCards');
+renderCards(TECH_DIMS, 'techCards');
+update();
+
+const actionItems = [];
+
+function renderActionItems(){
+  const el = document.getElementById('actionListOut');
+  if(actionItems.length === 0){
+    el.innerHTML = '<li class="muted">Brak dodanych działań.</li>';
+    return;
+  }
+  el.innerHTML = actionItems.map((a,i) => {
+    const deadlineStr = a.deadline ? new Date(a.deadline).toLocaleDateString('pl-PL', {year:'numeric', month:'short', day:'numeric'}) : 'bez terminu';
+    return `<li>${a.text} — <strong>${a.owner || 'bez przypisanych osób'}</strong>, do ${deadlineStr} <button type="button" data-idx="${i}" class="rm-action" style="background:none;border:none;color:#8B96A2;cursor:pointer;">×</button></li>`;
+  }).join('');
+  el.querySelectorAll('.rm-action').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const idx = parseInt(e.currentTarget.getAttribute('data-idx'), 10);
+      actionItems.splice(idx,1);
+      renderActionItems();
+    });
+  });
+}
+renderActionItems();
+
+document.getElementById('addActionBtn').addEventListener('click', () => {
+  const textEl = document.getElementById('actionText');
+  const ownerEl = document.getElementById('actionOwner');
+  const deadlineEl = document.getElementById('actionDeadline');
+  if(!textEl.value.trim()) return;
+  actionItems.push({text: textEl.value.trim(), owner: ownerEl.value.trim(), deadline: deadlineEl.value});
+  textEl.value = ''; ownerEl.value = ''; deadlineEl.value = '';
+  renderActionItems();
+});
+['actionText','actionOwner'].forEach(id => {
+  document.getElementById(id).addEventListener('keydown', (e) => {
+    if(e.key === 'Enter'){ e.preventDefault(); document.getElementById('addActionBtn').click(); }
+  });
+});
+
+function flushPendingAction(){
+  const textEl = document.getElementById('actionText');
+  if(textEl.value.trim()){
+    document.getElementById('addActionBtn').click();
+  }
+}
+
+document.getElementById('printBtn').addEventListener('click', () => {
+  const allDimsCheck = [...ORG_DIMS, ...TECH_DIMS];
+  const unanswered = allDimsCheck.filter(d => !naSet.has(d.id) && state[d.id] === null);
+  const statusEl = document.getElementById('saveStatus');
+  if(unanswered.length > 0){
+    statusEl.className = 'status-warning';
+    statusEl.textContent = unanswered.length === 1
+      ? 'Zostało 1 pytanie bez odpowiedzi — wybierzcie opis albo zaznaczcie „nie dotyczy”, zanim zapiszecie.'
+      : `Zostało ${unanswered.length} pytań bez odpowiedzi — wybierzcie opis albo zaznaczcie „nie dotyczy”, zanim zapiszecie.`;
+    const firstCard = document.getElementById(`card-${unanswered[0].id}`);
+    firstCard.scrollIntoView({behavior:'smooth', block:'center'});
+    firstCard.classList.add('flash-warning');
+    setTimeout(() => firstCard.classList.remove('flash-warning'), 1100);
+    return;
+  }
+  statusEl.className = 'muted';
+
+  flushPendingAction();
+  const team = currentTeamName();
+  const notesVal = document.getElementById('notes').value;
+  const closingQuestionVal = document.getElementById('closingQuestion').value;
+  const recoHTML = focusSet.size ? document.getElementById('recoOut').innerHTML : '<p>Nie zaznaczono tematów do rozmowy.</p>';
+  const orgRadarSVG = document.getElementById('orgRadarBottom').innerHTML;
+  const techRadarSVG = document.getElementById('techRadarBottom').innerHTML;
+  const profileHTML = [
+    {label:'Organizacja i planowanie', dims:ORG_DIMS},
+    {label:'Technologia (DORA / DevOps)', dims:TECH_DIMS}
+  ].map(g => `<h3>${g.label}</h3><ul>${g.dims.map(d => naSet.has(d.id)
+      ? `<li><strong>${d.title}</strong> — nie dotyczy naszego zespołu</li>`
+      : `<li><strong>${d.title}</strong> — ${d.levels[state[d.id]-1]}${focusSet.has(d.id) ? ' <em>(chcemy o tym porozmawiać)</em>' : ''}</li>`).join('')}</ul>`).join('');
+  const actionsHTML = actionItems.length
+    ? actionItems.map(a => {
+        const dl = a.deadline ? new Date(a.deadline).toLocaleDateString('pl-PL', {year:'numeric', month:'short', day:'numeric'}) : 'bez terminu';
+        return `<li>${a.text} — ${a.owner || 'bez przypisanych osób'}, do ${dl}</li>`;
+      }).join('')
+    : '<li>Brak dodanych działań.</li>';
+
+  const allDimsForExport = [...ORG_DIMS, ...TECH_DIMS];
+  const commentEntries = allDimsForExport
+    .filter(d => comments[d.id] && comments[d.id].trim())
+    .map(d => {
+      return `<li><strong>${d.title}</strong>: ${comments[d.id].trim().replace(/\n/g,'<br>')}</li>`;
+    });
+  const commentsHTML = commentEntries.length ? commentEntries.join('') : '';
+
+  const realDataEntries = allDimsForExport
+    .filter(d => REAL_DATA_DIMS.has(d.id) && realData[d.id] && realData[d.id].trim())
+    .map(d => `<li><strong>${d.title}</strong> — wybrany opis: ${state[d.id] ? d.levels[state[d.id]-1] : 'brak'}; realna wartość: ${realData[d.id].trim()}</li>`);
+  const realDataHTML = realDataEntries.length ? realDataEntries.join('') : '';
+
+  const naEntries = allDimsForExport
+    .filter(d => naSet.has(d.id))
+    .map(d => `<li><strong>${d.title}</strong>${naReasons[d.id] && naReasons[d.id].trim() ? ': ' + naReasons[d.id].trim() : ' (bez podanego powodu)'}</li>`);
+  const naHTML = naEntries.length ? naEntries.join('') : '';
+
+  const html = `<!DOCTYPE html><html lang="pl"><head><meta charset="UTF-8"><title>Poziomy zespołu — opis</title>
+  <style>
+    body{font-family: Georgia, "Iowan Old Style", serif; color:#17222E; padding:40px; max-width:800px; margin:0 auto;}
+    h1{font-size:28px;margin-bottom:4px;} h2{font-size:16px;margin-top:30px;font-family:-apple-system,Segoe UI,sans-serif;text-transform:uppercase;letter-spacing:.04em;color:#3C4A59;}
+    .meta{font-size:13px;color:#555;margin-bottom:20px;font-family:-apple-system,Segoe UI,sans-serif;}
+    .hint{font-size:12.5px;color:#777;margin-bottom:24px;font-family:-apple-system,Segoe UI,sans-serif;border-left:2px solid #ccc;padding-left:10px;}
+    ul{padding-left:20px;font-family:-apple-system,Segoe UI,sans-serif;font-size:14px;}
+    p{font-family:-apple-system,Segoe UI,sans-serif;font-size:14.5px;}
+    .reco-card{--gc:#B9812E;border:1px solid #ddd;border-left:5px solid var(--gc);border-radius:6px;margin-bottom:12px;font-family:-apple-system,Segoe UI,sans-serif;overflow:hidden;page-break-inside:avoid;}
+    .reco-card.tech{--gc:#276765;}
+    .reco-card .head{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;padding:9px 14px;background:#f4f1ea;}
+    .reco-card.tech .head{background:#eaf2f1;}
+    .reco-card .dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--gc);}
+    .reco-section{padding:9px 14px;border-top:1px solid #e5e5e5;}
+    .reco-label{font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--gc);margin-bottom:4px;}
+    .reco-card ul{margin:0;padding-left:18px;font-size:13px;}
+    .reco-whytext{font-size:12.5px;color:#555;line-height:1.5;}
+    .reco-section.reco-blocked{background:#fafafa;font-size:12.5px;color:#276765;line-height:1.5;}
+    .reco-section.reco-blocked .reco-label{text-transform:none;letter-spacing:0;font-size:12px;color:#276765;}
+    .reco-empty{font-size:13.5px;color:#555;font-family:-apple-system,Segoe UI,sans-serif;}
+    .row{display:flex; gap:24px; margin-top:6px;}
+    .row > div{flex:1;text-align:center;}
+    .row .label{font-family:-apple-system,Segoe UI,sans-serif;font-size:13px;color:#3C4A59;margin-bottom:6px;}
+    svg{max-width:240px;}
+    .radar-inner{position:relative;}
+    .radar-dot{position:absolute;width:11px;height:11px;border-radius:50%;background:var(--dot-color,#333);border:2px solid #fff;transform:translate(-50%,-50%);padding:0;cursor:pointer;}
+    .radar-dot:hover, .radar-dot:focus{z-index:50;}
+    .radar-dot .tooltip{display:none;position:absolute;bottom:18px;left:50%;transform:translateX(-50%);width:230px;background:#17222E;color:#F2F3ED;font-size:11.5px;line-height:1.45;padding:8px 10px;border-radius:6px;text-align:left;font-family:-apple-system,Segoe UI,sans-serif;z-index:30;}
+    .radar-dot:hover .tooltip, .radar-dot:focus .tooltip{display:block;}
+    h3{font-size:14px;margin:18px 0 4px;font-family:-apple-system,Segoe UI,sans-serif;color:#3C4A59;}
+    .reco-described{font-size:13px;color:#555;font-style:italic;margin:2px 0 6px;font-family:-apple-system,Segoe UI,sans-serif;}
+    @media print{.hint{display:none;}}
+  </style></head><body>
+  <h1>Poziomy zespołu</h1>
+  <div class="meta">${team ? 'Zespół: ' + team + ' · ' : ''}Zapisano: ${new Date().toLocaleDateString('pl-PL', {year:'numeric', month:'long', day:'numeric'})} · Wersja narzędzia: v3</div>
+  <div class="hint">Wskazówka: Ctrl+P (lub Cmd+P), żeby zapisać tę stronę jako PDF.</div>
+  <div class="row">
+    <div><div class="label">Organizacja i planowanie</div>${orgRadarSVG}</div>
+    <div><div class="label">Technologia (DORA)</div>${techRadarSVG}</div>
+  </div>
+  <h2>Nasz opis</h2>${profileHTML}
+  <h2>Propozycje do rozmowy</h2><p style="font-size:12.5px;color:#777;font-style:italic;">To są punkty wyjścia do rozmowy, nie gotowa recepta — Wasz kontekst może wymagać zupełnie innego podejścia niż to, co tu zaproponowano.</p>${recoHTML}
+  ${realDataHTML ? `<h2>Realne dane z dashboardu (gdzie podano)</h2><ul>${realDataHTML}</ul>` : ''}
+  ${closingQuestionVal.trim() ? `<h2>Czego jako zespół potrzebujemy, aby mieć większe zdolności wytwarzania?</h2><p>${closingQuestionVal.trim().replace(/\n/g,'<br>')}</p>` : ''}
+  <h2>Notatki</h2><p>${notesVal ? notesVal.replace(/\n/g,'<br>') : 'Brak notatek.'}</p>
+  ${commentsHTML ? `<h2>Komentarze przy pytaniach</h2><ul>${commentsHTML}</ul>` : ''}
+  ${naHTML ? `<h2>Wymiary oznaczone jako „nie dotyczy”</h2><ul>${naHTML}</ul>` : ''}
+  <h2>Działania</h2><ul>${actionsHTML}</ul>
+  </body></html>`;
+
+  const blob = new Blob([html], {type:'text/html'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  const teamSlug = team ? '-' + team.toLowerCase().replace(/[^a-z0-9ąćęłńóśźż]+/gi, '-').replace(/^-+|-+$/g, '') : '';
+  a.download = `poziomy-zespolow-opis${teamSlug}-${new Date().toISOString().slice(0,10)}.html`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+
+  document.getElementById('saveStatus').textContent = 'Pobrano plik z opisem. Otwórz go i użyj Ctrl+P, żeby zapisać jako PDF.';
+});
+
+function currentTeamName(){
+  return document.getElementById('teamName').value.trim();
+}
+
+function clearExportWarning(){
+  const statusEl = document.getElementById('saveStatus');
+  if(statusEl.classList.contains('status-warning')){
+    statusEl.className = 'muted';
+    statusEl.textContent = '';
+  }
+}
+
+/* Zapis wyniku i historia ocen wymagają trwałego magazynu (window.storage), dostępnego tylko gdy
+   to narzędzie działa jako artefakt z zapisem włączonym. W samodzielnym pliku HTML odpalanym wprost
+   w przeglądarce window.storage nie istnieje, więc ten blok jest tymczasowo wyłączony — jedyną formą
+   zapisu wyniku jest teraz przycisk "Zapisz i pobierz wynik (PDF)". Odkomentować cały poniższy blok
+   razem z przyciskiem #saveBtn i sekcją .history w HTML, żeby przywrócić zapis i historię.
+
+document.getElementById('saveBtn').addEventListener('click', async () => {
+  flushPendingAction();
+  const statusEl = document.getElementById('saveStatus');
+  const team = currentTeamName();
+  if(!team){
+    statusEl.textContent = 'Wpiszcie nazwę zespołu na górze strony, zanim zapiszecie wynik — to ona oddziela Waszą historię od innych zespołów.';
+    document.getElementById('teamName').focus();
+    return;
+  }
+  statusEl.textContent = 'Zapisywanie…';
+  try{
+    const now = new Date();
+    const key = 'maturity-assessment:' + now.toISOString();
+    const orgVals = ORG_DIMS.filter(d => !naSet.has(d.id)).map(d => state[d.id]);
+    const techVals = TECH_DIMS.filter(d => !naSet.has(d.id)).map(d => state[d.id]);
+    const payload = {
+      date: now.toISOString(),
+      team: team,
+      orgAvg: orgVals.length ? orgVals.reduce((a,b)=>a+b,0)/orgVals.length : null,
+      techAvg: techVals.length ? techVals.reduce((a,b)=>a+b,0)/techVals.length : null,
+      scores: {...state},
+      naDims: [...naSet],
+      notes: document.getElementById('notes').value,
+      actions: actionItems
+    };
+    const result = await window.storage.set(key, JSON.stringify(payload), true);
+    if(result){
+      statusEl.textContent = 'Zapisano. Ta ocena jest widoczna w historii poniżej dla zespołu „' + team + '”.';
+      loadHistory();
+    } else {
+      statusEl.textContent = 'Nie udało się zapisać. Spróbujcie ponownie.';
+    }
+  } catch(err){
+    statusEl.textContent = 'Nie udało się zapisać. Spróbujcie ponownie.';
+    console.error(err);
+  }
+});
+
+let allHistoryEntries = [];
+
+async function loadHistory(){
+  const el = document.getElementById('historyBody');
+  el.innerHTML = 'Ładowanie historii…';
+  try{
+    const listResult = await window.storage.list('maturity-assessment:', true);
+    const keys = (listResult && listResult.keys) ? listResult.keys : [];
+    if(keys.length === 0){
+      allHistoryEntries = [];
+      renderHistory();
+      return;
+    }
+    const entries = await Promise.all(keys.map(async k => {
+      try{
+        const r = await window.storage.get(k, true);
+        return r ? JSON.parse(r.value) : null;
+      } catch(e){ return null; }
+    }));
+    allHistoryEntries = entries.filter(Boolean).sort((a,b) => new Date(b.date) - new Date(a.date));
+    renderHistory();
+  } catch(err){
+    el.innerHTML = 'Historia niedostępna w tej chwili.';
+    console.error(err);
+  }
+}
+
+function renderHistory(){
+  const el = document.getElementById('historyBody');
+  const team = currentTeamName();
+  if(!team){
+    el.innerHTML = 'Wpiszcie nazwę zespołu na górze strony, żeby zobaczyć historię Waszych ocen.';
+    return;
+  }
+  const teamLower = team.toLowerCase();
+  const mine = allHistoryEntries.filter(v => (v.team || '').trim().toLowerCase() === teamLower);
+  if(mine.length === 0){
+    el.innerHTML = `Brak zapisanych ocen dla zespołu „${team}”. Bądźcie pierwsi.`;
+    return;
+  }
+  const rows = mine.map(v => {
+    const d = new Date(v.date);
+    const dateStr = d.toLocaleDateString('pl-PL', {year:'numeric', month:'short', day:'numeric'});
+    const actionCount = (v.actions && v.actions.length) ? v.actions.length : 0;
+    return `<tr><td>${dateStr}</td><td>${v.orgAvg === null || v.orgAvg === undefined ? '–' : v.orgAvg.toFixed(1)}</td><td>${v.techAvg === null || v.techAvg === undefined ? '–' : v.techAvg.toFixed(1)}</td><td>${actionCount}</td></tr>`;
+  }).join('');
+  el.innerHTML = `<table><thead><tr><th>Data</th><th>Organizacja</th><th>Technologia</th><th>Działania</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+document.getElementById('teamName').addEventListener('input', () => {
+  renderHistory();
+  try{ window.storage.set('last-team-name', document.getElementById('teamName').value, false); }catch(e){}
+});
+
+(async () => {
+  try{
+    const last = await window.storage.get('last-team-name', false);
+    if(last && last.value){
+      document.getElementById('teamName').value = last.value;
+    }
+  } catch(e){ }
+  renderHistory();
+})();
+
+loadHistory();
+*/
+</script>
+</body>
+</html>
