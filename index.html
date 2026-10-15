@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Health Chceck Zespołu</title>
+<title>Health Check Zespołu</title>
 <style>
   :root{
     --ink:#17222E;
@@ -973,7 +973,7 @@ const RECOMMENDATIONS = {
     },
     mid: {
       steps: [
-        'Kończcie każdą taką rozmowę maksymalnie 1–2 konkretnymi akcjami z właścicielem i terminem. Więcej akcji niż to zwykle oznacza, że żadna z nich nie zostanie zrealizowana.',
+        'Kończcie każdą taką rozmowę maksymalnie 1–2 konkretnymi akcjami, z osobami, które się do nich zgłosiły, i z terminem. Więcej akcji niż to zwykle oznacza, że żadna z nich nie zostanie zrealizowana.',
         'Zaczynajcie kolejną rozmowę od przeglądu, co się stało z akcjami z poprzedniego razu. To jedno pytanie na starcie buduje wiarygodność całego procesu.'
       ],
       why: 'Rozmowa bez wdrożonych wniosków uczy zespół czegoś gorszego niż stagnacja — uczy, że mówienie o problemach nic nie zmienia. Kiedy to się utrwali, kolejne rozmowy stają się rytuałem bez treści, a prawdziwe problemy przestają być w ogóle zgłaszane.'
@@ -1643,7 +1643,7 @@ document.getElementById('printBtn').addEventListener('click', () => {
   const a = document.createElement('a');
   a.href = url;
   const teamSlug = team ? '-' + team.toLowerCase().replace(/[^a-z0-9ąćęłńóśźż]+/gi, '-').replace(/^-+|-+$/g, '') : '';
-  a.download = `poziomy-zespolow-opis${teamSlug}-${new Date().toISOString().slice(0,10)}.html`;
+  a.download = `health-check-zespolu-opis${teamSlug}-${new Date().toISOString().slice(0,10)}.html`;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
