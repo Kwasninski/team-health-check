@@ -746,7 +746,7 @@
 <script>
 const ORG_DIMS = [
   {id:'planowanie', title:'Podział i planowanie pracy', help:"Chodzi o to, czy praca jest dzielona na małe, zarządzalne kawałki i planowana w krótkich, przewidywalnych cyklach – niezależnie, czy nazywacie to sprintem, iteracją czy po prostu tygodniowym planem. W środowisku, gdzie zespół zależy od roadmapy kilku innych zespołów naraz, krótki cykl bywa trudniejszy do utrzymania niż w izolowanym zespole – to też warto uwzględnić w opisie.", levels:[
-    'Zadania trafiają do nas bez podziału na mniejsze części ani planu na iterację.',
+    'Zadania trafiają do nas bez podziału na mniejsze części ani planu.',
     'Dzielimy pracę doraźnie, plany często rozjeżdżają się z rzeczywistością.',
     'Planujemy pracę w krótkich cyklach, ale trafność planu bywa różna.',
     'Dzielimy pracę na małe przyrosty i zwykle dowozimy to, co zaplanowaliśmy.',
@@ -894,20 +894,20 @@ const RECOMMENDATIONS = {
   planowanie: {
     low: {
       steps: [
-        'Zacznijcie od zapisania w jednym miejscu, co dokładnie robicie w najbliższym tygodniu – nawet na kartce czy w prostej liście. Chodzi o to, żeby każdy w zespole widział to samo, zamiast trzymać plan tylko w głowie.',
-        'Ustalcie jeden stały moment w tygodniu na wspólne spojrzenie na to, co przed Wami. Wystarczy 15–20 minut – najważniejsze, żeby to był nawyk, a nie coś ad hoc.'
+        'Zacznijcie od zapisania w jednym miejscu, co dokładnie robicie w najbliższym tygodniu – wystarczy prosta lista w np. confluence. Chodzi o to, żeby każdy w zespole widział to samo, zamiast trzymać plan tylko w głowie.',
+        'Ustalcie jeden stały moment w tygodniu na wspólne spojrzenie na to, co przed Wami. Wystarczy 15–20 minut synchronizacji – najważniejsze, żeby to był nawyk, a nie coś ad hoc.'
       ],
       why: 'Bez żadnego punktu odniesienia zespół nie może odróżnić przypadkowego opóźnienia od systemowego problemu – a bez tego rozróżnienia każda rozmowa o terminach staje się sporem o odczucia, nie o fakty.'
     },
     mid: {
       steps: [
         'Jeśli długość cyklu jest ustalona i nie do zmiany (np. wspólny sprint dla kilku zespołów), skupcie się na tym, co go rozjeżdża – sprawdźcie z ostatnich 3–4 cykli, ile procent zaplanowanej pracy faktycznie dowieźliście, i poszukajcie wzorca w tym, co się regularnie nie udaje.',
-        'Dzielcie duże zadania na fragmenty możliwe do ukończenia w 1–3 dni. Jeśli trudno rozbić zadanie, to sam w sobie sygnał, że wymaga doprecyzowania, zanim je podejmiecie.'
+        'Dzielcie duże zadania na fragmenty możliwe do ukończenia w 1–3 dni. Jeśli trudno rozbić zadanie, może to być sygnał, że wymaga ono doprecyzowania, zanim je podejmiecie.'
       ],
       why: 'Zespoły, które nie dzielą pracy na małe kawałki, uczą się wolniej – duże zadania dają rzadszy feedback o tym, czy obrane podejście w ogóle działa. To samo tłumaczy utratę przewidywalności; dodatkowo nieprzewidywalne planowanie bywa wygodnym pretekstem do mikrozarządzania zespołem z zewnątrz.'
     },
     blockedLabel: "Gdy wiecie, jak planować, ale ktoś inny co chwilę psuje plan:",
-    blocked: 'Jeśli umiecie dzielić pracę i planować krótko, ale i tak nic się nie zgadza – sprawdźcie, czy problem nie leży poza Wami: zależności od zespołów, które same nie planują w cyklach, albo ciągłe zmiany priorytetów odgórnie w trakcie iteracji. Tego nie rozwiąże sama dyscyplina planowania – wymaga rozmowy z osobami ustalającymi priorytety na wyższym poziomie.'
+    blocked: 'Jeśli dzielicie pracę na małe kawałki i planujecie się krótkoterminowo, ale i tak nic z tego nie wychodzi – sprawdźcie, czy problem nie leży poza Wami: np. zależności od zespołów, które same nie planują w krótkich cyklach, albo ciągłe zmiany priorytetów odgórnie w trakcie iteracji. Tego nie rozwiąże sama dyscyplina planowania – problem wymaga rozmowy z osobami ustalającymi priorytety na wyższym poziomie. Wyeskalujcie to.'
   },
   priorytety: {
     low: {
