@@ -826,11 +826,11 @@ const ORG_DIMS = [
 
 const TECH_DIMS = [
   {id:'deploy_freq', title:'Częstotliwość wdrożeń', help:"Deployment Frequency (częstotliwość wdrożeń) – jak często zmiany trafiają na produkcję. Jedna z czterech kluczowych metryk DORA. Częstotliwość zależy od kontekstu – w środowiskach z twardymi oknami wdrożeniowymi (regulacje, certyfikacja sprzętu, integracje z systemami o ograniczonej dostępności) rzadsze, większe wdrożenia bywają świadomym wyborem. Jeśli odpowiadacie za kilka usług, opiszcie tę najbardziej krytyczną biznesowo albo powtórzcie opis osobno dla 2–3 kluczowych serwisów zamiast uśredniać w głowie.", levels:[
-    'Wdrażamy rzadziej niż raz w miesiącu, nasze wdrożenia są duże i ryzykowne.',
-    'Wdrażamy raz na miesiąc do kilku tygodni.',
-    'Wdrażamy co tydzień lub kilka razy w tygodniu.',
-    'Wdrażamy codziennie, nasze zmiany są małe i przewidywalne.',
-    'Wdrażamy wielokrotnie dziennie, na żądanie – tam, gdzie nasz kontekst na to pozwala.'
+    'Wdrażamy zdecydowanie rzadziej niż raz w miesiącu.',
+    'Wdrażamy raz w miesiącu lub częściej.',
+    'Wdrażamy mniej więcej raz w tygodniu.',
+    'Wdrażamy codziennie.',
+    'Wdrażamy wielokrotnie w ciągu dnia.'
   ]},
   {id:'lead_time', title:'Czas realizacji zmiany (lead time for changes)', help:"Lead Time for Changes – czas od momentu, gdy zmiana w kodzie jest gotowa, do chwili, gdy działa na produkcji. Druga z metryk DORA. W systemach złożonych z wielu usług lead time bywa sumą czasów oczekiwania na kilka zespołów naraz – mierzenie tylko swojego fragmentu może dawać złudny obraz całości. Jeśli odpowiadacie za kilka usług, opiszcie tę najbardziej krytyczną biznesowo albo powtórzcie opis osobno dla 2–3 kluczowych serwisów zamiast uśredniać w głowie.", levels:[
     'U nas od commita do produkcji mijają tygodnie lub miesiące.',
