@@ -749,7 +749,7 @@
 
   <details class="howto">
     <summary>Dlaczego to ankieta, a nie pomiar</summary>
-    <p class="howto-note">Cztery metryki DORA (częstotliwość wdrożeń, lead time, wskaźnik nieudanych zmian, MTTR) da się zmierzyć. Przy każdej jest opcjonalne pole na faktyczną wartość z Waszego dashboardu, jeśli ją znacie. Wybrany opis i liczba mogą się różnić, i to też jest informacja. Warto wiedzieć, że badania DORA, z których pochodzą te metryki, też opierają się na ankietach: przez lata odpowiedziało w nich ponad 39 tysięcy specjalistów. Przy obszarach dotyczących kultury i sposobu pracy pytamy zespół, bo nie ma innego źródła tej informacji.</p>
+    <p class="howto-note">Metryki DORA, o które tu pytamy (częstotliwość wdrożeń, lead time, wskaźnik nieudanych zmian, czas przywrócenia usługi), da się zmierzyć. Przy każdej z nich jest opcjonalne pole na faktyczną wartość z Waszego dashboardu, jeśli ją znacie. Wybrany opis i liczba mogą się różnić, i to też jest informacja. Badacze DORA od 2024 roku liczą też piątą metrykę (odsetek wdrożeń będących poprawkami), o którą tu nie pytamy. Warto wiedzieć, że badania DORA, z których pochodzą te metryki, też opierają się na ankietach: przez lata odpowiedziało w nich ponad 39 tysięcy specjalistów. Przy obszarach dotyczących kultury i sposobu pracy pytamy zespół, bo nie ma innego źródła tej informacji.</p>
   </details>
 
   <div class="cat-picker" id="catPicker">
@@ -819,7 +819,7 @@
 
   </div>
 
-  <footer>Wypełniajcie razem. Wracajcie za kwartał i sprawdźcie, co się zmieniło.<br><span style="font-size:11px;">Wersja: v4.1.4</span><br><span style="font-size:11px;">Sebastian Kwaśniński, 2026</span></footer>
+  <footer>Wypełniajcie razem. Wracajcie za kwartał i sprawdźcie, co się zmieniło.<br><span style="font-size:11px;">Wersja: v4.1.7</span><br><span style="font-size:11px;">Sebastian Kwaśniński, 2026</span></footer>
 </div>
 
 <div class="modal-overlay" id="missingModal" hidden role="dialog" aria-modal="true" aria-labelledby="missingTitle">
@@ -1007,7 +1007,7 @@ const CATS = [
      "Wymieniamy się wiedzą sporadycznie, głównie przy okazji problemów.",
      "Świadomie staramy się dzielić wiedzą, ale nie robimy tego systemowo.",
      "Każdy element systemu może u nas przejąć więcej niż jedna osoba.",
-     "Kod jest wspólny: każdy z nas może zmienić dowolny jego fragment."
+     "Kod jest wspólny: każdy z nas może zmienić większość jego fragmentów."
     ]
    },
    {
@@ -1076,7 +1076,7 @@ const CATS = [
      "Testujemy głównie ręcznie.",
      "Mamy podstawowe testy automatyczne, ale nie ufamy im w pełni.",
      "Mamy solidny zestaw testów automatycznych i ufamy im przy większości zmian.",
-     "Mamy wysokie pokrycie testami różnych poziomów.",
+     "Mamy testy na różnych poziomach, ale nie dla każdej części systemu.",
      "Ufamy naszym testom na tyle, że wdrażamy bez obaw."
     ]
    },
@@ -1109,9 +1109,9 @@ const CATS = [
     "title": "Krótkie gałęzie (trunk-based)",
     "help": "Trunk-based development to praca na krótko żyjących gałęziach, często integrowanych z główną linią kodu. W środowisku z wieloma zespołami na współdzielonym repozytorium albo z zależnościami między wieloma usługami częsta integracja bywa trudniejsza do skoordynowania niż w pojedynczym repozytorium i wymaga innej infrastruktury (feature flagi, testy kontraktowe).",
     "levels": [
-     "Mamy długo żyjące gałęzie, a nasze scalenia są rzadkie i sprawiają kłopoty.",
-     "Nasze gałęzie żyją kilka dni do tygodnia, scalenia bywają problematyczne.",
-     "Mamy krótkie gałęzie i często integrujemy z główną linią kodu.",
+     "Nasze gałęzie żyją tygodnie lub dłużej, a scalenia są rzadkie i sprawiają kłopoty.",
+     "Nasze gałęzie żyją od kilku dni do tygodnia, a scalenia bywają problematyczne.",
+     "Nasze gałęzie żyją zwykle jeden–dwa dni, a scalenia rzadko sprawiają kłopoty.",
      "Pracujemy w zasadzie w trunk-based development, choć zdarzają się wyjątki.",
      "Pracujemy w trunk-based development, a główna linia kodu jest u nas zawsze gotowa do wdrożenia."
     ]
@@ -1122,8 +1122,8 @@ const CATS = [
   "id": "dostarczanie",
   "group": "tech",
   "label": "Dostarczanie zmian",
-  "desc": "Jak zmiana trafia od zatwierdzenia do użytkownika, na ile wdrożenie jest zautomatyzowane i jak sprawnie przebiega. W środowiskach regulowanych, w embedded czy tam, gdzie błąd bardzo dużo kosztuje, rzadsze i ostrożniejsze wdrożenia bywają świadomym wyborem. Przy czterech pytaniach (metryki DORA) możecie wpisać faktyczne wartości, jeśli je znacie.",
-  "blurb": "automatyczne wdrażanie i cztery metryki DORA",
+  "desc": "Jak zmiana trafia od zatwierdzenia do użytkownika, na ile wdrożenie jest zautomatyzowane i jak sprawnie przebiega. W środowiskach regulowanych, w embedded czy tam, gdzie błąd bardzo dużo kosztuje, rzadsze i ostrożniejsze wdrożenia bywają świadomym wyborem. Przy pytaniach opartych na metrykach DORA możecie wpisać faktyczne wartości, jeśli je znacie.",
+  "blurb": "automatyczne wdrażanie, niezależność wdrożeń i metryki DORA",
   "radar": "#4A93BD",
   "dims": [
    {
@@ -1134,56 +1134,68 @@ const CATS = [
      "Wdrażamy ręcznie, a każde wdrożenie wymaga wielu kroków i uwagi kilku osób.",
      "Część wdrożenia mamy zautomatyzowaną, ale zostają ręczne kroki i zwykle ktoś musi je pilnować.",
      "Wdrożenie uruchamiamy jednym poleceniem lub kliknięciem, ale robi to wybrana osoba.",
-     "Każda zmiana przechodzi automatycznie przez pipeline aż do gotowej do wdrożenia wersji.",
+     "Zatwierdzona zmiana sama przechodzi przez pipeline do gotowej wersji, a wdrożyć ją może każdy z nas.",
      "W każdej chwili możemy wdrożyć aktualną wersję, a samo wdrożenie nie wymaga od nas żadnych przygotowań."
+    ]
+   },
+   {
+    "id": "niezaleznosc_wdr",
+    "title": "Niezależność wdrożeń od innych zespołów",
+    "help": "Chodzi o to, czy możecie wdrożyć swoją zmianę bez czekania na inne zespoły: ich wdrożenia, zgody albo zmiany w ich częściach systemu. Gdy wiele zespołów dzieli platformę lub usługi, część zależności jest nieunikniona – pytanie dotyczy tego, jak często blokują one Wasze wdrożenia. To osobne pytanie od „Zarządzania zależnościami i ryzykiem”, które dotyczy planowania pracy.",
+    "levels": [
+     "Prawie każde nasze wdrożenie wymaga wspólnego terminu z innymi zespołami.",
+     "Większość naszych wdrożeń wymaga uzgodnień z innymi zespołami, ale wspólny termin jest potrzebny tylko przy niektórych.",
+     "Część zmian wdrażamy sami, ale te, które dotykają wspólnych elementów, wymagają uzgodnień z innymi zespołami.",
+     "Większość zmian wdrażamy sami, w dogodnym dla nas momencie, ale zdarza się, że czekamy na inne zespoły.",
+     "Prawie każdą zmianę możemy wdrożyć sami i w dowolnym momencie, także gdy korzystają z niej inne zespoły."
     ]
    },
    {
     "id": "deploy_freq",
     "title": "Częstotliwość wdrożeń",
-    "help": "Deployment Frequency (częstotliwość wdrożeń) – jak często zmiany trafiają na produkcję. Jedna z czterech kluczowych metryk DORA. Częstotliwość zależy od kontekstu – w środowiskach z twardymi oknami wdrożeniowymi (regulacje, certyfikacja sprzętu, integracje z systemami o ograniczonej dostępności) rzadsze, większe wdrożenia bywają świadomym wyborem. Jeśli odpowiadacie za kilka usług, opiszcie tę najważniejszą dla biznesu albo odpowiedzcie osobno dla 2–3 kluczowych serwisów, zamiast uśredniać.",
+    "help": "Deployment Frequency (częstotliwość wdrożeń) – jak często zmiany trafiają na produkcję. Jedna z kluczowych metryk DORA. Częstotliwość zależy od kontekstu – w środowiskach z twardymi oknami wdrożeniowymi (regulacje, certyfikacja sprzętu, integracje z systemami o ograniczonej dostępności) rzadsze, większe wdrożenia bywają świadomym wyborem. Jeśli odpowiadacie za kilka usług, opiszcie tę najważniejszą dla biznesu albo odpowiedzcie osobno dla 2–3 kluczowych serwisów, zamiast uśredniać.",
     "levels": [
-     "Wdrażamy zdecydowanie rzadziej niż raz w miesiącu.",
-     "Wdrażamy raz w miesiącu lub częściej.",
-     "Wdrażamy mniej więcej raz w tygodniu.",
-     "Wdrażamy codziennie.",
+     "Wdrażamy rzadziej niż raz w miesiącu.",
+     "Wdrażamy od raz w miesiącu do kilku razy w miesiącu.",
+     "Wdrażamy zwykle raz lub kilka razy w tygodniu.",
+     "Wdrażamy zwykle codziennie.",
      "Wdrażamy wielokrotnie w ciągu dnia."
     ]
    },
    {
     "id": "lead_time",
     "title": "Czas realizacji zmiany (lead time for changes)",
-    "help": "Lead Time for Changes – czas od momentu, gdy zmiana w kodzie jest gotowa, do chwili, gdy działa na produkcji. Druga z metryk DORA. W systemach złożonych z wielu usług lead time bywa sumą czasów oczekiwania na kilka zespołów naraz – mierzenie tylko swojego fragmentu może dawać mylący obraz całości. Jeśli odpowiadacie za kilka usług, opiszcie tę najważniejszą dla biznesu albo odpowiedzcie osobno dla 2–3 kluczowych serwisów, zamiast uśredniać.",
+    "help": "Lead Time for Changes – czas od zatwierdzenia (scalenia) zmiany do chwili, gdy działa na produkcji. Jedna z metryk DORA. W systemach złożonych z wielu usług lead time bywa sumą czasów oczekiwania na kilka zespołów naraz – mierzenie tylko swojego fragmentu może dawać mylący obraz całości. Jeśli odpowiadacie za kilka usług, opiszcie tę najważniejszą dla biznesu albo odpowiedzcie osobno dla 2–3 kluczowych serwisów, zamiast uśredniać.",
     "levels": [
-     "U nas od commita do produkcji mijają tygodnie lub miesiące.",
-     "U nas to kilka dni do tygodnia.",
-     "U nas to poniżej doby.",
-     "U nas to kilka godzin.",
+     "U nas to ponad miesiąc.",
+     "U nas to od tygodnia do miesiąca.",
+     "U nas to od doby do tygodnia.",
+     "U nas to od godziny do doby.",
      "U nas to poniżej godziny."
     ]
    },
    {
     "id": "change_failure",
     "title": "Wskaźnik nieudanych zmian",
-    "help": "Change Failure Rate – jaki procent wdrożeń powoduje awarię, degradację usługi lub wymaga poprawki. Trzecia metryka DORA. Uwaga: akceptowalny poziom zależy od kosztu błędu w Waszym kontekście – różne podejścia bywają świadomym kompromisem między tempem a ostrożnością. Jeśli odpowiadacie za kilka usług, opiszcie tę najważniejszą dla biznesu albo odpowiedzcie osobno dla 2–3 kluczowych serwisów, zamiast uśredniać.",
+    "help": "Change Failure Rate – jaki procent wdrożeń powoduje awarię, degradację usługi lub wymaga poprawki. Jedna z metryk DORA. Uwaga: akceptowalny poziom zależy od kosztu błędu w Waszym kontekście – różne podejścia bywają świadomym kompromisem między tempem a ostrożnością. Jeśli odpowiadacie za kilka usług, opiszcie tę najważniejszą dla biznesu albo odpowiedzcie osobno dla 2–3 kluczowych serwisów, zamiast uśredniać.",
     "levels": [
-     "Duża część naszych wdrożeń wymaga hotfixa lub rollbacku.",
-     "Problemy po naszych wdrożeniach zdarzają się często i są kosztowne.",
-     "Część naszych wdrożeń wymaga poprawek, ale szybko je wykrywamy.",
-     "Problemy po wdrożeniu zdarzają się u nas rzadko.",
-     "Gdy wdrożenie się nie powiedzie, zwykle wycofujemy zmianę, zanim odczują to użytkownicy."
+     "Wiele naszych wdrożeń kończy się poprawką awaryjną lub wycofaniem zmiany.",
+     "Poprawka lub wycofanie zdarza się u nas regularnie, a o błędach dowiadujemy się głównie od użytkowników.",
+     "Poprawki po wdrożeniu zdarzają się, ale zwykle sami szybko je zauważamy.",
+     "Poprawki po wdrożeniu zdarzają się rzadko, a zmiany wdrażamy małymi krokami, żeby błąd był łatwy do wycofania.",
+     "Poprawki po wdrożeniu są u nas wyjątkiem. Gdy wdrożenie się nie powiedzie, zwykle wycofujemy zmianę, zanim odczują to użytkownicy."
     ]
    },
    {
     "id": "mttr",
     "title": "Czas przywrócenia usługi (MTTR)",
-    "help": "MTTR (Mean Time To Restore/Recovery) – jak szybko zespół przywraca działanie usługi po awarii. Czwarta metryka DORA. W systemach rozproszonych czas przywrócenia bywa trudny do zmierzenia jednoznacznie, bo różne komponenty mogą się psuć i wracać niezależnie – traktujcie to jako przybliżenie, nie precyzyjny wskaźnik. Jeśli odpowiadacie za kilka usług, opiszcie tę najważniejszą dla biznesu albo odpowiedzcie osobno dla 2–3 kluczowych serwisów, zamiast uśredniać.",
+    "help": "MTTR (Mean Time To Restore/Recovery) – jak szybko zespół przywraca działanie usługi po awarii. Jedna z metryk DORA. W systemach rozproszonych czas przywrócenia bywa trudny do zmierzenia jednoznacznie, bo różne komponenty mogą się psuć i wracać niezależnie – traktujcie to jako przybliżenie, nie precyzyjny wskaźnik. Jeśli odpowiadacie za kilka usług, opiszcie tę najważniejszą dla biznesu albo odpowiedzcie osobno dla 2–3 kluczowych serwisów, zamiast uśredniać.",
     "levels": [
-     "Przywrócenie usługi po awarii zajmuje nam zwykle dłużej niż dobę.",
-     "Przywrócenie zajmuje nam od kilkunastu godzin do doby.",
-     "Przywrócenie zajmuje nam kilka godzin.",
-     "Przywrócenie zajmuje nam zwykle poniżej godziny.",
-     "Przywrócenie zajmuje nam minuty, dzięki gotowym procedurom i automatyzacji."
+     "Przywrócenie usługi po awarii zajmuje nam zwykle ponad dobę.",
+     "Przywrócenie zajmuje nam zwykle od kilku godzin do doby.",
+     "Przywrócenie zajmuje nam zwykle od godziny do kilku godzin.",
+     "Przywrócenie zajmuje nam zwykle od kilkunastu minut do godziny.",
+     "Przywrócenie zajmuje nam zwykle kilka minut, dzięki gotowym procedurom i automatyzacji."
     ]
    }
   ]
@@ -1310,7 +1322,7 @@ const RECOMMENDATIONS = {
  "przewidywalnosc": {
   "low": {
    "steps": [
-    "Zacznijcie od zapisania w jednym miejscu, co dokładnie robicie w najbliższym tygodniu – wystarczy prosta lista w np. confluence. Chodzi o to, żeby każdy w zespole widział to samo, zamiast trzymać plan tylko w głowie.",
+    "Zacznijcie od zapisania w jednym miejscu, co dokładnie robicie w najbliższym tygodniu – wystarczy prosta lista na wspólnej stronie lub tablicy. Chodzi o to, żeby każdy w zespole widział to samo, zamiast trzymać plan tylko w głowie.",
     "Ustalcie jeden stały moment w tygodniu na wspólne spojrzenie na to, co przed Wami. Wystarczy 15–20 minut synchronizacji – najważniejsze, żeby to był nawyk, a nie coś ad hoc."
    ],
    "why": "Bez punktu odniesienia nie odróżnicie przypadkowego opóźnienia od systemowego problemu, a rozmowa o terminach staje się sporem o odczucia."
@@ -1320,7 +1332,7 @@ const RECOMMENDATIONS = {
     "Jeśli długość cyklu jest ustalona i nie do zmiany (np. wspólny sprint dla kilku zespołów), skupcie się na tym, co go rozjeżdża – sprawdźcie z ostatnich 3–4 cykli, ile procent zaplanowanej pracy faktycznie dowieźliście, i poszukajcie wzorca w tym, co się regularnie nie udaje.",
     "Planujcie z zapasem na to, co nieplanowane (np. 20% pojemności), zamiast zakładać, że wszystko pójdzie zgodnie z planem. Plan z zapasem częściej się sprawdza."
    ],
-   "why": "Nieprzewidywalne planowanie bywa wygodnym pretekstem, żeby z zewnątrz mikrozarządzać zespołem. Prognoza, która się sprawdza, broni Was lepiej niż deklaracje."
+   "why": "Plan, który się sprawdza, ułatwia rozmowę o terminach i zakresie z osobami decyzyjnymi spoza zespołu."
   },
   "blockedLabel": "Gdy wiecie, jak planować, ale ktoś inny co chwilę psuje plan:",
   "blocked": "Jeśli dzielicie pracę na małe kawałki i planujecie się krótkoterminowo, ale i tak nic z tego nie wychodzi – sprawdźcie, czy problem nie leży poza Wami: np. zależności od zespołów, które same nie planują w krótkich cyklach, albo ciągłe zmiany priorytetów odgórnie w trakcie iteracji. Tego nie rozwiąże sama dyscyplina planowania – problem wymaga rozmowy z osobami ustalającymi priorytety na wyższym poziomie. Wyeskalujcie to."
@@ -1371,7 +1383,7 @@ const RECOMMENDATIONS = {
   },
   "mid": {
    "steps": [
-    "Zamiast pełnej checklisty, ustalcie „bezpieczne minimum” do startu – np. znany cel i osobę, która decyduje, gdy coś się zmieni w trakcie. To minimum powinno dać się sprawdzić w mniej niż minutę, inaczej nikt nie będzie z niego korzystał.",
+    "Sprawdźcie, czy Wasze minimum gotowości da się zweryfikować w mniej niż minutę. Jeśli nie, skróćcie je do tego, co naprawdę blokuje start (np. znany cel, kryteria akceptacji, wycena).",
     "Gdy zaczynacie coś niedoprecyzowanego, nazwijcie to wprost jako założenie robocze i ustalcie, kiedy je zweryfikujecie. Samo nazwanie niepewności na głos często wystarczy, żebyście zaczęli nią świadomie zarządzać."
    ],
    "why": "Sztywne trzymanie się pełnej DoR bywa nierealne w bardzo zmiennym środowisku. Nie musi to być problemem, jeśli niepewność nazywacie i nią zarządzacie, zamiast ignorować ją w milczeniu. Ważne, żeby ryzyko braku jasności było widoczne przed startem."
@@ -1395,7 +1407,7 @@ const RECOMMENDATIONS = {
    "why": "Kryteria pomijane pod presją uczą Was, że można je ignorować. Lepsza jest krótsza lista, której się pilnujecie, niż długa, którą tylko odhaczacie."
   },
   "blockedLabel": "Gdy kryteria są jasne, ale presja z zewnątrz je łamie:",
-  "blocked": "Jeśli trzymacie się kryteriów, ale ktoś z zewnątrz regularnie naciska, żeby uznać coś za skończone wcześniej, to sprawa wymaga rozmowy o kosztach skrótów, a nie dalszego dopracowywania definicji. Pokażcie, ile kosztuje poprawianie po wdrożeniu."
+  "blocked": "Jeśli trzymacie się kryteriów, ale z zewnątrz regularnie pojawia się nacisk, żeby uznać coś za skończone wcześniej, to sprawa wymaga rozmowy o kosztach skrótów, a nie dalszego dopracowywania definicji. Pokażcie, ile kosztuje poprawianie po wdrożeniu."
  },
  "feedback_biznes": {
   "low": {
@@ -1428,10 +1440,10 @@ const RECOMMENDATIONS = {
     "Wybierzcie kolejną kategorię decyzji (np. wybór bibliotek i narzędzi w ramach ustalonej architektury) i ustalcie, że podejmujecie ją sami. Powiedzcie o tym osobom spoza zespołu, żeby nikt nie był zaskoczony.",
     "Ustalcie jasno, gdzie kończy się Wasz mandat, a zaczyna eskalacja. Spisana granica eliminuje niepotrzebne pytania o pozwolenie w codziennej pracy."
    ],
-   "why": "Bez realnej autonomii z czasem przestajecie próbować rozwiązywać problemy samodzielnie, bo nauczyliście się, że ktoś to i tak podważy. Ta wyuczona bezradność jest droższa niż samo opóźnienie decyzji, bo trudno ją odwrócić, nawet gdy autonomia formalnie wróci."
+   "why": "Gdy część decyzji zapada poza zespołem, łatwo przestać zgłaszać własne pomysły, bo wydaje się, że i tak zostaną zmienione. Warto sprawdzić, które z tych decyzji naprawdę wymagają zgody z zewnątrz, i spróbować to zmienić."
   },
   "blockedLabel": "Gdy próbujecie decydować, a decyzje i tak wracają z góry:",
-  "blocked": "Jeśli próbujecie przejąć więcej decyzji, ale ciągle jest to cofane z góry – to nie jest problem Waszej dojrzałości, tylko sygnał, że ktoś nad Wami nie ufa procesowi albo ma inne, niewypowiedziane kryteria sukcesu. Warto to nazwać wprost w rozmowie z przełożonym, zamiast zgadywać."
+  "blocked": "Jeśli próbujecie przejąć więcej decyzji, ale ciągle jest to cofane z góry – to nie jest problem Waszej dojrzałości. Warto zapytać przełożonego, jakie kryteria decydują o cofnięciu decyzji, zamiast zgadywać."
  },
  "odpowiedzialnosc": {
   "low": {
@@ -1467,7 +1479,7 @@ const RECOMMENDATIONS = {
    "why": "Gdy ludzie boją się przyznać do błędu, błędy nie znikają: zostają ukryte i wychodzą na jaw później, zwykle w gorszym momencie i przy wyższych stawkach. W tym czasie system psuje się niezauważony."
   },
   "blockedLabel": "Gdy sami pokazujecie otwartość, a ludzie i tak milczą:",
-  "blocked": "Jeśli jako lider sami pokazujecie otwartość, a mimo to ludzie się nie otwierają – sprawdźcie, czy gdzieś wyżej w organizacji nie ma kultury szukania winnych przy błędach. Bezpieczeństwo psychologiczne w jednym zespole nie przetrwa długo, jeśli cała organizacja karze przyznawanie się do pomyłek."
+  "blocked": "Jeśli jako lider sami pokazujecie otwartość, a mimo to ludzie się nie otwierają – sprawdźcie, czy w otoczeniu zespołu błędy nie są karane. Bezpieczeństwo psychologiczne w jednym zespole nie przetrwa długo, jeśli cała organizacja karze przyznawanie się do pomyłek."
  },
  "kwestionowanie": {
   "low": {
@@ -1500,10 +1512,10 @@ const RECOMMENDATIONS = {
     "Śledźcie sygnały przeciążenia (nadgodziny, przenoszone zadania) i reagujcie na nie w regularnej rozmowie o sposobie pracy. Nie czekajcie, aż ktoś powie to wprost – same dane często mówią wcześniej.",
     "Ustalcie limit pracy w toku (WIP), żeby ograniczyć rozpraszanie i presję. Nawet prosty limit liczby równoległych zadań na osobę potrafi zrobić różnicę."
    ],
-   "why": "Chroniczne przeciążenie obniża jakość decyzji technicznych, bo zmęczeni wybieracie rozwiązania doraźne zamiast przemyślanych. Zysk z przyspieszenia zwykle okazuje się pozorny, gdy doliczy się koszt poprawek i odejść z zespołu."
+   "why": "Powtarzające się przeciążenie obniża jakość decyzji technicznych, bo zmęczeni możecie wybierać rozwiązania doraźne zamiast przemyślanych. Zysk z przyspieszenia zwykle okazuje się pozorny, gdy doliczy się koszt poprawek i odejść z zespołu."
   },
   "blockedLabel": "Gdy zgłaszacie przeciążenie, a presja i tak nie maleje:",
-  "blocked": "Jeśli zgłaszacie przeciążenie, a presja mimo to nie maleje – to nie jest coś, co rozwiąże limit WIP. To znaczy, że ktoś powyżej zespołu podejmuje decyzje ilościowe (zakres, terminy) bez uwzględniania Waszej realnej przepustowości. Dane o przeciążeniu są argumentem do tej rozmowy – ale rozmowę trzeba faktycznie odbyć na poziomie, gdzie te decyzje zapadają."
+  "blocked": "Jeśli zgłaszacie przeciążenie, a presja mimo to nie maleje – to nie jest coś, co rozwiąże limit WIP. To znaczy, że decyzje o zakresie i terminach zapadają poza zespołem, a Wasza przepustowość nie jest w nich uwzględniana. Dane o przeciążeniu są argumentem do tej rozmowy – ale rozmowę trzeba faktycznie odbyć na poziomie, gdzie te decyzje zapadają."
  },
  "wspolpraca": {
   "low": {
@@ -1518,7 +1530,7 @@ const RECOMMENDATIONS = {
     "Wprowadźcie regularne parowanie lub code review na krytycznych obszarach. Nie musi to być każda zmiana – zacznijcie od tych fragmentów, których dotyka najmniej osób.",
     "Zmapujcie, kto jest jedynym ekspertem w danym obszarze, i zaplanujcie przekazanie wiedzy. Nawet jedna wspólna sesja czy krótka notatka „na start” znacząco zmniejsza ryzyko."
    ],
-   "why": "Gdy tylko jedna osoba rozumie dany obszar, unikacie zmian w nim, bo konsekwencje może ocenić tylko ona. Ryzyko jej nieobecności jest tu drugorzędne wobec tego, ile dobrych decyzji architektonicznych nigdy nie zapada."
+   "why": "Gdy tylko jedna osoba rozumie dany obszar, unikacie zmian w nim, bo konsekwencje może ocenić tylko ona. Do tego jej nieobecność zatrzymuje pracę."
   },
   "blockedLabel": "Gdy dzielicie się wiedzą, a ryzyko i tak zostaje:",
   "blocked": "Jeśli parujecie i dzielicie się wiedzą, ale bus factor i tak jest niski, bo system jest rozłożony na wiele usług, których nikt w całości nie rozumie – problem nie jest w Waszych nawykach, tylko w architekturze albo braku dokumentacji granic odpowiedzialności między zespołami. To wymaga inwestycji w mapę systemu, nie więcej parowania."
@@ -1545,7 +1557,7 @@ const RECOMMENDATIONS = {
   "low": {
    "steps": [
     "Zacznijcie zapisywać zależności tam, gdzie je zauważycie – choćby w jednym wspólnym dokumencie, bez formalnego procesu. Ważniejsze jest to, żeby zacząć, niż żeby proces był od razu dopracowany.",
-    "Na najbliższym planowaniu zapytajcie wprost: „czego potrzebujemy od kogoś spoza zespołu, żeby to zrobić?” To jedno pytanie, zadawane regularnie, wyłapuje większość zależności, zanim staną się problemem."
+    "Na najbliższym planowaniu zapytajcie wprost: „czego potrzebujemy od kogoś spoza zespołu, żeby to zrobić?” To jedno pytanie, zadawane regularnie, wyłapuje wiele zależności, zanim staną się problemem."
    ],
    "why": "Jeśli nigdy nie nazywacie zależności na głos, dowiadujecie się o nich dopiero wtedy, gdy powodują poślizg. Samo zapisywanie ich, nawet nieformalnie, już pomaga."
   },
@@ -1590,7 +1602,7 @@ const RECOMMENDATIONS = {
     "Zarezerwujcie stały czas w sprincie na refaktoryzację najbardziej uciążliwych fragmentów kodu, zamiast czekać na „wielki remont”. Małe, regularne porcje są łatwiejsze do obronienia niż jedno duże przedsięwzięcie.",
     "Stosujcie zasadę: zostawiajcie kod odrobinę czystszy, niż go zastaliście. Małe poprawki przy okazji kosztują mało, a z czasem robią dużą różnicę."
    ],
-   "why": "Spowolnienie zmian to najbardziej oczywisty skutek kodu, którego boicie się dotykać. Poważniejszy jest cichszy efekt: zniechęcenie do dobrych decyzji architektonicznych, bo każda propozycja większej zmiany zderza się z ryzykiem, którego nikt nie chce wziąć na siebie."
+   "why": "Spowolnienie zmian to najbardziej oczywisty skutek kodu, którego boicie się dotykać. Do tego każda propozycja większej zmiany zderza się z ryzykiem, którego nikt nie chce wziąć na siebie."
   },
   "blockedLabel": "Gdy chcecie dbać o kod, a terminy nigdy na to nie pozwalają:",
   "blocked": "Jeśli chcecie refaktoryzować, ale presja terminów nigdy na to nie pozwala, to nie kwestia Waszej dyscypliny, tylko decyzja biznesowa o priorytetach, podejmowana świadomie lub nie. Nazwijcie wprost koszt tego wyboru (spowolnienie kolejnych zmian) osobie, która ustala terminy, zamiast po cichu radzić sobie z coraz gorszym kodem."
@@ -1608,7 +1620,7 @@ const RECOMMENDATIONS = {
     "Sprawdźcie, które krytyczne ścieżki systemu nie mają jeszcze testów automatycznych, i dopiszcie je w pierwszej kolejności. Zaczynajcie od miejsc, gdzie błąd kosztuje najwięcej, a nie od tych najłatwiejszych do przetestowania.",
     "Gdy błąd trafi na produkcję, dopiszcie test, który by go wykrył. Z czasem zestaw rośnie dokładnie tam, gdzie jest potrzebny."
    ],
-   "why": "Bez zaufanych testów zaczynacie unikać refaktoryzacji i większych usprawnień, bo sprawdzenie, czy coś się nie zepsuło, jest zbyt kosztowne. Awarie są tu mniejszym problemem niż cicha stagnacja architektury, którą trudno później odwrócić."
+   "why": "Bez zaufanych testów zaczynacie unikać refaktoryzacji i większych usprawnień, bo sprawdzenie, czy coś się nie zepsuło, jest zbyt kosztowne."
   },
   "blockedLabel": "Gdy chcecie testować, a kod na to strukturalnie nie pozwala:",
   "blocked": "Jeśli chcecie pisać testy, ale kod jest zbyt mocno spleciony, żeby dało się go łatwo testować (brak separacji, ukryte zależności, stan globalny) – to problem architektoniczny, którego same testy nie rozwiążą. Czasem trzeba najpierw zainwestować w minimalny refaktor pod testowalność – i to jest osobna decyzja do uzasadnienia biznesowo."
@@ -1659,7 +1671,7 @@ const RECOMMENDATIONS = {
   },
   "mid": {
    "steps": [
-    "Skróćcie czas życia gałęzi funkcyjnych – cel: poniżej 1–2 dni. Krótszy czas życia gałęzi to mniej okazji do konfliktów przy scalaniu.",
+    "Skróćcie czas życia gałęzi funkcyjnych – cel: poniżej jednego dnia. Krótszy czas życia gałęzi to mniej okazji do konfliktów przy scalaniu.",
     "Wprowadźcie feature flagi, żeby móc integrować niedokończoną pracę bez ryzyka. To pozwala scalać częściej, nawet gdy funkcja nie jest jeszcze gotowa do pokazania użytkownikom."
    ],
    "why": "Długo żyjące gałęzie kodu to odroczony koszt, który rośnie nieliniowo: konflikt przy scaleniu gałęzi żyjącej tydzień bywa wielokrotnie trudniejszy niż przy scaleniu codziennym."
@@ -1677,7 +1689,7 @@ const RECOMMENDATIONS = {
   },
   "mid": {
    "steps": [
-    "Sprawdźcie, czy wdrożenie może zrobić każda osoba w zespole, a nie tylko wybrana. Jeśli nie, spiszcie, czego brakuje (uprawnień, wiedzy, narzędzi).",
+    "Spiszcie, czego brakuje pozostałym osobom (uprawnień, wiedzy, narzędzi), żeby wdrażać samodzielnie, i zaplanujcie, jak to uzupełnić.",
     "Dodajcie do pipeline’u automatyczne wdrożenie na środowisko testowe po każdej zmianie. To dobry krok pośredni przed automatycznym wdrożeniem na produkcję."
    ],
    "why": "Wdrożenie zależne od jednej osoby jest wąskim gardłem i ryzykiem. Im bardziej rutynowe, tym rzadziej coś się psuje, bo nikt nie robi go „po raz pierwszy w tym roku”."
@@ -1685,13 +1697,31 @@ const RECOMMENDATIONS = {
   "blockedLabel": "Gdy chcecie automatyzować wdrożenia, a proces jest narzucony z zewnątrz:",
   "blocked": "Jeśli wdrożenia podlegają zewnętrznym zatwierdzeniom (okna wdrożeniowe, regulacje, zgoda innego zespołu), pełna automatyzacja może nie być możliwa. Zautomatyzujcie to, co leży w Waszych rękach, i nazwijcie wprost ograniczenia, które leżą poza nimi."
  },
+ "niezaleznosc_wdr": {
+  "low": {
+   "steps": [
+    "Weźcie ostatnie 3–5 wdrożeń i sprawdźcie, przy ilu musieliście na kogoś czekać albo uzgadniać termin z innym zespołem. Zapiszcie, kogo to dotyczyło i dlaczego.",
+    "Wybierzcie jeden powtarzający się powód i zapytajcie drugi zespół, jak go usunąć – np. przez interfejs, który nadal działa ze starszą wersją, żeby żaden zespół nie musiał wdrażać razem z drugim."
+   ],
+   "why": "Gdy wdrożenia muszą wychodzić razem z innymi zespołami, tempo całej grupy zależy od najwolniejszego z nich, a jedna awaria wstrzymuje wszystkich."
+  },
+  "mid": {
+   "steps": [
+    "Ustalcie z zespołami, z którymi najczęściej uzgadniacie wdrożenia, jakie zmiany mogą wychodzić niezależnie (np. te, które nie zmieniają wspólnych interfejsów), a jakie wymagają uzgodnień. Spiszcie to krótko.",
+    "Przy zmianach, które dotykają innych zespołów, wprowadzajcie je w dwóch krokach: najpierw dodajcie nowe zachowanie obok starego, a stare usuńcie dopiero wtedy, gdy wszyscy przejdą na nowe."
+   ],
+   "why": "Im mniej wdrożeń wymaga wspólnego terminu, tym łatwiej wdrażać małe zmiany i szybciej uczyć się z ich skutków."
+  },
+  "blockedLabel": "Gdy chcecie wdrażać samodzielnie, ale architektura lub proces na to nie pozwalają:",
+  "blocked": "Jeśli wspólny termin wynika z architektury (np. jedna duża aplikacja wdrażana przez kilka zespołów) albo z procesu narzuconego przez platformę, nie zmienicie tego samodzielnie. Policzcie, ile razy w ostatnim kwartale wdrożenie przesunęło się z powodu uzgodnień, i przedstawcie to osobom odpowiedzialnym za architekturę lub platformę jako argument do decyzji."
+ },
  "deploy_freq": {
   "low": {
    "steps": [
     "Znajdźcie jeden, najczęściej robiony typ zmiany i spróbujcie wdrożyć go w mniejszym rozmiarze niż zwykle, żeby zobaczyć różnicę. Nawet jedno udane, mniejsze wdrożenie zmienia sposób myślenia o ryzyku.",
     "Spiszcie, co dziś blokuje częstsze wdrożenia (proces, ludzie, narzędzia) – zanim zaczniecie automatyzować, warto wiedzieć, co realnie stoi na drodze. Często okazuje się, że przeszkoda jest bardziej organizacyjna niż techniczna."
    ],
-   "why": "Bardzo rzadkie wdrożenia to zwykle objaw głębszego problemu – strachu przed zmianą, braku automatyzacji, ręcznych kroków. Zanim zajmiecie się częstotliwością wprost, warto zrozumieć, co ją dziś ogranicza."
+   "why": "Bardzo rzadkie wdrożenia to często objaw głębszego problemu – strachu przed zmianą, braku automatyzacji, ręcznych kroków. Zanim zajmiecie się częstotliwością wprost, warto zrozumieć, co ją dziś ogranicza."
   },
   "mid": {
    "steps": [
@@ -1706,14 +1736,14 @@ const RECOMMENDATIONS = {
  "lead_time": {
   "low": {
    "steps": [
-    "Zmierzcie czas dla jednej, ostatniej zmiany – od pierwszego commita do działania na produkcji – żeby mieć punkt odniesienia. Jedna taka miara mówi więcej niż ogólne wrażenie „chyba nieźle nam idzie”.",
+    "Zmierzcie czas dla jednej, ostatniej zmiany – od jej zatwierdzenia do działania na produkcji – żeby mieć punkt odniesienia. Jedna taka miara mówi więcej niż ogólne wrażenie „chyba nieźle nam idzie”.",
     "Zastanówcie się wspólnie, który krok w tej drodze najbardziej Was frustruje – to zwykle najszybszy trop do poprawy. Frustracja zwykle dobrze wskazuje, gdzie jest wąskie gardło."
    ],
    "why": "Bez pomiaru lead time zwykle wydaje się „jakoś taki, jaki jest”. Dopiero konkretna liczba pokazuje, czy problem tkwi w code review, testach, samym wdrożeniu, czy może w środowisku, w którym pracujecie."
   },
   "mid": {
    "steps": [
-    "Zmapujcie drogę zmiany od commita do produkcji i znajdźcie największe wąskie gardło. Skupcie się na jednym, największym opóźnieniu, zamiast próbować naprawiać wszystko naraz.",
+    "Zmapujcie drogę zmiany od zatwierdzenia do produkcji i znajdźcie największe wąskie gardło. Skupcie się na jednym, największym opóźnieniu, zamiast próbować naprawiać wszystko naraz.",
     "Skróćcie czas oczekiwania na code review (np. limit 24h na pierwszą odpowiedź). To jedna z najczęstszych, a zarazem najłatwiejszych do naprawienia przyczyn długiego lead time."
    ],
    "why": "Długi lead time wydłuża Wasz cykl uczenia się: błędne założenia wychodzą na jaw później, gdy poprawka jest droższa, a Wasza uwaga dawno skupia się na czymś innym. Ten koszt rzadko trafia do bezpośrednich rozliczeń, ale narasta."
@@ -1737,7 +1767,7 @@ const RECOMMENDATIONS = {
    "why": "Wysoki odsetek nieudanych wdrożeń wywołuje strach przed wdrażaniem: ryzyko kompensujecie wolniejszym tempem i większą liczbą ręcznych kontroli. To odwrotność tego, czego potrzeba do poprawy."
   },
   "blockedLabel": "Gdy macie dobre praktyki, a wskaźnik i tak jest wysoki:",
-  "blocked": "Jeśli macie dobre praktyki, a mimo to CFR jest wysoki – sprawdźcie, czy problem nie leży w systemach, na które nie macie wpływu (zależności zewnętrzne, dane produkcyjne, których nie da się w pełni odtworzyć testowo). Czasem realny sufit jakości jest niżej, niż sugerowałaby dobra praktyka inżynierska, i trzeba to nazwać wprost zamiast winić proces."
+  "blocked": "Jeśli macie dobre praktyki, a mimo to wskaźnik nieudanych zmian jest wysoki – sprawdźcie, czy problem nie leży w systemach, na które nie macie wpływu (zależności zewnętrzne, dane produkcyjne, których nie da się w pełni odtworzyć testowo). Czasem realny sufit jakości jest niżej, niż sugerowałaby dobra praktyka inżynierska, i trzeba to nazwać wprost zamiast winić proces."
  },
  "mttr": {
   "low": {
@@ -1752,10 +1782,10 @@ const RECOMMENDATIONS = {
     "Spiszcie prostą procedurę reagowania na incydent (kto, co, w jakiej kolejności). Nie musi być idealna od razu – ważne, żeby istniała i była gdzieś dostępna w chwili kryzysu.",
     "Poćwiczcie scenariusz awarii (game day) choć raz, żeby sprawdzić, gdzie są luki. Ćwiczenie w spokojnych warunkach jest dużo tańsze niż nauka podczas prawdziwej awarii."
    ],
-   "why": "Krótki czas przywracania usługi znaczy więcej niż niska częstotliwość awarii. Awarii nie da się całkowicie wyeliminować, a to, jak szybko reagujecie, decyduje o zaufaniu klientów i o Waszym poczuciu kontroli nad systemem."
+   "why": "Awarii nie da się całkowicie wyeliminować, dlatego liczy się też to, jak szybko wracacie do działania. Od tego zależy zaufanie klientów i Wasze poczucie kontroli nad systemem."
   },
   "blockedLabel": "Gdy macie procedury, a czas przywrócenia i tak jest długi:",
-  "blocked": "Jeśli macie procedurę i przećwiczone scenariusze, a mimo to MTTR jest wysoki – sprawdźcie, czy problem nie leży w dostępie (kto ma uprawnienia do naprawy w środku nocy) albo w zależności od zewnętrznego dostawcy, którego SLA jest gorsze niż Wasze własne. To coś do wynegocjowania wyżej, nie do naprawienia procedurą wewnętrzną."
+  "blocked": "Jeśli macie procedurę i przećwiczone scenariusze, a mimo to czas przywrócenia usługi jest wysoki – sprawdźcie, czy problem nie leży w dostępie (kto ma uprawnienia do naprawy w środku nocy) albo w zależności od zewnętrznego dostawcy, którego SLA jest gorsze niż Wasze własne. To coś do wynegocjowania wyżej, nie do naprawienia procedurą wewnętrzną."
  },
  "iac": {
   "low": {
@@ -1878,7 +1908,7 @@ const RECOMMENDATIONS = {
     "Ustalcie jasną zasadę, w jakim czasie naprawiacie podatności o różnej wadze (np. krytyczne w dni, nie w miesiące). Bez tego zgłoszenia od skanera trafiają na dno backlogu.",
     "Jeśli skanowanie uruchamiacie ręcznie, przenieście je do pipeline CI. To, co wymaga pamiętania, prędzej czy później przestaje się dziać."
    ],
-   "why": "Skanowanie, które istnieje, ale którego wyniki nikt nie przegląda, daje złudne poczucie bezpieczeństwa; jest gorsze niż jego brak, bo sprawia wrażenie, że temat jest już rozwiązany."
+   "why": "Skanowanie, które istnieje, ale którego wyniki nikt nie przegląda, daje złudne poczucie bezpieczeństwa; bywa gorsze niż jego brak, bo sprawia wrażenie, że temat jest już rozwiązany."
   },
   "blockedLabel": "Gdy widzicie podatności, ale nikt nie daje czasu na ich naprawę:",
   "blocked": "Jeśli zgłaszacie luki bezpieczeństwa, a priorytet zawsze wygrywają nowe funkcje – przedstawcie to w kategoriach ryzyka biznesowego (potencjalny wyciek danych, przestój, konsekwencje prawne), nie w kategoriach czystości kodu. To zwykle szybciej trafia do decydentów niż argument czysto techniczny."
@@ -2325,7 +2355,7 @@ document.getElementById('printBtn').addEventListener('click', () => {
     @media print{.hint{display:none;}}
   </style></head><body>
   <h1>Health Check Zespołu</h1>
-  <div class="meta">${team ? 'Zespół: ' + esc(team) + ' · ' : ''}Zakres: ${activeCats.map(c => CAT_LABEL[c]).join(' + ')} · Zapisano: ${new Date().toLocaleDateString('pl-PL', {year:'numeric', month:'long', day:'numeric'})} · Wersja: v4.1.4</div>
+  <div class="meta">${team ? 'Zespół: ' + esc(team) + ' · ' : ''}Zakres: ${activeCats.map(c => CAT_LABEL[c]).join(' + ')} · Zapisano: ${new Date().toLocaleDateString('pl-PL', {year:'numeric', month:'long', day:'numeric'})} · Wersja: v4.1.7</div>
   <div class="hint">Wskazówka: Ctrl+P (lub Cmd+P), żeby zapisać tę stronę jako PDF.</div>
   <div class="row">
     ${radarsHTML}
