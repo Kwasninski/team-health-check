@@ -819,7 +819,7 @@
 
   </div>
 
-  <footer>Wypełniajcie razem. Wracajcie za kwartał i sprawdźcie, co się zmieniło.<br><span style="font-size:11px;">Wersja: v4.1.7</span><br><span style="font-size:11px;">Sebastian Kwaśniński, 2026</span></footer>
+  <footer>Wypełniajcie razem. Wracajcie za kwartał i sprawdźcie, co się zmieniło.<br><span style="font-size:11px;">Wersja: v4.1.9</span><br><span style="font-size:11px;">Sebastian Kwaśniński, 2026</span></footer>
 </div>
 
 <div class="modal-overlay" id="missingModal" hidden role="dialog" aria-modal="true" aria-labelledby="missingTitle">
@@ -1143,10 +1143,10 @@ const CATS = [
     "title": "Niezależność wdrożeń od innych zespołów",
     "help": "Chodzi o to, czy możecie wdrożyć swoją zmianę bez czekania na inne zespoły: ich wdrożenia, zgody albo zmiany w ich częściach systemu. Gdy wiele zespołów dzieli platformę lub usługi, część zależności jest nieunikniona – pytanie dotyczy tego, jak często blokują one Wasze wdrożenia. To osobne pytanie od „Zarządzania zależnościami i ryzykiem”, które dotyczy planowania pracy.",
     "levels": [
-     "Prawie każde nasze wdrożenie wymaga wspólnego terminu z innymi zespołami.",
+     "Prawie każde nasze wdrożenie wymaga wspólnego terminu lub uzgodnień z innymi zespołami.",
      "Większość naszych wdrożeń wymaga uzgodnień z innymi zespołami, ale wspólny termin jest potrzebny tylko przy niektórych.",
      "Część zmian wdrażamy sami, ale te, które dotykają wspólnych elementów, wymagają uzgodnień z innymi zespołami.",
-     "Większość zmian wdrażamy sami, w dogodnym dla nas momencie, ale zdarza się, że czekamy na inne zespoły.",
+     "Większość zmian wdrażamy sami, w dogodnym dla nas momencie, ale zdarza się, że jesteśmy zależni od innych zespołów.",
      "Prawie każdą zmianę możemy wdrożyć sami i w dowolnym momencie, także gdy korzystają z niej inne zespoły."
     ]
    },
@@ -2355,7 +2355,7 @@ document.getElementById('printBtn').addEventListener('click', () => {
     @media print{.hint{display:none;}}
   </style></head><body>
   <h1>Health Check Zespołu</h1>
-  <div class="meta">${team ? 'Zespół: ' + esc(team) + ' · ' : ''}Zakres: ${activeCats.map(c => CAT_LABEL[c]).join(' + ')} · Zapisano: ${new Date().toLocaleDateString('pl-PL', {year:'numeric', month:'long', day:'numeric'})} · Wersja: v4.1.7</div>
+  <div class="meta">${team ? 'Zespół: ' + esc(team) + ' · ' : ''}Zakres: ${activeCats.map(c => CAT_LABEL[c]).join(' + ')} · Zapisano: ${new Date().toLocaleDateString('pl-PL', {year:'numeric', month:'long', day:'numeric'})} · Wersja: v4.1.9</div>
   <div class="hint">Wskazówka: Ctrl+P (lub Cmd+P), żeby zapisać tę stronę jako PDF.</div>
   <div class="row">
     ${radarsHTML}
