@@ -819,7 +819,7 @@
 
   </div>
 
-  <footer>Wypełniajcie razem. Wracajcie za kwartał i sprawdźcie, co się zmieniło.<br><span style="font-size:11px;">Wersja: v4.1.3</span><br><span style="font-size:11px;">Sebastian Kwaśniński, 2026</span></footer>
+  <footer>Wypełniajcie razem. Wracajcie za kwartał i sprawdźcie, co się zmieniło.<br><span style="font-size:11px;">Wersja: v4.1.4</span><br><span style="font-size:11px;">Sebastian Kwaśniński, 2026</span></footer>
 </div>
 
 <div class="modal-overlay" id="missingModal" hidden role="dialog" aria-modal="true" aria-labelledby="missingTitle">
@@ -1122,7 +1122,7 @@ const CATS = [
   "id": "dostarczanie",
   "group": "tech",
   "label": "Dostarczanie zmian",
-  "desc": "Jak zmiana trafia od zatwierdzenia do użytkownika: jak często zespół wdraża, ile to trwa i co się dzieje, gdy coś pójdzie nie tak. W środowiskach regulowanych, w embedded czy tam, gdzie błąd bardzo dużo kosztuje, rzadsze i ostrożniejsze wdrożenia bywają świadomym wyborem. Przy czterech pytaniach (metryki DORA) możecie wpisać faktyczne wartości, jeśli je znacie.",
+  "desc": "Jak zmiana trafia od zatwierdzenia do użytkownika, na ile wdrożenie jest zautomatyzowane i jak sprawnie przebiega. W środowiskach regulowanych, w embedded czy tam, gdzie błąd bardzo dużo kosztuje, rzadsze i ostrożniejsze wdrożenia bywają świadomym wyborem. Przy czterech pytaniach (metryki DORA) możecie wpisać faktyczne wartości, jeśli je znacie.",
   "blurb": "automatyczne wdrażanie i cztery metryki DORA",
   "radar": "#4A93BD",
   "dims": [
@@ -2325,7 +2325,7 @@ document.getElementById('printBtn').addEventListener('click', () => {
     @media print{.hint{display:none;}}
   </style></head><body>
   <h1>Health Check Zespołu</h1>
-  <div class="meta">${team ? 'Zespół: ' + esc(team) + ' · ' : ''}Zakres: ${activeCats.map(c => CAT_LABEL[c]).join(' + ')} · Zapisano: ${new Date().toLocaleDateString('pl-PL', {year:'numeric', month:'long', day:'numeric'})} · Wersja: v4.1.3</div>
+  <div class="meta">${team ? 'Zespół: ' + esc(team) + ' · ' : ''}Zakres: ${activeCats.map(c => CAT_LABEL[c]).join(' + ')} · Zapisano: ${new Date().toLocaleDateString('pl-PL', {year:'numeric', month:'long', day:'numeric'})} · Wersja: v4.1.4</div>
   <div class="hint">Wskazówka: Ctrl+P (lub Cmd+P), żeby zapisać tę stronę jako PDF.</div>
   <div class="row">
     ${radarsHTML}
