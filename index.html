@@ -819,7 +819,7 @@
 
   </div>
 
-  <footer>Wypełniajcie razem. Wracajcie za kwartał i sprawdźcie, co się zmieniło.<br><span style="font-size:11px;">Wersja: v4.1.9</span><br><span style="font-size:11px;">Sebastian Kwaśniński, 2026</span></footer>
+  <footer>Wypełniajcie razem. Wracajcie za kwartał i sprawdźcie, co się zmieniło.<br><span style="font-size:11px;">Wersja: v4.2.1</span><br><span style="font-size:11px;">Sebastian Kwaśniński, 2026</span></footer>
 </div>
 
 <div class="modal-overlay" id="missingModal" hidden role="dialog" aria-modal="true" aria-labelledby="missingTitle">
@@ -851,8 +851,8 @@ const CATS = [
     "levels": [
      "Zadania trafiają do nas w dużych kawałkach, których nie dzielimy.",
      "Dzielimy pracę dopiero wtedy, gdy zadanie zaczyna się przeciągać.",
-     "Zwykle dzielimy zadania przed startem, ale ich wielkość bardzo się różni.",
-     "Dzielimy pracę na małe części, które łatwo dowieźć osobno.",
+     "Zadania zwykle dzielimy przed startem, ale część z nich nadal jest duża i trwa tygodnie.",
+     "Większość zadań jest na tyle mała, że można ją dowieźć osobno i skończyć w kilka dni.",
      "Każde zadanie lub kawałek funkcjonalności jest na tyle mały, że jego ukończenie zajmuje nam od jednego dnia do kilku."
     ]
    },
@@ -865,7 +865,7 @@ const CATS = [
      "Planujemy pracę, ale plany często rozjeżdżają się z rzeczywistością.",
      "Planujemy w krótkich cyklach, ale trafność planu bywa różna.",
      "Zwykle dowozimy to, co zaplanowaliśmy w danym cyklu.",
-     "Gdy plan się zmienia, dostosowujemy go w trakcie cyklu i dowozimy to, co najważniejsze."
+     "Nasze plany zwykle się sprawdzają, a gdy się zmieniają, dostosowujemy je w trakcie cyklu i dowozimy to, co najważniejsze."
     ]
    },
    {
@@ -2355,7 +2355,7 @@ document.getElementById('printBtn').addEventListener('click', () => {
     @media print{.hint{display:none;}}
   </style></head><body>
   <h1>Health Check Zespołu</h1>
-  <div class="meta">${team ? 'Zespół: ' + esc(team) + ' · ' : ''}Zakres: ${activeCats.map(c => CAT_LABEL[c]).join(' + ')} · Zapisano: ${new Date().toLocaleDateString('pl-PL', {year:'numeric', month:'long', day:'numeric'})} · Wersja: v4.1.9</div>
+  <div class="meta">${team ? 'Zespół: ' + esc(team) + ' · ' : ''}Zakres: ${activeCats.map(c => CAT_LABEL[c]).join(' + ')} · Zapisano: ${new Date().toLocaleDateString('pl-PL', {year:'numeric', month:'long', day:'numeric'})} · Wersja: v4.2.1</div>
   <div class="hint">Wskazówka: Ctrl+P (lub Cmd+P), żeby zapisać tę stronę jako PDF.</div>
   <div class="row">
     ${radarsHTML}
