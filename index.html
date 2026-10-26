@@ -1127,6 +1127,18 @@ const CATS = [
      "Nasze gałęzie żyją zwykle krócej niż dzień, a część zmian scalamy od razu do głównej linii kodu.",
      "Pracujemy w trunk-based development, a główna linia kodu jest u nas zawsze gotowa do wdrożenia."
     ]
+   },
+   {
+    "id": "dokumentacja",
+    "title": "Dokumentacja",
+    "help": "Pytanie dotyczy tego, czy zespół utrzymuje opis systemu (architekturę, ważne decyzje wraz z uzasadnieniem, instrukcje na wypadek awarii) i aktualizuje go razem ze zmianami. Część tej roli pełnią też czytelny kod i testy. W środowiskach regulowanych dokumentacja bywa wymogiem formalnym.",
+    "levels": [
+     "Dokumentacji prawie nie mamy, wiedza o systemie jest w głowach pojedynczych osób.",
+     "Dokumentacja istnieje, ale zwykle jest nieaktualna.",
+     "Najważniejsze rzeczy mamy spisane, ale aktualizujemy je dopiero, gdy ktoś zauważy, że są nieaktualne.",
+     "Dokumentację aktualizujemy zwykle razem ze zmianą w systemie.",
+     "Dokumentacja jest zawsze aktualna: zmiana bez zaktualizowanego opisu nie jest u nas uznana za skończoną."
+    ]
    }
   ]
  },
@@ -1690,6 +1702,24 @@ const RECOMMENDATIONS = {
   },
   "blockedLabel": "Gdy chcecie integrować częściej, a infrastruktura nie nadąża:",
   "blocked": "Jeśli chcecie integrować częściej, ale wymaga to zmian w infrastrukturze (feature flagi, lepsze testy kontraktowe między serwisami), na które nie macie budżetu – to jest inwestycja do uzasadnienia jako projekt, nie coś do wymuszenia samą dyscypliną."
+ },
+ "dokumentacja": {
+  "low": {
+   "steps": [
+    "Poproście osobę, która nie zna wybranego modułu, żeby wyjaśniła go Wam na podstawie samego kodu i tego, co jest spisane, i zapisała, czego zabrakło. Ta lista to dobry początek.",
+    "Spiszcie najpierw to, czego nie widać w kodzie: dlaczego wybraliście dane rozwiązanie i co robić przy najczęstszej awarii. Kilka zdań na decyzję wystarczy."
+   ],
+   "why": "Kod pokazuje, jak system działa, ale nie dlaczego tak działa. Bez tego każda zmiana w zespole i każda nieobecność kosztuje więcej."
+  },
+  "mid": {
+   "steps": [
+    "Dodajcie do Definition of Done pytanie: czy ta zmiana wymaga zmiany opisu? Jeśli tak, wpiszcie w zadaniu link do strony, którą trzeba zaktualizować.",
+    "Ustalcie jako zespół, że każdy, kto zauważy nieaktualną stronę, poprawia ją albo oznacza, i raz na kwartał przejrzyjcie wspólnie strony, które dawno nie były zmieniane. Pomaga data ostatniego przeglądu na stronie."
+   ],
+   "why": "Dokumentacji, której nie ufacie, nikt nie czyta, więc nikt jej nie poprawia. W badaniach DORA jakość dokumentacji wiązała się z lepszymi wynikami dostarczania, o ile była aktualna i używana."
+  },
+  "blockedLabel": "Gdy dbacie o dokumentację, a i tak się dezaktualizuje:",
+  "blocked": "Jeśli opis nie nadąża za systemem mimo dobrych chęci, problem leży zwykle w sposobie jego utrzymywania, nie w pisaniu. Sprawdźcie, czy aktualizacja opisu jest częścią zakończenia zmiany, czy wspólnie dbacie o aktualność stron i czy ktokolwiek przegląda stare. Jeśli chodzi o elementy innych zespołów, ustalcie, kto prowadzi opis wspólnych części."
  },
  "cd": {
   "low": {
