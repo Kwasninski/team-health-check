@@ -831,7 +831,7 @@
 
   </div>
 
-  <footer>Wypełniajcie razem. Wracajcie za kwartał i sprawdźcie, co się zmieniło.<br><span style="font-size:11px;">Wersja: v4.2.7</span><br><span style="font-size:11px;">Sebastian Kwaśniński, 2026</span></footer>
+  <footer>Wypełniajcie razem. Wracajcie za kwartał i sprawdźcie, co się zmieniło.<br><span style="font-size:11px;">Wersja: v4.2.8</span><br><span style="font-size:11px;">Sebastian Kwaśniński, 2026</span></footer>
 </div>
 
 <div class="modal-overlay" id="missingModal" hidden role="dialog" aria-modal="true" aria-labelledby="missingTitle">
@@ -1053,7 +1053,7 @@ const CATS = [
   "group": "tech",
   "label": "Praktyki inżynierskie",
   "desc": "Jak zespół dba o jakość kodu, testów i integracji na co dzień (to w dużej mierze praktyki z Extreme Programming). Żaden z opisów nie jest uniwersalnym celem – w kodzie odziedziczonym, w środowiskach regulowanych czy tam, gdzie koszt błędu jest bardzo wysoki, punkt wyjścia bywa po prostu inny.",
-  "blurb": "code review i parowanie, refaktoryzacja, testy, dług techniczny, CI i krótkie gałęzie",
+  "blurb": "code review i parowanie, refaktoryzacja, testy, dług techniczny, CI i krótkie gałęzie, dokumentacja",
   "radar": "#3E9C98",
   "dims": [
    {
@@ -2198,7 +2198,7 @@ function renderProfile(){
     <div class="profile-group ${g.cls} cc-${g.id}">
       <div class="profile-group-title"><span class="dot ${g.cls}"></span>${g.label}</div>
       ${rows.length ? rows.map(d => `<div class="profile-row"><div class="profile-main"><div class="profile-title">${d.title}</div><div class="profile-text">${d.levels[state[d.id]-1]}</div></div><label class="focus-toggle"><input type="checkbox" class="focus-check" data-id="${d.id}" ${focusSet.has(d.id) ? 'checked' : ''}> Chcemy o tym porozmawiać</label></div>`).join('')
-        : '<div class="profile-row"><div class="profile-text profile-muted">Brak tematów do zaznaczenia w tej sekcji.</div></div>'}
+        : '<div class="profile-row"><div class="profile-text profile-muted">Wszędzie wybraliście czwarty lub piąty opis, więc nie ma tu tematów priorytetowych do rozmowy.</div></div>'}
     </div>`;
   }).join('');
   [...focusSet].forEach(id => { if(activeIds.has(id) && !visibleIds.has(id)) focusSet.delete(id); });
@@ -2397,7 +2397,7 @@ document.getElementById('printBtn').addEventListener('click', () => {
     @media print{.hint{display:none;}}
   </style></head><body>
   <h1>Health Check Zespołu</h1>
-  <div class="meta">${team ? 'Zespół: ' + esc(team) + ' · ' : ''}Zakres: ${activeCats.map(c => CAT_LABEL[c]).join(' + ')} · Zapisano: ${new Date().toLocaleDateString('pl-PL', {year:'numeric', month:'long', day:'numeric'})} · Wersja: v4.2.7</div>
+  <div class="meta">${team ? 'Zespół: ' + esc(team) + ' · ' : ''}Zakres: ${activeCats.map(c => CAT_LABEL[c]).join(' + ')} · Zapisano: ${new Date().toLocaleDateString('pl-PL', {year:'numeric', month:'long', day:'numeric'})} · Wersja: v4.2.8</div>
   <div class="hint">Wskazówka: Ctrl+P (lub Cmd+P), żeby zapisać tę stronę jako PDF.</div>
   <div class="row">
     ${radarsHTML}
