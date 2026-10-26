@@ -742,8 +742,17 @@
     <ul>
       <li>To jest Wasz własny opis pracy, nie pomiar automatyczny.</li>
       <li><strong>Pięć opisów przy każdym obszarze to uproszczenie, więc możliwe, że żaden nie będzie pasował do Waszej sytuacji idealnie.</strong> Wybierzcie najbliższy, a to, co się nie zgadza, dopiszcie w komentarzu. Narzędzie nie liczy wyniku zbiorczego i nie porównuje zespołów – to opis do rozmowy, nie ocena.</li>
-      <li>Odpowiedzi, komentarze i notatki zostają w tej przeglądarce (autozapis) i nigdzie nie są wysyłane.</li>
       <li>Narzędzie polega na uczciwości zespołu. Nic nie chroni przed masowym zaznaczaniem „nie dotyczy” tam, gdzie opis byłby niewygodny – dlatego przy każdym takim zaznaczeniu warto zostawić krótkie uzasadnienie (pole niżej przy checkboxie).</li>
+    </ul>
+  </details>
+
+  <details class="howto">
+    <summary>Prywatność i zapisywanie danych</summary>
+    <ul>
+      <li>Nic, co wpisujecie, nie trafia na żaden zewnętrzny serwer.</li>
+      <li>Odpowiedzi zostają tylko na Waszym komputerze, w pamięci przeglądarki, i są usuwane po 7 dniach.</li>
+      <li>Pobrany opis to zwykły plik HTML.</li>
+      <li>Standardowo, nie wpisujcie danych wrażliwych.</li>
     </ul>
   </details>
 
@@ -819,7 +828,7 @@
 
   </div>
 
-  <footer>Wypełniajcie razem. Wracajcie za kwartał i sprawdźcie, co się zmieniło.<br><span style="font-size:11px;">Wersja: v4.2.6</span><br><span style="font-size:11px;">Sebastian Kwaśniński, 2026</span></footer>
+  <footer>Wypełniajcie razem. Wracajcie za kwartał i sprawdźcie, co się zmieniło.<br><span style="font-size:11px;">Wersja: v4.2.7</span><br><span style="font-size:11px;">Sebastian Kwaśniński, 2026</span></footer>
 </div>
 
 <div class="modal-overlay" id="missingModal" hidden role="dialog" aria-modal="true" aria-labelledby="missingTitle">
@@ -2355,7 +2364,7 @@ document.getElementById('printBtn').addEventListener('click', () => {
     @media print{.hint{display:none;}}
   </style></head><body>
   <h1>Health Check Zespołu</h1>
-  <div class="meta">${team ? 'Zespół: ' + esc(team) + ' · ' : ''}Zakres: ${activeCats.map(c => CAT_LABEL[c]).join(' + ')} · Zapisano: ${new Date().toLocaleDateString('pl-PL', {year:'numeric', month:'long', day:'numeric'})} · Wersja: v4.2.6</div>
+  <div class="meta">${team ? 'Zespół: ' + esc(team) + ' · ' : ''}Zakres: ${activeCats.map(c => CAT_LABEL[c]).join(' + ')} · Zapisano: ${new Date().toLocaleDateString('pl-PL', {year:'numeric', month:'long', day:'numeric'})} · Wersja: v4.2.7</div>
   <div class="hint">Wskazówka: Ctrl+P (lub Cmd+P), żeby zapisać tę stronę jako PDF.</div>
   <div class="row">
     ${radarsHTML}
@@ -2562,7 +2571,9 @@ function clearExportWarning(){
     const raw = localStorage.getItem(KEY);
     if(raw){
       const snap = JSON.parse(raw);
-      if(snap && snap.v === 1 && hasContent(snap)){
+      if(snap && snap.ts && Date.now() - snap.ts > 7*24*60*60*1000){
+        localStorage.removeItem(KEY);
+      } else if(snap && snap.v === 1 && hasContent(snap)){
         restore(snap);
         showBanner(snap.ts);
       }
