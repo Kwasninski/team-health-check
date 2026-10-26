@@ -819,7 +819,7 @@
 
   </div>
 
-  <footer>Wypełniajcie razem. Wracajcie za kwartał i sprawdźcie, co się zmieniło.<br><span style="font-size:11px;">Wersja: v4.2.1</span><br><span style="font-size:11px;">Sebastian Kwaśniński, 2026</span></footer>
+  <footer>Wypełniajcie razem. Wracajcie za kwartał i sprawdźcie, co się zmieniło.<br><span style="font-size:11px;">Wersja: v4.2.3</span><br><span style="font-size:11px;">Sebastian Kwaśniński, 2026</span></footer>
 </div>
 
 <div class="modal-overlay" id="missingModal" hidden role="dialog" aria-modal="true" aria-labelledby="missingTitle">
@@ -1107,12 +1107,12 @@ const CATS = [
    {
     "id": "trunk",
     "title": "Krótkie gałęzie (trunk-based)",
-    "help": "Trunk-based development to praca na krótko żyjących gałęziach, często integrowanych z główną linią kodu. W środowisku z wieloma zespołami na współdzielonym repozytorium albo z zależnościami między wieloma usługami częsta integracja bywa trudniejsza do skoordynowania niż w pojedynczym repozytorium i wymaga innej infrastruktury (feature flagi, testy kontraktowe).",
+    "help": "Trunk-based development to praca na krótko żyjących gałęziach, często integrowanych z główną linią kodu. Im krócej żyją gałęzie, tym mniej konfliktów przy scalaniu. W środowisku z wieloma zespołami na współdzielonym repozytorium albo z zależnościami między wieloma usługami częsta integracja bywa trudniejsza do skoordynowania niż w pojedynczym repozytorium i wymaga innej infrastruktury (feature flagi, testy kontraktowe).",
     "levels": [
-     "Nasze gałęzie żyją tygodnie lub dłużej, a scalenia są rzadkie i sprawiają kłopoty.",
-     "Nasze gałęzie żyją od kilku dni do tygodnia, a scalenia bywają problematyczne.",
-     "Nasze gałęzie żyją zwykle jeden–dwa dni, a scalenia rzadko sprawiają kłopoty.",
-     "Pracujemy w zasadzie w trunk-based development, choć zdarzają się wyjątki.",
+     "Nasze gałęzie żyją tygodnie lub dłużej.",
+     "Nasze gałęzie żyją od kilku dni do tygodnia.",
+     "Nasze gałęzie żyją zwykle jeden–dwa dni.",
+     "Nasze gałęzie żyją zwykle krócej niż dzień, a część zmian scalamy od razu do głównej linii kodu.",
      "Pracujemy w trunk-based development, a główna linia kodu jest u nas zawsze gotowa do wdrożenia."
     ]
    }
@@ -1240,7 +1240,7 @@ const CATS = [
      "Gdy jest awaria, każdy robi to, co uważa za słuszne, i nie wiadomo, kto prowadzi.",
      "Awarią zajmuje się ten, kto akurat jest dostępny, bez ustalonego sposobu działania.",
      "Wiemy, kogo wezwać lub jak sobie poradzić z typowymi awariami, ale zasady reagowania nie są spisane.",
-     "Mamy spisany sposób reagowania i wiemy, kto prowadzi incydent.",
+     "Mamy spisany sposób reagowania, w którym określono, kto prowadzi incydent.",
      "Sposób reagowania ćwiczymy i dopracowujemy na podstawie tego, jak nam poszło."
     ]
    },
@@ -1252,7 +1252,7 @@ const CATS = [
      "Po awarii wracamy do pracy bez rozmowy o tym, co się stało.",
      "Rozmawiamy o awarii nieformalnie, gdy była poważna.",
      "Robimy post mortem po poważniejszych awariach, ale bez stałego formatu.",
-     "Po każdej poważniejszej awarii robimy post mortem w stałym formacie (oś czasu, przyczyny, wpływ), bez szukania winnych.",
+     "Po każdej poważniejszej awarii robimy post mortem w stałym formacie (oś czasu, przyczyny, wpływ).",
      "Post mortem robimy także po zdarzeniach, które mogły skończyć się awarią, i dzielimy się wnioskami szerzej niż w zespole."
     ]
    },
@@ -1276,7 +1276,7 @@ const CATS = [
      "Trzymamy sekrety wprost w kodzie lub plikach konfiguracyjnych.",
      "Sekrety trzymamy w różnych miejscach i każdy robi to po swojemu.",
      "Sekrety trzymamy w dedykowanym miejscu, ale zasady dostępu i wymiany nie są ustalone.",
-     "Sekrety trzymamy w dedykowanym miejscu, a dostęp do nich mają tylko osoby i usługi, które go potrzebują.",
+     "Dostęp do sekretów mają u nas tylko osoby i usługi, które go potrzebują.",
      "Sekrety wymieniamy regularnie, a gdy któryś wycieknie, wiemy, jak szybko go unieważnić i podmienić."
     ]
    },
@@ -2355,7 +2355,7 @@ document.getElementById('printBtn').addEventListener('click', () => {
     @media print{.hint{display:none;}}
   </style></head><body>
   <h1>Health Check Zespołu</h1>
-  <div class="meta">${team ? 'Zespół: ' + esc(team) + ' · ' : ''}Zakres: ${activeCats.map(c => CAT_LABEL[c]).join(' + ')} · Zapisano: ${new Date().toLocaleDateString('pl-PL', {year:'numeric', month:'long', day:'numeric'})} · Wersja: v4.2.1</div>
+  <div class="meta">${team ? 'Zespół: ' + esc(team) + ' · ' : ''}Zakres: ${activeCats.map(c => CAT_LABEL[c]).join(' + ')} · Zapisano: ${new Date().toLocaleDateString('pl-PL', {year:'numeric', month:'long', day:'numeric'})} · Wersja: v4.2.3</div>
   <div class="hint">Wskazówka: Ctrl+P (lub Cmd+P), żeby zapisać tę stronę jako PDF.</div>
   <div class="row">
     ${radarsHTML}
