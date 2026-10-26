@@ -695,8 +695,11 @@
   .cat-offer .cat-offer-btn[class*="cc-"]{background:var(--c-dk);color:#17222E;}
   .cat-offer .cat-offer-btn[class*="cc-"]:hover{background:color-mix(in srgb,var(--c-dk) 85%,#fff);}
   .radar-block .name{color:var(--c);}
-  .topics-details>summary{display:flex;align-items:center;gap:6px;font-family:Georgia,serif;font-size:20px;font-weight:400;margin:36px 0 12px;padding:10px 14px;color:var(--paper);cursor:pointer;list-style:none;border:1px solid rgba(255,255,255,0.22);border-radius:8px;background:rgba(255,255,255,0.05);transition:background .15s,border-color .15s;}
-  .topics-details>summary:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.4);}
+  .topics-details>summary{display:flex;align-items:center;gap:6px;font-family:Georgia,serif;font-size:20px;font-weight:400;margin:0;padding:12px 14px;color:var(--paper);cursor:pointer;list-style:none;border-radius:8px;transition:background .15s;}
+  .topics-details{margin:36px 0 0;border:1px solid rgba(255,255,255,0.22);border-radius:8px;background:rgba(255,255,255,0.05);}
+  .topics-details[open]{padding-bottom:16px;}
+  .topics-details>*:not(summary){margin-left:16px;margin-right:16px;}
+  .topics-details>summary:hover{background:rgba(255,255,255,0.08);}
   .topics-details>summary:focus-visible{outline:2px solid rgba(255,255,255,0.6);outline-offset:2px;}
   .topics-details>summary::-webkit-details-marker{display:none;}
   .topics-details>summary::before{content:'▸';display:inline-block;width:1.1em;opacity:.8;transition:transform .15s;}
@@ -705,9 +708,9 @@
   .topics-details[open]>summary::after{content:'zwiń';}
   .topics-count{font-family:system-ui,sans-serif;font-size:14px;opacity:.75;margin-left:10px;}
   .topics-count{white-space:nowrap;}
-  @media (max-width:520px){.topics-details>summary{font-size:18px;padding:10px 12px;}.topics-details>summary::after{display:none;}.topics-count{font-size:13px;margin-left:auto;}}
+  @media (max-width:520px){.topics-details>*:not(summary){margin-left:10px;margin-right:10px;}.topics-details>summary{font-size:18px;padding:10px 12px;}.topics-details>summary::after{display:none;}.topics-count{font-size:13px;margin-left:auto;}}
   .topics-details,#talkWrap{scroll-margin-top:60px;}
-  .reco.topics-details{margin-top:0;}
+  .reco.topics-details{margin-top:16px;}
 </style>
 </head>
 <body>
