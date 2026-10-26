@@ -731,7 +731,7 @@
     <summary>Jak korzystać z tego narzędzia (3 kroki)</summary>
     <ol>
       <li>Usiądźcie razem jako zespół – najlepiej w pełnym składzie, razem z PO/TPO.</li>
-      <li>Dla każdego obszaru przeczytajcie wszystkie opisy i wspólnie wybierzcie ten, który najlepiej oddaje to, jak pracujecie na co dzień. Dyskusja i różnice zdań są tu ważniejsze niż sam wybór. Jeśli obszar po prostu nie pasuje do Waszego kontekstu (np. specyfika technologii czy regulacji), zaznaczcie „nie dotyczy” zamiast zgadywać.</li>
+      <li>Dla każdego obszaru przeczytajcie wszystkie opisy i wspólnie wybierzcie ten, który najlepiej oddaje to, jak pracujecie na co dzień. <strong>Nie musi pasować idealnie – wystarczy najbliższy.</strong> Dyskusja i różnice zdań są tu ważniejsze niż sam wybór. Jeśli obszar po prostu nie pasuje do Waszego kontekstu (np. specyfika technologii czy regulacji), zaznaczcie „nie dotyczy” zamiast zgadywać.</li>
       <li>Na dole zobaczycie swój opis w jednym miejscu. Sami zaznaczacie tematy, o których chcecie porozmawiać – dla nich pojawią się propozycje. Jest też miejsce na własne działania. Zapiszcie opis, żeby wrócić do niego za kwartał i zobaczyć, co się zmieniło.</li>
     </ol>
     <p class="howto-note"><strong>Jeśli się nie zgadzacie:</strong> nie wybierajcie w milczeniu „środka”, tylko po to, żeby ruszyć dalej. Przedyskutujcie, skąd bierze się różnica zdań. Jeśli mimo dyskusji nadal się nie zgadzacie, wybierzcie opis, który pasuje do typowego dnia pracy, i zanotujcie rozbieżność w komentarzu – to też jest informacja.</p>
@@ -741,7 +741,7 @@
     <summary>Ograniczenia tego narzędzia</summary>
     <ul>
       <li>To jest Wasz własny opis pracy, nie pomiar automatyczny.</li>
-      <li><strong>Pięć opisów przy każdym obszarze to uproszczenie – żaden nie pasuje idealnie.</strong> Wybierzcie najbliższy i dopiszcie komentarz, jeśli coś nie gra. Narzędzie nie liczy wyniku zbiorczego i nie porównuje zespołów – to opis do rozmowy, nie ocena.</li>
+      <li><strong>Pięć opisów przy każdym obszarze to uproszczenie, więc możliwe, że żaden nie będzie pasował do Waszej sytuacji idealnie.</strong> Wybierzcie najbliższy, a to, co się nie zgadza, dopiszcie w komentarzu. Narzędzie nie liczy wyniku zbiorczego i nie porównuje zespołów – to opis do rozmowy, nie ocena.</li>
       <li>Odpowiedzi, komentarze i notatki zostają w tej przeglądarce (autozapis) i nigdzie nie są wysyłane.</li>
       <li>Narzędzie polega na uczciwości zespołu. Nic nie chroni przed masowym zaznaczaniem „nie dotyczy” tam, gdzie opis byłby niewygodny – dlatego przy każdym takim zaznaczeniu warto zostawić krótkie uzasadnienie (pole niżej przy checkboxie).</li>
     </ul>
@@ -819,7 +819,7 @@
 
   </div>
 
-  <footer>Wypełniajcie razem. Wracajcie za kwartał i sprawdźcie, co się zmieniło.<br><span style="font-size:11px;">Wersja: v4.2.4</span><br><span style="font-size:11px;">Sebastian Kwaśniński, 2026</span></footer>
+  <footer>Wypełniajcie razem. Wracajcie za kwartał i sprawdźcie, co się zmieniło.<br><span style="font-size:11px;">Wersja: v4.2.5</span><br><span style="font-size:11px;">Sebastian Kwaśniński, 2026</span></footer>
 </div>
 
 <div class="modal-overlay" id="missingModal" hidden role="dialog" aria-modal="true" aria-labelledby="missingTitle">
@@ -2355,7 +2355,7 @@ document.getElementById('printBtn').addEventListener('click', () => {
     @media print{.hint{display:none;}}
   </style></head><body>
   <h1>Health Check Zespołu</h1>
-  <div class="meta">${team ? 'Zespół: ' + esc(team) + ' · ' : ''}Zakres: ${activeCats.map(c => CAT_LABEL[c]).join(' + ')} · Zapisano: ${new Date().toLocaleDateString('pl-PL', {year:'numeric', month:'long', day:'numeric'})} · Wersja: v4.2.4</div>
+  <div class="meta">${team ? 'Zespół: ' + esc(team) + ' · ' : ''}Zakres: ${activeCats.map(c => CAT_LABEL[c]).join(' + ')} · Zapisano: ${new Date().toLocaleDateString('pl-PL', {year:'numeric', month:'long', day:'numeric'})} · Wersja: v4.2.5</div>
   <div class="hint">Wskazówka: Ctrl+P (lub Cmd+P), żeby zapisać tę stronę jako PDF.</div>
   <div class="row">
     ${radarsHTML}
