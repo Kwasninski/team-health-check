@@ -860,8 +860,8 @@ const CATS = [
      "Zadania trafiają do nas w dużych kawałkach, których nie dzielimy.",
      "Dzielimy pracę dopiero wtedy, gdy zadanie zaczyna się przeciągać.",
      "Zadania zwykle dzielimy przed startem, ale część z nich nadal jest duża i trwa tygodnie.",
-     "Większość zadań jest na tyle mała, że można ją dowieźć osobno i skończyć w kilka dni.",
-     "Każde zadanie lub kawałek funkcjonalności jest na tyle mały, że jego ukończenie zajmuje nam od jednego dnia do kilku."
+     "Większość zadań dzielimy tak, że da się je skończyć w kilka dni.",
+     "Każde zadanie dzielimy tak, że każdy kawałek da się skończyć i pokazać w ciągu od jednego dnia do kilku."
     ]
    },
    {
@@ -931,7 +931,7 @@ const CATS = [
     "levels": [
      "Dowiadujemy się, czy coś działa, głównie z reklamacji lub przypadkowych sygnałów – nikt u nas systematycznie tego nie sprawdza.",
      "Czasem ktoś u nas sprawdza wyniki po wdrożeniu, ale zależy to od inicjatywy pojedynczej osoby, nie od ustalonej praktyki.",
-     "Mamy dostęp do podstawowych danych o użyciu funkcji, ale rzadko wracamy do nich po zakończeniu pracy.",
+     "Mamy ustaloną praktykę sprawdzania efektów po wdrożeniu, ale rzadko korzystamy z jej wyników przy planowaniu.",
      "Regularnie sprawdzamy, czy dostarczone rozwiązania osiągają zakładany efekt, i wykorzystujemy to przy planowaniu kolejnych prac.",
      "Przed startem zadania ustalamy miarę sukcesu, a po wdrożeniu sprawdzamy ją i na tej podstawie podejmujemy decyzje."
     ]
@@ -951,8 +951,8 @@ const CATS = [
     "title": "Autonomia w decyzjach",
     "help": "Chodzi o to, ile decyzji – technicznych i dotyczących organizacji pracy – zespół może podjąć samodzielnie, bez czekania na akceptację z zewnątrz.",
     "levels": [
-     "Czekamy na polecenia, decyzje zapadają poza zespołem.",
-     "Wykonujemy decyzje podjęte gdzie indziej, rzadko je kwestionujemy.",
+     "Czekamy na polecenia, wszystkie decyzje zapadają poza zespołem.",
+     "Większość decyzji zapada poza zespołem, sami decydujemy tylko w drobnych sprawach.",
      "Część decyzji technicznych podejmujemy samodzielnie.",
      "Samodzielnie podejmujemy większość decyzji technicznych i dotyczących organizacji pracy.",
      "Sami decydujemy, jak budujemy produkt i jak pracujemy. Z otoczeniem uzgadniamy te decyzje, które tego wymagają lub mogą wpływać na inne zespoły."
@@ -972,7 +972,7 @@ const CATS = [
    },
    {
     "id": "bledy_pomoc",
-    "title": "Błędy i prośby o pomoc",
+    "title": "Otwartość wobec błędów",
     "help": "Bezpieczeństwo psychologiczne to poczucie, że można przyznać się do błędu, zadać „głupie” pytanie albo poprosić o pomoc bez obawy o negatywne konsekwencje społeczne czy zawodowe.",
     "levels": [
      "Ukrywamy błędy i problemy, bo boimy się konsekwencji.",
@@ -1002,7 +1002,7 @@ const CATS = [
      "Praca w nadgodzinach i pod presją jest u nas normą, jesteśmy chronicznie przeciążeni.",
      "Przeciążamy się często, zwykle przy większych deadline’ach.",
      "Nasze tempo bywa nierówne, ale zwykle wracamy do normy po intensywnych okresach.",
-     "Nasze tempo pracy jest w większości stabilne.",
+     "Nasze tempo pracy jest stabilne, a okresy większego obciążenia zdarzają się rzadko.",
      "Pracujemy w stałym tempie, które da się utrzymać. Przeciążenie jest u nas wyjątkiem, a gdy się zdarza, szybko reagujemy."
     ]
    },
@@ -1060,8 +1060,8 @@ const CATS = [
      "Piszemy kod w pojedynkę, nikt poza autorem go nie ogląda.",
      "Code review robimy sporadycznie, głównie gdy zmiana jest duża lub ryzykowna.",
      "Code review jest u nas normą, ale jego jakość i czas oczekiwania bywają różne.",
-     "Każda zmiana przechodzi code review, a część prac robimy w parach lub zespołowo.",
-     "Code review jest u nas szybkie i daje realne uwagi, a w parach lub zespołowo pracujemy zawsze, gdy zadanie tego wymaga."
+     "Każda zmiana przechodzi code review albo powstaje w parze lub zespołowo.",
+     "Code review lub praca w parze to u nas stała praktyka, która daje realną wartość."
     ]
    },
    {
@@ -1083,8 +1083,8 @@ const CATS = [
     "levels": [
      "Testujemy głównie ręcznie.",
      "Mamy podstawowe testy automatyczne, ale nie ufamy im w pełni.",
-     "Mamy solidny zestaw testów automatycznych i ufamy im przy większości zmian.",
-     "Mamy testy na różnych poziomach, ale nie dla każdej części systemu.",
+     "Najważniejsze części systemu mają testy automatyczne, którym ufamy.",
+     "Mamy testy na różnych poziomach, które obejmują większość systemu.",
      "Ufamy naszym testom na tyle, że wdrażamy bez obaw."
     ]
    },
@@ -1176,7 +1176,7 @@ const CATS = [
     "help": "Deployment Frequency (częstotliwość wdrożeń) – jak często zmiany trafiają na produkcję. Jedna z kluczowych metryk DORA. Częstotliwość zależy od kontekstu – w środowiskach z twardymi oknami wdrożeniowymi (regulacje, certyfikacja sprzętu, integracje z systemami o ograniczonej dostępności) rzadsze, większe wdrożenia bywają świadomym wyborem. Jeśli odpowiadacie za kilka usług, opiszcie tę najważniejszą dla biznesu albo odpowiedzcie osobno dla 2–3 kluczowych serwisów, zamiast uśredniać.",
     "levels": [
      "Wdrażamy rzadziej niż raz w miesiącu.",
-     "Wdrażamy od raz w miesiącu do kilku razy w miesiącu.",
+     "Wdrażamy raz w miesiącu lub kilka razy w miesiącu.",
      "Wdrażamy zwykle raz lub kilka razy w tygodniu.",
      "Wdrażamy zwykle codziennie.",
      "Wdrażamy wielokrotnie w ciągu dnia."
@@ -1202,7 +1202,7 @@ const CATS = [
      "Wiele naszych wdrożeń kończy się poprawką awaryjną lub wycofaniem zmiany.",
      "Poprawka lub wycofanie zdarza się u nas regularnie, a o błędach dowiadujemy się głównie od użytkowników.",
      "Poprawki po wdrożeniu zdarzają się, ale zwykle sami szybko je zauważamy.",
-     "Poprawki po wdrożeniu zdarzają się rzadko, a zmiany wdrażamy małymi krokami, żeby błąd był łatwy do wycofania.",
+     "Poprawki po wdrożeniu zdarzają się rzadko.",
      "Poprawki po wdrożeniu są u nas wyjątkiem. Gdy wdrożenie się nie powiedzie, zwykle wycofujemy zmianę, zanim odczują to użytkownicy."
     ]
    },
@@ -1215,7 +1215,7 @@ const CATS = [
      "Przywrócenie zajmuje nam zwykle od kilku godzin do doby.",
      "Przywrócenie zajmuje nam zwykle od godziny do kilku godzin.",
      "Przywrócenie zajmuje nam zwykle od kilkunastu minut do godziny.",
-     "Przywrócenie zajmuje nam zwykle kilka minut, dzięki gotowym procedurom i automatyzacji."
+     "Przywrócenie zajmuje nam zwykle kilka minut."
     ]
    }
   ]
@@ -1360,7 +1360,7 @@ const RECOMMENDATIONS = {
  "priorytety_z": {
   "low": {
    "steps": [
-    "Policzcie, ile zadań w ostatnim tygodniu miało etykietę „najpilniejsze” jednocześnie – sama ta liczba zwykle pokazuje skalę problemu.",
+    "Policzcie, ile zadań w ostatnim tygodniu było oznaczone jako „najpilniejsze”, i poproście każdą osobę o wskazanie trzech najważniejszych. Jeśli listy się różnią, macie punkt wyjścia do rozmowy.",
     "Ustalcie, kto ma ostateczny głos w sprawie kolejności prac, jeśli zespół się nie zgadza. Nie musi to być jedna stała osoba na zawsze – ważne, żeby w danym momencie było jasne, kto decyduje."
    ],
    "why": "Gdy nie ma jednego miejsca ani jednej osoby odpowiedzialnej za priorytety, każdy pracuje nad czymś innym i uważa to za najważniejsze. To rozprasza bardziej niż niedoskonała kolejność."
@@ -1406,7 +1406,7 @@ const RECOMMENDATIONS = {
     "Sprawdźcie, czy Wasze minimum gotowości da się zweryfikować w mniej niż minutę. Jeśli nie, skróćcie je do tego, co naprawdę blokuje start (np. znany cel, kryteria akceptacji, wycena).",
     "Gdy zaczynacie coś niedoprecyzowanego, nazwijcie to wprost jako założenie robocze i ustalcie, kiedy je zweryfikujecie. Samo nazwanie niepewności na głos często wystarczy, żebyście zaczęli nią świadomie zarządzać."
    ],
-   "why": "Sztywne trzymanie się pełnej DoR bywa nierealne w bardzo zmiennym środowisku. Nie musi to być problemem, jeśli niepewność nazywacie i nią zarządzacie, zamiast ignorować ją w milczeniu. Ważne, żeby ryzyko braku jasności było widoczne przed startem."
+   "why": "Zaczynanie z niepewnością bywa w zmiennym środowisku rozsądne, ale tylko wtedy, gdy nazwiecie, czego jeszcze nie wiecie. Niewypowiedziana niepewność wychodzi dopiero w trakcie pracy, gdy zmiana kierunku kosztuje najwięcej."
   },
   "blockedLabel": "Gdy proces zwykle działa, ale coś i tak regularnie wybucha:",
   "blocked": "Jeśli świadomie zaczynacie z niepewnością i to zwykle działa, ale mimo to regularnie coś wybucha – sprawdźcie, czy naprawdę nazywacie założenia na głos, czy tylko po cichu zakładacie, że ktoś inny to ogarnie. Czasem to nie proces zawodzi, tylko brakuje jednej osoby z mandatem, żeby powiedzieć „stop, to jeszcze nie jest gotowe”."
@@ -1475,7 +1475,7 @@ const RECOMMENDATIONS = {
   },
   "mid": {
    "steps": [
-    "Po każdym większym wdrożeniu wyznaczcie osobę, która sprawdzi w ciągu tygodnia, jak to działa, i da znać reszcie. Prosty nawyk, który pozwala wrócić do tego, co zostało dostarczone.",
+    "Ustalcie z góry, co się dzieje, gdy po wdrożeniu coś nie wychodzi: kto dostaje sygnał, kto decyduje o poprawce i kto informuje resztę. Nie czekajcie, aż ktoś sam się zgłosi.",
     "Gdy coś nie wychodzi, zaczynajcie rozmowę od pytania „co możemy z tym zrobić”, a nie „kto zawinił”. Dzięki temu łatwiej samodzielnie korygować własne decyzje."
    ],
    "why": "Odpowiedzialność za wynik obejmuje też reagowanie, gdy coś nie wychodzi. Bez tego dostarczacie, ale nie uczycie się na skutkach własnych decyzji."
@@ -1522,7 +1522,7 @@ const RECOMMENDATIONS = {
  "tempo": {
   "low": {
    "steps": [
-    "Zróbcie jeden tydzień przeglądu: zapiszcie, ile razy ktoś pracował po godzinach albo przenosił zadanie z powodu przeciążenia. Same liczby, bez oceniania, wystarczą, żeby zobaczyć skalę problemu.",
+    "Przez kilka tygodni zapisujcie, ile razy ktoś pracował po godzinach albo przenosił zadanie z powodu przeciążenia. Same liczby, bez oceniania, wystarczą, żeby zobaczyć skalę problemu.",
     "Otwarcie zgłoście przełożonym, że obecne tempo nie jest do utrzymania – zanim zamieni się to w wypalenie lub odejścia z zespołu. Łatwiej to usłyszeć jako sygnał wczesnego ostrzegania niż jako skargę po fakcie."
    ],
    "why": "Chroniczne przeciążenie, którego nikt nie nazwał na głos, uchodzi za normę. Dopiero gdy je nazwiecie, ktoś zacznie traktować je poważnie."
@@ -1547,8 +1547,8 @@ const RECOMMENDATIONS = {
   },
   "mid": {
    "steps": [
-    "Wprowadźcie regularne parowanie lub code review na krytycznych obszarach. Nie musi to być każda zmiana – zacznijcie od tych fragmentów, których dotyka najmniej osób.",
-    "Zmapujcie, kto jest jedynym ekspertem w danym obszarze, i zaplanujcie przekazanie wiedzy. Nawet jedna wspólna sesja czy krótka notatka „na start” znacząco zmniejsza ryzyko."
+    "Wybierzcie krytyczny obszar, który zna jedna osoba, i zróbcie w nim kolejne zadanie w parze z kimś, kto go nie zna. Przy następnym zadaniu zamieńcie się rolami.",
+    "Dla każdego takiego obszaru ustalcie drugą osobę, która go przejmie, i zaplanujcie przekazanie wiedzy. Nawet jedna wspólna sesja czy krótka notatka „na start” znacząco zmniejsza ryzyko."
    ],
    "why": "Gdy tylko jedna osoba rozumie dany obszar, unikacie zmian w nim, bo konsekwencje może ocenić tylko ona. Do tego jej nieobecność zatrzymuje pracę."
   },
@@ -1579,14 +1579,14 @@ const RECOMMENDATIONS = {
     "Zacznijcie zapisywać zależności tam, gdzie je zauważycie – choćby w jednym wspólnym dokumencie, bez formalnego procesu. Ważniejsze jest to, żeby zacząć, niż żeby proces był od razu dopracowany.",
     "Na najbliższym planowaniu zapytajcie wprost: „czego potrzebujemy od kogoś spoza zespołu, żeby to zrobić?” To jedno pytanie, zadawane regularnie, wyłapuje wiele zależności, zanim staną się problemem."
    ],
-   "why": "Jeśli nigdy nie nazywacie zależności na głos, dowiadujecie się o nich dopiero wtedy, gdy powodują poślizg. Samo zapisywanie ich, nawet nieformalnie, już pomaga."
+   "why": "Gdy zależności znacie, ale nie zapisujecie ich ani nie zgłaszacie, o problemie dowiadujecie się dopiero wtedy, gdy powoduje poślizg. Samo zapisywanie ich, nawet nieformalnie, już pomaga."
   },
   "mid": {
    "steps": [
     "Wprowadźcie prosty rejestr zależności międzyzespołowych, przeglądany na bieżąco. Nie musi być rozbudowany – wystarczy lista z osobą kontaktową i statusem.",
     "Zgłaszajcie zależność w momencie jej odkrycia, nie czekając na planowanie. Im wcześniej inny zespół się o niej dowie, tym więcej ma czasu na reakcję."
    ],
-   "why": "Zależności odkryte późno kosztują nieproporcjonalnie więcej niż te odkryte wcześnie. Im później dowie się o nich drugi zespół, tym mniej ma czasu na reakcję, więc Wasz problem staje się jego pilnym kryzysem i może nadwyrężyć relację na dłużej niż jeden projekt."
+   "why": "Gdy zależności znacie wcześniej, ale inne zespoły dowiadują się o nich niespójnie albo późno, mają mało czasu na reakcję. Wasz problem staje się wtedy ich pilnym kryzysem i może nadwyrężyć relację na dłużej niż jeden projekt."
   },
   "blockedLabel": "Gdy zgłaszacie zależności, a inne zespoły ich nie honorują:",
   "blocked": "Jeśli zgłaszacie zależności wcześnie, a mimo to inne zespoły nie realizują ich na czas – to nie jest coś, co poprawi lepszy rejestr zależności. To wymaga eskalacji na poziom, gdzie ktoś ma władzę ustalić priorytety między zespołami, bo samo zgłoszenie zależności nie daje Wam mocy sprawczej nad cudzym backlogiem."
@@ -1601,7 +1601,7 @@ const RECOMMENDATIONS = {
   },
   "mid": {
    "steps": [
-    "Sprawdźcie, jaki procent zmian faktycznie przechodzi code review i jak długo na nie czeka. Jeśli sporo zmian omija review albo czeka na nie dłużej niż dobę, tu jest najszybsza poprawa.",
+    "Sprawdźcie, jak długo zmiany czekają na pierwszą odpowiedź recenzenta i jak często review kończy się samym zatwierdzeniem bez uwag. Jeśli czekają dłużej niż dobę albo uwag prawie nie ma, tu jest najszybsza poprawa.",
     "Przy większych lub ryzykownych zmianach spróbujcie pracy w parze albo krótkiej sesji z całym zespołem zamiast review po fakcie. Wspólna praca często szybciej wyłapuje to, co w review by umknęło."
    ],
    "why": "Code review, które trwa zbyt długo albo jest formalnością, uczy Was, że można je ominąć. Warto, żeby było krótkie i dawało realne uwagi."
@@ -1612,17 +1612,17 @@ const RECOMMENDATIONS = {
  "refaktoryzacja": {
   "low": {
    "steps": [
-    "Wybierzcie jeden, najbardziej „toksyczny” fragment kodu, którego nikt nie chce dotykać, i zróbcie na nim pierwszą wspólną refaktoryzację. Udana zmiana jednego fragmentu ułatwia podjęcie kolejnych.",
-    "Zanim zmienicie kod, którego się boicie, dopiszcie test potwierdzający jego obecne zachowanie. Dzięki temu refaktoryzacja przestaje być skokiem w ciemno."
+    "Zanim zmienicie kod, którego się boicie albo który odkładacie, dopiszcie test potwierdzający jego obecne zachowanie. Dzięki temu refaktoryzacja przestaje być skokiem w ciemno.",
+    "Potem wybierzcie jeden fragment, którego nikt nie chce dotykać, i zróbcie na nim wspólnie pierwszą refaktoryzację. Udana zmiana jednego fragmentu ułatwia podjęcie kolejnych."
    ],
-   "why": "Kod, którego boicie się dotykać, z czasem spowalnia Waszą pracę, nawet gdy planowanie działa dobrze."
+   "why": "Kod, którego boicie się dotykać albo do którego nie wracacie, z czasem spowalnia Waszą pracę, nawet gdy planowanie działa dobrze."
   },
   "mid": {
    "steps": [
-    "Zarezerwujcie stały czas w sprincie na refaktoryzację najbardziej uciążliwych fragmentów kodu, zamiast czekać na „wielki remont”. Małe, regularne porcje są łatwiejsze do obronienia niż jedno duże przedsięwzięcie.",
-    "Stosujcie zasadę: zostawiajcie kod odrobinę czystszy, niż go zastaliście. Małe poprawki przy okazji kosztują mało, a z czasem robią dużą różnicę."
+    "Zarezerwujcie stały czas w każdym cyklu pracy na refaktoryzację najbardziej uciążliwych fragmentów kodu, zamiast czekać na „wielki remont”. Małe, regularne porcje są łatwiejsze do obronienia niż jedno duże przedsięwzięcie.",
+    "Zapisujcie w jednym miejscu fragmenty, które przy okazji zostawiacie na później, i co jakiś czas wybierajcie z nich jeden do zrobienia. Refaktoryzacja robiona tylko przy okazji omija to, co przeszkadza najbardziej."
    ],
-   "why": "Spowolnienie zmian to najbardziej oczywisty skutek kodu, którego boicie się dotykać. Do tego każda propozycja większej zmiany zderza się z ryzykiem, którego nikt nie chce wziąć na siebie."
+   "why": "Refaktoryzacja robiona tylko przy okazji omija miejsca, których nikt nie dotyka przy innych zadaniach, a to zwykle one najbardziej spowalniają zmiany. Każda propozycja większej zmiany zderza się wtedy z ryzykiem, którego nikt nie chce wziąć na siebie."
   },
   "blockedLabel": "Gdy chcecie dbać o kod, a terminy nigdy na to nie pozwalają:",
   "blocked": "Jeśli chcecie refaktoryzować, ale presja terminów nigdy na to nie pozwala, to nie kwestia Waszej dyscypliny, tylko decyzja biznesowa o priorytetach, podejmowana świadomie lub nie. Nazwijcie wprost koszt tego wyboru (spowolnienie kolejnych zmian) osobie, która ustala terminy, zamiast po cichu radzić sobie z coraz gorszym kodem."
@@ -1640,7 +1640,7 @@ const RECOMMENDATIONS = {
     "Sprawdźcie, które krytyczne ścieżki systemu nie mają jeszcze testów automatycznych, i dopiszcie je w pierwszej kolejności. Zaczynajcie od miejsc, gdzie błąd kosztuje najwięcej, a nie od tych najłatwiejszych do przetestowania.",
     "Gdy błąd trafi na produkcję, dopiszcie test, który by go wykrył. Z czasem zestaw rośnie dokładnie tam, gdzie jest potrzebny."
    ],
-   "why": "Bez zaufanych testów zaczynacie unikać refaktoryzacji i większych usprawnień, bo sprawdzenie, czy coś się nie zepsuło, jest zbyt kosztowne."
+   "why": "Tam, gdzie testów brakuje, musicie sprawdzać zmiany ręcznie i zaczynacie unikać refaktoryzacji i większych usprawnień, bo sprawdzenie, czy coś się nie zepsuło, jest zbyt kosztowne."
   },
   "blockedLabel": "Gdy chcecie testować, a kod na to strukturalnie nie pozwala:",
   "blocked": "Jeśli chcecie pisać testy, ale kod jest zbyt mocno spleciony, żeby dało się go łatwo testować (brak separacji, ukryte zależności, stan globalny) – to problem architektoniczny, którego same testy nie rozwiążą. Czasem trzeba najpierw zainwestować w minimalny refaktor pod testowalność – i to jest osobna decyzja do uzasadnienia biznesowo."
@@ -1687,14 +1687,14 @@ const RECOMMENDATIONS = {
     "Zmierzcie, jak długo dziś średnio żyje gałąź kodu, zanim zostanie scalona – to da Wam punkt odniesienia. Bez tej liczby trudno ocenić, czy problem faktycznie jest poważny.",
     "Spróbujcie skrócić czas życia jednej, najbliższej gałęzi funkcyjnej o połowę, jako eksperyment. Potraktujcie to jako test, nie stałą zasadę – łatwiej się na to zgodzić."
    ],
-   "why": "Bez punktu odniesienia trudno ocenić, czy problem jest poważny. Długo żyjące gałęzie zwykle narastają stopniowo, więc przyzwyczajacie się do problemu i przestajecie go zauważać."
+   "why": "Długo żyjące gałęzie narastają stopniowo, więc przyzwyczajacie się do problemu i przestajecie go zauważać. Pomiar pokazuje, jak daleko jesteście od krótkich gałęzi."
   },
   "mid": {
    "steps": [
     "Skróćcie czas życia gałęzi funkcyjnych – cel: poniżej jednego dnia. Krótszy czas życia gałęzi to mniej okazji do konfliktów przy scalaniu.",
     "Wprowadźcie feature flagi, żeby móc integrować niedokończoną pracę bez ryzyka. To pozwala scalać częściej, nawet gdy funkcja nie jest jeszcze gotowa do pokazania użytkownikom."
    ],
-   "why": "Długo żyjące gałęzie kodu to odroczony koszt, który rośnie nieliniowo: konflikt przy scaleniu gałęzi żyjącej tydzień bywa wielokrotnie trudniejszy niż przy scaleniu codziennym."
+   "why": "Każdy dodatkowy dzień życia gałęzi to odroczony koszt, który rośnie szybciej, niż się zwykle wydaje: konflikt po kilku dniach bywa wielokrotnie trudniejszy niż przy scalaniu codziennym."
   },
   "blockedLabel": "Gdy chcecie integrować częściej, a infrastruktura nie nadąża:",
   "blocked": "Jeśli chcecie integrować częściej, ale wymaga to zmian w infrastrukturze (feature flagi, lepsze testy kontraktowe między serwisami), na które nie macie budżetu – to jest inwestycja do uzasadnienia jako projekt, nie coś do wymuszenia samą dyscypliną."
@@ -1705,11 +1705,11 @@ const RECOMMENDATIONS = {
     "Poproście osobę, która nie zna wybranego modułu, żeby wyjaśniła go Wam na podstawie samego kodu i tego, co jest spisane, i zapisała, czego zabrakło. Ta lista to dobry początek.",
     "Spiszcie najpierw to, czego nie widać w kodzie: dlaczego wybraliście dane rozwiązanie i co robić przy najczęstszej awarii. Kilka zdań na decyzję wystarczy."
    ],
-   "why": "Kod pokazuje, jak system działa, ale nie dlaczego tak działa. Bez tego każda zmiana w zespole i każda nieobecność kosztuje więcej."
+   "why": "Kod pokazuje, jak system działa, ale nie dlaczego tak działa. Nieaktualny opis dodatkowo wprowadza w błąd, więc każda zmiana i każda nieobecność w zespole kosztuje więcej."
   },
   "mid": {
    "steps": [
-    "Dodajcie do Definition of Done pytanie: czy ta zmiana wymaga zmiany opisu? Jeśli tak, wpiszcie w zadaniu link do strony, którą trzeba zaktualizować.",
+    "Dodajcie do kryteriów ukończenia zadania (a jeśli ich nie macie, do opisu zadania) pytanie: czy ta zmiana wymaga zmiany opisu? Jeśli tak, wpiszcie w zadaniu link do strony, którą trzeba zaktualizować.",
     "Ustalcie jako zespół, że każdy, kto zauważy nieaktualną stronę, poprawia ją albo oznacza, i raz na kwartał przejrzyjcie wspólnie strony, które dawno nie były zmieniane. Pomaga data ostatniego przeglądu na stronie."
    ],
    "why": "Dokumentacji, której nie ufacie, nikt nie czyta, więc nikt jej nie poprawia. W badaniach DORA jakość dokumentacji wiązała się z lepszymi wynikami dostarczania, o ile była aktualna i używana."
@@ -1828,7 +1828,7 @@ const RECOMMENDATIONS = {
  "iac": {
   "low": {
    "steps": [
-    "Wybierzcie jedno, najczęściej ręcznie zmieniane środowisko i spiszcie krok po kroku, jak się je dziś konfiguruje – to pierwszy krok do zapisania tego w kodzie. Samo spisanie procesu często ujawnia niepotrzebne komplikacje.",
+    "Wybierzcie część konfiguracji, którą nadal robicie ręcznie i która sprawia najwięcej kłopotu, i spiszcie krok po kroku, jak ją dziś wykonujecie. Samo spisanie procesu często ujawnia niepotrzebne komplikacje.",
     "Zapiszcie w kodzie jedną, najprostszą część tej konfiguracji i sprawdźcie, czy da się ją odtworzyć od zera. Mały, działający przykład przekonuje lepiej niż plan."
    ],
    "why": "Gdy konfigurujecie środowiska ręcznie, tracicie powtarzalność: każde nowe środowisko jest trochę inne, a odtworzenie po awarii zależy od pamięci ludzi."
@@ -1846,17 +1846,17 @@ const RECOMMENDATIONS = {
  "monitoring": {
   "low": {
    "steps": [
-    "Sprawdźcie, czy macie w ogóle jakikolwiek dashboard czy logi dla najważniejszej części systemu – jeśli nie, zacznijcie od tego minimum. Nawet podstawowy wgląd to duża zmiana względem braku jakiegokolwiek.",
+    "Sprawdźcie, czy dla najważniejszej części systemu macie dashboard albo logi, które ktoś faktycznie otwiera. Jeśli nie macie żadnych, zacznijcie od tego minimum. Jeśli macie, ustalcie, kto i kiedy na nie patrzy.",
     "Zapytajcie: skąd ostatnio dowiedzieliście się o awarii? Jeśli odpowiedź to „od użytkownika”, to Wasz priorytet numer jeden. To pytanie samo w sobie zwykle pokazuje, od czego zacząć."
    ],
-   "why": "Bez wglądu w system nie zareagujecie szybciej niż użytkownicy. Zanim zajmiecie się zaawansowanymi alertami, potrzebujecie podstawowego wglądu w to, co się dzieje."
+   "why": "Bez regularnego wglądu w system nie zareagujecie szybciej niż użytkownicy. Dane, których nikt nie ogląda, niczego nie zmieniają."
   },
   "mid": {
    "steps": [
     "Przejrzyjcie alerty z ostatniego miesiąca: które były fałszywe, a które problemy przeszły bez alertu. Wyłączcie alerty, na które nikt nie reagował, i dodajcie brakujące.",
     "Ustalcie jeden dashboard, który sprawdzacie codziennie, nie tylko w czasie awarii. Codzienny nawyk sprawia, że odchylenia od normy widać, zanim staną się problemem."
    ],
-   "why": "Bez danych nie sprawdzicie, czy Wasze usprawnienia coś zmieniają. Brak wglądu w system oznacza decyzje techniczne oparte na przekonaniu „chyba działa dobrze”, a nie na faktach."
+   "why": "Alerty, które zgłaszają fałszywe problemy albo pomijają prawdziwe, uczą ignorowania. Gdy dashboardy i alerty są wiarygodne, odchylenia widać, zanim zauważą je użytkownicy."
   },
   "blockedLabel": "Gdy chcecie lepszego wglądu, a infrastruktura jest poza Wami:",
   "blocked": "Jeśli chcecie mieć lepszy wgląd, ale infrastruktura obserwowalności jest scentralizowana i kontrolowana przez inny zespół (platformowy, SRE) – eskalujcie konkretną potrzebę (jakie metryki, jaki dashboard), zamiast czekać, aż ktoś sam się domyśli, czego brakuje."
@@ -1892,7 +1892,7 @@ const RECOMMENDATIONS = {
     "Ustalcie prosty, stały format (oś czasu, przyczyny, wpływ, wnioski) i stosujcie go po każdej poważniejszej awarii. Stały format ułatwia porównania i skraca przygotowanie.",
     "Rozważcie post mortem także po zdarzeniach, które mogły skończyć się awarią, ale się nie skończyły. Uczą tyle samo, a nie wymagają prawdziwej awarii."
    ],
-   "why": "Post mortem bez szukania winnych działa tylko wtedy, gdy widzicie, że szczerość nie jest karana. Wtedy mówicie więcej, a wnioski są prawdziwsze."
+   "why": "Stały format sprawia, że rozmowy po awariach da się porównywać, a wnioski nie zależą od tego, kto prowadził spotkanie. Rozmowa po zdarzeniach, które mogły skończyć się awarią, daje podobne wnioski bez kosztu prawdziwej awarii."
   },
   "blockedLabel": "Gdy robicie post mortem, a rozmowa idzie w stronę winnych:",
   "blocked": "Jeśli post mortem zamienia się w szukanie winnych, problem nie leży w formacie spotkania, tylko w kulturze. Zadbajcie o to, żeby osoby na wyższych stanowiskach same przyznawały się do błędów. Bez tego żaden szablon nie pomoże."
@@ -2329,7 +2329,6 @@ document.getElementById('printBtn').addEventListener('click', () => {
   const team = currentTeamName();
   const notesVal = document.getElementById('notes').value;
   const closingQuestionVal = document.getElementById('closingQuestion').value;
-  const recoHTML = focusSet.size ? document.getElementById('recoOut').innerHTML : '<p>Nie zaznaczono tematów do rozmowy.</p>';
   const radarsHTML = CATS.filter(c => hasCat(c.id)).map(c => `<div><div class="label">${c.label}</div>${document.getElementById('radar-' + c.id).innerHTML}</div>`).join('');
   const profileHTML = CATS.filter(c => hasCat(c.id)).map(c => ({label:c.label, dims:c.dims})).map(g => `<h3>${g.label}</h3><ul>${g.dims.map(d => naSet.has(d.id)
       ? `<li><strong>${d.title}</strong> – nie dotyczy naszego zespołu</li>`
@@ -2367,18 +2366,6 @@ document.getElementById('printBtn').addEventListener('click', () => {
     .hint{font-size:12.5px;color:#777;margin-bottom:24px;font-family:-apple-system,Segoe UI,sans-serif;border-left:2px solid #ccc;padding-left:10px;}
     ul{padding-left:20px;font-family:-apple-system,Segoe UI,sans-serif;font-size:14px;}
     p{font-family:-apple-system,Segoe UI,sans-serif;font-size:14.5px;}
-    .reco-card{--gc:#B9812E;border:1px solid #ddd;border-left:5px solid var(--gc);border-radius:6px;margin-bottom:12px;font-family:-apple-system,Segoe UI,sans-serif;overflow:hidden;page-break-inside:avoid;}
-    .reco-card.tech{--gc:#276765;}
-    .reco-card .head{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;padding:9px 14px;background:#f4f1ea;}
-    .reco-card.tech .head{background:#eaf2f1;}
-    .reco-card .dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--gc);}
-    .reco-section{padding:9px 14px;border-top:1px solid #e5e5e5;}
-    .reco-label{font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--gc);margin-bottom:4px;}
-    .reco-card ul{margin:0;padding-left:18px;font-size:13px;}
-    .reco-whytext{font-size:12.5px;color:#555;line-height:1.5;}
-    .reco-section.reco-blocked{background:#fafafa;font-size:12.5px;color:#276765;line-height:1.5;}
-    .reco-section.reco-blocked .reco-label{text-transform:none;letter-spacing:0;font-size:12px;color:#276765;}
-    .reco-empty{font-size:13.5px;color:#555;font-family:-apple-system,Segoe UI,sans-serif;}
     .row{display:flex; gap:24px; margin-top:6px;}
     .row > div{flex:1;text-align:center;}
     .row .label{font-family:-apple-system,Segoe UI,sans-serif;font-size:13px;color:#3C4A59;margin-bottom:6px;}
@@ -2389,7 +2376,6 @@ document.getElementById('printBtn').addEventListener('click', () => {
     .radar-dot .tooltip{display:none;position:absolute;bottom:18px;left:50%;transform:translateX(-50%);width:230px;background:#17222E;color:#F2F3ED;font-size:11.5px;line-height:1.45;padding:8px 10px;border-radius:6px;text-align:left;font-family:-apple-system,Segoe UI,sans-serif;z-index:30;}
     .radar-dot:hover .tooltip, .radar-dot:focus .tooltip{display:block;}
     h3{font-size:14px;margin:18px 0 4px;font-family:-apple-system,Segoe UI,sans-serif;color:#3C4A59;}
-    .reco-described{font-size:13px;color:#555;font-style:italic;margin:2px 0 6px;font-family:-apple-system,Segoe UI,sans-serif;}
     @media print{.hint{display:none;}}
   </style></head><body>
   <h1>Health Check Zespołu</h1>
@@ -2399,7 +2385,6 @@ document.getElementById('printBtn').addEventListener('click', () => {
     ${radarsHTML}
   </div>
   <h2>Nasz opis</h2>${profileHTML}
-  <h2>Propozycje do rozmowy</h2><p style="font-size:12.5px;color:#777;font-style:italic;">To są punkty wyjścia do rozmowy, nie gotowa recepta – Wasz kontekst może wymagać zupełnie innego podejścia niż to, co tu zaproponowano.</p>${recoHTML}
   ${realDataHTML ? `<h2>Realne dane z dashboardu (gdzie podano)</h2><ul>${realDataHTML}</ul>` : ''}
   ${closingQuestionVal.trim() ? `<h2>Czego jako zespół potrzebujemy, aby mieć większe zdolności wytwarzania?</h2><p>${escBr(closingQuestionVal.trim())}</p>` : ''}
   <h2>Notatki</h2><p>${notesVal ? escBr(notesVal) : 'Brak notatek.'}</p>
