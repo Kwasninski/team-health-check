@@ -827,7 +827,7 @@
 
   </div>
 
-  <footer><span style="font-size:11px;">Wersja: v4.2.8</span><br><span style="font-size:11px;">Sebastian Kwaśniński, 2026</span></footer>
+  <footer><span style="font-size:11px;">Wersja: v4.2.9</span><br><span style="font-size:11px;">Sebastian Kwaśniński, 2026</span></footer>
 </div>
 
 <div class="modal-overlay" id="missingModal" hidden role="dialog" aria-modal="true" aria-labelledby="missingTitle">
@@ -872,7 +872,7 @@ const CATS = [
      "Pracujemy ad hoc i zajmujemy się tym, co akurat się pojawi.",
      "Planujemy pracę, ale plany często rozjeżdżają się z rzeczywistością.",
      "Planujemy w krótkich cyklach, ale trafność planu bywa różna.",
-     "Zwykle dowozimy to, co zaplanowaliśmy w danym cyklu.",
+     "Zwykle osiągamy cel, który wyznaczyliśmy sobie na dany cykl.",
      "Nasze plany zwykle się sprawdzają, a gdy się zmieniają, dostosowujemy je w trakcie cyklu i dowozimy to, co najważniejsze."
     ]
    },
@@ -1133,7 +1133,7 @@ const CATS = [
      "Dokumentacja istnieje, ale zwykle jest nieaktualna.",
      "Najważniejsze rzeczy mamy spisane, ale aktualizujemy je dopiero, gdy ktoś zauważy, że są nieaktualne.",
      "Dokumentację aktualizujemy zwykle razem ze zmianą w systemie.",
-     "Dokumentacja jest zawsze aktualna: zmiana bez zaktualizowanego opisu nie jest u nas uznana za skończoną."
+     "Dokumentacja jest aktualna i nie większa, niż potrzeba: zmiana bez zaktualizowanego opisu nie jest u nas uznana za skończoną, a opisy, z których nikt nie korzysta, usuwamy."
     ]
    }
   ]
@@ -1209,7 +1209,7 @@ const CATS = [
    {
     "id": "mttr",
     "title": "Czas przywrócenia usługi (MTTR)",
-    "help": "MTTR (Mean Time To Restore/Recovery) – jak szybko zespół przywraca działanie usługi po awarii. Jedna z metryk DORA. W systemach rozproszonych czas przywrócenia bywa trudny do zmierzenia jednoznacznie, bo różne komponenty mogą się psuć i wracać niezależnie – traktujcie to jako przybliżenie, nie precyzyjny wskaźnik. Jeśli odpowiadacie za kilka usług, opiszcie tę najważniejszą dla biznesu albo odpowiedzcie osobno dla 2–3 kluczowych serwisów, zamiast uśredniać.",
+    "help": "Czas przywrócenia usługi – jak szybko zespół przywraca działanie usługi po awarii. W badaniach DORA to jedna z metryk stabilności, liczona jako mediana, a nie średnia, i dotycząca awarii spowodowanych wdrożeniem. Tu pytamy o każdą awarię, więc traktujcie wynik jako przybliżenie. W systemach rozproszonych czas przywrócenia bywa trudny do zmierzenia jednoznacznie, bo różne komponenty mogą się psuć i wracać niezależnie – traktujcie to jako przybliżenie, nie precyzyjny wskaźnik. Jeśli odpowiadacie za kilka usług, opiszcie tę najważniejszą dla biznesu albo odpowiedzcie osobno dla 2–3 kluczowych serwisów, zamiast uśredniać.",
     "levels": [
      "Przywrócenie usługi po awarii zajmuje nam zwykle ponad dobę.",
      "Przywrócenie zajmuje nam zwykle od kilku godzin do doby.",
@@ -1349,7 +1349,7 @@ const RECOMMENDATIONS = {
   },
   "mid": {
    "steps": [
-    "Jeśli długość cyklu jest ustalona i nie do zmiany (np. wspólny sprint dla kilku zespołów), skupcie się na tym, co go rozjeżdża – sprawdźcie z ostatnich 3–4 cykli, ile procent zaplanowanej pracy faktycznie dowieźliście, i poszukajcie wzorca w tym, co się regularnie nie udaje.",
+    "Jeśli długość cyklu jest ustalona i nie do zmiany (np. wspólny sprint dla kilku zespołów), skupcie się na tym, co go rozjeżdża – sprawdźcie z ostatnich 3–4 cykli, w ilu udało się osiągnąć cel cyklu, i poszukajcie wzorca w tym, co się regularnie nie udaje.",
     "Planujcie z zapasem na to, co nieplanowane (np. 20% pojemności), zamiast zakładać, że wszystko pójdzie zgodnie z planem. Plan z zapasem częściej się sprawdza."
    ],
    "why": "Plan, który się sprawdza, ułatwia rozmowę o terminach i zakresie z osobami decyzyjnymi spoza zespołu."
@@ -1451,7 +1451,7 @@ const RECOMMENDATIONS = {
   "low": {
    "steps": [
     "Policzcie, ile decyzji w ostatnim miesiącu próbowaliście podjąć samodzielnie, a ile z nich zostało cofniętych lub zmienionych z zewnątrz. Sama proporcja pokazuje punkt startowy.",
-    "Wybierzcie jedną, najmniej ryzykowną kategorię decyzji (np. jak podzielić pracę wewnątrz zespołu) i jawnie ogłoście, że to Wy o niej decydujecie. Mały, bezpieczny obszar łatwiej obronić i rozszerzyć niż od razu walczyć o dużą autonomię."
+    "Wybierzcie jedną, najmniej ryzykowną kategorię decyzji (np. jak podzielić pracę wewnątrz zespołu) uzgodnijcie z przełożonym, że to Wy o niej decydujecie, i dajcie o tym znać innym. Mały, bezpieczny obszar łatwiej obronić i rozszerzyć niż od razu walczyć o dużą autonomię."
    ],
    "why": "Gdy nie macie żadnej autonomii, często nawet nie próbujecie jej sprawdzić, bo z góry zakładacie brak zgody. To błędne koło samo się nie przerwie; potrzebny jest pierwszy, mały krok."
   },
@@ -1486,7 +1486,7 @@ const RECOMMENDATIONS = {
  "bledy_pomoc": {
   "low": {
    "steps": [
-    "Zróbcie wśród siebie krótką, anonimową ankietę (3 pytania) o tym, czy czujecie się bezpiecznie, zgłaszając błędy. Samo zadanie tego pytania jest już sygnałem zmiany.",
+    "Zróbcie wśród siebie krótką ankietę o tym, czy czujecie się bezpiecznie, zgłaszając błędy (np. siedem pytań Amy Edmondson o bezpieczeństwo psychologiczne). W małym zespole anonimowość bywa pozorna, więc omówcie wyniki wspólnie. Samo zadanie tego pytania jest już sygnałem zmiany.",
     "Lider lub osoba starsza stażem niech znajdzie okazję, żeby publicznie przyznać się do własnej pomyłki – to szybciej zmienia normy niż jakakolwiek deklaracja."
    ],
    "why": "Jeśli ukrywacie błędy, problemy w pozostałych obszarach nie wychodzą na jaw i trudno je naprawić. Zacznijcie od tego tematu."
@@ -1530,7 +1530,7 @@ const RECOMMENDATIONS = {
   "mid": {
    "steps": [
     "Śledźcie sygnały przeciążenia (nadgodziny, przenoszone zadania) i reagujcie na nie w regularnej rozmowie o sposobie pracy. Nie czekajcie, aż ktoś powie to wprost – same dane często mówią wcześniej.",
-    "Ustalcie limit pracy w toku (WIP), żeby ograniczyć rozpraszanie i presję. Nawet prosty limit liczby równoległych zadań na osobę potrafi zrobić różnicę."
+    "Pokażcie całą trwającą pracę na wspólnej tablicy i ustalcie limit zadań rozpoczętych jednocześnie. Nawet prosty limit liczby równoległych zadań na osobę potrafi zrobić różnicę."
    ],
    "why": "Powtarzające się przeciążenie obniża jakość decyzji technicznych, bo zmęczeni możecie wybierać rozwiązania doraźne zamiast przemyślanych. Zysk z przyspieszenia zwykle okazuje się pozorny, gdy doliczy się koszt poprawek i odejść z zespołu."
   },
@@ -1583,7 +1583,7 @@ const RECOMMENDATIONS = {
   },
   "mid": {
    "steps": [
-    "Wprowadźcie prosty rejestr zależności międzyzespołowych, przeglądany na bieżąco. Nie musi być rozbudowany – wystarczy lista z osobą kontaktową i statusem.",
+    "Raz na kwartał przejrzyjcie, które zależności wracają, i dla każdej zapytajcie, czy da się ją usunąć, a nie tylko pilnować (np. przez przesunięcie odpowiedzialności za wspólny element). Na bieżąco wystarczy prosta lista z osobą kontaktową i statusem.",
     "Zgłaszajcie zależność w momencie jej odkrycia, nie czekając na planowanie. Im wcześniej inny zespół się o niej dowie, tym więcej ma czasu na reakcję."
    ],
    "why": "Gdy zależności znacie wcześniej, ale inne zespoły dowiadują się o nich niespójnie albo późno, mają mało czasu na reakcję. Wasz problem staje się wtedy ich pilnym kryzysem i może nadwyrężyć relację na dłużej niż jeden projekt."
@@ -1619,7 +1619,7 @@ const RECOMMENDATIONS = {
   },
   "mid": {
    "steps": [
-    "Zarezerwujcie stały czas w każdym cyklu pracy na refaktoryzację najbardziej uciążliwych fragmentów kodu, zamiast czekać na „wielki remont”. Małe, regularne porcje są łatwiejsze do obronienia niż jedno duże przedsięwzięcie.",
+    "Przed każdą zmianą zapytajcie, co ułatwiłoby ją wprowadzić, i zróbcie to najpierw. Większe porządki planujcie jako osobne, małe zadania, zamiast czekać na „wielki remont”.",
     "Zapisujcie w jednym miejscu fragmenty, które przy okazji zostawiacie na później, i co jakiś czas wybierajcie z nich jeden do zrobienia. Refaktoryzacja robiona tylko przy okazji omija to, co przeszkadza najbardziej."
    ],
    "why": "Refaktoryzacja robiona tylko przy okazji omija miejsca, których nikt nie dotyka przy innych zadaniach, a to zwykle one najbardziej spowalniają zmiany. Każda propozycja większej zmiany zderza się wtedy z ryzykiem, którego nikt nie chce wziąć na siebie."
@@ -1630,7 +1630,7 @@ const RECOMMENDATIONS = {
  "testy_auto": {
   "low": {
    "steps": [
-    "Sprawdźcie, jaki procent kodu jest dziś pokryty testami automatycznymi – nawet zgrubne, przybliżone narzędzie da Wam punkt zero do porównań w przyszłości.",
+    "Sprawdźcie, czy testy uruchamiają się przy każdej zmianie, jak długo trwają (cel: poniżej 10 minut) i czy ich porażka zawsze oznacza prawdziwy błąd. Sam procent pokrycia mówi mniej niż to, czy testom można ufać.",
     "Wybierzcie jedną, najbardziej krytyczną ścieżkę systemu i zadbajcie, żeby miała testy, którym ufacie: napiszcie je albo naprawcie te, które już są. Nie starajcie się objąć wszystkiego naraz, bo ta jedna ścieżka da Wam szybko odczuwalną wartość i wzorzec do dalszej pracy."
    ],
    "why": "Obejmowanie testami wszystkiego naraz przytłacza, a testy, którym nie ufacie, i tak każą sprawdzać wszystko ręcznie. Jedna dobrze wybrana, krytyczna ścieżka szybciej da wartość niż rozproszony wysiłek."
@@ -1775,7 +1775,7 @@ const RECOMMENDATIONS = {
   "low": {
    "steps": [
     "Zmierzcie czas dla jednej, ostatniej zmiany – od jej zatwierdzenia do działania na produkcji – żeby mieć punkt odniesienia. Jedna taka miara mówi więcej niż ogólne wrażenie „chyba nieźle nam idzie”.",
-    "Zastanówcie się wspólnie, który krok w tej drodze najbardziej Was frustruje – to zwykle najszybszy trop do poprawy. Frustracja zwykle dobrze wskazuje, gdzie jest wąskie gardło."
+    "Dla jednej zmiany zapiszcie, ile czasu ktoś faktycznie nad nią pracował, a ile czekała (na review, testy, wdrożenie). Największe oczekiwanie to zwykle najszybszy trop do poprawy."
    ],
    "why": "Bez pomiaru lead time zwykle wydaje się „jakoś taki, jaki jest”. Dopiero konkretna liczba pokazuje, czy problem tkwi w code review, testach, samym wdrożeniu, czy może w środowisku, w którym pracujecie."
   },
@@ -1799,7 +1799,7 @@ const RECOMMENDATIONS = {
   },
   "mid": {
    "steps": [
-    "Wprowadźcie checklistę przed wdrożeniem dla najbardziej ryzykownych zmian. Nie musi być długa – kilka najważniejszych punktów wyłapuje większość powtarzalnych błędów.",
+    "Zamieńcie najczęstsze punkty z ręcznej checklisty na automatyczne kontrole w pipeline, a ryzykowne zmiany wprowadzajcie stopniowo (np. za flagą funkcji albo najpierw dla części użytkowników).",
     "Dodajcie testy regresyjne dla obszarów, które najczęściej się psują. Inwestycja w te konkretne miejsca zwraca się szybciej niż równomierne pokrycie całego systemu."
    ],
    "why": "Wysoki odsetek nieudanych wdrożeń wywołuje strach przed wdrażaniem: ryzyko kompensujecie wolniejszym tempem i większą liczbą ręcznych kontroli. To odwrotność tego, czego potrzeba do poprawy."
@@ -1818,7 +1818,7 @@ const RECOMMENDATIONS = {
   "mid": {
    "steps": [
     "Spiszcie prostą procedurę reagowania na incydent (kto, co, w jakiej kolejności). Nie musi być idealna od razu – ważne, żeby istniała i była gdzieś dostępna w chwili kryzysu.",
-    "Poćwiczcie scenariusz awarii (game day) choć raz, żeby sprawdzić, gdzie są luki. Ćwiczenie w spokojnych warunkach jest dużo tańsze niż nauka podczas prawdziwej awarii."
+    "Sprawdźcie, czy umiecie szybko cofnąć ostatnią zmianę albo ją wyłączyć (np. flagą funkcji), bez pisania poprawki w trakcie awarii. Wycofanie jest zwykle szybsze niż naprawianie na gorąco."
    ],
    "why": "Awarii nie da się całkowicie wyeliminować, dlatego liczy się też to, jak szybko wracacie do działania. Od tego zależy zaufanie klientów i Wasze poczucie kontroli nad systemem."
   },
@@ -2379,7 +2379,7 @@ document.getElementById('printBtn').addEventListener('click', () => {
     @media print{.hint{display:none;}}
   </style></head><body>
   <h1>Health Check Zespołu</h1>
-  <div class="meta">${team ? 'Zespół: ' + esc(team) + ' · ' : ''}Zakres: ${activeCats.map(c => CAT_LABEL[c]).join(' + ')} · Zapisano: ${new Date().toLocaleDateString('pl-PL', {year:'numeric', month:'long', day:'numeric'})} · Wersja: v4.2.8</div>
+  <div class="meta">${team ? 'Zespół: ' + esc(team) + ' · ' : ''}Zakres: ${activeCats.map(c => CAT_LABEL[c]).join(' + ')} · Zapisano: ${new Date().toLocaleDateString('pl-PL', {year:'numeric', month:'long', day:'numeric'})} · Wersja: v4.2.9</div>
   <div class="hint">Wskazówka: Ctrl+P (lub Cmd+P), żeby zapisać tę stronę jako PDF.</div>
   <div class="row">
     ${radarsHTML}
