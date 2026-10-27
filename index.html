@@ -747,7 +747,7 @@
 
   <details class="howto">
     <summary>Dlaczego to ankieta, a nie pomiar</summary>
-    <p class="howto-note">Metryki DORA, o które tu pytamy (częstotliwość wdrożeń, lead time, wskaźnik nieudanych zmian, czas przywrócenia usługi), da się zmierzyć. Przy każdej z nich jest opcjonalne pole na faktyczną wartość z Waszego dashboardu, jeśli ją znacie. Wybrany opis i liczba mogą się różnić, i to też jest informacja. Badacze DORA od 2024 roku liczą też piątą metrykę (odsetek wdrożeń będących poprawkami), o którą tu nie pytamy. Warto wiedzieć, że badania DORA, z których pochodzą te metryki, też opierają się na ankietach: odpowiadają w nich dziesiątki tysięcy specjalistów z całego świata. Przy obszarach dotyczących kultury i sposobu pracy pytamy zespół, bo nie ma innego źródła tej informacji.</p>
+    <p class="howto-note">Metryki DORA, o które tu pytamy (częstotliwość wdrożeń, lead time, wskaźnik nieudanych zmian, czas przywrócenia usługi), da się zmierzyć. Przy każdej z nich jest opcjonalne pole na faktyczną wartość z Waszego dashboardu, jeśli ją znacie. Wybrany opis i liczba mogą się różnić, i to też jest informacja. Badacze DORA od 2024 roku liczą też piątą metrykę (odsetek wdrożeń będących poprawkami), o którą tu nie pytamy. Warto wiedzieć, że badania DORA, z których pochodzą te metryki, też opierają się na ankietach: odpowiadają w nich osoby z wielu firm i krajów. Przy obszarach dotyczących kultury i sposobu pracy pytamy zespół, bo nie ma innego źródła tej informacji.</p>
   </details>
 
   <details class="howto">
@@ -804,7 +804,7 @@
 
     <div class="open-box">
     <div class="k" style="margin-top:0;margin-bottom:8px;">Pytanie otwarte do zespołu</div>
-    <textarea id="closingQuestion" placeholder="Czego jako zespół potrzebujemy, aby mieć większe zdolności wytwarzania?"></textarea>
+    <textarea id="closingQuestion" placeholder="Czego jako zespół potrzebujemy, żeby skuteczniej dostarczać wartość?"></textarea>
 
     <textarea id="notes" placeholder="Miejsce na notatki..."></textarea>
     </div>
@@ -827,7 +827,7 @@
 
   </div>
 
-  <footer><span style="font-size:11px;">Wersja: v4.2.9</span><br><span style="font-size:11px;">Sebastian Kwaśniński, 2026</span></footer>
+  <footer><span style="font-size:11px;">Wersja: v4.3.0</span><br><span style="font-size:11px;">Sebastian Kwaśniński, 2026</span></footer>
 </div>
 
 <div class="modal-overlay" id="missingModal" hidden role="dialog" aria-modal="true" aria-labelledby="missingTitle">
@@ -855,7 +855,7 @@ const CATS = [
    {
     "id": "dekompozycja",
     "title": "Dekompozycja pracy",
-    "help": "Chodzi o to, czy zadania da się podzielić na małe części, które można dowieźć osobno.",
+    "help": "Chodzi o to, czy zadania da się podzielić na małe części, które można zrealizować i wdrożyć osobno.",
     "levels": [
      "Zadania trafiają do nas w dużych kawałkach, których nie dzielimy.",
      "Dzielimy pracę dopiero wtedy, gdy zadanie zaczyna się przeciągać.",
@@ -873,7 +873,7 @@ const CATS = [
      "Planujemy pracę, ale plany często rozjeżdżają się z rzeczywistością.",
      "Planujemy w krótkich cyklach, ale trafność planu bywa różna.",
      "Zwykle osiągamy cel, który wyznaczyliśmy sobie na dany cykl.",
-     "Nasze plany zwykle się sprawdzają, a gdy się zmieniają, dostosowujemy je w trakcie cyklu i dowozimy to, co najważniejsze."
+     "Zwykle osiągamy cel cyklu, a gdy okoliczności się zmieniają, dostosowujemy plan w trakcie i zachowujemy to, co najważniejsze."
     ]
    },
    {
@@ -1000,7 +1000,7 @@ const CATS = [
     "help": "Zrównoważone tempo to zasada z Extreme Programming (XP) mówiąca, że zespół powinien pracować w tempie, które da się utrzymać w długim okresie – bez chronicznych nadgodzin i wypalenia.",
     "levels": [
      "Praca w nadgodzinach i pod presją jest u nas normą, jesteśmy chronicznie przeciążeni.",
-     "Przeciążamy się często, zwykle przy większych deadline’ach.",
+     "Przeciążamy się często, zwykle przy większych terminach.",
      "Nasze tempo bywa nierówne, ale zwykle wracamy do normy po intensywnych okresach.",
      "Nasze tempo pracy jest stabilne, a okresy większego obciążenia zdarzają się rzadko.",
      "Pracujemy w stałym tempie, które da się utrzymać. Przeciążenie jest u nas wyjątkiem, a gdy się zdarza, szybko reagujemy."
@@ -1091,7 +1091,7 @@ const CATS = [
    {
     "id": "dlug",
     "title": "Dług techniczny",
-    "help": "Dług techniczny to odłożone decyzje i „skróty” w kodzie. Sam dług bywa racjonalnym wyborem, żeby dowieźć coś na czas. Gorzej, gdy jest niewidoczny: zespół, który wie, co i dlaczego odłożył, jest w innej sytuacji niż zespół, który nie wie, ile długu ma.",
+    "help": "Dług techniczny to odłożone decyzje i „skróty” w kodzie. Sam dług bywa racjonalnym wyborem, żeby zdążyć w terminie. Gorzej, gdy jest niewidoczny: zespół, który wie, co i dlaczego odłożył, jest w innej sytuacji niż zespół, który nie wie, ile długu ma.",
     "levels": [
      "Nie wiemy, ile mamy długu technicznego, nikt go nie śledzi.",
      "O długu technicznym wspominamy sporadycznie, ale nigdzie go nie zapisujemy.",
@@ -1209,7 +1209,7 @@ const CATS = [
    {
     "id": "mttr",
     "title": "Czas przywrócenia usługi (MTTR)",
-    "help": "Czas przywrócenia usługi – jak szybko zespół przywraca działanie usługi po awarii. W badaniach DORA to jedna z metryk stabilności, liczona jako mediana, a nie średnia, i dotycząca awarii spowodowanych wdrożeniem. Tu pytamy o każdą awarię, więc traktujcie wynik jako przybliżenie. W systemach rozproszonych czas przywrócenia bywa trudny do zmierzenia jednoznacznie, bo różne komponenty mogą się psuć i wracać niezależnie – traktujcie to jako przybliżenie, nie precyzyjny wskaźnik. Jeśli odpowiadacie za kilka usług, opiszcie tę najważniejszą dla biznesu albo odpowiedzcie osobno dla 2–3 kluczowych serwisów, zamiast uśredniać.",
+    "help": "Czas przywrócenia usługi – jak szybko zespół przywraca działanie usługi po awarii. W badaniach DORA to jedna z metryk stabilności, liczona jako mediana, a nie średnia, i dotycząca awarii spowodowanych wdrożeniem. Tu pytamy o każdą awarię. W systemach rozproszonych czas przywrócenia bywa trudny do zmierzenia jednoznacznie, bo różne komponenty mogą się psuć i wracać niezależnie – traktujcie wynik jako przybliżenie, nie precyzyjny wskaźnik. Jeśli odpowiadacie za kilka usług, opiszcie tę najważniejszą dla biznesu albo odpowiedzcie osobno dla 2–3 kluczowych serwisów, zamiast uśredniać.",
     "levels": [
      "Przywrócenie usługi po awarii zajmuje nam zwykle ponad dobę.",
      "Przywrócenie zajmuje nam zwykle od kilku godzin do doby.",
@@ -1332,7 +1332,7 @@ const RECOMMENDATIONS = {
   "mid": {
    "steps": [
     "Dzielcie duże zadania na fragmenty możliwe do ukończenia w 1–3 dni. Jeśli trudno rozbić zadanie, może to być sygnał, że wymaga ono doprecyzowania, zanim je podejmiecie.",
-    "Szukajcie podziału według wartości dla użytkownika, a nie według warstw technicznych. Kawałek, który można pokazać i sprawdzić, daje szybszy feedback niż „zrobiony backend”."
+    "Szukajcie podziału według wartości dla użytkownika, a nie według warstw technicznych. Kawałek, który można pokazać i sprawdzić, daje szybszą informację zwrotną niż „zrobiony backend”."
    ],
    "why": "Gdy nie dzielicie pracy na małe kawałki, uczycie się wolniej: duże zadania rzadziej mówią, czy obrane podejście działa."
   },
@@ -1355,7 +1355,7 @@ const RECOMMENDATIONS = {
    "why": "Plan, który się sprawdza, ułatwia rozmowę o terminach i zakresie z osobami decyzyjnymi spoza zespołu."
   },
   "blockedLabel": "Gdy wiecie, jak planować, ale ktoś inny co chwilę psuje plan:",
-  "blocked": "Jeśli dzielicie pracę na małe kawałki i planujecie się krótkoterminowo, ale i tak nic z tego nie wychodzi – sprawdźcie, czy problem nie leży poza Wami: np. zależności od zespołów, które same nie planują w krótkich cyklach, albo ciągłe zmiany priorytetów odgórnie w trakcie iteracji. Tego nie rozwiąże sama dyscyplina planowania – problem wymaga rozmowy z osobami ustalającymi priorytety na wyższym poziomie. Wyeskalujcie to."
+  "blocked": "Jeśli dzielicie pracę na małe kawałki i planujecie krótkoterminowo, ale i tak nic z tego nie wychodzi – sprawdźcie, czy problem nie leży poza Wami: np. zależności od zespołów, które same nie planują w krótkich cyklach, albo ciągłe zmiany priorytetów odgórnie w trakcie iteracji. Tego nie rozwiąże sama dyscyplina planowania – problem wymaga rozmowy z osobami ustalającymi priorytety na wyższym poziomie. Wyeskalujcie to."
  },
  "priorytety_z": {
   "low": {
@@ -1385,7 +1385,7 @@ const RECOMMENDATIONS = {
   },
   "mid": {
    "steps": [
-    "Przeglądajcie i porządkujcie backlog regularnie, nie tylko tuż przed planowaniem. Krótki, cykliczny przegląd (np. raz w tygodniu) zapobiega temu, żeby backlog stał się nieaktualnym śmietnikiem pomysłów.",
+    "Przeglądajcie i porządkujcie backlog regularnie, nie tylko tuż przed planowaniem. Krótki, cykliczny przegląd (np. raz w tygodniu) zapobiega temu, żeby backlog stał się nieaktualnym zbiorem pomysłów.",
     "Usuńcie lub zarchiwizujcie zadania, które leżą w backlogu od miesięcy i nikt o nie nie pyta. Krótszy backlog jest czytelniejszy i łatwiej go utrzymać."
    ],
    "why": "Przeładowany, nieaktualny backlog kosztuje czas przy każdym planowaniu i ukrywa to, co ważne."
@@ -1433,9 +1433,9 @@ const RECOMMENDATIONS = {
   "low": {
    "steps": [
     "Wybierzcie jedną niedawno dostarczoną funkcję i sprawdźcie, czy w ogóle da się zmierzyć, czy była używana. Sam brak takiej możliwości już jest ważną informacją.",
-    "Zapytajcie Product Ownera lub biznes, skąd wiedzą, że ostatnie wdrożenie się opłaciło. Odpowiedź „chyba tak” jest sygnałem, że nikt tego nie sprawdza."
+    "Zapytajcie product ownera lub biznes, skąd wiedzą, że ostatnie wdrożenie się opłaciło. Odpowiedź „chyba tak” jest sygnałem, że nikt tego nie sprawdza."
    ],
-   "why": "Można dowozić zadania terminowo i z dobrą jakością techniczną, a mimo to budować rzeczy, których nikt nie potrzebuje. Bez sposobu na sprawdzenie efektu ta pomyłka wychodzi na jaw późno, gdy naprawa jest już bardzo droga."
+   "why": "Można dostarczać zadania terminowo i z dobrą jakością techniczną, a mimo to budować rzeczy, których nikt nie potrzebuje. Bez sposobu na sprawdzenie efektu ta pomyłka wychodzi na jaw późno, gdy naprawa jest już bardzo droga."
   },
   "mid": {
    "steps": [
@@ -1451,7 +1451,7 @@ const RECOMMENDATIONS = {
   "low": {
    "steps": [
     "Policzcie, ile decyzji w ostatnim miesiącu próbowaliście podjąć samodzielnie, a ile z nich zostało cofniętych lub zmienionych z zewnątrz. Sama proporcja pokazuje punkt startowy.",
-    "Wybierzcie jedną, najmniej ryzykowną kategorię decyzji (np. jak podzielić pracę wewnątrz zespołu) uzgodnijcie z przełożonym, że to Wy o niej decydujecie, i dajcie o tym znać innym. Mały, bezpieczny obszar łatwiej obronić i rozszerzyć niż od razu walczyć o dużą autonomię."
+    "Wybierzcie jedną, najmniej ryzykowną kategorię decyzji (np. jak podzielić pracę wewnątrz zespołu), uzgodnijcie z przełożonym, że to Wy o niej decydujecie, i dajcie o tym znać innym. Mały, bezpieczny obszar łatwiej obronić i rozszerzyć niż od razu walczyć o dużą autonomię."
    ],
    "why": "Gdy nie macie żadnej autonomii, często nawet nie próbujecie jej sprawdzić, bo z góry zakładacie brak zgody. To błędne koło samo się nie przerwie; potrzebny jest pierwszy, mały krok."
   },
@@ -1535,7 +1535,7 @@ const RECOMMENDATIONS = {
    "why": "Powtarzające się przeciążenie obniża jakość decyzji technicznych, bo zmęczeni możecie wybierać rozwiązania doraźne zamiast przemyślanych. Zysk z przyspieszenia zwykle okazuje się pozorny, gdy doliczy się koszt poprawek i odejść z zespołu."
   },
   "blockedLabel": "Gdy zgłaszacie przeciążenie, a presja i tak nie maleje:",
-  "blocked": "Jeśli zgłaszacie przeciążenie, a presja mimo to nie maleje – to nie jest coś, co rozwiąże limit WIP. To znaczy, że decyzje o zakresie i terminach zapadają poza zespołem, a Wasza przepustowość nie jest w nich uwzględniana. Dane o przeciążeniu są argumentem do tej rozmowy – ale rozmowę trzeba faktycznie odbyć na poziomie, gdzie te decyzje zapadają."
+  "blocked": "Jeśli zgłaszacie przeciążenie, a presja mimo to nie maleje – to nie jest coś, co rozwiąże limit pracy w toku. To znaczy, że decyzje o zakresie i terminach zapadają poza zespołem, a Wasza przepustowość nie jest w nich uwzględniana. Dane o przeciążeniu są argumentem do tej rozmowy – ale rozmowę trzeba faktycznie odbyć na poziomie, gdzie te decyzje zapadają."
  },
  "wspolpraca": {
   "low": {
@@ -1630,7 +1630,7 @@ const RECOMMENDATIONS = {
  "testy_auto": {
   "low": {
    "steps": [
-    "Sprawdźcie, czy testy uruchamiają się przy każdej zmianie, jak długo trwają (cel: poniżej 10 minut) i czy ich porażka zawsze oznacza prawdziwy błąd. Sam procent pokrycia mówi mniej niż to, czy testom można ufać.",
+    "Jeśli macie już testy automatyczne, sprawdźcie, czy uruchamiają się przy każdej zmianie, jak długo trwają (cel: poniżej 10 minut) i czy ich porażka zawsze oznacza prawdziwy błąd. Jeśli ich nie macie, zapiszcie, jakie sprawdzenia robicie ręcznie przy każdym wdrożeniu, bo to lista pierwszych kandydatów do automatyzacji.",
     "Wybierzcie jedną, najbardziej krytyczną ścieżkę systemu i zadbajcie, żeby miała testy, którym ufacie: napiszcie je albo naprawcie te, które już są. Nie starajcie się objąć wszystkiego naraz, bo ta jedna ścieżka da Wam szybko odczuwalną wartość i wzorzec do dalszej pracy."
    ],
    "why": "Obejmowanie testami wszystkiego naraz przytłacza, a testy, którym nie ufacie, i tak każą sprawdzać wszystko ręcznie. Jedna dobrze wybrana, krytyczna ścieżka szybciej da wartość niż rozproszony wysiłek."
@@ -1655,10 +1655,10 @@ const RECOMMENDATIONS = {
   },
   "mid": {
    "steps": [
-    "Wybierzcie z długu w backlogu 2–3 pozycje, które kosztują Was najwięcej czasu, i zaplanujcie je na najbliższe 1–2 sprinty. Dług, który tylko leży w backlogu, nie zmniejsza się sam, a z czasem, w miarę jak kod i narzędzia się starzeją, rośnie.",
-    "Ustalcie stały, niewielki udział czasu na dług (np. jedno zadanie w sprincie), zamiast czekać na „spokojniejszy okres”, który nie nadchodzi."
+    "Wybierzcie z długu w backlogu 2–3 pozycje, które kosztują Was najwięcej czasu, i zaplanujcie je na najbliższe 1–2 cykle pracy. Dług, który tylko leży w backlogu, nie zmniejsza się sam, a z czasem, w miarę jak kod i narzędzia się starzeją, rośnie.",
+    "Ustalcie stały, niewielki udział czasu na dług (np. jedno zadanie w każdym cyklu pracy), zamiast czekać na „spokojniejszy okres”, który nie nadchodzi."
    ],
-   "why": "Dług techniczny sam w sobie nie jest problemem: bywa racjonalnym wyborem, żeby dowieźć coś na czas. Gorzej, gdy leży w backlogu i nikt nie decyduje, co z nim zrobić. Wtedy rośnie: każda kolejna zmiana w tym miejscu jest droższa, a starzejące się rozwiązania trudniej utrzymać."
+   "why": "Dług techniczny sam w sobie nie jest problemem: bywa racjonalnym wyborem, żeby zdążyć w terminie. Gorzej, gdy leży w backlogu i nikt nie decyduje, co z nim zrobić. Wtedy rośnie: każda kolejna zmiana w tym miejscu jest droższa, a starzejące się rozwiązania trudniej utrzymać."
   },
   "blockedLabel": "Gdy dług jest widoczny, ale nikt nie daje czasu na spłatę:",
   "blocked": "Jeśli macie widoczny rejestr długu, ale nikt nigdy nie daje czasu na jego spłatę – to nie kwestia Waszej dyscypliny, tylko decyzja priorytetowa podejmowana wyżej. Przedstawcie dług w kategoriach ryzyka biznesowego (co się stanie, jeśli tego nie spłacimy), nie w kategoriach czystości kodu – to częściej trafia do decydentów."
@@ -1673,13 +1673,13 @@ const RECOMMENDATIONS = {
   },
   "mid": {
    "steps": [
-    "Naprawiajcie albo usuwajcie niestabilne testy (flaky) od razu, gdy się pojawią. Jeden test, który zawodzi bez powodu, szybko odbiera zaufanie do całego pipeline’u.",
+    "Naprawiajcie albo usuwajcie niestabilne testy (takie, które raz przechodzą, a raz nie przy tym samym kodzie) od razu, gdy się pojawią. Jeden test, który zawodzi bez powodu, szybko odbiera zaufanie do całego pipeline’u.",
     "Zmierzcie, ile trwa pipeline, i ustalcie realny cel (np. poniżej 10 minut dla najczęstszego przebiegu). Wolny pipeline zachęca do omijania go."
    ],
    "why": "Wolny lub niestabilny pipeline wydłuża pętlę informacji zwrotnej i uczy Was, że wyniki można ignorować. Wtedy traci sens także dobry zestaw testów."
   },
   "blockedLabel": "Gdy chcecie poprawić pipeline, a nie macie nad nim kontroli:",
-  "blocked": "Jeśli pipeline utrzymuje inny zespół (platformowy), zgłoście konkretny problem (np. czasy kolejki, niestabilne runnery), zamiast ogólnej prośby o poprawę. Konkretne dane łatwiej przekonują do priorytetu. Podobnie, gdy pipeline nie pasuje do obecnej architektury produktu, opiszcie, co konkretnie nie działa."
+  "blocked": "Jeśli pipeline utrzymuje inny zespół (platformowy), zgłoście konkretny problem (np. czasy oczekiwania w kolejce, niestabilne maszyny budujące), zamiast ogólnej prośby o poprawę. Konkretne dane łatwiej przekonują do priorytetu. Podobnie, gdy pipeline nie pasuje do obecnej architektury produktu, opiszcie, co konkretnie nie działa."
  },
  "trunk": {
   "low": {
@@ -1769,7 +1769,7 @@ const RECOMMENDATIONS = {
    "why": "Częste, małe wdrożenia służą temu, żeby ryzyko każdej zmiany było małe i łatwe do wycofania. Kto wdraża rzadko i dużo, płaci trudniejszym debugowaniem, a każde wdrożenie staje się wydarzeniem budzącym stres, które zniechęca do kolejnych."
   },
   "blockedLabel": "Gdy chcecie wdrażać częściej, a proces na to nie pozwala:",
-  "blocked": "Jeśli umiecie i chcecie wdrażać częściej, ale proces zatwierdzania (compliance, change advisory board, zewnętrzne zależności) na to nie pozwala – to nie jest coś, co rozwiążecie sami. Policzcie realny koszt tego procesu (czas, opóźnienia, ryzyko dużych wdrożeń) i przedstawcie go jako argument do zmiany procesu, zamiast próbować obejść go po cichu."
+  "blocked": "Jeśli umiecie i chcecie wdrażać częściej, ale proces zatwierdzania (wymogi regulacyjne, komisja zatwierdzająca zmiany, zewnętrzne zależności) na to nie pozwala – to nie jest coś, co rozwiążecie sami. Policzcie realny koszt tego procesu (czas, opóźnienia, ryzyko dużych wdrożeń) i przedstawcie go jako argument do zmiany procesu, zamiast próbować obejść go po cichu."
  },
  "lead_time": {
   "low": {
@@ -1823,7 +1823,7 @@ const RECOMMENDATIONS = {
    "why": "Awarii nie da się całkowicie wyeliminować, dlatego liczy się też to, jak szybko wracacie do działania. Od tego zależy zaufanie klientów i Wasze poczucie kontroli nad systemem."
   },
   "blockedLabel": "Gdy macie procedury, a czas przywrócenia i tak jest długi:",
-  "blocked": "Jeśli macie procedurę i przećwiczone scenariusze, a mimo to czas przywrócenia usługi jest wysoki – sprawdźcie, czy problem nie leży w dostępie (kto ma uprawnienia do naprawy w środku nocy) albo w zależności od zewnętrznego dostawcy, którego SLA jest gorsze niż Wasze własne. To coś do wynegocjowania wyżej, nie do naprawienia procedurą wewnętrzną."
+  "blocked": "Jeśli macie procedurę i umiecie szybko cofnąć zmianę, a mimo to czas przywrócenia usługi jest wysoki – sprawdźcie, czy problem nie leży w dostępie (kto ma uprawnienia do naprawy w środku nocy) albo w zależności od zewnętrznego dostawcy, którego gwarantowany czas reakcji jest gorszy niż Wasze własne wymagania. To coś do wynegocjowania wyżej, nie do naprawienia procedurą wewnętrzną."
  },
  "iac": {
   "low": {
@@ -1854,12 +1854,12 @@ const RECOMMENDATIONS = {
   "mid": {
    "steps": [
     "Przejrzyjcie alerty z ostatniego miesiąca: które były fałszywe, a które problemy przeszły bez alertu. Wyłączcie alerty, na które nikt nie reagował, i dodajcie brakujące.",
-    "Ustalcie jeden dashboard, który sprawdzacie codziennie, nie tylko w czasie awarii. Codzienny nawyk sprawia, że odchylenia od normy widać, zanim staną się problemem."
+    "Ustalcie, jakie sygnały oznaczają problem dla użytkownika (np. błędy, wolne odpowiedzi), i ustawcie na nich alerty. Dashboard służy potem do szukania przyczyny, a nie do patrzenia na niego codziennie."
    ],
    "why": "Alerty, które zgłaszają fałszywe problemy albo pomijają prawdziwe, uczą ignorowania. Gdy dashboardy i alerty są wiarygodne, odchylenia widać, zanim zauważą je użytkownicy."
   },
   "blockedLabel": "Gdy chcecie lepszego wglądu, a infrastruktura jest poza Wami:",
-  "blocked": "Jeśli chcecie mieć lepszy wgląd, ale infrastruktura obserwowalności jest scentralizowana i kontrolowana przez inny zespół (platformowy, SRE) – eskalujcie konkretną potrzebę (jakie metryki, jaki dashboard), zamiast czekać, aż ktoś sam się domyśli, czego brakuje."
+  "blocked": "Jeśli chcecie mieć lepszy wgląd, ale infrastruktura obserwowalności jest scentralizowana i kontrolowana przez inny zespół (platformowy lub odpowiedzialny za niezawodność) – eskalujcie konkretną potrzebę (jakie metryki, jaki dashboard), zamiast czekać, aż ktoś sam się domyśli, czego brakuje."
  },
  "incydenty": {
   "low": {
@@ -1939,7 +1939,7 @@ const RECOMMENDATIONS = {
     "Włączcie darmowe, automatyczne skanowanie zależności (wiele platform ma to wbudowane bezpłatnie) i zobaczcie, ile realnie macie znanych podatności. Sama liczba często bywa zaskoczeniem.",
     "Przejrzyjcie wynik razem i wybierzcie kilka najpoważniejszych podatności do naprawy w najbliższym tygodniu. Nie próbujcie naprawić wszystkiego naraz."
    ],
-   "why": "Luka bezpieczeństwa różni się od zwykłego błędu tym, że ktoś aktywnie szuka okazji, żeby ją wykorzystać. Czas między pojawieniem się podatności a jej naprawą ma tu bezpośrednie znaczenie, inaczej niż przy długu technicznym, który może poczekać."
+   "why": "Luka bezpieczeństwa różni się od zwykłego błędu tym, że ktoś aktywnie szuka okazji, żeby ją wykorzystać. Czas między pojawieniem się podatności a jej naprawą ma tu bezpośrednie znaczenie, inaczej niż przy większości długu technicznego, który narasta wolniej."
   },
   "mid": {
    "steps": [
@@ -2379,14 +2379,14 @@ document.getElementById('printBtn').addEventListener('click', () => {
     @media print{.hint{display:none;}}
   </style></head><body>
   <h1>Health Check Zespołu</h1>
-  <div class="meta">${team ? 'Zespół: ' + esc(team) + ' · ' : ''}Zakres: ${activeCats.map(c => CAT_LABEL[c]).join(' + ')} · Zapisano: ${new Date().toLocaleDateString('pl-PL', {year:'numeric', month:'long', day:'numeric'})} · Wersja: v4.2.9</div>
+  <div class="meta">${team ? 'Zespół: ' + esc(team) + ' · ' : ''}Zakres: ${activeCats.map(c => CAT_LABEL[c]).join(' + ')} · Zapisano: ${new Date().toLocaleDateString('pl-PL', {year:'numeric', month:'long', day:'numeric'})} · Wersja: v4.3.0</div>
   <div class="hint">Wskazówka: Ctrl+P (lub Cmd+P), żeby zapisać tę stronę jako PDF.</div>
   <div class="row">
     ${radarsHTML}
   </div>
   <h2>Nasz opis</h2>${profileHTML}
   ${realDataHTML ? `<h2>Realne dane z dashboardu (gdzie podano)</h2><ul>${realDataHTML}</ul>` : ''}
-  ${closingQuestionVal.trim() ? `<h2>Czego jako zespół potrzebujemy, aby mieć większe zdolności wytwarzania?</h2><p>${escBr(closingQuestionVal.trim())}</p>` : ''}
+  ${closingQuestionVal.trim() ? `<h2>Czego jako zespół potrzebujemy, żeby skuteczniej dostarczać wartość?</h2><p>${escBr(closingQuestionVal.trim())}</p>` : ''}
   <h2>Notatki</h2><p>${notesVal ? escBr(notesVal) : 'Brak notatek.'}</p>
   ${commentsHTML ? `<h2>Komentarze przy pytaniach</h2><ul>${commentsHTML}</ul>` : ''}
   ${naHTML ? `<h2>Obszary oznaczone jako „nie dotyczy”</h2><ul>${naHTML}</ul>` : ''}
