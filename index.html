@@ -896,7 +896,7 @@ const CATS = [
      "Nie mamy uporządkowanego backlogu, zadania wpadają do nas z różnych stron.",
      "Backlog mamy, ale bywa nieaktualny i trudno się w nim połapać.",
      "Mamy uporządkowany backlog, ale aktualizujemy go nieregularnie.",
-     "Backlog jest aktualny i czytelny, a następne w kolejce zadania mają jasny opis.",
+     "Backlog jest aktualny, czytelny i uporządkowany.",
      "Regularnie porządkujemy backlog: usuwamy to, co przestało być ważne, i doprecyzowujemy to, co będzie potrzebne wkrótce."
     ]
    },
@@ -1342,10 +1342,10 @@ const RECOMMENDATIONS = {
  "przewidywalnosc": {
   "low": {
    "steps": [
-    "Zacznijcie od zapisania w jednym miejscu, co dokładnie robicie w najbliższym tygodniu – wystarczy prosta lista na wspólnej stronie lub tablicy. Chodzi o to, żeby każdy w zespole widział to samo, zamiast trzymać plan tylko w głowie.",
+    "Zapiszcie w jednym miejscu, co jest dla Was priorytetowe w najbliższym tygodniu lub dwóch – wystarczy prosta lista na wspólnej stronie lub tablicy. Jeśli już planujecie, dopiszcie obok, co z tego faktycznie zrobiliście. Chodzi o to, żeby każdy widział to samo i żeby było z czym porównać plan.",
     "Ustalcie jeden stały moment w tygodniu na wspólne spojrzenie na to, co przed Wami. Wystarczy 15–20 minut synchronizacji – najważniejsze, żeby to był nawyk, a nie coś ad hoc."
    ],
-   "why": "Bez punktu odniesienia nie odróżnicie przypadkowego opóźnienia od systemowego problemu, a rozmowa o terminach staje się sporem o odczucia."
+   "why": "Bez porównania planu z tym, co się stało, nie odróżnicie przypadkowego opóźnienia od systemowego problemu, a rozmowa o terminach staje się sporem o odczucia."
   },
   "mid": {
    "steps": [
@@ -1367,10 +1367,10 @@ const RECOMMENDATIONS = {
   },
   "mid": {
    "steps": [
-    "Ustalcie jawne kryteria priorytetyzacji (np. wartość biznesowa vs wysiłek) i spiszcie je. Nie muszą być skomplikowane – wystarczą 2–3 pytania, które zadajecie przy każdej nowej rzeczy w backlogu.",
-    "Co jakiś czas sprawdźcie, czy ktoś z zespołu potrafi uzasadnić, dlaczego akurat te zadania są na górze. Jeśli nie, rozmowa o tym jest ważniejsza niż samo porządkowanie."
+    "Ustalcie stały moment (np. raz na kilka tygodni), w którym wspólnie sprawdzacie, czy priorytety nadal są aktualne. Pytanie na start: co zmieniło się od ostatniego razu?",
+    "Jeśli nie macie jawnych kryteriów (np. wartość biznesowa vs wysiłek), spiszcie je: wystarczą 2–3 pytania, które zadajecie przy każdej nowej rzeczy w backlogu. Łatwiej wtedy odróżnić zmianę, którą warto wprowadzić, od przypadkowej."
    ],
-   "why": "Niejasne priorytety kosztują więcej niż czas stracony na mniej wartościowe zadania: uczą Was, że i tak się zmienią, więc nie warto się do nich przywiązywać. Przez to każda kolejna decyzja o kolejności prac budzi mniejsze zaangażowanie, nawet gdy ktoś w końcu ustali ją porządnie."
+   "why": "Priorytety, których nikt nie rewiduje, z czasem przestają pasować do rzeczywistości, a zespół pracuje według kolejności, którą nikt już nie uważa za najlepszą. Regularny przegląd kosztuje mało i ujawnia to, zanim zacznie rozjeżdżać plany."
   },
   "blockedLabel": "Gdy priorytety są jasne na papierze, ale nie w praktyce:",
   "blocked": "Jeśli macie jasne kryteria priorytetyzacji, ale priorytety i tak zmieniają się co tydzień odgórnie – problem nie jest w Waszym procesie, tylko w braku jednego właściciela priorytetów po stronie biznesu. Eskalujcie to wprost jako pytanie: kto ostatecznie decyduje, i czy ta osoba jest gotowa bronić swoich decyzji przed presją z boku."
@@ -1378,10 +1378,10 @@ const RECOMMENDATIONS = {
  "backlog": {
   "low": {
    "steps": [
-    "Zbierzcie wszystko, co dziś krąży w mailach, rozmowach i głowach, w jednym miejscu. Nie musi być uporządkowane – ważne, żeby istniała jedna lista.",
-    "Ustalcie, kto i kiedy porządkuje tę listę. Wystarczy 15 minut raz w tygodniu, żeby nie stała się nieczytelna."
+    "Zbierzcie w jednym miejscu wszystko, co dziś krąży w mailach, rozmowach i głowach. Jeśli macie już backlog, dopiszcie do niego to, czego w nim brakuje. Nie musi być uporządkowane, ważne, żeby istniała jedna lista.",
+    "Za backlog odpowiada product owner, więc ustalcie z nim, kiedy go razem porządkujecie. Wystarczy 15 minut raz w tygodniu, żeby lista nie stała się nieczytelna."
    ],
-   "why": "Bez jednego wspólnego miejsca o kolejności decyduje to, kto ostatni coś zgłosił."
+   "why": "Gdy zadania są rozproszone albo backlog jest nieaktualny, o kolejności decyduje to, kto ostatni coś zgłosił, a nie to, co jest ważne."
   },
   "mid": {
    "steps": [
@@ -1390,16 +1390,16 @@ const RECOMMENDATIONS = {
    ],
    "why": "Przeładowany, nieaktualny backlog kosztuje czas przy każdym planowaniu i ukrywa to, co ważne."
   },
-  "blockedLabel": "Gdy backlog porządkujecie, a mimo to ciągle puchnie:",
-  "blocked": "Jeśli backlog porządkujecie, a mimo to szybko się zapełnia, sprawdźcie, kto i w jaki sposób do niego dopisuje. Czasem problem nie leży w porządkowaniu, tylko w braku wspólnej zasady, co w ogóle do backlogu trafia."
+  "blockedLabel": "Gdy backlog porządkujecie, a mimo to nie pomaga w planowaniu:",
+  "blocked": "Jeśli backlog jest uporządkowany, a planowanie i tak sprawia kłopot, problem może leżeć w samych zadaniach: są za duże, niejasne albo nie wiadomo, jaki cel produktu mają realizować. Sprawdźcie z product ownerem, czy zadania na początku listy są na tyle zrozumiałe, że można je zaplanować bez dodatkowych ustaleń."
  },
  "dor": {
   "low": {
    "steps": [
     "Przejrzyjcie ostatnie 5 zadań i sprawdźcie, w ilu z nich brakowało kluczowej informacji już na starcie – to pokaże, czy problem jest częsty, czy incydentalny.",
-    "Spiszcie 2–3 najczęstsze powody, przez które zadania „wracają” w trakcie pracy, i zacznijcie je sprawdzać na starcie. Z czasem ta krótka lista sama przerodzi się w Wasze minimum gotowości."
+    "Jeśli macie już ustalenia, sprawdźcie, które z nich pomijacie i dlaczego (zwykle są za długie albo nikt ich nie sprawdza). Jeśli ich nie macie, spiszcie 2–3 najczęstsze powody, przez które zadania „wracają” w trakcie pracy, i zacznijcie je sprawdzać na starcie."
    ],
-   "why": "Bez wspólnego punktu odniesienia nie ocenicie, czy zadanie nadaje się do podjęcia. Najczęściej brakujące informacje wychodzą dopiero w połowie pracy."
+   "why": "Gdy nie ma wspólnego minimum albo jest ono pomijane, nie ocenicie, czy zadanie nadaje się do podjęcia. Brakujące informacje wychodzą wtedy dopiero w połowie pracy."
   },
   "mid": {
    "steps": [
@@ -1415,9 +1415,9 @@ const RECOMMENDATIONS = {
   "low": {
    "steps": [
     "Przejrzyjcie ostatnie 5 zadań uznanych za skończone i sprawdźcie, w ilu z nich coś jeszcze wymagało poprawy po zamknięciu (np. brak testów, brak wdrożenia). To pokaże, czego brakuje w Waszym rozumieniu „zrobione”.",
-    "Spiszcie 3–4 rzeczy, bez których nic nie uznajecie za skończone (np. kod po code review, testy przechodzą, działa na środowisku testowym). Krótka lista, którą da się sprawdzić w minutę, jest lepsza niż długa, której nikt nie czyta."
+    "Jeśli macie już kryteria, skróćcie je do kilku rzeczy, bez których nic nie uznajecie za skończone, i trzymajcie się ich także pod presją. Jeśli ich nie macie, zacznijcie od takiej krótkiej listy (np. kod po code review, testy przechodzą, działa na środowisku testowym). Lista, którą da się sprawdzić w minutę, jest lepsza niż długa, której nikt nie czyta."
    ],
-   "why": "Bez wspólnego rozumienia „zrobione” każdy zamyka zadania według własnej miary, a braki wychodzą dopiero u kolejnych osób albo u użytkownika, czyli wtedy, gdy ich naprawa kosztuje najwięcej."
+   "why": "Gdy kryteria są niejasne albo pomijane, każdy zamyka zadania według własnej miary, a braki wychodzą dopiero u kolejnych osób albo u użytkownika, czyli wtedy, gdy ich naprawa kosztuje najwięcej."
   },
   "mid": {
    "steps": [
@@ -1558,10 +1558,10 @@ const RECOMMENDATIONS = {
  "retro": {
   "low": {
    "steps": [
-    "Zanim wprowadzicie regularne spotkania, sprawdźcie nieformalnie: ile razy w ostatnim miesiącu ten sam problem wracał w rozmowach kuluarowych, a nigdy nie trafił na żadne forum. To pokazuje realną skalę tego, co dziś ginie.",
-    "Na pierwsze takie spotkanie przynieście po jednej rzeczy, która was ostatnio zirytowała w sposobie pracy – to naturalny start rozmowy. Nie szukajcie od razu rozwiązań, samo nazwanie problemów już coś zmienia."
+    "Jeśli nie macie stałego momentu na refleksję, ustalcie go (np. godzina co kilka tygodni). Jeśli macie, wybierzcie z ostatniej rozmowy jeden wniosek i zamieńcie go na akcję z osobami odpowiedzialnymi i terminem.",
+    "Sprawdźcie, ile razy w ostatnim miesiącu ten sam problem wracał w rozmowach, a nic z tego nie wynikło. To pokazuje realną skalę tego, co dziś ginie."
    ],
-   "why": "Jeśli nigdy się nie zatrzymujecie, nie odróżnicie problemu jednorazowego od wzorca powtarzającego się co iterację. Bez tego rozróżnienia trudno poprawić cokolwiek systemowo i w kółko naprawiacie te same problemy."
+   "why": "Bez regularnej refleksji albo bez wdrażania jej wniosków nie odróżnicie problemu jednorazowego od wzorca powtarzającego się co iterację, więc w kółko naprawiacie te same rzeczy."
   },
   "mid": {
    "steps": [
@@ -1631,9 +1631,9 @@ const RECOMMENDATIONS = {
   "low": {
    "steps": [
     "Sprawdźcie, jaki procent kodu jest dziś pokryty testami automatycznymi – nawet zgrubne, przybliżone narzędzie da Wam punkt zero do porównań w przyszłości.",
-    "Wybierzcie jedną, najbardziej krytyczną ścieżkę systemu i napiszcie dla niej pierwsze automatyczne testy – nie starajcie się objąć wszystkiego naraz. Ta jedna ścieżka da Wam szybko odczuwalną wartość i wzorzec do dalszej pracy."
+    "Wybierzcie jedną, najbardziej krytyczną ścieżkę systemu i zadbajcie, żeby miała testy, którym ufacie: napiszcie je albo naprawcie te, które już są. Nie starajcie się objąć wszystkiego naraz, bo ta jedna ścieżka da Wam szybko odczuwalną wartość i wzorzec do dalszej pracy."
    ],
-   "why": "Zaczynanie automatyzacji testów od zera przytłacza, gdy próbujecie objąć wszystko naraz. Jedna dobrze wybrana, krytyczna ścieżka szybciej da wartość niż rozproszony wysiłek."
+   "why": "Obejmowanie testami wszystkiego naraz przytłacza, a testy, którym nie ufacie, i tak każą sprawdzać wszystko ręcznie. Jedna dobrze wybrana, krytyczna ścieżka szybciej da wartość niż rozproszony wysiłek."
   },
   "mid": {
    "steps": [
@@ -1763,7 +1763,7 @@ const RECOMMENDATIONS = {
   },
   "mid": {
    "steps": [
-    "Zmniejszcie wielkość pojedynczego wdrożenia – mniejsze, częstsze zmiany. Mniejszy rozmiar zmiany to prostszy rollback i łatwiejsze znalezienie przyczyny, gdy coś pójdzie nie tak.",
+    "Zmniejszcie wielkość pojedynczego wdrożenia – mniejsze, częstsze zmiany. Mniejszą zmianę łatwiej wycofać i łatwiej znaleźć przyczynę, gdy coś pójdzie nie tak.",
     "Zautomatyzujcie choć jeden krok procesu wdrożenia, który dziś jest ręczny. Wybierzcie ten, który najczęściej bywa pomijany lub robiony niedbale pod presją czasu."
    ],
    "why": "Częste, małe wdrożenia służą temu, żeby ryzyko każdej zmiany było małe i łatwe do wycofania. Kto wdraża rzadko i dużo, płaci trudniejszym debugowaniem, a każde wdrożenie staje się wydarzeniem budzącym stres, które zniechęca do kolejnych."
@@ -1871,10 +1871,10 @@ const RECOMMENDATIONS = {
   },
   "mid": {
    "steps": [
-    "Przećwiczcie raz na kwartał krótki scenariusz awarii (np. godzina, na sucho). Spisana procedura, której nikt nie wypróbował, w prawdziwym incydencie często zawodzi.",
-    "Ustalcie, jak informujecie osoby spoza zespołu (np. biznes, wsparcie) i kto to robi. Dobra komunikacja nie skraca samej naprawy, ale zdejmuje presję z osób, które ją prowadzą."
+    "Spiszcie na jednej stronie to, co już wiecie: kogo wołacie przy typowych awariach, kto prowadzi sprawę i kto informuje osoby spoza zespołu (np. biznes, wsparcie).",
+    "Gdy to będzie spisane, przećwiczcie to raz na kwartał na krótkim scenariuszu (np. godzina, na sucho). Procedura, której nikt nie wypróbował, w prawdziwym incydencie często zawodzi."
    ],
-   "why": "Gdy macie ustalony sposób reagowania, tracicie mniej czasu na ustalanie, kto co robi, i szybciej przywracacie usługę. To skraca czas przywrócenia."
+   "why": "Gdy sposób reagowania jest spisany, nie trzeba w trakcie awarii ustalać, kto co robi, i szybciej przywracacie usługę. Spisanie tego, co już wiecie, kosztuje mniej niż ustalanie tego pod presją."
   },
   "blockedLabel": "Gdy macie procedurę, ale dyżury i uprawnienia są poza Wami:",
   "blocked": "Jeśli reagowanie na incydenty wymaga uprawnień lub dyżurów, którymi zarządza inny zespół, ustalcie z nim prosty podział ról w trakcie awarii, zamiast czekać na rozwiązanie systemowe."
