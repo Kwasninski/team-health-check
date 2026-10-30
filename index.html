@@ -211,7 +211,9 @@
     font-size:13px;
     resize:vertical;
   }
-  .card.is-na{opacity:0.55;}
+  .card.is-na{border-top:1px dashed var(--ink-soft);border-right:1px dashed var(--ink-soft);border-bottom:1px dashed var(--ink-soft);padding:17px 19px 17px 20px;}
+  .card.is-na .title, .card.is-na .scale-radio-list, .card.is-na .real-data-input{opacity:0.5;}
+  .card.is-na .na-toggle{color:var(--ink);font-weight:600;}
   .card.is-na .radio-option{cursor:not-allowed;}
   .na-badge{
     display:inline-block;
@@ -1983,6 +1985,7 @@ function renderCards(dims, containerId, colorClass){
       <div class="title-row">
         <div class="title">${d.title}</div>
         ${d.help ? `<span class="info-icon" tabindex="0">i<span class="tooltip">${d.help}</span></span>` : ''}
+        <span class="na-badge" id="na-badge-${d.id}" style="display:none;">Pominięty: nie dotyczy</span>
       </div>
       <div class="scale-radio-list" id="scalelist-${d.id}" role="radiogroup" aria-label="Wybierzcie opis, który najlepiej pasuje">
         ${[1,2,3,4,5].map(n => `<label class="radio-option" for="score-${d.id}-${n}"><input type="radio" name="score-${d.id}" id="score-${d.id}-${n}" value="${n}" data-id="${d.id}"><span class="opt-num"></span><span class="opt-text">${d.levels[n-1]}</span></label>`).join('')}
@@ -2028,6 +2031,7 @@ function renderCards(dims, containerId, colorClass){
         naSet.add(d.id);
         radios.forEach(r => r.disabled = true);
         card.classList.add('is-na');
+        document.getElementById(`na-badge-${d.id}`).style.display = 'inline-block';
         card.classList.remove('unanswered');
         naReasonInput.style.display = 'block';
         naReasonInput.focus();
@@ -2036,6 +2040,7 @@ function renderCards(dims, containerId, colorClass){
         naSet.delete(d.id);
         radios.forEach(r => r.disabled = false);
         card.classList.remove('is-na');
+        document.getElementById(`na-badge-${d.id}`).style.display = 'none';
         naReasonInput.style.display = 'none';
         if(state[d.id] === null) card.classList.add('unanswered');
       }
@@ -2332,7 +2337,7 @@ document.getElementById('printBtn').addEventListener('click', () => {
   const radarsHTML = CATS.filter(c => hasCat(c.id)).map(c => `<div><div class="label">${c.label}</div>${document.getElementById('radar-' + c.id).innerHTML}</div>`).join('');
   const profileHTML = CATS.filter(c => hasCat(c.id)).map(c => ({label:c.label, dims:c.dims})).map(g => `<h3>${g.label}</h3><ul>${g.dims.map(d => naSet.has(d.id)
       ? `<li><strong>${d.title}</strong> – nie dotyczy naszego zespołu</li>`
-      : `<li><strong>${d.title}</strong> – ${d.levels[state[d.id]-1]}${focusSet.has(d.id) ? ' <em>(chcemy o tym porozmawiać)</em>' : ''}</li>`).join('')}</ul>`).join('');
+      : `<li><strong>${d.title}</strong> – ${d.levels[state[d.id]-1]}</li>`).join('')}</ul>`).join('');
   const focusItems = CATS.filter(c => hasCat(c.id)).flatMap(c => c.dims.filter(d => focusSet.has(d.id) && !naSet.has(d.id) && state[d.id] !== null).map(d => ({cat:c.label, d})));
   const focusHTML = focusItems.length ? `<h2>Wybrane do dyskusji</h2><div class="focus-list">${focusItems.map(({cat,d}) => `<div class="focus-item"><div class="focus-cat">${cat}</div><div class="focus-title">${d.title}</div><div class="focus-level">${d.levels[state[d.id]-1]}</div>${comments[d.id] && comments[d.id].trim() ? `<div class="focus-comment">Komentarz zespołu: ${escBr(comments[d.id].trim())}</div>` : ''}</div>`).join('')}</div>` : '';
   const actionsHTML = actionItems.length
