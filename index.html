@@ -731,7 +731,7 @@
     <ol>
       <li>Usiądźcie razem jako zespół – najlepiej w pełnym składzie, razem z PO/TPO. Nie potrzebujecie nikogo z zewnątrz.</li>
       <li>Dla każdego obszaru przeczytajcie wszystkie opisy i wspólnie wybierzcie ten, który najlepiej oddaje to, jak pracujecie na co dzień. <strong>Opis nie musi pasować idealnie – wystarczy ten, do którego jest Wam najbliżej.</strong> Dyskusja i różnice zdań są tu ważniejsze niż sam wybór. Jeśli obszar po prostu nie pasuje do Waszego kontekstu (np. specyfika technologii czy regulacji), zaznaczcie „nie dotyczy” zamiast zgadywać.</li>
-      <li>Na dole zobaczycie swój opis w jednym miejscu. Sami zaznaczacie tematy, o których chcecie porozmawiać – dla nich pojawią się propozycje. Na najbliższy kwartał zwykle wystarczą 1–2. Jest też miejsce na własne działania. Pobierzcie opis, żeby wrócić do niego za jakiś czas i zobaczyć, co się zmieniło.</li>
+      <li>Na dole zobaczycie swój opis w jednym miejscu. Sami zaznaczacie tematy, o których chcecie porozmawiać – dla nich pojawią się propozycje. Na najbliższy kwartał zwykle wystarczą 1–2. Jest też miejsce na własne działania. Wygenerujcie opis, żeby wrócić do niego za jakiś czas i zobaczyć, co się zmieniło.</li>
     </ol>
     <p class="howto-note"><strong>Jeśli się nie zgadzacie:</strong> nie wybierajcie w milczeniu „środka”, tylko po to, żeby ruszyć dalej. Przedyskutujcie, skąd bierze się różnica zdań. Jeśli mimo dyskusji nadal się nie zgadzacie, wybierzcie opis, który pasuje do typowego dnia pracy, i zanotujcie rozbieżność w komentarzu – to też jest informacja.</p>
   </details>
@@ -755,14 +755,14 @@
     <ul>
       <li>Nic, co wpisujecie, nie trafia na żaden zewnętrzny serwer.</li>
       <li>Odpowiedzi zostają tylko na Waszym komputerze, w pamięci przeglądarki, i są usuwane po 7 dniach.</li>
-      <li>Pobrany opis to zwykły plik HTML.</li>
+      <li>Wygenerowany opis to zwykły plik HTML.</li>
       <li>Standardowo, nie wpisujcie danych wrażliwych.</li>
     </ul>
   </details>
 
   <div class="cat-picker" id="catPicker">
     <h2>Którą część chcecie zbadać?</h2>
-    <p class="cat-lead">Zaznaczcie jedną część albo kilka – dostaniecie do wypełnienia tylko to, co wybierzecie. Wybór możecie zmienić w każdej chwili, odpowiedzi nie przepadną. Pobrany opis obejmuje zaznaczone części.</p>
+    <p class="cat-lead">Zaznaczcie jedną część albo kilka – dostaniecie do wypełnienia tylko to, co wybierzecie. Wybór możecie zmienić w każdej chwili, odpowiedzi nie przepadną. Wygenerowany opis obejmuje zaznaczone części.</p>
     <div class="cat-grid" id="catGrid" role="group" aria-label="Wybór części ankiety (można zaznaczyć dowolną liczbę)"></div>
     <p class="cat-meta" id="catStatus" role="status" aria-live="polite" style="margin-top:12px;font-size:13px;color:var(--ink-soft);"></p>
   </div>
@@ -821,13 +821,13 @@
     </div>
 
     <div class="actions">
-      <button class="btn-primary" id="printBtn">Pobierz opis (plik HTML)</button>
+      <button class="btn-primary" id="printBtn">Wygeneruj opis (plik HTML)</button>
     </div>
     <div id="saveStatus" class="muted" style="margin-top:8px;"></div>
 
   </div>
 
-  <footer><span style="font-size:11px;">Wersja: v4.3.0</span><br><span style="font-size:11px;">Sebastian Kwaśniński, 2026</span></footer>
+  <footer><span style="font-size:11px;">Wersja: v4.3.1</span><br><span style="font-size:11px;">Sebastian Kwaśniński, 2026</span></footer>
 </div>
 
 <div class="modal-overlay" id="missingModal" hidden role="dialog" aria-modal="true" aria-labelledby="missingTitle">
@@ -2333,6 +2333,8 @@ document.getElementById('printBtn').addEventListener('click', () => {
   const profileHTML = CATS.filter(c => hasCat(c.id)).map(c => ({label:c.label, dims:c.dims})).map(g => `<h3>${g.label}</h3><ul>${g.dims.map(d => naSet.has(d.id)
       ? `<li><strong>${d.title}</strong> – nie dotyczy naszego zespołu</li>`
       : `<li><strong>${d.title}</strong> – ${d.levels[state[d.id]-1]}${focusSet.has(d.id) ? ' <em>(chcemy o tym porozmawiać)</em>' : ''}</li>`).join('')}</ul>`).join('');
+  const focusItems = CATS.filter(c => hasCat(c.id)).flatMap(c => c.dims.filter(d => focusSet.has(d.id) && !naSet.has(d.id) && state[d.id] !== null).map(d => ({cat:c.label, d})));
+  const focusHTML = focusItems.length ? `<h2>Wybrane do dyskusji</h2><div class="focus-list">${focusItems.map(({cat,d}) => `<div class="focus-item"><div class="focus-cat">${cat}</div><div class="focus-title">${d.title}</div><div class="focus-level">${d.levels[state[d.id]-1]}</div>${comments[d.id] && comments[d.id].trim() ? `<div class="focus-comment">Komentarz zespołu: ${escBr(comments[d.id].trim())}</div>` : ''}</div>`).join('')}</div>` : '';
   const actionsHTML = actionItems.length
     ? actionItems.map(a => {
         const dl = a.deadline ? new Date(a.deadline).toLocaleDateString('pl-PL', {year:'numeric', month:'short', day:'numeric'}) : 'bez terminu';
@@ -2366,6 +2368,11 @@ document.getElementById('printBtn').addEventListener('click', () => {
     .hint{font-size:12.5px;color:#777;margin-bottom:24px;font-family:-apple-system,Segoe UI,sans-serif;border-left:2px solid #ccc;padding-left:10px;}
     ul{padding-left:20px;font-family:-apple-system,Segoe UI,sans-serif;font-size:14px;}
     p{font-family:-apple-system,Segoe UI,sans-serif;font-size:14.5px;}
+    .focus-item{border-left:4px solid #276765;background:#f3f7f6;padding:10px 14px;margin-bottom:10px;font-family:-apple-system,Segoe UI,sans-serif;page-break-inside:avoid;}
+    .focus-cat{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:#276765;margin-bottom:2px;}
+    .focus-title{font-size:15px;font-weight:700;margin-bottom:3px;}
+    .focus-level{font-size:14px;line-height:1.45;}
+    .focus-comment{font-size:13px;color:#555;font-style:italic;margin-top:6px;}
     .row{display:flex; gap:24px; margin-top:6px;}
     .row > div{flex:1;text-align:center;}
     .row .label{font-family:-apple-system,Segoe UI,sans-serif;font-size:13px;color:#3C4A59;margin-bottom:6px;}
@@ -2379,11 +2386,12 @@ document.getElementById('printBtn').addEventListener('click', () => {
     @media print{.hint{display:none;}}
   </style></head><body>
   <h1>Health Check Zespołu</h1>
-  <div class="meta">${team ? 'Zespół: ' + esc(team) + ' · ' : ''}Zakres: ${activeCats.map(c => CAT_LABEL[c]).join(' + ')} · Zapisano: ${new Date().toLocaleDateString('pl-PL', {year:'numeric', month:'long', day:'numeric'})} · Wersja: v4.3.0</div>
+  <div class="meta">${team ? 'Zespół: ' + esc(team) + ' · ' : ''}Zakres: ${activeCats.map(c => CAT_LABEL[c]).join(' + ')} · Zapisano: ${new Date().toLocaleDateString('pl-PL', {year:'numeric', month:'long', day:'numeric'})} · Wersja: v4.3.1</div>
   <div class="hint">Wskazówka: Ctrl+P (lub Cmd+P), żeby zapisać tę stronę jako PDF.</div>
   <div class="row">
     ${radarsHTML}
   </div>
+  ${focusHTML}
   <h2>Nasz opis</h2>${profileHTML}
   ${realDataHTML ? `<h2>Realne dane z dashboardu (gdzie podano)</h2><ul>${realDataHTML}</ul>` : ''}
   ${closingQuestionVal.trim() ? `<h2>Czego jako zespół potrzebujemy, żeby skuteczniej dostarczać wartość?</h2><p>${escBr(closingQuestionVal.trim())}</p>` : ''}
@@ -2404,7 +2412,7 @@ document.getElementById('printBtn').addEventListener('click', () => {
   document.body.removeChild(a);
   setTimeout(() => URL.revokeObjectURL(url), 2000);
 
-  document.getElementById('saveStatus').textContent = 'Pobrano plik z opisem. Otwórz go i użyj Ctrl+P, żeby zapisać jako PDF.';
+  document.getElementById('saveStatus').textContent = 'Wygenerowano plik z opisem. Otwórz go i użyj Ctrl+P, żeby zapisać jako PDF.';
 });
 
 function goToCard(id){
@@ -2426,8 +2434,8 @@ function openMissingModal(list){
   const m = document.getElementById('missingModal');
   missingFirstId = list[0].id;
   document.getElementById('missingLead').textContent = list.length === 1
-    ? 'Do pobrania opisu potrzebna jest odpowiedź albo „nie dotyczy” przy każdym obszarze. Brakuje jednego:'
-    : `Do pobrania opisu potrzebna jest odpowiedź albo „nie dotyczy” przy każdym obszarze. Brakuje: ${list.length}.`;
+    ? 'Do wygenerowania opisu potrzebna jest odpowiedź albo „nie dotyczy” przy każdym obszarze. Brakuje jednego:'
+    : `Do wygenerowania opisu potrzebna jest odpowiedź albo „nie dotyczy” przy każdym obszarze. Brakuje: ${list.length}.`;
   document.getElementById('missingList').innerHTML = list.map(d => `<li><button type="button" data-id="${d.id}">${d.title}</button></li>`).join('');
   m.hidden = false;
   document.getElementById('missingGo').focus();
@@ -2458,7 +2466,7 @@ function clearExportWarning(){
   const KEY = 'poziomy-zespolu-v3-neutralny-autosave';
   let restoring = false;
   let resetting = false;
-  let dirty = false;      // są zmiany, których nie pobrano do pliku
+  let dirty = false;      // są zmiany, których nie zapisano do pliku opisu
   let timer = null;
 
   function snapshot(){
@@ -2602,11 +2610,11 @@ function clearExportWarning(){
   }, true);
   window.addEventListener('pagehide', save);
 
-  // po pobraniu pliku nie ostrzegamy już przy zamknięciu
+  // po wygenerowaniu pliku nie ostrzegamy już przy zamknięciu
   document.getElementById('printBtn').addEventListener('click', () => {
     setTimeout(() => {
       const st = document.getElementById('saveStatus');
-      if(st && st.textContent.indexOf('Pobrano') === 0) dirty = false;
+      if(st && st.textContent.indexOf('Wygenerowano') === 0) dirty = false;
     }, 50);
   });
 
