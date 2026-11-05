@@ -215,6 +215,7 @@
   .card.is-na .title, .card.is-na .scale-radio-list, .card.is-na .real-data-input{opacity:0.5;}
   .card.is-na .na-toggle{color:var(--ink);font-weight:600;}
   .card.is-na .radio-option{cursor:not-allowed;}
+  .radar-empty{font-size:13px;color:var(--ink-soft);text-align:center;padding:40px 16px;margin:0;}
   .na-badge{
     display:inline-block;
     font-size:10.5px;
@@ -829,7 +830,7 @@
 
   </div>
 
-  <footer><span style="font-size:11px;">Wersja: v4.3.1</span><br><span style="font-size:11px;">Sebastian Kwaśniński, 2026</span></footer>
+  <footer><span style="font-size:11px;">Wersja: v4.3.2</span><br><span style="font-size:11px;">Sebastian Kwaśniński, 2026</span></footer>
 </div>
 
 <div class="modal-overlay" id="missingModal" hidden role="dialog" aria-modal="true" aria-labelledby="missingTitle">
@@ -846,476 +847,476 @@
 
 <script>
 const CATS = [
- {
-  "id": "plan",
-  "group": "org",
-  "label": "Planowanie i priorytety",
-  "desc": "Jak zespół dzieli pracę, ustala priorytety i planuje – niezależnie od frameworka. Jeśli coś jest poza Waszą kontrolą (priorytety, zależności, budżet), opisujcie stan faktyczny.",
-  "blurb": "dzielenie pracy, planowanie, priorytety, backlog, gotowość i ukończenie, efekt u użytkownika",
-  "radar": "#B9812E",
-  "dims": [
-   {
-    "id": "dekompozycja",
-    "title": "Dekompozycja pracy",
-    "help": "Chodzi o to, czy zadania da się podzielić na małe części, które można zrealizować i wdrożyć osobno.",
-    "levels": [
-     "Zadania trafiają do nas w dużych kawałkach, których nie dzielimy.",
-     "Dzielimy pracę dopiero wtedy, gdy zadanie zaczyna się przeciągać.",
-     "Zadania zwykle dzielimy przed startem, ale część z nich nadal jest duża i trwa tygodnie.",
-     "Większość zadań dzielimy tak, że da się je skończyć w kilka dni.",
-     "Każde zadanie dzielimy tak, że każdy kawałek da się skończyć i pokazać w ciągu od jednego dnia do kilku."
+  {
+    "id": "plan",
+    "group": "org",
+    "label": "Planowanie i priorytety",
+    "desc": "Jak zespół dzieli pracę, ustala priorytety i planuje – niezależnie od frameworka. Jeśli coś jest poza Waszą kontrolą (priorytety, zależności, budżet), opisujcie stan faktyczny.",
+    "blurb": "dzielenie pracy, planowanie, priorytety, backlog, gotowość i ukończenie, efekt u użytkownika",
+    "radar": "#B9812E",
+    "dims": [
+      {
+        "id": "dekompozycja",
+        "title": "Dekompozycja pracy",
+        "help": "Chodzi o to, czy dzielicie zadania na małe części, które można zrealizować i wdrożyć osobno. Mniejsze mogą dać szybszy feedback czy zmierzamy w dobrym kierunku.",
+        "levels": [
+          "Zadania trafiają do nas w dużych kawałkach, których nie dzielimy.",
+          "Zadania dzielimy dopiero wtedy, gdy zaczynają się przeciągać.",
+          "Zadania zwykle dzielimy na mniejsze, ale część z nich nadal jest duża i trwa dłużej niż planowaliśmy.",
+          "Większość zadań dzielimy tak, że da się je skończyć w kilka dni.",
+          "Wszystkie zadania dzielimy tak, że każde nich da się skończyć i pokazać w ciągu 1-3 dni."
+        ]
+      },
+      {
+        "id": "przewidywalnosc",
+        "title": "Planowanie i przewidywalność",
+        "help": "Nie chodzi o nazwę cyklu (sprint, iteracja, tydzień), tylko o to, czy plan na najbliższy okres się sprawdza. W środowisku, gdzie zespół zależy od roadmapy kilku innych zespołów naraz, krótki cykl bywa trudniejszy do utrzymania niż w izolowanym zespole – to też warto uwzględnić w opisie.",
+        "levels": [
+          "Nie planujemy prac - zajmujemy się tym, co akurat się pojawi.",
+          "Planujemy pracę, ale plany często rozjeżdżają się z rzeczywistością.",
+          "Przeważnie planujemy pracę w krótkich cyklach, ale trafność planu bywa różna.",
+          "Planujemy pracę i zwykle osiągamy cel, który zaplanowaliśmy sobie na dany cykl.",
+          "Do przygotowania planu wykorzystujemy dane i w większości przypadków osiągamy wyznaczony cel. Gdy okoliczności się zmieniają, dostosowujemy plan w trakcie i dostarczamy to, co najważniejsze."
+        ]
+      },
+      {
+        "id": "priorytety_z",
+        "title": "Zarządzanie priorytetami",
+        "help": "Czy wiadomo, co jest najważniejsze i dlaczego, i czy rozumie to cały zespół, a nie tylko jedna osoba. W organizacjach z wieloma interesariuszami o sprzecznych priorytetach to bywa trudniejsze niż w małym, izolowanym zespole.",
+        "levels": [
+          "Wszystko jest u nas „pilne”, priorytety dostjemy z góry i zdarza się, że zmieniają się z dnia na dzień bez uzasadnienia.",
+          "Mamy priorytety, ale każdy z nas rozumie je trochę inaczej i niespecjalnie mamy na nie wpływ.",
+          "Znamy priorytety choć rzadko je rewidujemy, mamy na nie pewien wpływ.",
+          "Znamy priorytety, rozumiemy je spójnie w zespole i cyklicznie sprawdzamy ich aktualność.",
+          "Znamy i współtworzymy priorytety, potrafimy wyjaśnić skąd się biorą, na bieżąco nimi zarządzamy."
+        ]
+      },
+      {
+        "id": "backlog",
+        "title": "Backlog",
+        "help": "Backlog to lista elementów, które rozwijają, usprawniają lub naprawiają produkt. To pytanie dotyczy jego stanu: czy jest aktualny i czytelny, czy wiadomo, co jest najważniejsze, i czy to, co w nim jest, faktycznie ma wartość.",
+        "levels": [
+          "Nie mamy jednego backlogu. Zadania przychodzą mailem, na czacie i na spotkaniach.",
+          "Mamy jeden backlog, ale to lista wszystkiego. Nie wiadomo, co jest ważne, a co już nieaktualne.",
+          "Backlog jest ułożony według kolejności, ale porządkujemy go zrywami, zwykle dopiero wtedy, gdy zrobi się bałagan.",
+          "Regularnie przeglądamy backlog, a to, co jest na początku listy, jest gotowe do pracy.",
+          "Regularnie przeglądamy backlog i sprawdzamy każdy element pod kątem celu produktu. Usuwamy to, co nie wnosi wartości, i potrafimy wyjaśnić, dlaczego coś jest wyżej od reszty."
+        ]
+      },
+      {
+        "id": "dor",
+        "title": "Definition of Ready",
+        "help": "DoR („Definition of Ready”) to uzgodnione minimum, które zadanie musi spełnić, żeby można było je rozpocząć. Nie trzeba czekać, aż wszystko będzie jasne – w zwinnym środowisku często zaczyna się pracę, zanim wszystko jest domknięte. Ważne, żeby nazwać, co jeszcze jest niewiadomą.",
+        "levels": [
+          "Nie mamy wspólnego rozumienia, kiedy zadanie jest gotowe do startu. Każdy ocenia to po swojemu.",
+          "Mamy ustalone minimum gotowości, ale pomijamy je, gdy brakuje czasu albo zadanie wydaje się proste.",
+          "Przed startem zawsze sprawdzamy minimum gotowości, ale nie mówimy na głos, czego jeszcze nie wiemy. Niewiadome wychodzą dopiero w trakcie pracy.",
+          "Sprawdzamy minimum gotowości i już na starcie nazywamy niewiadome.",
+          "Dopasowujemy minimum gotowości do wielkości i ryzyka zadania. Świadomie decydujemy, kiedy zacząć mimo niepewności, i ustalamy, kiedy sprawdzimy nasze założenia."
+        ]
+      },
+      {
+        "id": "dod",
+        "title": "Definition of Done",
+        "help": "DoD („Definition of Done”) to kryteria, które zadanie musi spełnić, żeby uznać je za naprawdę skończone (np. kod po code review, przetestowany, wdrożony), a nie tylko „zrobione u mnie”.",
+        "levels": [
+          "Nie mamy wspólnego rozumienia, kiedy zadanie jest ukończone. Każdy zamyka zadania według własnej miary.",
+          "Mamy ustalone kryteria ukończenia, ale pomijamy je, gdy brakuje czasu.",
+          "Zawsze sprawdzamy kryteria ukończenia, ale kończą się na oddaniu zmiany. Nie sprawdzamy, czy działa u użytkownika.",
+          "Zawsze sprawdzamy kryteria, a obejmują one też to, czy zmiana działa u użytkownika.",
+          "Gdy mimo kryteriów coś nam umknie, sprawdzamy, dlaczego, i poprawiamy kryteria. Rozwijamy je razem z produktem."
+        ]
+      },
+      {
+        "id": "feedback_biznes",
+        "title": "Pętla zwrotna z użytkownikiem i biznesem",
+        "help": "Chodzi o to, czy zespół wie, że to, co dostarcza, faktycznie działa dla użytkownika i tworzy wartość biznesową, a nie tylko czy zadanie formalnie zostało zamknięte. Sprawne procesy i technika nie gwarantują, że budujecie właściwe rzeczy – to osobny obszar.",
+        "levels": [
+          "Nikt u nas nie sprawdza efektów po wdrożeniu. O tym, czy coś działa, dowiadujemy się z reklamacji albo przypadkiem.",
+          "Czasem ktoś sprawdza wyniki po wdrożeniu, ale zależy to od jednej osoby, a nie od ustalonej praktyki.",
+          "Sprawdzanie efektów po wdrożeniu to u nas stała praktyka, ale rzadko korzystamy z wyników przy planowaniu.",
+          "Wyniki po wdrożeniu wykorzystujemy przy planowaniu.",
+          "Przed startem ustalamy miarę sukcesu, po wdrożeniu ją sprawdzamy i na tej podstawie decydujemy, co rozwijać, co poprawić, a co porzucić."
+        ]
+      }
     ]
-   },
-   {
-    "id": "przewidywalnosc",
-    "title": "Planowanie i przewidywalność",
-    "help": "Nie chodzi o nazwę cyklu (sprint, iteracja, tydzień), tylko o to, czy plan na najbliższy okres się sprawdza. W środowisku, gdzie zespół zależy od roadmapy kilku innych zespołów naraz, krótki cykl bywa trudniejszy do utrzymania niż w izolowanym zespole – to też warto uwzględnić w opisie.",
-    "levels": [
-     "Pracujemy ad hoc i zajmujemy się tym, co akurat się pojawi.",
-     "Planujemy pracę, ale plany często rozjeżdżają się z rzeczywistością.",
-     "Planujemy w krótkich cyklach, ale trafność planu bywa różna.",
-     "Zwykle osiągamy cel, który wyznaczyliśmy sobie na dany cykl.",
-     "Zwykle osiągamy cel cyklu, a gdy okoliczności się zmieniają, dostosowujemy plan w trakcie i zachowujemy to, co najważniejsze."
+  },
+  {
+    "id": "zespol",
+    "group": "org",
+    "label": "Praktyki zespołowe i współpraca",
+    "desc": "Jak zespół podejmuje decyzje, bierze odpowiedzialność, rozmawia o błędach i dba o tempo, wiedzę oraz relacje z innymi zespołami.",
+    "blurb": "decyzje, odpowiedzialność, bezpieczeństwo psychologiczne, tempo, wiedza, refleksja, zależności",
+    "radar": "#B0673B",
+    "dims": [
+      {
+        "id": "autonomia_d",
+        "title": "Autonomia w decyzjach",
+        "help": "Chodzi o to, ile decyzji – technicznych i dotyczących organizacji pracy – zespół może podjąć samodzielnie, bez czekania na akceptację z zewnątrz.",
+        "levels": [
+          "Wszystkie decyzje zapadają poza zespołem. Czekamy na polecenia.",
+          "Sami decydujemy tylko o drobiazgach. Decyzje techniczne i dotyczące sposobu pracy zapadają poza zespołem.",
+          "Część decyzji technicznych podejmujemy sami, ale o sposobie pracy (np. jak planujemy i jak się organizujemy) decyduje ktoś z zewnątrz.",
+          "Sami decydujemy o sprawach technicznych i o sposobie pracy.",
+          "Wiemy, o czym decydujemy sami, a co uzgadniamy z innymi, bo wpływa na inne zespoły. W codziennej pracy nie pytamy o pozwolenie."
+        ]
+      },
+      {
+        "id": "odpowiedzialnosc",
+        "title": "Odpowiedzialność za wynik",
+        "help": "Chodzi o to, czy zespół czuje się właścicielem tego, co dostarcza – także po tym, jak zadanie zostało zamknięte.",
+        "levels": [
+          "Nie czujemy się właścicielami wyniku. Odpowiedzialność jest gdzie indziej.",
+          "Odpowiadamy za swoje zadania, ale nie za to, czy całość działa.",
+          "Odpowiadamy za całość tego, co dostarczamy, ale tylko do zamknięcia zadania. To, co dzieje się po wdrożeniu, to już nie nasza sprawa.",
+          "Odpowiadamy za to, co dostarczamy, także po wdrożeniu.",
+          "Sami sprawdzamy, jak działa to, co dostarczyliśmy, i korygujemy własne decyzje, zanim ktoś musi nam o tym powiedzieć."
+        ]
+      },
+      {
+        "id": "bledy_pomoc",
+        "title": "Otwartość wobec błędów",
+        "help": "Bezpieczeństwo psychologiczne to poczucie, że można przyznać się do błędu, zadać „głupie” pytanie albo poprosić o pomoc bez obawy o negatywne konsekwencje społeczne czy zawodowe.",
+        "levels": [
+          "Ukrywamy błędy i problemy, bo boimy się konsekwencji.",
+          "Przyznajemy się do błędów niechętnie, zwykle dopiero wtedy, gdy nie da się ich ukryć.",
+          "Gdy ktoś zapyta, mówimy o błędach szczerze, ale sami rzadko je zgłaszamy i niechętnie prosimy o pomoc.",
+          "Sami mówimy o swoich błędach i prosimy o pomoc, gdy jej potrzebujemy.",
+          "O błędach mówimy od razu, gdy je zauważymy, a o pomoc prosimy, zanim problem urośnie."
+        ]
+      },
+      {
+        "id": "kwestionowanie",
+        "title": "Kwestionowanie decyzji",
+        "help": "Chodzi o to, czy można powiedzieć „mam wątpliwości” albo „widzę to inaczej” – także wobec lidera lub osób starszych stażem – bez obawy o negatywne konsekwencje.",
+        "levels": [
+          "Nie zgłaszamy wątpliwości wobec decyzji, nawet na boku.",
+          "Wątpliwości zgłaszamy rzadko i raczej na boku, a nie tam, gdzie zapada decyzja.",
+          "Zgłaszamy wątpliwości, ale tylko wtedy, gdy ktoś o nie zapyta.",
+          "Sami mówimy o wątpliwościach wprost, nie czekając, aż ktoś o nie zapyta.",
+          "Otwarcie kwestionujemy decyzje każdego, także lidera i osób starszych stażem, bo zależy nam na najlepszym rozwiązaniu."
+        ]
+      },
+      {
+        "id": "tempo",
+        "title": "Zrównoważone tempo",
+        "help": "Zrównoważone tempo to zasada z Extreme Programming (XP) mówiąca, że zespół powinien pracować w tempie, które da się utrzymać w długim okresie – bez chronicznych nadgodzin i wypalenia.",
+        "levels": [
+          "Nadgodziny i praca pod presją to u nas norma. Jesteśmy chronicznie przeciążeni.",
+          "Przeciążamy się przy każdym większym terminie i nie zawsze zdążymy odpocząć przed następnym.",
+          "Intensywne okresy zdarzają się u nas regularnie, ale po każdym wracamy do normalnego tempa.",
+          "Pracujemy w stabilnym tempie, a przeciążenie zdarza się rzadko.",
+          "Pracujemy w stabilnym tempie. Sygnały przeciążenia zauważamy wcześnie i zmieniamy plan, zanim ktoś zacznie pracować po godzinach."
+        ]
+      },
+      {
+        "id": "wspolpraca",
+        "title": "Rozproszenie wiedzy i wspólna własność kodu",
+        "help": "Bus factor to liczba osób, których nagła nieobecność (np. odejście z firmy) zatrzymałaby pracę zespołu. Wspólna własność kodu (collective code ownership) oznacza, że każdy może zmieniać każdy fragment kodu, nie tylko jego autor. W większych, rozproszonych systemach ryzyko rzadko jest tak proste jak „jedna osoba zna cały moduł” – częściej chodzi o to, że nikt nie rozumie całości interakcji między usługami, za które odpowiada kilka zespołów naraz.",
+        "levels": [
+          "W wielu obszarach wiedzę ma tylko jedna osoba i nikt jej nie przejmuje. Gdy jej nie ma, praca w tym obszarze stoi (bus factor 1).",
+          "Wiedzą dzielimy się, gdy pojawi się problem, ale w ważnych obszarach nadal polegamy na jednej osobie.",
+          "Celowo dzielimy się wiedzą (np. przez pracę w parach), ale nie każdy ważny obszar ma kto przejąć.",
+          "Każdy ważny obszar zna i potrafi zmienić więcej niż jedna osoba.",
+          "Kod jest wspólny. Każdy z nas zmienia większość jego fragmentów, nie czekając na autora."
+        ]
+      },
+      {
+        "id": "retro",
+        "title": "Regularna refleksja i wdrażanie usprawnień",
+        "help": "Nie chodzi o konkretną nazwę spotkania (np. retrospektywę) – liczy się regularny moment przyjrzenia się temu, JAK zespół pracuje, niezależnie od formy, i to, czy coś z tego faktycznie się zmienia.",
+        "levels": [
+          "Nie mamy regularnego momentu na refleksję nad sposobem pracy.",
+          "Mamy regularny moment na refleksję, ale wnioski rzadko zamieniamy w działania.",
+          "Część wniosków wdrażamy, ale potem do nich nie wracamy, więc nie wiemy, co faktycznie zostało zrobione.",
+          "Zapisujemy akcje i na kolejnej rozmowie sprawdzamy, czy zostały zrobione.",
+          "Zapisujemy akcje i sprawdzamy, czy pomogły. Jeśli nie, poprawiamy je albo z nich rezygnujemy."
+        ]
+      },
+      {
+        "id": "zaleznosci",
+        "title": "Zarządzanie zależnościami i ryzykiem",
+        "help": "Zależność to sytuacja, w której wykonanie Waszej pracy wymaga czegoś od innego zespołu, systemu lub osoby. W organizacji z wieloma zespołami na współdzielonej platformie zależności bywają wielopoziomowe i trudne do przewidzenia – to normalne, pytanie dotyczy tego, jak szybko je zauważacie, nie czy w ogóle występują.",
+        "levels": [
+          "Zależności odkrywamy w ostatniej chwili i powodują poślizgi.",
+          "Wiemy o zależnościach, ale zajmujemy się nimi dopiero wtedy, gdy zaczynają blokować pracę.",
+          "Zależności wyłapujemy z wyprzedzeniem, ale inne zespoły dowiadują się o nich różnie, czasem za późno.",
+          "Na bieżąco śledzimy zależności i od razu zgłaszamy je innym zespołom.",
+          "Zależności zgłaszamy od razu, a te, które wracają, usuwamy, np. przenosząc odpowiedzialność za wspólny element."
+        ]
+      }
     ]
-   },
-   {
-    "id": "priorytety_z",
-    "title": "Zarządzanie priorytetami",
-    "help": "Czy wiadomo, co jest najważniejsze i dlaczego, i czy rozumie to cały zespół, a nie tylko jedna osoba. W organizacjach z wieloma interesariuszami o sprzecznych priorytetach to bywa trudniejsze niż w małym, izolowanym zespole.",
-    "levels": [
-     "Wszystko jest u nas „pilne”, a priorytety zmieniają się z dnia na dzień bez uzasadnienia.",
-     "Mamy priorytety, ale każdy z nas rozumie je trochę inaczej.",
-     "Znamy priorytety, choć rzadko je rewidujemy.",
-     "Priorytety opieramy na jasnych kryteriach (wartość, ryzyko) i wszyscy je rozumiemy.",
-     "Współtworzymy priorytety i potrafimy wyjaśnić, skąd się biorą."
+  },
+  {
+    "id": "prakt",
+    "group": "tech",
+    "label": "Praktyki inżynierskie",
+    "desc": "Jak zespół dba o jakość kodu, testów i integracji na co dzień (to w dużej mierze praktyki z Extreme Programming). Żaden z opisów nie jest uniwersalnym celem – w kodzie odziedziczonym, w środowiskach regulowanych czy tam, gdzie koszt błędu jest bardzo wysoki, punkt wyjścia bywa po prostu inny.",
+    "blurb": "code review i parowanie, refaktoryzacja, testy, dług techniczny, CI i krótkie gałęzie, dokumentacja",
+    "radar": "#3E9C98",
+    "dims": [
+      {
+        "id": "przeglady",
+        "title": "Code review i parowanie",
+        "help": "Chodzi o to, czy kod, zanim trafi dalej, ogląda ktoś jeszcze: przez code review albo wspólną pracę (pair lub mob programming).",
+        "levels": [
+          "Piszemy kod w pojedynkę. Nikt poza autorem go nie ogląda.",
+          "Code review robimy tylko czasem, głównie przy dużych lub ryzykownych zmianach.",
+          "Code review jest u nas normą, ale gdy się spieszymy, część zmian je omija.",
+          "Każda zmiana przechodzi code review albo powstaje w parze lub zespołowo.",
+          "Każda zmiana przechodzi code review albo powstaje w parze. Odpowiedź przychodzi szybko, a uwagi faktycznie poprawiają kod."
+        ]
+      },
+      {
+        "id": "refaktoryzacja",
+        "title": "Refaktoryzacja i prostota kodu",
+        "help": "Refaktoryzacja to poprawianie struktury kodu bez zmiany jego zachowania. Chodzi też o dbanie o prostotę rozwiązań, a nie tylko o to, żeby „działało”.",
+        "levels": [
+          "Boimy się zmieniać istniejący kod, żeby czegoś nie zepsuć.",
+          "Zmieniamy istniejący kod, gdy musimy, ale refaktoryzację odkładamy i zwykle do niej nie wracamy.",
+          "Refaktoryzujemy przy okazji innych zadań, ale fragmenty, których nikt nie dotyka, zostają bez zmian.",
+          "Refaktoryzację planujemy regularnie, jako stały element pracy.",
+          "Upraszczamy kod na bieżąco, przy każdej zmianie, zanim skomplikowane fragmenty zaczną nam przeszkadzać."
+        ]
+      },
+      {
+        "id": "testy_auto",
+        "title": "Testy automatyczne",
+        "help": "Chodzi o to, jak bardzo zespół polega na automatycznych testach zamiast ręcznego sprawdzania. W kodzie odziedziczonym bez testów od lat punkt wyjścia bywa po prostu inny niż w nowym projekcie.",
+        "levels": [
+          "Testujemy głównie ręcznie. Testów automatycznych prawie nie mamy.",
+          "Mamy podstawowe testy automatyczne, ale im nie ufamy, więc i tak sprawdzamy wszystko ręcznie.",
+          "Najważniejsze części systemu mają testy, którym ufamy, ale resztę sprawdzamy ręcznie.",
+          "Testy na różnych poziomach obejmują większość systemu.",
+          "Ufamy testom na tyle, że wdrażamy bez ręcznego sprawdzania. Gdy błąd mimo to przejdzie, dopisujemy test, który by go złapał."
+        ]
+      },
+      {
+        "id": "dlug",
+        "title": "Dług techniczny",
+        "help": "Dług techniczny to odłożone decyzje i „skróty” w kodzie. Sam dług bywa racjonalnym wyborem, żeby zdążyć w terminie. Gorzej, gdy jest niewidoczny: zespół, który wie, co i dlaczego odłożył, jest w innej sytuacji niż zespół, który nie wie, ile długu ma.",
+        "levels": [
+          "Nie rozmawiamy o długu technicznym i nie wiemy, ile go mamy.",
+          "O długu technicznym rozmawiamy, ale nigdzie go nie zapisujemy.",
+          "Dług techniczny jest zapisany w backlogu, ale rzadko trafia do planu.",
+          "Dług techniczny regularnie trafia do planu i jest spłacany.",
+          "Świadomie decydujemy, kiedy zaciągnąć dług, a kiedy go spłacić, na podstawie tego, ile nas kosztuje."
+        ]
+      },
+      {
+        "id": "pipeline_ci",
+        "title": "Pipeline CI",
+        "help": "CI (Continuous Integration) to automatyczne budowanie i testowanie każdej zmiany. To pytanie dotyczy samego pipeline’u: czy działa, czy jest szybki i czy mu ufacie.",
+        "levels": [
+          "Nie mamy CI albo nasz pipeline praktycznie nie działa.",
+          "Pipeline działa, ale bywa zawodny i zdarza nam się go omijać.",
+          "Pipeline uruchamia się przy każdej zmianie i go nie omijamy, ale bywa wolny albo czasem pada bez powodu.",
+          "Pipeline jest szybki i stabilny.",
+          "Pipeline jest szybki i stabilny, bo gdy zwalnia lub zawodzi, naprawiamy go od razu, przed innymi zadaniami."
+        ]
+      },
+      {
+        "id": "trunk",
+        "title": "Krótkie gałęzie (trunk-based)",
+        "help": "Trunk-based development to praca na krótko żyjących gałęziach, często integrowanych z główną linią kodu. Im krócej żyją gałęzie, tym mniej konfliktów przy scalaniu. W środowisku z wieloma zespołami na współdzielonym repozytorium albo z zależnościami między wieloma usługami częsta integracja bywa trudniejsza do skoordynowania niż w pojedynczym repozytorium i wymaga innej infrastruktury (feature flagi, testy kontraktowe).",
+        "levels": [
+          "Nasze gałęzie żyją tygodnie lub dłużej.",
+          "Nasze gałęzie żyją od kilku dni do tygodnia.",
+          "Nasze gałęzie żyją zwykle jeden–dwa dni.",
+          "Nasze gałęzie żyją zwykle krócej niż dzień.",
+          "Zmiany trafiają do głównej linii kodu co najmniej raz dziennie, a ta jest zawsze gotowa do wdrożenia."
+        ]
+      },
+      {
+        "id": "dokumentacja",
+        "title": "Dokumentacja",
+        "help": "Pytanie dotyczy tego, czy zespół utrzymuje opis systemu (architekturę, ważne decyzje wraz z uzasadnieniem, instrukcje na wypadek awarii) i aktualizuje go razem ze zmianami. Część tej roli pełnią też czytelny kod i testy. W środowiskach regulowanych dokumentacja bywa wymogiem formalnym.",
+        "levels": [
+          "Dokumentacji prawie nie mamy, wiedza o systemie jest w głowach pojedynczych osób.",
+          "Dokumentacja istnieje, ale jest nieaktualna i nikt jej nie poprawia.",
+          "Najważniejsze rzeczy mamy spisane, ale aktualizujemy je dopiero, gdy ktoś zauważy, że są nieaktualne.",
+          "Dokumentację zwykle aktualizujemy razem ze zmianą w systemie.",
+          "Zmiana bez zaktualizowanego opisu nie jest u nas skończona, a opisy, z których nikt nie korzysta, usuwamy."
+        ]
+      }
     ]
-   },
-   {
-    "id": "backlog",
-    "title": "Backlog",
-    "help": "Backlog to lista elementów, które rozwijają, usprawniają lub naprawiają produkt. To pytanie dotyczy jego stanu: czy jest aktualny, czytelny i uporządkowany.",
-    "levels": [
-     "Nie mamy uporządkowanego backlogu, zadania wpadają do nas z różnych stron.",
-     "Backlog mamy, ale bywa nieaktualny i trudno się w nim połapać.",
-     "Mamy uporządkowany backlog, ale aktualizujemy go nieregularnie.",
-     "Backlog jest aktualny, czytelny i uporządkowany.",
-     "Regularnie porządkujemy backlog: usuwamy to, co przestało być ważne, i doprecyzowujemy to, co będzie potrzebne wkrótce."
+  },
+  {
+    "id": "dostarczanie",
+    "group": "tech",
+    "label": "Dostarczanie zmian",
+    "desc": "Jak zmiana trafia od zatwierdzenia do użytkownika, na ile wdrożenie jest zautomatyzowane i jak sprawnie przebiega. W środowiskach regulowanych, w embedded czy tam, gdzie błąd bardzo dużo kosztuje, rzadsze i ostrożniejsze wdrożenia bywają świadomym wyborem. Przy pytaniach opartych na metrykach DORA możecie wpisać faktyczne wartości, jeśli je znacie.",
+    "blurb": "automatyczne wdrażanie, niezależność wdrożeń i metryki DORA",
+    "radar": "#4A93BD",
+    "dims": [
+      {
+        "id": "cd",
+        "title": "Automatyczne wdrażanie (CD)",
+        "help": "CD (Continuous Delivery) to automatyzacja drogi od zatwierdzonej zmiany do produkcji. To pytanie dotyczy tego, ile z tej drogi odbywa się bez ręcznej pracy.",
+        "levels": [
+          "Wdrażamy ręcznie, a każde wdrożenie wymaga wielu kroków i uwagi kilku osób.",
+          "Część wdrożenia mamy zautomatyzowaną, ale zostają ręczne kroki i zwykle ktoś musi je pilnować.",
+          "Wdrożenie uruchamiamy jednym poleceniem lub kliknięciem, ale robi to tylko wybrana osoba.",
+          "Zatwierdzona zmiana sama przechodzi przez pipeline do gotowej wersji i każdy z nas może ją wdrożyć.",
+          "Aktualną wersję możemy wdrożyć w każdej chwili, bez żadnych przygotowań."
+        ]
+      },
+      {
+        "id": "niezaleznosc_wdr",
+        "title": "Niezależność wdrożeń od innych zespołów",
+        "help": "Chodzi o to, czy możecie wdrożyć swoją zmianę bez czekania na inne zespoły: ich wdrożenia, zgody albo zmiany w ich częściach systemu. Gdy wiele zespołów dzieli platformę lub usługi, część zależności jest nieunikniona – pytanie dotyczy tego, które Wasze zmiany i jak często muszą na nie czekać. To osobne pytanie od „Zarządzania zależnościami i ryzykiem”, które dotyczy planowania pracy.",
+        "levels": [
+          "Wdrażamy razem z innymi zespołami, we wspólnym terminie. Sami prawie nic nie wdrożymy.",
+          "Termin wdrożenia wybieramy sami, ale prawie każda zmiana wymaga wcześniej uzgodnień albo zgody innego zespołu.",
+          "Zmiany w naszej części systemu wdrażamy sami, ale te, które dotykają wspólnych elementów, zawsze wymagają uzgodnień z innymi zespołami.",
+          "Zmiany we wspólnych elementach też zwykle wdrażamy sami.",
+          "Prawie każdą zmianę wdrażamy sami i w dowolnym momencie, także taką, z której korzystają inne zespoły, bo wprowadzamy ją tak, żeby nie psuła tego, z czego już korzystają."
+        ]
+      },
+      {
+        "id": "deploy_freq",
+        "title": "Częstotliwość wdrożeń",
+        "help": "Deployment Frequency (częstotliwość wdrożeń) – jak często zmiany trafiają na produkcję. Jedna z kluczowych metryk DORA. Częstotliwość zależy od kontekstu – w środowiskach z twardymi oknami wdrożeniowymi (regulacje, certyfikacja sprzętu, integracje z systemami o ograniczonej dostępności) rzadsze, większe wdrożenia bywają świadomym wyborem. Jeśli odpowiadacie za kilka usług, opiszcie tę najważniejszą dla biznesu albo odpowiedzcie osobno dla 2–3 kluczowych serwisów, zamiast uśredniać.",
+        "levels": [
+          "Wdrażamy rzadziej niż raz w miesiącu.",
+          "Wdrażamy co najmniej raz lub kilka razy w miesiącu.",
+          "Wdrażamy co najmniej raz w tygodniu, ale nie codziennie.",
+          "Wdrażamy zwykle codziennie.",
+          "Wdrażamy wielokrotnie w ciągu dnia."
+        ]
+      },
+      {
+        "id": "lead_time",
+        "title": "Czas realizacji zmiany (lead time for changes)",
+        "help": "Lead Time for Changes – czas od zapisania zmiany w repozytorium (commitu) do chwili, gdy działa na produkcji. Jedna z metryk DORA. W systemach złożonych z wielu usług lead time bywa sumą czasów oczekiwania na kilka zespołów naraz – mierzenie tylko swojego fragmentu może dawać mylący obraz całości. Jeśli odpowiadacie za kilka usług, opiszcie tę najważniejszą dla biznesu albo odpowiedzcie osobno dla 2–3 kluczowych serwisów, zamiast uśredniać.",
+        "levels": [
+          "U nas to ponad miesiąc.",
+          "U nas to od tygodnia do miesiąca.",
+          "U nas to od doby do tygodnia.",
+          "U nas to od godziny do doby.",
+          "U nas to poniżej godziny."
+        ]
+      },
+      {
+        "id": "change_failure",
+        "title": "Wskaźnik nieudanych zmian",
+        "help": "Change Failure Rate – jak często wdrożenie powoduje awarię, degradację usługi lub wymaga poprawki. Jedna z metryk DORA. Jeśli macie dashboard z tą metryką, wpiszcie jej wartość w polu poniżej. Jeśli nie, sprawdźcie ostatnie 10–20 wdrożeń, policzcie, ile z nich trzeba było poprawiać lub wycofywać, i wybierzcie najbliższy poziom. Uwaga: akceptowalny poziom zależy od kosztu błędu w Waszym kontekście – różne podejścia bywają świadomym kompromisem między tempem a ostrożnością. Jeśli odpowiadacie za kilka usług, opiszcie tę najważniejszą dla biznesu albo odpowiedzcie osobno dla 2–3 kluczowych serwisów, zamiast uśredniać.",
+        "levels": [
+          "Mniej więcej co drugie wdrożenie albo częściej.",
+          "Mniej więcej co trzecie wdrożenie.",
+          "Mniej więcej co piąte wdrożenie.",
+          "Mniej więcej co dziesiąte wdrożenie.",
+          "Rzadziej niż co dwudzieste wdrożenie."
+        ]
+      },
+      {
+        "id": "mttr",
+        "title": "Czas przywrócenia usługi (MTTR)",
+        "help": "Czas przywrócenia usługi – jak szybko zespół przywraca działanie usługi po awarii. W badaniach DORA to jedna z metryk stabilności, liczona jako mediana, a nie średnia, i dotycząca awarii spowodowanych wdrożeniem. Tu pytamy o każdą awarię. Jeśli macie dashboard z tą metryką, wpiszcie jej wartość w polu poniżej. W systemach rozproszonych czas przywrócenia bywa trudny do zmierzenia jednoznacznie, bo różne komponenty mogą się psuć i wracać niezależnie – traktujcie wynik jako przybliżenie, nie precyzyjny wskaźnik. Jeśli odpowiadacie za kilka usług, opiszcie tę najważniejszą dla biznesu albo odpowiedzcie osobno dla 2–3 kluczowych serwisów, zamiast uśredniać.",
+        "levels": [
+          "Przywrócenie usługi po awarii zajmuje nam zwykle ponad tydzień.",
+          "Przywrócenie zajmuje nam zwykle od doby do tygodnia.",
+          "Przywrócenie zajmuje nam zwykle od godziny do doby.",
+          "Przywrócenie zajmuje nam zwykle od 15 minut do godziny.",
+          "Przywrócenie zajmuje nam zwykle mniej niż 15 minut."
+        ]
+      }
     ]
-   },
-   {
-    "id": "dor",
-    "title": "Definition of Ready",
-    "help": "DoR („Definition of Ready”) to uzgodnione minimum, kiedy zadanie nadaje się do rozpoczęcia. Nie trzeba czekać, aż wszystko będzie jasne – w zwinnym środowisku często zaczyna się, zanim wszystko jest domknięte. Ważne, żeby nazwać, co jeszcze jest niewiadomą.",
-    "levels": [
-     "Nie mamy wspólnego rozumienia, kiedy zadanie jest gotowe do startu.",
-     "Mamy takie ustalenia, ale pomijamy je, gdy brakuje czasu.",
-     "Znamy minimum gotowości i zwykle go przestrzegamy.",
-     "Mamy jasne minimum do rozpoczęcia pracy i nazywamy niewiadome, które zostają do wyjaśnienia w trakcie.",
-     "Dopasowujemy minimum gotowości do zadania i decydujemy, kiedy zacząć mimo niepewności."
+  },
+  {
+    "id": "prod",
+    "group": "tech",
+    "label": "Produkcja i bezpieczeństwo",
+    "desc": "Jak zespół utrzymuje system na produkcji, wykrywa i naprawia problemy, uczy się z awarii i dba o bezpieczeństwo.",
+    "blurb": "infrastruktura, monitoring, incydenty i post mortem, sekrety, podatności",
+    "radar": "#4FA77A",
+    "dims": [
+      {
+        "id": "iac",
+        "title": "Infrastruktura jako kod",
+        "help": "IaC (Infrastructure as Code) to zarządzanie infrastrukturą przez kod, a nie ręczną konfigurację.",
+        "levels": [
+          "Środowiska konfigurujemy ręcznie.",
+          "Część infrastruktury mamy w kodzie, ale nowe środowiska i większość zmian nadal robimy ręcznie.",
+          "Większość infrastruktury mamy w kodzie, ale zdarza się, że ktoś zmienia coś ręcznie na środowisku i kod przestaje się zgadzać.",
+          "Cała infrastruktura jest w kodzie i zmieniamy ją tylko przez kod.",
+          "Środowisko potrafimy odtworzyć z kodu od zera, bez żadnej ręcznej pracy."
+        ]
+      },
+      {
+        "id": "monitoring",
+        "title": "Monitoring i alerty",
+        "help": "Observability to zdolność systemu do pokazywania, co się w nim dzieje – przez logi, metryki i tracing. To pytanie dotyczy tego, skąd i jak szybko dowiadujecie się o problemach. W systemie złożonym z wielu usług sam wgląd w pojedynczy serwis nie wystarczy – trzeba widzieć, jak żądanie przechodzi przez cały łańcuch (distributed tracing), inaczej alerty pokazują objawy, nie przyczyny.",
+        "levels": [
+          "O problemach dowiadujemy się od użytkowników i nie mamy danych, które pomogłyby zauważyć je wcześniej.",
+          "Mamy logi i metryki, ale zaglądamy do nich dopiero wtedy, gdy ktoś zgłosi problem.",
+          "Mamy alerty, ale o większości problemów i tak pierwsi dowiadują się użytkownicy.",
+          "O większości problemów dowiadujemy się sami, a nie z zgłoszeń użytkowników.",
+          "Większość problemów wykrywamy, zanim odczują je użytkownicy."
+        ]
+      },
+      {
+        "id": "incydenty",
+        "title": "Reagowanie na incydenty",
+        "help": "Incydent to awaria lub poważny problem na produkcji. To pytanie dotyczy tego, jak działacie, gdy się zdarzy: kto prowadzi, kogo wołacie i jak się komunikujecie.",
+        "levels": [
+          "Gdy jest awaria, kilka osób działa naraz, każdy po swojemu, i nie wiadomo, kto prowadzi.",
+          "Awarią zajmuje się ten, kto akurat jest dostępny, i sam musi ustalić, kogo wołać i co robić.",
+          "Wiemy, kto prowadzi i kogo wołać, ale nie mamy tego spisanego, więc gdy kluczowej osoby nie ma, ustalamy wszystko na bieżąco.",
+          "Mamy spisany i znany całemu zespołowi sposób reagowania: wiadomo, kto prowadzi, kto naprawia i kto informuje biznes i wsparcie.",
+          "Mamy ustalone poziomy wagi awarii i dla każdego wiadomo, kogo angażujemy i jak często informujemy innych. Drobny problem nie stawia na nogi całego zespołu, a poważny od razu dostaje pełną uwagę."
+        ]
+      },
+      {
+        "id": "postmortem",
+        "title": "Post mortem",
+        "help": "Post mortem to rozmowa po incydencie: co się stało, dlaczego i co ujawniło. Dobrze działa bez szukania winnych (blameless) – zespół uczy się, a nie szuka kozła ofiarnego.",
+        "levels": [
+          "Po awarii wracamy do pracy bez rozmowy o tym, co się stało.",
+          "Po poważnej awarii rozmawiamy o niej nieformalnie, ale nic z tej rozmowy nie zapisujemy.",
+          "Robimy post mortem po poważniejszych awariach, ale bez stałego formatu.",
+          "Po każdej awarii robimy post mortem w stałym formacie (oś czasu, przyczyny, wpływ).",
+          "Post mortem jest u nas standardową praktyką, szukamy w nich wszystkich przyczyn, nie tylko pierwszej, i robimy je także po zdarzeniach, które mogły skończyć się awarią."
+        ]
+      },
+      {
+        "id": "wnioski_inc",
+        "title": "Wnioski z incydentów",
+        "help": "Chodzi o to, czy z post mortem wynikają konkretne działania i czy ktoś pilnuje, że faktycznie zostały zrobione.",
+        "levels": [
+          "Z awarii nie wynikają u nas żadne działania.",
+          "Po awarii zapisujemy wnioski, ale nie zamieniamy ich w konkretne zadania.",
+          "Wnioski zamieniamy w zadania, ale nikt nie pilnuje, czy zostały zrobione.",
+          "Działania po awarii mają osobę odpowiedzialną i termin i są realizowane.",
+          "Sprawdzamy, czy wdrożone działania faktycznie zapobiegły powtórce, i poprawiamy je, jeśli nie."
+        ]
+      },
+      {
+        "id": "sekrety",
+        "title": "Sekrety i dostępy",
+        "help": "Sekrety to hasła do systemów i usług, klucze API i tokeny. To pytanie dotyczy tego, gdzie je trzymacie, kto ma do nich dostęp i czy umiecie je wymienić.",
+        "levels": [
+          "Trzymamy sekrety wprost w kodzie lub plikach konfiguracyjnych.",
+          "Sekretów nie trzymamy w kodzie, ale każdy przechowuje je po swojemu (np. w lokalnych plikach, notatkach albo na czacie).",
+          "Sekrety trzymamy w jednym, przeznaczonym do tego miejscu, ale dostęp do nich ma szerokie grono, także osoby, które ich nie potrzebują.",
+          "Sekrety trzymamy w jednym miejscu, a dostęp do nich mają tylko osoby i usługi, które go potrzebują.",
+          "Sekrety wymieniają się automatycznie albo są krótkotrwałe, a gdy któryś wycieknie, umiemy szybko go unieważnić i podmienić."
+        ]
+      },
+      {
+        "id": "podatnosci",
+        "title": "Podatności i zależności",
+        "help": "Chodzi o skanowanie zależności i kodu pod kątem znanych luk, o to, jak szybko naprawiacie znalezione podatności, i o to, czy utrzymujecie zależności aktualne.",
+        "levels": [
+          "Nikt u nas nie sprawdza zależności ani kodu pod kątem podatności.",
+          "Podatności sprawdzamy sporadycznie i zależnie od osoby.",
+          "Skanujemy zależności, ale wyniki przeglądamy rzadko, więc znalezione podatności długo czekają na naprawę.",
+          "Skanowanie zależności i kodu jest częścią naszego pipeline’u, a znalezione podatności naprawiamy w czasie ustalonym dla ich wagi.",
+          "Zależności aktualizujemy na bieżąco, w dużej mierze automatycznie, więc większość znanych podatności znika, zanim trzeba się nimi osobno zajmować."
+        ]
+      }
     ]
-   },
-   {
-    "id": "dod",
-    "title": "Definition of Done",
-    "help": "DoD („Definition of Done”) to kryteria, kiedy zadanie jest naprawdę skończone (np. kod po code review, przetestowany, wdrożony), a nie tylko „zrobione u mnie”.",
-    "levels": [
-     "Nie mamy wspólnego rozumienia, kiedy zadanie jest ukończone.",
-     "Mamy takie kryteria, ale pomijamy je pod presją czasu.",
-     "Znamy kryteria ukończenia i zwykle ich przestrzegamy.",
-     "Mamy jasne kryteria ukończenia i stosujemy je do każdego zadania.",
-     "Nasze kryteria ukończenia rozwijamy razem z produktem i poprawiamy je, gdy coś nam umknie."
-    ]
-   },
-   {
-    "id": "feedback_biznes",
-    "title": "Pętla zwrotna z użytkownikiem i biznesem",
-    "help": "Chodzi o to, czy zespół wie, że to, co dostarcza, faktycznie działa dla użytkownika i tworzy wartość biznesową, a nie tylko czy zadanie formalnie zostało zamknięte. Sprawne procesy i technika nie gwarantują, że budujecie właściwe rzeczy – to osobny obszar.",
-    "levels": [
-     "Dowiadujemy się, czy coś działa, głównie z reklamacji lub przypadkowych sygnałów – nikt u nas systematycznie tego nie sprawdza.",
-     "Czasem ktoś u nas sprawdza wyniki po wdrożeniu, ale zależy to od inicjatywy pojedynczej osoby, nie od ustalonej praktyki.",
-     "Mamy ustaloną praktykę sprawdzania efektów po wdrożeniu, ale rzadko korzystamy z jej wyników przy planowaniu.",
-     "Regularnie sprawdzamy, czy dostarczone rozwiązania osiągają zakładany efekt, i wykorzystujemy to przy planowaniu kolejnych prac.",
-     "Przed startem zadania ustalamy miarę sukcesu, a po wdrożeniu sprawdzamy ją i na tej podstawie podejmujemy decyzje."
-    ]
-   }
-  ]
- },
- {
-  "id": "zespol",
-  "group": "org",
-  "label": "Praktyki zespołowe i współpraca",
-  "desc": "Jak zespół podejmuje decyzje, bierze odpowiedzialność, rozmawia o błędach i dba o tempo, wiedzę oraz relacje z innymi zespołami.",
-  "blurb": "decyzje, odpowiedzialność, bezpieczeństwo psychologiczne, tempo, wiedza, refleksja, zależności",
-  "radar": "#B0673B",
-  "dims": [
-   {
-    "id": "autonomia_d",
-    "title": "Autonomia w decyzjach",
-    "help": "Chodzi o to, ile decyzji – technicznych i dotyczących organizacji pracy – zespół może podjąć samodzielnie, bez czekania na akceptację z zewnątrz.",
-    "levels": [
-     "Czekamy na polecenia, wszystkie decyzje zapadają poza zespołem.",
-     "Większość decyzji zapada poza zespołem, sami decydujemy tylko w drobnych sprawach.",
-     "Część decyzji technicznych podejmujemy samodzielnie.",
-     "Samodzielnie podejmujemy większość decyzji technicznych i dotyczących organizacji pracy.",
-     "Sami decydujemy, jak budujemy produkt i jak pracujemy. Z otoczeniem uzgadniamy te decyzje, które tego wymagają lub mogą wpływać na inne zespoły."
-    ]
-   },
-   {
-    "id": "odpowiedzialnosc",
-    "title": "Odpowiedzialność za wynik",
-    "help": "Chodzi o to, czy zespół czuje się właścicielem tego, co dostarcza – także po tym, jak zadanie zostało zamknięte.",
-    "levels": [
-     "Nie czujemy się właścicielami wyniku, odpowiedzialność jest gdzie indziej.",
-     "Odpowiadamy za swoje zadania, ale nie za to, czy całość działa.",
-     "Czujemy się odpowiedzialni za to, co dostarczamy, ale nie zawsze reagujemy, gdy coś nie wychodzi.",
-     "Odpowiadamy za to, co dostarczamy, także po wdrożeniu.",
-     "Odpowiadamy za skutki swoich decyzji i sami je korygujemy, gdy coś nie wychodzi."
-    ]
-   },
-   {
-    "id": "bledy_pomoc",
-    "title": "Otwartość wobec błędów",
-    "help": "Bezpieczeństwo psychologiczne to poczucie, że można przyznać się do błędu, zadać „głupie” pytanie albo poprosić o pomoc bez obawy o negatywne konsekwencje społeczne czy zawodowe.",
-    "levels": [
-     "Ukrywamy błędy i problemy, bo boimy się konsekwencji.",
-     "Ujawniamy błędy niechętnie, zwykle dopiero gdy nie da się ich ukryć.",
-     "Zwykle mówimy otwarcie o błędach, choć nie zawsze od razu.",
-     "Przyznajemy się do błędów i prosimy o pomoc.",
-     "O swoich błędach mówimy sami, zanim ktoś o nie zapyta."
-    ]
-   },
-   {
-    "id": "kwestionowanie",
-    "title": "Kwestionowanie decyzji",
-    "help": "Chodzi o to, czy można powiedzieć „mam wątpliwości” albo „widzę to inaczej” – także wobec lidera lub osób starszych stażem – bez obawy o negatywne konsekwencje.",
-    "levels": [
-     "Decyzji innych nie kwestionujemy, nawet gdy mamy wątpliwości.",
-     "Wątpliwości zgłaszamy rzadko i raczej na boku.",
-     "Zgłaszamy wątpliwości, gdy ktoś o nie zapyta.",
-     "Mówimy o wątpliwościach wprost, także wobec decyzji kolegów z zespołu.",
-     "Otwarcie kwestionujemy decyzje innych, także lidera lub osób starszych stażem, żeby znaleźć najlepsze rozwiązanie."
-    ]
-   },
-   {
-    "id": "tempo",
-    "title": "Zrównoważone tempo",
-    "help": "Zrównoważone tempo to zasada z Extreme Programming (XP) mówiąca, że zespół powinien pracować w tempie, które da się utrzymać w długim okresie – bez chronicznych nadgodzin i wypalenia.",
-    "levels": [
-     "Praca w nadgodzinach i pod presją jest u nas normą, jesteśmy chronicznie przeciążeni.",
-     "Przeciążamy się często, zwykle przy większych terminach.",
-     "Nasze tempo bywa nierówne, ale zwykle wracamy do normy po intensywnych okresach.",
-     "Nasze tempo pracy jest stabilne, a okresy większego obciążenia zdarzają się rzadko.",
-     "Pracujemy w stałym tempie, które da się utrzymać. Przeciążenie jest u nas wyjątkiem, a gdy się zdarza, szybko reagujemy."
-    ]
-   },
-   {
-    "id": "wspolpraca",
-    "title": "Rozproszenie wiedzy i wspólna własność kodu",
-    "help": "Bus factor to liczba osób, których nagła nieobecność (np. odejście z firmy) zatrzymałaby pracę zespołu. Wspólna własność kodu (collective code ownership) oznacza, że każdy może zmieniać każdy fragment kodu, nie tylko jego autor. W większych, rozproszonych systemach ryzyko rzadko jest tak proste jak „jedna osoba zna cały moduł” – częściej chodzi o to, że nikt nie rozumie całości interakcji między usługami, za które odpowiada kilka zespołów naraz.",
-    "levels": [
-     "Mamy silosy kompetencyjne – pojedyncze osoby są „jedynym punktem awarii” (bus factor 1).",
-     "Wymieniamy się wiedzą sporadycznie, głównie przy okazji problemów.",
-     "Świadomie staramy się dzielić wiedzą, ale nie robimy tego systemowo.",
-     "Każdy element systemu może u nas przejąć więcej niż jedna osoba.",
-     "Kod jest wspólny: każdy z nas może zmienić większość jego fragmentów."
-    ]
-   },
-   {
-    "id": "retro",
-    "title": "Regularna refleksja i wdrażanie usprawnień",
-    "help": "Nie chodzi o konkretną nazwę spotkania (np. retrospektywę) – liczy się regularny moment przyjrzenia się temu, JAK zespół pracuje, niezależnie od formy, i to, czy coś z tego faktycznie się zmienia.",
-    "levels": [
-     "Nie mamy żadnego regularnego momentu na refleksję nad sposobem pracy – i nic z tego nie wynika.",
-     "Taka refleksja się u nas zdarza, ale wnioski rzadko wdrażamy.",
-     "Część wniosków z takich rozmów wdrażamy, efekty bywają widoczne.",
-     "Wdrażamy większość wniosków z takich rozmów i widzimy efekty, ale nie prowadzimy listy usprawnień.",
-     "Wdrażamy wnioski, zapisujemy je i sprawdzamy, czy pomogły. Jeśli nie, poprawiamy."
-    ]
-   },
-   {
-    "id": "zaleznosci",
-    "title": "Zarządzanie zależnościami i ryzykiem",
-    "help": "Zależność to sytuacja, w której wykonanie Waszej pracy wymaga czegoś od innego zespołu, systemu lub osoby. W organizacji z wieloma zespołami na współdzielonej platformie zależności bywają wielopoziomowe i trudne do przewidzenia – to normalne, pytanie dotyczy tego, jak szybko je zauważacie, nie czy w ogóle występują.",
-    "levels": [
-     "Zależności ujawniają się nam w ostatniej chwili i powodują poślizgi.",
-     "Znamy zależności, ale zarządzamy nimi reaktywnie.",
-     "Identyfikujemy zależności z wyprzedzeniem, ale komunikacja bywa niespójna.",
-     "Na bieżąco śledzimy zależności i ryzyka oraz komunikujemy je innym zespołom.",
-     "Zależności i ryzyka zauważamy i ograniczamy, zanim zaczną opóźniać pracę."
-    ]
-   }
-  ]
- },
- {
-  "id": "prakt",
-  "group": "tech",
-  "label": "Praktyki inżynierskie",
-  "desc": "Jak zespół dba o jakość kodu, testów i integracji na co dzień (to w dużej mierze praktyki z Extreme Programming). Żaden z opisów nie jest uniwersalnym celem – w kodzie odziedziczonym, w środowiskach regulowanych czy tam, gdzie koszt błędu jest bardzo wysoki, punkt wyjścia bywa po prostu inny.",
-  "blurb": "code review i parowanie, refaktoryzacja, testy, dług techniczny, CI i krótkie gałęzie, dokumentacja",
-  "radar": "#3E9C98",
-  "dims": [
-   {
-    "id": "przeglady",
-    "title": "Code review i parowanie",
-    "help": "Chodzi o to, czy kod, zanim trafi dalej, ogląda ktoś jeszcze: przez code review albo wspólną pracę (pair lub mob programming).",
-    "levels": [
-     "Piszemy kod w pojedynkę, nikt poza autorem go nie ogląda.",
-     "Code review robimy sporadycznie, głównie gdy zmiana jest duża lub ryzykowna.",
-     "Code review jest u nas normą, ale jego jakość i czas oczekiwania bywają różne.",
-     "Każda zmiana przechodzi code review albo powstaje w parze lub zespołowo.",
-     "Code review lub praca w parze to u nas stała praktyka, która daje realną wartość."
-    ]
-   },
-   {
-    "id": "refaktoryzacja",
-    "title": "Refaktoryzacja i prostota kodu",
-    "help": "Refaktoryzacja to poprawianie struktury kodu bez zmiany jego zachowania. Chodzi też o dbanie o prostotę rozwiązań, a nie tylko o to, żeby „działało”.",
-    "levels": [
-     "Nikt nie odważa się u nas zmieniać istniejącego kodu z obawy przed zepsuciem.",
-     "Refaktoryzację odkładamy i zwykle do niej nie wracamy.",
-     "Refaktoryzację robimy przy okazji innych zadań, ale niesystematycznie.",
-     "Refaktoryzację planujemy i robimy regularnie.",
-     "Dbamy o prostotę kodu na bieżąco i upraszczamy skomplikowane fragmenty, zanim zaczną nam przeszkadzać."
-    ]
-   },
-   {
-    "id": "testy_auto",
-    "title": "Testy automatyczne",
-    "help": "Chodzi o to, jak bardzo zespół polega na automatycznych testach zamiast ręcznego sprawdzania. W kodzie odziedziczonym bez testów od lat punkt wyjścia bywa po prostu inny niż w nowym projekcie.",
-    "levels": [
-     "Testujemy głównie ręcznie.",
-     "Mamy podstawowe testy automatyczne, ale nie ufamy im w pełni.",
-     "Najważniejsze części systemu mają testy automatyczne, którym ufamy.",
-     "Mamy testy na różnych poziomach, które obejmują większość systemu.",
-     "Ufamy naszym testom na tyle, że wdrażamy bez obaw."
-    ]
-   },
-   {
-    "id": "dlug",
-    "title": "Dług techniczny",
-    "help": "Dług techniczny to odłożone decyzje i „skróty” w kodzie. Sam dług bywa racjonalnym wyborem, żeby zdążyć w terminie. Gorzej, gdy jest niewidoczny: zespół, który wie, co i dlaczego odłożył, jest w innej sytuacji niż zespół, który nie wie, ile długu ma.",
-    "levels": [
-     "Nie wiemy, ile mamy długu technicznego, nikt go nie śledzi.",
-     "O długu technicznym wspominamy sporadycznie, ale nigdzie go nie zapisujemy.",
-     "Dług techniczny jest widoczny w backlogu, ale rzadko go priorytetyzujemy.",
-     "Dług techniczny zapisujemy i regularnie spłacamy.",
-     "Świadomie decydujemy o zaciągnięciu lub spłacie długu technicznego na podstawie jego kosztu."
-    ]
-   },
-   {
-    "id": "pipeline_ci",
-    "title": "Pipeline CI",
-    "help": "CI (Continuous Integration) to automatyczne budowanie i testowanie każdej zmiany. To pytanie dotyczy samego pipeline’u: czy działa, czy jest szybki i czy mu ufacie.",
-    "levels": [
-     "Nie mamy CI albo nasz pipeline praktycznie nie działa.",
-     "Pipeline działa, ale bywa zawodny i zdarza nam się go omijać.",
-     "Pipeline uruchamia się przy każdym commicie i zwykle mu ufamy.",
-     "Nasz pipeline jest szybki i stabilny.",
-     "Gdy pipeline zwalnia lub zawodzi, od razu go naprawiamy."
-    ]
-   },
-   {
-    "id": "trunk",
-    "title": "Krótkie gałęzie (trunk-based)",
-    "help": "Trunk-based development to praca na krótko żyjących gałęziach, często integrowanych z główną linią kodu. Im krócej żyją gałęzie, tym mniej konfliktów przy scalaniu. W środowisku z wieloma zespołami na współdzielonym repozytorium albo z zależnościami między wieloma usługami częsta integracja bywa trudniejsza do skoordynowania niż w pojedynczym repozytorium i wymaga innej infrastruktury (feature flagi, testy kontraktowe).",
-    "levels": [
-     "Nasze gałęzie żyją tygodnie lub dłużej.",
-     "Nasze gałęzie żyją od kilku dni do tygodnia.",
-     "Nasze gałęzie żyją zwykle jeden–dwa dni.",
-     "Nasze gałęzie żyją zwykle krócej niż dzień, a część zmian scalamy od razu do głównej linii kodu.",
-     "Pracujemy w trunk-based development, a główna linia kodu jest u nas zawsze gotowa do wdrożenia."
-    ]
-   },
-   {
-    "id": "dokumentacja",
-    "title": "Dokumentacja",
-    "help": "Pytanie dotyczy tego, czy zespół utrzymuje opis systemu (architekturę, ważne decyzje wraz z uzasadnieniem, instrukcje na wypadek awarii) i aktualizuje go razem ze zmianami. Część tej roli pełnią też czytelny kod i testy. W środowiskach regulowanych dokumentacja bywa wymogiem formalnym.",
-    "levels": [
-     "Dokumentacji prawie nie mamy, wiedza o systemie jest w głowach pojedynczych osób.",
-     "Dokumentacja istnieje, ale zwykle jest nieaktualna.",
-     "Najważniejsze rzeczy mamy spisane, ale aktualizujemy je dopiero, gdy ktoś zauważy, że są nieaktualne.",
-     "Dokumentację aktualizujemy zwykle razem ze zmianą w systemie.",
-     "Dokumentacja jest aktualna i nie większa, niż potrzeba: zmiana bez zaktualizowanego opisu nie jest u nas uznana za skończoną, a opisy, z których nikt nie korzysta, usuwamy."
-    ]
-   }
-  ]
- },
- {
-  "id": "dostarczanie",
-  "group": "tech",
-  "label": "Dostarczanie zmian",
-  "desc": "Jak zmiana trafia od zatwierdzenia do użytkownika, na ile wdrożenie jest zautomatyzowane i jak sprawnie przebiega. W środowiskach regulowanych, w embedded czy tam, gdzie błąd bardzo dużo kosztuje, rzadsze i ostrożniejsze wdrożenia bywają świadomym wyborem. Przy pytaniach opartych na metrykach DORA możecie wpisać faktyczne wartości, jeśli je znacie.",
-  "blurb": "automatyczne wdrażanie, niezależność wdrożeń i metryki DORA",
-  "radar": "#4A93BD",
-  "dims": [
-   {
-    "id": "cd",
-    "title": "Automatyczne wdrażanie (CD)",
-    "help": "CD (Continuous Delivery) to automatyzacja drogi od zatwierdzonej zmiany do produkcji. To pytanie dotyczy tego, ile z tej drogi odbywa się bez ręcznej pracy.",
-    "levels": [
-     "Wdrażamy ręcznie, a każde wdrożenie wymaga wielu kroków i uwagi kilku osób.",
-     "Część wdrożenia mamy zautomatyzowaną, ale zostają ręczne kroki i zwykle ktoś musi je pilnować.",
-     "Wdrożenie uruchamiamy jednym poleceniem lub kliknięciem, ale robi to wybrana osoba.",
-     "Zatwierdzona zmiana sama przechodzi przez pipeline do gotowej wersji, a wdrożyć ją może każdy z nas.",
-     "W każdej chwili możemy wdrożyć aktualną wersję, a samo wdrożenie nie wymaga od nas żadnych przygotowań."
-    ]
-   },
-   {
-    "id": "niezaleznosc_wdr",
-    "title": "Niezależność wdrożeń od innych zespołów",
-    "help": "Chodzi o to, czy możecie wdrożyć swoją zmianę bez czekania na inne zespoły: ich wdrożenia, zgody albo zmiany w ich częściach systemu. Gdy wiele zespołów dzieli platformę lub usługi, część zależności jest nieunikniona – pytanie dotyczy tego, jak często blokują one Wasze wdrożenia. To osobne pytanie od „Zarządzania zależnościami i ryzykiem”, które dotyczy planowania pracy.",
-    "levels": [
-     "Prawie każde nasze wdrożenie wymaga wspólnego terminu lub uzgodnień z innymi zespołami.",
-     "Większość naszych wdrożeń wymaga uzgodnień z innymi zespołami, ale wspólny termin jest potrzebny tylko przy niektórych.",
-     "Część zmian wdrażamy sami, ale te, które dotykają wspólnych elementów, wymagają uzgodnień z innymi zespołami.",
-     "Większość zmian wdrażamy sami, w dogodnym dla nas momencie, ale zdarza się, że jesteśmy zależni od innych zespołów.",
-     "Prawie każdą zmianę możemy wdrożyć sami i w dowolnym momencie, także gdy korzystają z niej inne zespoły."
-    ]
-   },
-   {
-    "id": "deploy_freq",
-    "title": "Częstotliwość wdrożeń",
-    "help": "Deployment Frequency (częstotliwość wdrożeń) – jak często zmiany trafiają na produkcję. Jedna z kluczowych metryk DORA. Częstotliwość zależy od kontekstu – w środowiskach z twardymi oknami wdrożeniowymi (regulacje, certyfikacja sprzętu, integracje z systemami o ograniczonej dostępności) rzadsze, większe wdrożenia bywają świadomym wyborem. Jeśli odpowiadacie za kilka usług, opiszcie tę najważniejszą dla biznesu albo odpowiedzcie osobno dla 2–3 kluczowych serwisów, zamiast uśredniać.",
-    "levels": [
-     "Wdrażamy rzadziej niż raz w miesiącu.",
-     "Wdrażamy raz w miesiącu lub kilka razy w miesiącu.",
-     "Wdrażamy zwykle raz lub kilka razy w tygodniu.",
-     "Wdrażamy zwykle codziennie.",
-     "Wdrażamy wielokrotnie w ciągu dnia."
-    ]
-   },
-   {
-    "id": "lead_time",
-    "title": "Czas realizacji zmiany (lead time for changes)",
-    "help": "Lead Time for Changes – czas od zatwierdzenia (scalenia) zmiany do chwili, gdy działa na produkcji. Jedna z metryk DORA. W systemach złożonych z wielu usług lead time bywa sumą czasów oczekiwania na kilka zespołów naraz – mierzenie tylko swojego fragmentu może dawać mylący obraz całości. Jeśli odpowiadacie za kilka usług, opiszcie tę najważniejszą dla biznesu albo odpowiedzcie osobno dla 2–3 kluczowych serwisów, zamiast uśredniać.",
-    "levels": [
-     "U nas to ponad miesiąc.",
-     "U nas to od tygodnia do miesiąca.",
-     "U nas to od doby do tygodnia.",
-     "U nas to od godziny do doby.",
-     "U nas to poniżej godziny."
-    ]
-   },
-   {
-    "id": "change_failure",
-    "title": "Wskaźnik nieudanych zmian",
-    "help": "Change Failure Rate – jaki procent wdrożeń powoduje awarię, degradację usługi lub wymaga poprawki. Jedna z metryk DORA. Uwaga: akceptowalny poziom zależy od kosztu błędu w Waszym kontekście – różne podejścia bywają świadomym kompromisem między tempem a ostrożnością. Jeśli odpowiadacie za kilka usług, opiszcie tę najważniejszą dla biznesu albo odpowiedzcie osobno dla 2–3 kluczowych serwisów, zamiast uśredniać.",
-    "levels": [
-     "Wiele naszych wdrożeń kończy się poprawką awaryjną lub wycofaniem zmiany.",
-     "Poprawka lub wycofanie zdarza się u nas regularnie, a o błędach dowiadujemy się głównie od użytkowników.",
-     "Poprawki po wdrożeniu zdarzają się, ale zwykle sami szybko je zauważamy.",
-     "Poprawki po wdrożeniu zdarzają się rzadko.",
-     "Poprawki po wdrożeniu są u nas wyjątkiem. Gdy wdrożenie się nie powiedzie, zwykle wycofujemy zmianę, zanim odczują to użytkownicy."
-    ]
-   },
-   {
-    "id": "mttr",
-    "title": "Czas przywrócenia usługi (MTTR)",
-    "help": "Czas przywrócenia usługi – jak szybko zespół przywraca działanie usługi po awarii. W badaniach DORA to jedna z metryk stabilności, liczona jako mediana, a nie średnia, i dotycząca awarii spowodowanych wdrożeniem. Tu pytamy o każdą awarię. W systemach rozproszonych czas przywrócenia bywa trudny do zmierzenia jednoznacznie, bo różne komponenty mogą się psuć i wracać niezależnie – traktujcie wynik jako przybliżenie, nie precyzyjny wskaźnik. Jeśli odpowiadacie za kilka usług, opiszcie tę najważniejszą dla biznesu albo odpowiedzcie osobno dla 2–3 kluczowych serwisów, zamiast uśredniać.",
-    "levels": [
-     "Przywrócenie usługi po awarii zajmuje nam zwykle ponad dobę.",
-     "Przywrócenie zajmuje nam zwykle od kilku godzin do doby.",
-     "Przywrócenie zajmuje nam zwykle od godziny do kilku godzin.",
-     "Przywrócenie zajmuje nam zwykle od kilkunastu minut do godziny.",
-     "Przywrócenie zajmuje nam zwykle kilka minut."
-    ]
-   }
-  ]
- },
- {
-  "id": "prod",
-  "group": "tech",
-  "label": "Produkcja i bezpieczeństwo",
-  "desc": "Jak zespół utrzymuje system na produkcji, wykrywa i naprawia problemy, uczy się z awarii i dba o bezpieczeństwo.",
-  "blurb": "infrastruktura, monitoring, incydenty i post mortem, sekrety, podatności",
-  "radar": "#4FA77A",
-  "dims": [
-   {
-    "id": "iac",
-    "title": "Infrastruktura jako kod",
-    "help": "IaC (Infrastructure as Code) to zarządzanie infrastrukturą przez kod, a nie ręczną konfigurację.",
-    "levels": [
-     "Konfigurujemy środowiska ręcznie.",
-     "Część infrastruktury mamy w kodzie, resztę konfigurujemy ręcznie.",
-     "Większość infrastruktury mamy jako kod, ale zdarzają się ręczne zmiany.",
-     "Całą infrastrukturę mamy wersjonowaną w kodzie.",
-     "Środowisko potrafimy odtworzyć z kodu w krótkim czasie, bez ręcznej pracy."
-    ]
-   },
-   {
-    "id": "monitoring",
-    "title": "Monitoring i alerty",
-    "help": "Observability to zdolność systemu do pokazywania, co się w nim dzieje – przez logi, metryki i tracing. W systemie złożonym z wielu usług sam wgląd w pojedynczy serwis nie wystarczy – trzeba widzieć, jak żądanie przechodzi przez cały łańcuch (distributed tracing), inaczej alerty pokazują objawy, nie przyczyny.",
-    "levels": [
-     "O problemach dowiadujemy się od użytkowników.",
-     "Mamy podstawowe logi i metryki, ale nikt regularnie ich nie sprawdza.",
-     "Mamy dashboardy i alerty na kluczowe metryki.",
-     "Alerty są wiarygodne i pozwalają szybko znaleźć przyczynę problemu.",
-     "Wykrywamy większość problemów, zanim zauważy je użytkownik."
-    ]
-   },
-   {
-    "id": "incydenty",
-    "title": "Reagowanie na incydenty",
-    "help": "Incydent to awaria lub poważny problem na produkcji. To pytanie dotyczy tego, jak działacie, gdy się zdarzy: kto prowadzi, kogo wołacie i jak się komunikujecie.",
-    "levels": [
-     "Gdy jest awaria, każdy robi to, co uważa za słuszne, i nie wiadomo, kto prowadzi.",
-     "Awarią zajmuje się ten, kto akurat jest dostępny, bez ustalonego sposobu działania.",
-     "Wiemy, kogo wezwać lub jak sobie poradzić z typowymi awariami, ale zasady reagowania nie są spisane.",
-     "Mamy spisany sposób reagowania, w którym określono, kto prowadzi incydent.",
-     "Sposób reagowania ćwiczymy i dopracowujemy na podstawie tego, jak nam poszło."
-    ]
-   },
-   {
-    "id": "postmortem",
-    "title": "Post mortem",
-    "help": "Post mortem to rozmowa po incydencie: co się stało, dlaczego, co ujawniło. Dobrze działa bez szukania winnych (blameless) – zespół uczy się, a nie szuka kozła ofiarnego.",
-    "levels": [
-     "Po awarii wracamy do pracy bez rozmowy o tym, co się stało.",
-     "Rozmawiamy o awarii nieformalnie, gdy była poważna.",
-     "Robimy post mortem po poważniejszych awariach, ale bez stałego formatu.",
-     "Po każdej poważniejszej awarii robimy post mortem w stałym formacie (oś czasu, przyczyny, wpływ).",
-     "Post mortem robimy także po zdarzeniach, które mogły skończyć się awarią, i dzielimy się wnioskami szerzej niż w zespole."
-    ]
-   },
-   {
-    "id": "wnioski_inc",
-    "title": "Wnioski z incydentów",
-    "help": "Chodzi o to, czy z post mortem wynikają konkretne działania i czy ktoś pilnuje, że faktycznie zostały zrobione.",
-    "levels": [
-     "Z awarii nie wynikają u nas żadne działania.",
-     "Po awarii zapisujemy wnioski, ale rzadko cokolwiek z nich wdrażamy.",
-     "Część działań po awarii realizujemy, ale nikt nie sprawdza, które z nich faktycznie zostały zrobione.",
-     "Działania po awarii mają właściciela i termin, i zwykle je realizujemy.",
-     "Sprawdzamy, czy wdrożone działania faktycznie zapobiegły powtórce, i poprawiamy je, jeśli nie."
-    ]
-   },
-   {
-    "id": "sekrety",
-    "title": "Sekrety i dostępy",
-    "help": "Sekrety to hasła, klucze API i tokeny. To pytanie dotyczy tego, gdzie je trzymacie i kto ma do nich dostęp.",
-    "levels": [
-     "Trzymamy sekrety wprost w kodzie lub plikach konfiguracyjnych.",
-     "Sekrety trzymamy w różnych miejscach i każdy robi to po swojemu.",
-     "Sekrety trzymamy w dedykowanym miejscu, ale zasady dostępu i wymiany nie są ustalone.",
-     "Dostęp do sekretów mają u nas tylko osoby i usługi, które go potrzebują.",
-     "Sekrety wymieniamy regularnie, a gdy któryś wycieknie, wiemy, jak szybko go unieważnić i podmienić."
-    ]
-   },
-   {
-    "id": "podatnosci",
-    "title": "Podatności i zależności",
-    "help": "Chodzi o skanowanie zależności i kodu pod kątem znanych luk oraz o to, jak traktujecie znalezione problemy: jak zwykłe błędy do naprawy, a nie osobną kategorię pracy.",
-    "levels": [
-     "Nikt u nas nie sprawdza zależności ani kodu pod kątem podatności.",
-     "Podatności sprawdzamy sporadycznie i zależnie od osoby.",
-     "Skanujemy zależności, ale na znalezione problemy reagujemy z opóźnieniem.",
-     "Skanowanie bezpieczeństwa jest częścią naszego pipeline’u, a znalezione podatności trafiają do backlogu z jasnym priorytetem.",
-     "Po każdej znalezionej podatności lub incydencie poprawiamy proces, żeby podobny problem nie wrócił."
-    ]
-   }
-  ]
- }
+  }
 ];
 const ALL_DIMS = CATS.flatMap(c => c.dims);
 const ORG_DIMS = CATS.filter(c => c.group === 'org').flatMap(c => c.dims);
@@ -1381,7 +1382,7 @@ const RECOMMENDATIONS = {
   "low": {
    "steps": [
     "Zbierzcie w jednym miejscu wszystko, co dziś krąży w mailach, rozmowach i głowach. Jeśli macie już backlog, dopiszcie do niego to, czego w nim brakuje. Nie musi być uporządkowane, ważne, żeby istniała jedna lista.",
-    "Za backlog odpowiada product owner, więc ustalcie z nim, kiedy go razem porządkujecie. Wystarczy 15 minut raz w tygodniu, żeby lista nie stała się nieczytelna."
+    "Za backlog odpowiada product owner, więc poproście go, żeby ułożył przynajmniej początek listy według ważności. Nie trzeba układać wszystkiego, wystarczy, że wiadomo, co jest najważniejsze na najbliższe tygodnie."
    ],
    "why": "Gdy zadania są rozproszone albo backlog jest nieaktualny, o kolejności decyduje to, kto ostatni coś zgłosił, a nie to, co jest ważne."
   },
@@ -1405,7 +1406,7 @@ const RECOMMENDATIONS = {
   },
   "mid": {
    "steps": [
-    "Sprawdźcie, czy Wasze minimum gotowości da się zweryfikować w mniej niż minutę. Jeśli nie, skróćcie je do tego, co naprawdę blokuje start (np. znany cel, kryteria akceptacji, wycena).",
+    "Przy sprawdzaniu gotowości zadawajcie jedno dodatkowe pytanie: czego jeszcze nie wiemy? Zapiszcie odpowiedź w zadaniu, nawet jeśli to jedno zdanie.",
     "Gdy zaczynacie coś niedoprecyzowanego, nazwijcie to wprost jako założenie robocze i ustalcie, kiedy je zweryfikujecie. Samo nazwanie niepewności na głos często wystarczy, żebyście zaczęli nią świadomie zarządzać."
    ],
    "why": "Zaczynanie z niepewnością bywa w zmiennym środowisku rozsądne, ale tylko wtedy, gdy nazwiecie, czego jeszcze nie wiecie. Niewypowiedziana niepewność wychodzi dopiero w trakcie pracy, gdy zmiana kierunku kosztuje najwięcej."
@@ -1423,10 +1424,10 @@ const RECOMMENDATIONS = {
   },
   "mid": {
    "steps": [
-    "Sprawdźcie, czy kryteria ukończenia stosujecie także wtedy, gdy brakuje czasu. Jeśli pod presją są pomijane, zastanówcie się, które z nich są naprawdę niezbędne, i tylko te zostawcie jako nieprzekraczalne.",
-    "Dodajcie do kryteriów jedno pytanie o dalszy los zmiany, np. „czy ktoś sprawdził, że działa u użytkownika?”. To przesuwa myślenie z „oddane” na „działa”."
+    "Dodajcie do kryteriów jedno pytanie o dalszy los zmiany, np. „czy ktoś sprawdził, że działa u użytkownika?”. To przesuwa myślenie z „oddane” na „działa”.",
+    "Gdy po zamknięciu zadania wyjdzie błąd, zadajcie sobie pytanie: które kryterium by go złapało? Jeśli żadne, dopiszcie je albo zmieńcie istniejące."
    ],
-   "why": "Kryteria pomijane pod presją uczą Was, że można je ignorować. Lepsza jest krótsza lista, której się pilnujecie, niż długa, którą tylko odhaczacie."
+   "why": "Kryteria, które kończą się na oddaniu zmiany, mówią tylko tyle, że praca wyszła z zespołu, a nie że działa. Różnicę widać dopiero u użytkownika."
   },
   "blockedLabel": "Gdy kryteria są jasne, ale presja z zewnątrz je łamie:",
   "blocked": "Jeśli trzymacie się kryteriów, ale z zewnątrz regularnie pojawia się nacisk, żeby uznać coś za skończone wcześniej, to sprawa wymaga rozmowy o kosztach skrótów, a nie dalszego dopracowywania definicji. Pokażcie, ile kosztuje poprawianie po wdrożeniu."
@@ -1441,8 +1442,8 @@ const RECOMMENDATIONS = {
   },
   "mid": {
    "steps": [
-    "Ustalcie prostą miarę sukcesu (np. jedną metrykę użycia) dla każdej większej funkcji, zanim zaczniecie ją budować. Wystarczy jedno zdanie typu „uznamy to za sukces, jeśli…”.",
-    "Zarezerwujcie stały punkt w planowaniu kolejnego okresu na przegląd, co się stało z rzeczami dostarczonymi poprzednio. Krótki przegląd wystarczy, ważna jest regularność."
+    "Zarezerwujcie stały punkt w planowaniu kolejnego okresu na przegląd, co się stało z rzeczami dostarczonymi poprzednio. Krótki przegląd wystarczy, ważna jest regularność.",
+    "Ustalcie prostą miarę sukcesu (np. jedną metrykę użycia) dla każdej większej funkcji, zanim zaczniecie ją budować. Wystarczy jedno zdanie typu „uznamy to za sukces, jeśli…”."
    ],
    "why": "Miara sukcesu ustalona przed startem daje Wam punkt odniesienia, do którego można wrócić, zamiast sporu o odczucia. Chroni też przed budowaniem kolejnych wersji czegoś, co od początku nie działało."
   },
@@ -1496,9 +1497,9 @@ const RECOMMENDATIONS = {
   "mid": {
    "steps": [
     "Wprowadźcie zasadę „błąd omawiamy bez szukania winnego” i konsekwentnie ją stosujcie. Szczególnie ważne jest trzymanie się jej wtedy, gdy błąd jest kosztowny – to wtedy jest naprawdę testowana.",
-    "Niech lider lub senior jako pierwszy przyzna się do błędu na forum, żeby inni zobaczyli, że to bezpieczne. Jedno szczere „popełniłem błąd” waży więcej niż dziesięć deklaracji o otwartości."
+    "Ustalcie, po jakim czasie utknięcia prosicie o pomoc (np. po godzinie bez postępu). Wtedy prośba o pomoc przestaje być przyznaniem się do porażki i staje się zwykłą zasadą."
    ],
-   "why": "Gdy ludzie boją się przyznać do błędu, błędy nie znikają: zostają ukryte i wychodzą na jaw później, zwykle w gorszym momencie i przy wyższych stawkach. W tym czasie system psuje się niezauważony."
+   "why": "Błąd, o który nikt nie zapytał, wychodzi na jaw później, zwykle w gorszym momencie i przy wyższych stawkach. Im wcześniej ktoś go zgłosi albo poprosi o pomoc, tym taniej go naprawić."
   },
   "blockedLabel": "Gdy sami pokazujecie otwartość, a ludzie i tak milczą:",
   "blocked": "Jeśli jako lider sami pokazujecie otwartość, a mimo to ludzie się nie otwierają – sprawdźcie, czy w otoczeniu zespołu błędy nie są karane. Bezpieczeństwo psychologiczne w jednym zespole nie przetrwa długo, jeśli cała organizacja karze przyznawanie się do pomyłek."
@@ -1531,8 +1532,8 @@ const RECOMMENDATIONS = {
   },
   "mid": {
    "steps": [
-    "Śledźcie sygnały przeciążenia (nadgodziny, przenoszone zadania) i reagujcie na nie w regularnej rozmowie o sposobie pracy. Nie czekajcie, aż ktoś powie to wprost – same dane często mówią wcześniej.",
-    "Pokażcie całą trwającą pracę na wspólnej tablicy i ustalcie limit zadań rozpoczętych jednocześnie. Nawet prosty limit liczby równoległych zadań na osobę potrafi zrobić różnicę."
+    "Pokażcie całą trwającą pracę na wspólnej tablicy i ustalcie limit zadań rozpoczętych jednocześnie. Nawet prosty limit liczby równoległych zadań na osobę potrafi zrobić różnicę.",
+    "Śledźcie sygnały przeciążenia (nadgodziny, przenoszone zadania) i reagujcie na nie w regularnej rozmowie o sposobie pracy. Nie czekajcie, aż ktoś powie to wprost – same dane często mówią wcześniej."
    ],
    "why": "Powtarzające się przeciążenie obniża jakość decyzji technicznych, bo zmęczeni możecie wybierać rozwiązania doraźne zamiast przemyślanych. Zysk z przyspieszenia zwykle okazuje się pozorny, gdy doliczy się koszt poprawek i odejść z zespołu."
   },
@@ -1585,8 +1586,8 @@ const RECOMMENDATIONS = {
   },
   "mid": {
    "steps": [
-    "Raz na kwartał przejrzyjcie, które zależności wracają, i dla każdej zapytajcie, czy da się ją usunąć, a nie tylko pilnować (np. przez przesunięcie odpowiedzialności za wspólny element). Na bieżąco wystarczy prosta lista z osobą kontaktową i statusem.",
-    "Zgłaszajcie zależność w momencie jej odkrycia, nie czekając na planowanie. Im wcześniej inny zespół się o niej dowie, tym więcej ma czasu na reakcję."
+    "Zgłaszajcie zależność w momencie jej odkrycia, nie czekając na planowanie. Im wcześniej inny zespół się o niej dowie, tym więcej ma czasu na reakcję.",
+    "Raz na kwartał przejrzyjcie, które zależności wracają, i dla każdej zapytajcie, czy da się ją usunąć, a nie tylko pilnować (np. przez przesunięcie odpowiedzialności za wspólny element). Na bieżąco wystarczy prosta lista z osobą kontaktową i statusem."
    ],
    "why": "Gdy zależności znacie wcześniej, ale inne zespoły dowiadują się o nich niespójnie albo późno, mają mało czasu na reakcję. Wasz problem staje się wtedy ich pilnym kryzysem i może nadwyrężyć relację na dłużej niż jeden projekt."
   },
@@ -1621,8 +1622,8 @@ const RECOMMENDATIONS = {
   },
   "mid": {
    "steps": [
-    "Przed każdą zmianą zapytajcie, co ułatwiłoby ją wprowadzić, i zróbcie to najpierw. Większe porządki planujcie jako osobne, małe zadania, zamiast czekać na „wielki remont”.",
-    "Zapisujcie w jednym miejscu fragmenty, które przy okazji zostawiacie na później, i co jakiś czas wybierajcie z nich jeden do zrobienia. Refaktoryzacja robiona tylko przy okazji omija to, co przeszkadza najbardziej."
+    "Zapisujcie w jednym miejscu fragmenty, które przy okazji zostawiacie na później, i co jakiś czas wybierajcie z nich jeden do zrobienia.",
+    "Przed każdą zmianą zapytajcie, co ułatwiłoby ją wprowadzić, i zróbcie to najpierw. Większe porządki planujcie jako osobne, małe zadania, zamiast czekać na „wielki remont”."
    ],
    "why": "Refaktoryzacja robiona tylko przy okazji omija miejsca, których nikt nie dotyka przy innych zadaniach, a to zwykle one najbardziej spowalniają zmiany. Każda propozycja większej zmiany zderza się wtedy z ryzykiem, którego nikt nie chce wziąć na siebie."
   },
@@ -1639,7 +1640,7 @@ const RECOMMENDATIONS = {
   },
   "mid": {
    "steps": [
-    "Sprawdźcie, które krytyczne ścieżki systemu nie mają jeszcze testów automatycznych, i dopiszcie je w pierwszej kolejności. Zaczynajcie od miejsc, gdzie błąd kosztuje najwięcej, a nie od tych najłatwiejszych do przetestowania.",
+    "Wybierzcie kolejne obszary, które dziś sprawdzacie ręcznie, i obejmujcie je testami po kolei. Zaczynajcie od miejsc, gdzie błąd kosztuje najwięcej, a nie od tych najłatwiejszych do przetestowania.",
     "Gdy błąd trafi na produkcję, dopiszcie test, który by go wykrył. Z czasem zestaw rośnie dokładnie tam, gdzie jest potrzebny."
    ],
    "why": "Tam, gdzie testów brakuje, musicie sprawdzać zmiany ręcznie i zaczynacie unikać refaktoryzacji i większych usprawnień, bo sprawdzenie, czy coś się nie zepsuło, jest zbyt kosztowne."
@@ -1657,10 +1658,10 @@ const RECOMMENDATIONS = {
   },
   "mid": {
    "steps": [
-    "Wybierzcie z długu w backlogu 2–3 pozycje, które kosztują Was najwięcej czasu, i zaplanujcie je na najbliższe 1–2 cykle pracy. Dług, który tylko leży w backlogu, nie zmniejsza się sam, a z czasem, w miarę jak kod i narzędzia się starzeją, rośnie.",
-    "Ustalcie stały, niewielki udział czasu na dług (np. jedno zadanie w każdym cyklu pracy), zamiast czekać na „spokojniejszy okres”, który nie nadchodzi."
+    "Wybierzcie z długu w backlogu 2–3 pozycje, które kosztują Was najwięcej czasu, i zaplanujcie je na najbliższe cykle pracy. Potem zostawiajcie na dług stały, niewielki udział czasu (np. jedno zadanie w każdym cyklu), zamiast czekać na „spokojniejszy okres”, który nie nadchodzi.",
+    "Gdy świadomie idziecie na skrót, od razu zapiszcie go jako dług: dlaczego go robicie i kiedy do niego wrócicie. Dzięki temu nowy dług powstaje z decyzji, a nie przy okazji."
    ],
-   "why": "Dług techniczny sam w sobie nie jest problemem: bywa racjonalnym wyborem, żeby zdążyć w terminie. Gorzej, gdy leży w backlogu i nikt nie decyduje, co z nim zrobić. Wtedy rośnie: każda kolejna zmiana w tym miejscu jest droższa, a starzejące się rozwiązania trudniej utrzymać."
+   "why": "Dług, który leży w backlogu i nikt nie decyduje, co z nim zrobić, rośnie: każda kolejna zmiana w tym miejscu jest droższa, a starzejące się rozwiązania trudniej utrzymać."
   },
   "blockedLabel": "Gdy dług jest widoczny, ale nikt nie daje czasu na spłatę:",
   "blocked": "Jeśli macie widoczny rejestr długu, ale nikt nigdy nie daje czasu na jego spłatę – to nie kwestia Waszej dyscypliny, tylko decyzja priorytetowa podejmowana wyżej. Przedstawcie dług w kategoriach ryzyka biznesowego (co się stanie, jeśli tego nie spłacimy), nie w kategoriach czystości kodu – to częściej trafia do decydentów."
@@ -1725,7 +1726,7 @@ const RECOMMENDATIONS = {
     "Spiszcie krok po kroku, jak dziś wygląda wdrożenie, i zaznaczcie kroki ręczne. Sama lista zwykle pokazuje, które z nich da się zautomatyzować najłatwiej.",
     "Zautomatyzujcie jeden, najbardziej uciążliwy krok (np. budowanie paczki albo uruchomienie migracji). Mały postęp daje szybko odczuwalną ulgę i pokazuje, że warto iść dalej."
    ],
-   "why": "Ręczne wdrożenia są wolne i podatne na pomyłki, a zaczynacie wdrażać rzadziej, bo każde kosztuje. To z kolei zwiększa ryzyko każdej kolejnej zmiany."
+   "why": "Ręczne wdrożenia są wolne i podatne na pomyłki, więc wdrażacie rzadziej, bo każde dużo kosztuje. To z kolei zwiększa ryzyko każdej kolejnej zmiany."
   },
   "mid": {
    "steps": [
@@ -1758,15 +1759,15 @@ const RECOMMENDATIONS = {
  "deploy_freq": {
   "low": {
    "steps": [
-    "Znajdźcie jeden, najczęściej robiony typ zmiany i spróbujcie wdrożyć go w mniejszym rozmiarze niż zwykle, żeby zobaczyć różnicę. Nawet jedno udane, mniejsze wdrożenie zmienia sposób myślenia o ryzyku.",
-    "Spiszcie, co dziś blokuje częstsze wdrożenia (proces, ludzie, narzędzia) – zanim zaczniecie automatyzować, warto wiedzieć, co realnie stoi na drodze. Często okazuje się, że przeszkoda jest bardziej organizacyjna niż techniczna."
+    "Spiszcie, co dziś blokuje częstsze wdrożenia (proces, ludzie, narzędzia) – zanim zaczniecie automatyzować, warto wiedzieć, co realnie stoi na drodze. Często okazuje się, że przeszkoda jest bardziej organizacyjna niż techniczna.",
+    "Znajdźcie jeden, najczęściej robiony typ zmiany i spróbujcie wdrożyć go w mniejszym rozmiarze niż zwykle, żeby zobaczyć różnicę. Nawet jedno udane, mniejsze wdrożenie zmienia sposób myślenia o ryzyku."
    ],
    "why": "Bardzo rzadkie wdrożenia to często objaw głębszego problemu – strachu przed zmianą, braku automatyzacji, ręcznych kroków. Zanim zajmiecie się częstotliwością wprost, warto zrozumieć, co ją dziś ogranicza."
   },
   "mid": {
    "steps": [
-    "Zmniejszcie wielkość pojedynczego wdrożenia – mniejsze, częstsze zmiany. Mniejszą zmianę łatwiej wycofać i łatwiej znaleźć przyczynę, gdy coś pójdzie nie tak.",
-    "Zautomatyzujcie choć jeden krok procesu wdrożenia, który dziś jest ręczny. Wybierzcie ten, który najczęściej bywa pomijany lub robiony niedbale pod presją czasu."
+    "Niech małe wdrożenia staną się normą: większe zmiany dzielcie na części, które da się wdrożyć osobno. Mniejszą zmianę łatwiej wycofać i łatwiej znaleźć przyczynę, gdy coś pójdzie nie tak.",
+    "Sprawdźcie, czy gotowe zmiany czekają, aż uzbiera się ich więcej (np. na stały dzień wydań). Spróbujcie wdrażać każdą zmianę od razu, gdy jest gotowa, choćby przez jeden sprint."
    ],
    "why": "Częste, małe wdrożenia służą temu, żeby ryzyko każdej zmiany było małe i łatwe do wycofania. Kto wdraża rzadko i dużo, płaci trudniejszym debugowaniem, a każde wdrożenie staje się wydarzeniem budzącym stres, które zniechęca do kolejnych."
   },
@@ -1776,17 +1777,17 @@ const RECOMMENDATIONS = {
  "lead_time": {
   "low": {
    "steps": [
-    "Zmierzcie czas dla jednej, ostatniej zmiany – od jej zatwierdzenia do działania na produkcji – żeby mieć punkt odniesienia. Jedna taka miara mówi więcej niż ogólne wrażenie „chyba nieźle nam idzie”.",
+    "Zmierzcie czas dla jednej, ostatniej zmiany – od commitu do działania na produkcji – żeby mieć punkt odniesienia. Jedna taka miara mówi więcej niż ogólne wrażenie „chyba nieźle nam idzie”.",
     "Dla jednej zmiany zapiszcie, ile czasu ktoś faktycznie nad nią pracował, a ile czekała (na review, testy, wdrożenie). Największe oczekiwanie to zwykle najszybszy trop do poprawy."
    ],
-   "why": "Bez pomiaru lead time zwykle wydaje się „jakoś taki, jaki jest”. Dopiero konkretna liczba pokazuje, czy problem tkwi w code review, testach, samym wdrożeniu, czy może w środowisku, w którym pracujecie."
+   "why": "Bez pomiaru trudno powiedzieć, czy lead time w ogóle jest problemem. Dopiero konkretna liczba pokazuje, czy zmiany najdłużej czekają na code review, na testy, czy na samo wdrożenie."
   },
   "mid": {
    "steps": [
-    "Zmapujcie drogę zmiany od zatwierdzenia do produkcji i znajdźcie największe wąskie gardło. Skupcie się na jednym, największym opóźnieniu, zamiast próbować naprawiać wszystko naraz.",
-    "Skróćcie czas oczekiwania na code review (np. limit 24h na pierwszą odpowiedź). To jedna z najczęstszych, a zarazem najłatwiejszych do naprawienia przyczyn długiego lead time."
+    "Zmapujcie drogę zmiany od commitu do produkcji i znajdźcie największe wąskie gardło. Skupcie się na nim, zamiast naprawiać wszystko naraz. Często jest nim czekanie na code review, które akurat łatwo skrócić.",
+    "Mierzcie lead time regularnie, np. raz w miesiącu dla kilku ostatnich zmian, i omawiajcie wynik wspólnie. Zobaczycie, czy poprawki faktycznie skracają drogę, i wcześnie zauważycie, gdy znów się wydłuża."
    ],
-   "why": "Długi lead time wydłuża Wasz cykl uczenia się: błędne założenia wychodzą na jaw później, gdy poprawka jest droższa, a Wasza uwaga dawno skupia się na czymś innym. Ten koszt rzadko trafia do bezpośrednich rozliczeń, ale narasta."
+   "why": "Długi lead time wydłuża Wasz cykl uczenia się: błędne założenia wychodzą na jaw później, gdy poprawka jest droższa, a Wasza uwaga dawno skupia się na czymś innym. Tego kosztu nikt nie liczy wprost, ale rośnie z każdą zmianą."
   },
   "blockedLabel": "Gdy znacie wąskie gardło, ale nie macie nad nim władzy:",
   "blocked": "Jeśli wiecie, gdzie jest wąskie gardło (np. zewnętrzny zespół musi zatwierdzić każdą zmianę), ale nie macie władzy, żeby to zmienić – udokumentujcie rzeczywisty czas oczekiwania i przedstawcie to jako dane, nie skargę. Liczby są trudniejsze do zignorowania niż odczucia."
@@ -1797,14 +1798,14 @@ const RECOMMENDATIONS = {
     "Zacznijcie zapisywać każdy przypadek, gdy wdrożenie wymagało poprawki lub wycofania – nawet w prostym arkuszu. Bez tego polegacie na wrażeniu, które bywa złudne.",
     "Po każdym takim przypadku zadajcie jedno pytanie: co konkretnie wykryłoby to wcześniej? Odpowiedzi na to pytanie z czasem same ułożą się w listę priorytetów do poprawy."
    ],
-   "why": "Problemy gaszone szybko są też szybko zapominane, więc bez śledzenia wdrożeń opieracie się na wrażeniu („chyba nieźle nam idzie”)."
+   "why": "Problemy gaszone szybko są też szybko zapominane, więc bez zapisywania nieudanych wdrożeń opieracie się na wrażeniu, a nie na liczbach."
   },
   "mid": {
    "steps": [
-    "Zamieńcie najczęstsze punkty z ręcznej checklisty na automatyczne kontrole w pipeline, a ryzykowne zmiany wprowadzajcie stopniowo (np. za flagą funkcji albo najpierw dla części użytkowników).",
-    "Dodajcie testy regresyjne dla obszarów, które najczęściej się psują. Inwestycja w te konkretne miejsca zwraca się szybciej niż równomierne pokrycie całego systemu."
+    "Ryzykowne zmiany wprowadzajcie stopniowo, np. za flagą funkcji albo najpierw dla części użytkowników. Jeśli coś pójdzie nie tak, problem dotknie niewielu osób i łatwiej go wycofać.",
+    "Przejrzyjcie zapisane nieudane wdrożenia i pogrupujcie je według przyczyny (np. brak testu, różnica między środowiskami, konfiguracja). Zajmijcie się najpierw najczęstszą grupą, a nie pojedynczymi przypadkami."
    ],
-   "why": "Wysoki odsetek nieudanych wdrożeń wywołuje strach przed wdrażaniem: ryzyko kompensujecie wolniejszym tempem i większą liczbą ręcznych kontroli. To odwrotność tego, czego potrzeba do poprawy."
+   "why": "Wysoki odsetek nieudanych wdrożeń wywołuje strach przed wdrażaniem: ryzyko kompensujecie wolniejszym tempem i większą liczbą ręcznych kontroli. A większe, rzadsze wdrożenia psują się częściej, więc problem się pogłębia."
   },
   "blockedLabel": "Gdy macie dobre praktyki, a wskaźnik i tak jest wysoki:",
   "blocked": "Jeśli macie dobre praktyki, a mimo to wskaźnik nieudanych zmian jest wysoki – sprawdźcie, czy problem nie leży w systemach, na które nie macie wpływu (zależności zewnętrzne, dane produkcyjne, których nie da się w pełni odtworzyć testowo). Czasem realny sufit jakości jest niżej, niż sugerowałaby dobra praktyka inżynierska, i trzeba to nazwać wprost zamiast winić proces."
@@ -1812,10 +1813,10 @@ const RECOMMENDATIONS = {
  "mttr": {
   "low": {
    "steps": [
-    "Spiszcie, co się dzieje dziś, krok po kroku, gdy coś się psuje – nawet jeśli to chaotyczne, samo spisanie tego już coś pokazuje. Zobaczycie luki, o których istnieniu nikt wcześniej głośno nie mówił.",
+    "Spiszcie, co się dzieje dziś, krok po kroku, gdy coś się psuje, nawet jeśli to chaotyczne. Zobaczycie luki, o których nikt wcześniej głośno nie mówił.",
     "Ustalcie, kto i jak jest informowany o awarii jako pierwszy – często tego ogniwa brakuje. Jasna ścieżka eskalacji potrafi skrócić czas reakcji bardziej niż jakiekolwiek narzędzie."
    ],
-   "why": "Zanim zajmiecie się skracaniem czasu naprawy, sprawdźcie, jak dziś wygląda reakcja na awarię. Często największym problemem jest czas, zanim ktokolwiek się zorientuje."
+   "why": "Często najwięcej czasu mija nie na samej naprawie, tylko zanim ktokolwiek zauważy awarię i wie, kto powinien się nią zająć."
   },
   "mid": {
    "steps": [
@@ -1837,19 +1838,19 @@ const RECOMMENDATIONS = {
   },
   "mid": {
    "steps": [
-    "Znajdźcie część infrastruktury, którą nadal konfigurujecie ręcznie, i zapiszcie ją w kodzie. Zacznijcie od tej, której odtworzenie najbardziej boli.",
-    "Wykrywajcie ręczne zmiany na środowiskach (np. przez porównanie z kodem) i traktujcie je jak błąd do poprawienia. Bez tego kod po cichu przestaje odpowiadać rzeczywistości."
+    "Wykrywajcie ręczne zmiany na środowiskach (np. przez porównanie z kodem) i traktujcie je jak błąd do poprawienia. Bez tego kod po cichu przestaje odpowiadać rzeczywistości.",
+    "Raz na jakiś czas odtwórzcie wybrane środowisko (np. testowe) od zera z samego kodu. Wszystko, co trzeba było przy tym zrobić ręcznie, to brakujący kawałek kodu."
    ],
    "why": "Infrastruktura zapisana w kodzie tylko częściowo daje fałszywe poczucie kontroli. Wystarczy kilka ręcznych zmian, żeby kod przestał odzwierciedlać to, co działa na środowisku."
   },
   "blockedLabel": "Gdy chcecie zapisać infrastrukturę w kodzie, ale nie macie uprawnień:",
-  "blocked": "Jeśli konfiguracją środowisk zarządza zespół platformowy albo zewnętrzny dostawca, nie wymusicie IaC samą Waszą decyzją. Ustalcie, jakie zmiany możecie zgłaszać przez kod (np. przez wspólne repozytorium), i zacznijcie od nich. Jeśli środowisk jest za mało, pokażcie, ile Was to kosztuje (czas oczekiwania, ręczne obejścia) – to argument do decyzji o inwestycji."
+  "blocked": "Jeśli konfiguracją środowisk zarządza zespół platformowy albo zewnętrzny dostawca, nie wymusicie IaC samą Waszą decyzją. Ustalcie, jakie zmiany możecie zgłaszać przez kod (np. przez wspólne repozytorium), i zacznijcie od nich. Jeśli ręczna konfiguracja po stronie platformy spowalnia Waszą pracę, pokażcie, ile Was to kosztuje (czas oczekiwania na środowisko, ręczne obejścia) – to argument do decyzji o inwestycji."
  },
  "monitoring": {
   "low": {
    "steps": [
     "Sprawdźcie, czy dla najważniejszej części systemu macie dashboard albo logi, które ktoś faktycznie otwiera. Jeśli nie macie żadnych, zacznijcie od tego minimum. Jeśli macie, ustalcie, kto i kiedy na nie patrzy.",
-    "Zapytajcie: skąd ostatnio dowiedzieliście się o awarii? Jeśli odpowiedź to „od użytkownika”, to Wasz priorytet numer jeden. To pytanie samo w sobie zwykle pokazuje, od czego zacząć."
+    "Zapytajcie: skąd ostatnio dowiedzieliście się o awarii? Jeśli odpowiedź to „od użytkownika”, to Wasz priorytet numer jeden."
    ],
    "why": "Bez regularnego wglądu w system nie zareagujecie szybciej niż użytkownicy. Dane, których nikt nie ogląda, niczego nie zmieniają."
   },
@@ -1866,17 +1867,17 @@ const RECOMMENDATIONS = {
  "incydenty": {
   "low": {
    "steps": [
-    "Spiszcie na jednej stronie, co robicie, gdy jest awaria: kogo wołamy, kto prowadzi, gdzie to komunikujemy. Nawet krótka, niedoskonała lista jest lepsza niż zgadywanie w trakcie.",
+    "Ustalcie jedno miejsce, w którym zgłaszacie awarię i rozmawiacie o niej w trakcie (np. osobny kanał na czacie). Wtedy wszyscy wiedzą, gdzie szukać informacji, i nie trzeba nikogo szukać po prywatnych wiadomościach.",
     "Wyznaczcie na czas incydentu jedną osobę, która prowadzi sprawę i dba o komunikację, żeby reszta mogła skupić się na naprawie. Rola może się zmieniać, ważne, żeby w danym momencie była jasna."
    ],
    "why": "Gdy nie wiadomo, kto prowadzi, w trakcie awarii powstaje chaos: te same rzeczy robi kilka osób, inne nikt, a użytkownicy i biznes nie dostają informacji."
   },
   "mid": {
    "steps": [
-    "Spiszcie na jednej stronie to, co już wiecie: kogo wołacie przy typowych awariach, kto prowadzi sprawę i kto informuje osoby spoza zespołu (np. biznes, wsparcie).",
-    "Gdy to będzie spisane, przećwiczcie to raz na kwartał na krótkim scenariuszu (np. godzina, na sucho). Procedura, której nikt nie wypróbował, w prawdziwym incydencie często zawodzi."
+    "Spiszcie na jednej stronie to, co już wiecie: kogo wołacie przy typowych awariach, kto prowadzi sprawę i kto informuje osoby spoza zespołu (np. biznes, wsparcie). Raz na jakiś czas przećwiczcie to na krótkim scenariuszu, bo procedura, której nikt nie wypróbował, w prawdziwym incydencie często zawodzi.",
+    "Ustalcie 2–3 poziomy wagi awarii (np. drobna, poważna, krytyczna) i dla każdego zapiszcie, kogo angażujecie i jak często informujecie innych. Dzięki temu nie każda awaria wymaga tej samej mobilizacji."
    ],
-   "why": "Gdy sposób reagowania jest spisany, nie trzeba w trakcie awarii ustalać, kto co robi, i szybciej przywracacie usługę. Spisanie tego, co już wiecie, kosztuje mniej niż ustalanie tego pod presją."
+   "why": "Gdy sposób reagowania jest spisany i znany wszystkim, nie zależy od tego, kto akurat jest dostępny, i nie trzeba go ustalać w trakcie awarii. Spisanie tego, co już wiecie, kosztuje mniej niż ustalanie tego pod presją."
   },
   "blockedLabel": "Gdy macie procedurę, ale dyżury i uprawnienia są poza Wami:",
   "blocked": "Jeśli reagowanie na incydenty wymaga uprawnień lub dyżurów, którymi zarządza inny zespół, ustalcie z nim prosty podział ról w trakcie awarii, zamiast czekać na rozwiązanie systemowe."
@@ -1892,7 +1893,7 @@ const RECOMMENDATIONS = {
   "mid": {
    "steps": [
     "Ustalcie prosty, stały format (oś czasu, przyczyny, wpływ, wnioski) i stosujcie go po każdej poważniejszej awarii. Stały format ułatwia porównania i skraca przygotowanie.",
-    "Rozważcie post mortem także po zdarzeniach, które mogły skończyć się awarią, ale się nie skończyły. Uczą tyle samo, a nie wymagają prawdziwej awarii."
+    "Gdy znajdziecie przyczynę awarii, pytajcie dalej: co sprawiło, że to było możliwe, i dlaczego nikt tego wcześniej nie zauważył. Awaria rzadko ma jedną przyczynę, a pierwsza znaleziona zwykle jest tylko najbliższa."
    ],
    "why": "Stały format sprawia, że rozmowy po awariach da się porównywać, a wnioski nie zależą od tego, kto prowadził spotkanie. Rozmowa po zdarzeniach, które mogły skończyć się awarią, daje podobne wnioski bez kosztu prawdziwej awarii."
   },
@@ -1903,7 +1904,7 @@ const RECOMMENDATIONS = {
   "low": {
    "steps": [
     "Z ostatniego post mortem lub awarii wybierzcie jeden wniosek i zamieńcie go na konkretne zadanie w backlogu. Jedno wdrożone działanie uczy więcej niż lista dziesięciu.",
-    "Przy każdym działaniu dopiszcie, kto je robi i do kiedy. Działanie bez właściciela i terminu zwykle nie powstaje."
+    "Przy każdym działaniu dopiszcie, kto je robi i do kiedy. Działanie bez właściciela i terminu zwykle nie zostaje zrobione."
    ],
    "why": "Wnioski, które nie zamieniają się w działania, dają tylko poczucie, że „coś się zrobiło”. Awaria wraca, a Wy tracicie zaufanie do całej praktyki post mortem."
   },
@@ -1920,15 +1921,15 @@ const RECOMMENDATIONS = {
  "sekrety": {
   "low": {
    "steps": [
-    "Sprawdźcie, czy jakiekolwiek hasła, klucze API lub tokeny są dziś wprost w repozytorium kodu. Jeśli tak, to pierwsza rzecz do naprawienia, niezależnie od reszty.",
+    "Sprawdźcie, czy jakiekolwiek hasła, klucze API lub tokeny są dziś wprost w repozytorium kodu. Jeśli tak, to pierwsza rzecz do naprawienia, niezależnie od reszty. Dodajcie też automatyczne skanowanie sekretów w pipeline albo przed commitem, żeby nowy sekret nie trafił do repozytorium.",
     "Przenieście sekrety do dedykowanego miejsca (menedżer sekretów albo zmienne środowiskowe platformy) i wymieńcie te, które były w repozytorium. Po tym, jak sekret trafił do historii kodu, nie da się go już uznać za bezpieczny."
    ],
-   "why": "Sekret w repozytorium zostaje w historii kodu, nawet po usunięciu. Każdy, kto ma dostęp do repozytorium, ma więc dostęp do systemów, które ten sekret otwiera."
+   "why": "Sekret w repozytorium zostaje w historii kodu, nawet po usunięciu, a sekret na czacie czy w prywatnym pliku widzi każdy, kto ma do nich dostęp. W obu przypadkach nie wiecie, kto naprawdę może otworzyć Wasze systemy."
   },
   "mid": {
    "steps": [
     "Ograniczcie dostęp do sekretów do osób i usług, które ich faktycznie potrzebują, i spiszcie, kto je ma. Im krótsza lista, tym mniejsze ryzyko i łatwiejsza wymiana.",
-    "Ustalcie, jak często wymieniacie ważne sekrety, i sprawdźcie, czy umiecie to zrobić bez przestoju. Wymiana, której nikt nie próbował, w prawdziwym wycieku często zawodzi."
+    "Ustalcie, jak często wymieniacie ważne sekrety, i sprawdźcie, czy umiecie to zrobić bez przestoju, a docelowo zautomatyzujcie wymianę. Wymiana, której nikt nie próbował, w prawdziwym wycieku często zawodzi."
    ],
    "why": "Sekret, który raz wyciekł i nigdy nie został wymieniony, pozostaje otwartą furtką. Umiejętność szybkiej wymiany to najlepsze zabezpieczenie na dzień, gdy coś jednak wycieknie."
   },
@@ -1946,7 +1947,7 @@ const RECOMMENDATIONS = {
   "mid": {
    "steps": [
     "Ustalcie jasną zasadę, w jakim czasie naprawiacie podatności o różnej wadze (np. krytyczne w dni, nie w miesiące). Bez tego zgłoszenia od skanera trafiają na dno backlogu.",
-    "Jeśli skanowanie uruchamiacie ręcznie, przenieście je do pipeline CI. To, co wymaga pamiętania, prędzej czy później przestaje się dziać."
+    "Jeśli skanowanie uruchamiacie ręcznie, przenieście je do pipeline CI, a potem włączcie automatyczne propozycje aktualizacji zależności. To, co wymaga pamiętania, prędzej czy później przestaje się dziać."
    ],
    "why": "Skanowanie, które istnieje, ale którego wyniki nikt nie przegląda, daje złudne poczucie bezpieczeństwa; bywa gorsze niż jego brak, bo sprawia wrażenie, że temat jest już rozwiązany."
   },
@@ -2064,6 +2065,10 @@ function renderCards(dims, containerId, colorClass){
   });
 }
 
+function axisNo(id){
+  for(const c of CATS){ const k = c.dims.findIndex(d => d.id === id); if(k >= 0) return k + 1; }
+  return '';
+}
 function vertexPoints(dims, size, values){
   const cx = size/2, cy = size/2, r = size/2 - 26;
   const n = dims.length;
@@ -2103,7 +2108,7 @@ function renderRadar(dims, values, color, size=280){
     axes += `<line x1="${cx}" y1="${cy}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="rgba(23,34,46,0.10)" stroke-width="1"/>`;
     const lx = cx + (r+14)*Math.cos(angle), ly = cy + (r+14)*Math.sin(angle);
     const anchor = Math.cos(angle) > 0.3 ? 'start' : (Math.cos(angle) < -0.3 ? 'end' : 'middle');
-    labels += `<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" font-size="8.5" fill="#3C4A59" text-anchor="${anchor}" dominant-baseline="middle">${i+1}</text>`;
+    labels += `<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" font-size="8.5" fill="#3C4A59" text-anchor="${anchor}" dominant-baseline="middle">${axisNo(d.id)}</text>`;
   });
   const verts = vertexPoints(dims, size, values);
   const poly = verts.map(p => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ');
@@ -2213,18 +2218,23 @@ function renderProfile(){
 }
 
 function updateProgress(){
-  const all = activeDims();
-  if(!all.length) return;
-  const done = all.filter(d => naSet.has(d.id) || state[d.id] !== null).length;
-  document.getElementById('progressCount').textContent = `${done}/${all.length}`;
-  document.getElementById('progressFill').style.width = (done / all.length * 100).toFixed(1) + '%';
+  const every = activeDims();
+  if(!every.length) return;
+  const all = every.filter(d => !naSet.has(d.id));
+  const skipped = every.length - all.length;
+  const done = all.filter(d => state[d.id] !== null).length;
+  document.getElementById('progressCount').textContent = `${done}/${all.length}` + (skipped ? ` (pominięte: ${skipped})` : '');
+  document.getElementById('progressFill').style.width = (all.length ? done / all.length * 100 : 100).toFixed(1) + '%';
   document.getElementById('progressBar').classList.toggle('done', done === all.length);
 }
 
 function update(){
   updateProgress();
   CATS.filter(c => hasCat(c.id)).forEach(c => {
-    document.getElementById('radar-' + c.id).innerHTML = renderRadar(c.dims, state, c.radar);
+    const shown = c.dims.filter(d => !naSet.has(d.id));
+    document.getElementById('radar-' + c.id).innerHTML = shown.length >= 3
+      ? renderRadar(shown, state, c.radar)
+      : `<p class="radar-empty">Za mało odpowiedzi do narysowania diagramu: w tej części pominięto zbyt wiele obszarów.</p>`;
   });
   renderProfile();
   renderRecommendations();
@@ -2383,6 +2393,7 @@ document.getElementById('printBtn').addEventListener('click', () => {
     .row .label{font-family:-apple-system,Segoe UI,sans-serif;font-size:13px;color:#3C4A59;margin-bottom:6px;}
     svg{max-width:240px;}
     .radar-inner{position:relative;}
+    .radar-empty{font-size:13px;color:#3C4A59;text-align:center;padding:40px 16px;margin:0;}
     .radar-dot{position:absolute;width:11px;height:11px;border-radius:50%;background:var(--dot-color,#333);border:2px solid #fff;transform:translate(-50%,-50%);padding:0;cursor:pointer;}
     .radar-dot:hover, .radar-dot:focus{z-index:50;}
     .radar-dot .tooltip{display:none;position:absolute;bottom:18px;left:50%;transform:translateX(-50%);width:230px;background:#17222E;color:#F2F3ED;font-size:11.5px;line-height:1.45;padding:8px 10px;border-radius:6px;text-align:left;font-family:-apple-system,Segoe UI,sans-serif;z-index:30;}
@@ -2391,7 +2402,7 @@ document.getElementById('printBtn').addEventListener('click', () => {
     @media print{.hint{display:none;}}
   </style></head><body>
   <h1>Health Check Zespołu</h1>
-  <div class="meta">${team ? 'Zespół: ' + esc(team) + ' · ' : ''}Zakres: ${activeCats.map(c => CAT_LABEL[c]).join(' + ')} · Zapisano: ${new Date().toLocaleDateString('pl-PL', {year:'numeric', month:'long', day:'numeric'})} · Wersja: v4.3.1</div>
+  <div class="meta">${team ? 'Zespół: ' + esc(team) + ' · ' : ''}Zakres: ${activeCats.map(c => CAT_LABEL[c]).join(' + ')} · Zapisano: ${new Date().toLocaleDateString('pl-PL', {year:'numeric', month:'long', day:'numeric'})} · Wersja: v4.3.2</div>
   <div class="hint">Wskazówka: Ctrl+P (lub Cmd+P), żeby zapisać tę stronę jako PDF.</div>
   <div class="row">
     ${radarsHTML}
